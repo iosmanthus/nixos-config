@@ -13,6 +13,7 @@
       liberation_ttf
       hasklig
       roboto
+      (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
     ];
 
 

@@ -29,11 +29,11 @@
     glib.dev
     firefox
     discord
-    flameshot
     jetbrains.goland
     tdesktop
     feeluown
   ];
+  services.picom.refreshRate = 60;
 
   # Configure keymap in X11
   services.xserver.layout = "us";

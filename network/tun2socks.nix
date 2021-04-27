@@ -20,21 +20,18 @@ in
 
       udp = mkOption {
         default = {
-          enable = true;
           udpTimeout = 15;
         };
-        type = types.submodule {
-          options = {
-            enable = mkOption {
-              description = "If proxy the UDP packet";
-              type = types.bool;
+        type = types.nullOr (
+          types.submodule {
+            options = {
+              udpTimeout = mkOption {
+                description = "UDP session timeout";
+                type = types.int;
+              };
             };
-            udpTimeout = mkOption {
-              description = "UDP session timeout";
-              type = types.int;
-            };
-          };
-        };
+          }
+        );
       };
 
       icmp = mkOption {
@@ -114,7 +111,7 @@ in
           -A tun2socks-out -d 192.168.0.0/16 -j RETURN
           -A tun2socks-out -d 224.0.0.0/4 -j RETURN
           -A tun2socks-out -d 240.0.0.0/4 -j RETURN
-          ${optionalString cfg.udp.enable "-A tun2socks-out -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
+          ${optionalString (cfg.udp != null) "-A tun2socks-out -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
           ${optionalString cfg.tcp "-A tun2socks-out -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
           ${optionalString cfg.icmp "-A tun2socks-out -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
 
@@ -131,7 +128,7 @@ in
           -A tun2socks-pre -d 192.168.0.0/16 -j RETURN
           -A tun2socks-pre -d 224.0.0.0/4 -j RETURN
           -A tun2socks-pre -d 240.0.0.0/4 -j RETURN
-          ${optionalString cfg.udp.enable "-A tun2socks-pre -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
+          ${optionalString (cfg.udp != null) "-A tun2socks-pre -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
           ${optionalString cfg.tcp "-A tun2socks-pre -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
           ${optionalString cfg.icmp "-A tun2socks-pre -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
           COMMIT
@@ -148,7 +145,7 @@ in
           iptables -t mangle -w -X tun2socks-out
         '';
 
-        udpTimeout = optionalString cfg.udp.enable "-udp-timeout ${toString cfg.udp.udpTimeout}";
+        udpTimeout = optionalString (cfg.udp != null) "-udp-timeout ${toString cfg.udp.udpTimeout}";
         tun2socksStart = writeShScript "tun2socks-start" ''
           tun2socks -loglevel warn -device ${cfg.tunName} -proxy ${cfg.socksProxy} ${udpTimeout}
         '';

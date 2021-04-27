@@ -27,7 +27,6 @@
   services.tun2socks = {
     enable = true;
     udp = {
-      enable = true;
       udpTimeout = 2;
     };
     socksProxy = "172.18.0.4:1080";

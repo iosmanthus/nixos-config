@@ -2,6 +2,7 @@
 {
   imports = [
     ./fusuma.nix
+    ./shell
   ];
 
   services.fusuma = {
@@ -76,4 +77,10 @@
     '';
   };
 
+  services.flameshot.enable = true;
+
+  programs.go = {
+    enable = true;
+    goPath = ".go";
+  };
 }
