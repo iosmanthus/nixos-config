@@ -5,5 +5,6 @@
   };
   environment.systemPackages = with pkgs;[
     fcitx5-gtk
+    fcitx5-pinyin-zhwiki
   ];
 }

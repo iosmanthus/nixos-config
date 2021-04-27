@@ -29,6 +29,7 @@
     glib.dev
     firefox
     discord
+    google-chrome
     jetbrains.goland
     tdesktop
     feeluown
