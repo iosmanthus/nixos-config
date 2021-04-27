@@ -4,7 +4,6 @@
 
 { config, pkgs, ... }:
 {
-  sops.sshKeyPaths = [ "${config.users.users.iosmanthus.home}/.ssh/id_rsa" ];
   imports =
     [
       # Include the results of the hardware scan.

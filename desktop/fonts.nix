@@ -10,6 +10,7 @@
       source-han-sans
       fira-code
       cascadia-code
+      liberation_ttf
       hasklig
       roboto
     ];
@@ -41,7 +42,7 @@
             <string>monospace</string>
            </test>
            <edit mode="prepend" binding="strong" name="family">
-            <string>Hasklig</string>
+            <string>Liberation Mono</string>
            </edit>
           </match>
           <!-- Fallback fonts preference order -->

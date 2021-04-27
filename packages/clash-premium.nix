@@ -18,7 +18,8 @@ stdenv.mkDerivation rec {
   version = "2021.03.10";
 
   src = fetchurl {
-    url = "https://github.com/Dreamacro/clash/releases/download/premium/clash-${supportedPlatform.${system}.alias}-${version}.gz";
+    url =
+      "https://github.com/Dreamacro/clash/releases/download/premium/clash-${supportedPlatform.${system}.alias}-${version}.gz";
     sha256 = supportedPlatform.${system}.sha256;
   };
 
