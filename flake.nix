@@ -2,7 +2,7 @@
   description = "iosmanthus 💓 NixOS";
   inputs = {
     nixpkgs = {
-      url = "nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs?rev=6e905991668b9bc2493fd75e0378929d5a7e9752";
     };
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -36,6 +36,7 @@
                 useGlobalPkgs = true;
                 verbose = true;
                 users.iosmanthus = import ./home;
+                users.root = import ./home/shell;
               };
             }
             {

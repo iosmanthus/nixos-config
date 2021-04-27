@@ -18,6 +18,10 @@
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "storage" "input" ];
   };
 
+  users.users.root = {
+    shell = pkgs.zsh;
+  };
+
   security.pam.services.iosmanthus.gnupg.enable = true;
 
   security.sudo.extraRules = [
