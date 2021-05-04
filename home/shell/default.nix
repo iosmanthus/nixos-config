@@ -6,7 +6,7 @@
     ./starship.nix
     ./alias.nix
   ];
-  
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
