@@ -18,13 +18,13 @@
   };
 
   programs.geary.enable = false;
+  programs.evolution.enable = true;
+
   environment.systemPackages = with pkgs;[
     gnome3.gnome-tweaks
     gnome3.dconf-editor
-    gnomeExtensions.appindicator
 
-    tilix
-    thunderbird
+    flameshot
     zoom-us
     glib.dev
     firefox
@@ -52,17 +52,4 @@
   services.xserver.desktopManager.gnome3.enable = true;
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
-  hardware.pulseaudio = {
-    enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
-  };
 }

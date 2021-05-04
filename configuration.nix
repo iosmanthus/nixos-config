@@ -8,17 +8,29 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./hardware-extra.nix
       ./desktop
       ./system
       ./network
       ./virtualisation
       ./misc
     ];
+
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    gc = {
+      dates = "weekly";
+      automatic = true;
+      persistent = true;
+      options = "--delete-older-than 2d";
+    };
+  };
+
+  environment.etc = {
+    "nixos/flake.nix".source = config.users.users.iosmanthus.home + "/projects/nix/nixos-config/flake.nix";
   };
 
   # nixpkgs configuration

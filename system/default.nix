@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  hardware.enableAllFirmware = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader = {
     systemd-boot = {

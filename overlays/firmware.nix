@@ -1,14 +1,16 @@
-self: super:
+{ system, ... }:
+(self: super:
 with super;
 {
   firmwareLinuxNonfree = firmwareLinuxNonfree.overrideAttrs (
-    oldAttrs: rec {
-      outputHash = "sha256-97dh9N6KHmK1TfMU0EaNPfZ1Mx7zm/Y3lAfASUSxzXM=";
-      src = pkgs.fetchgit {
+    _: rec {
+      version = "2020-12-18";
+      src = fetchgit {
         url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "73144e02dcff54529ab42d951de682740d204180";
-        sha256 = "sha256-6VYtF7MbsCcPFmmOJCapQs9kHZNPRQ9HFZBhTaE2ecE=";
+        rev = "refs/tags/" + lib.replaceStrings [ "-" ] [ "" ] version;
+        sha256 = "sha256-ZQ2gbWq6XEqF5Cz8NsMGccevccDmXOymiavM/t1YZeU=";
       };
+      outputHash = "sha256-hgTfrOmKKpVK+qGuaFtFURLCwcG/cCiT4UYx7qCw+9w=";
     }
   );
-}
+})

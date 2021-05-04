@@ -8,11 +8,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1619415069,
-        "narHash": "sha256-rIwv3MFuu/qT6d7Jw5FZK9Pd75PaqCH1HRA29ke1EeU=",
+        "lastModified": 1620029480,
+        "narHash": "sha256-/aGNQe5Z3gYUMwQkAKv1zf63dk7Ymj8/aVODSzKVZBE=",
         "owner": "berberman",
         "repo": "flakes",
-        "rev": "4ca4815c433d48ffced1dd2b111c3b590b20ad01",
+        "rev": "f76149b74d4c33d652bf766804bf931f90be7b5a",
         "type": "github"
       },
       "original": {
@@ -36,21 +36,6 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
-      "locked": {
-        "lastModified": 1619345332,
-        "narHash": "sha256-qHnQkEp1uklKTpx3MvKtY6xzgcqXDsz5nLilbbuL+3A=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "2ebf2558e5bf978c7fb8ea927dfaed8fefab2e28",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -58,11 +43,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1619330208,
-        "narHash": "sha256-l2Ci3ZPsdjMoWtRdTEQQBOkYUisKYxfjeUs5QCTtuEY=",
+        "lastModified": 1620100475,
+        "narHash": "sha256-JmH3f6KaIJ3y5FaJdHm4agyzfn+LMnV5RhtNrYa4jGY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "827636c619ce0d8178ddc08ab86ee92b50f2e5b4",
+        "rev": "9ffb206050bab47122eac18ea7cb289849f8d128",
         "type": "github"
       },
       "original": {
@@ -73,17 +58,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1619331426,
-        "narHash": "sha256-nrbe+0iALs4Ju0gXlhNcH+tAGsvYVPgSyrikk3JtLuY=",
+        "lastModified": 1620074890,
+        "narHash": "sha256-4Z8Zwpg0gPvqKbSsck1g9ql4E5NClGZdjyxbYoaXA4s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6e905991668b9bc2493fd75e0378929d5a7e9752",
+        "rev": "7cb76200088f45cd24a9aa67fd2f9657943d78a4",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "rev": "6e905991668b9bc2493fd75e0378929d5a7e9752",
         "type": "github"
       }
     },
@@ -127,7 +112,6 @@
     "root": {
       "inputs": {
         "berberman": "berberman",
-        "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix"

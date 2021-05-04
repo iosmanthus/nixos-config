@@ -1,4 +1,5 @@
-self: super: {
+{ system, ... }:
+(self: super: {
   feeluown = super.feeluown.overrideAttrs (
     old: {
       buildInputs = with super;[
@@ -8,4 +9,4 @@ self: super: {
       ];
     }
   );
-}
+})

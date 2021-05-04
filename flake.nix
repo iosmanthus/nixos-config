@@ -2,10 +2,7 @@
   description = "iosmanthus 💓 NixOS";
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs?rev=6e905991668b9bc2493fd75e0378929d5a7e9752";
-    };
-    flake-utils = {
-      url = "github:numtide/flake-utils";
+      url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -17,13 +14,12 @@
     berberman = {
       url = "github:berberman/flakes";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
   };
   outputs = { self, nixpkgs, ... }@inputs:
     {
       nixosConfigurations = {
-        iosmanthus-nixos = nixpkgs.lib.nixosSystem {
+        iosmanthus-nixos = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           # For more information of this field, check:
           # https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/eval-config.nix
@@ -36,11 +32,10 @@
                 useGlobalPkgs = true;
                 verbose = true;
                 users.iosmanthus = import ./home;
-                users.root = import ./home/shell;
               };
             }
             {
-              nixpkgs.overlays = [ inputs.berberman.overlay ] ++ import ./overlays;
+              nixpkgs.overlays = [ inputs.berberman.overlay ] ++ (import ./overlays { inherit system; });
             }
           ];
         };

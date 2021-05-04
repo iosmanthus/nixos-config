@@ -29,7 +29,7 @@
     udp = {
       udpTimeout = 2;
     };
-    socksProxy = "172.18.0.4:1080";
+    socksProxy = "172.18.0.2:1080";
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };
 

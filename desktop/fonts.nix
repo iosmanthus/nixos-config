@@ -10,10 +10,9 @@
       source-han-sans
       fira-code
       cascadia-code
-      liberation_ttf
       hasklig
       roboto
-      (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
+      (nerdfonts.override { fonts = [ "DroidSansMono" "LiberationMono" ]; })
     ];
 
 
@@ -43,7 +42,7 @@
             <string>monospace</string>
            </test>
            <edit mode="prepend" binding="strong" name="family">
-            <string>Liberation Mono</string>
+            <string>LiterationMono Nerd Font</string>
            </edit>
           </match>
           <!-- Fallback fonts preference order -->
