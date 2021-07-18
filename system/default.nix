@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./monitoring.nix
+  ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader = {
     systemd-boot = {

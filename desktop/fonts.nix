@@ -42,8 +42,14 @@
             <string>monospace</string>
            </test>
            <edit mode="prepend" binding="strong" name="family">
-            <string>LiterationMono Nerd Font</string>
+            <string>Hasklig</string>
            </edit>
+          </match>
+          <match>
+            <test name="family"><string>monospace</string></test>
+            <edit name="family" mode="append_last" binding="strong">
+              <string>Noto Color Emoji</string>
+            </edit>
           </match>
           <!-- Fallback fonts preference order -->
           <alias>
@@ -63,7 +69,7 @@
           <alias>
            <family>monospace</family>
            <prefer>
-            <family>Fira Code</family>
+            <family>LiterationMono Nerd Font</family>
            </prefer>
           </alias>
         </fontconfig>

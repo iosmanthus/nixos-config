@@ -32,12 +32,14 @@
   environment.etc = {
     "nixos/flake.nix".source = config.users.users.iosmanthus.home + "/projects/nix/nixos-config/flake.nix";
   };
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # nixpkgs configuration
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs;
     [
+      lsof
       wget
       vim
       git

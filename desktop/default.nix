@@ -2,9 +2,8 @@
 {
   imports = [
     ./fonts.nix
-    ./vscode.nix
     ./input-method.nix
-    ./gdm-tapping.nix
+    #./gdm-tapping.nix
   ];
 
   qt5 = {
@@ -17,39 +16,69 @@
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
   };
 
-  programs.geary.enable = false;
   programs.evolution.enable = true;
+  programs.dconf.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   environment.systemPackages = with pkgs;[
-    gnome3.gnome-tweaks
-    gnome3.dconf-editor
+    glib.dev
 
     flameshot
     zoom-us
-    glib.dev
     firefox
     discord
     google-chrome
     jetbrains.goland
+    jetbrains.idea-ultimate
+    jetbrains.clion
     tdesktop
     feeluown
+    slack
   ];
-  services.picom.refreshRate = 60;
+  services.autorandr.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "caps:escape";
-
-  # Enable the GNOME 3 Desktop Environment.
-  services.xserver.displayManager.gdm = {
+  services.xserver = {
     enable = true;
-    wayland = false;
-    extraConfig = {
-      tapping = true;
+    layout = "us";
+    xkbOptions = "caps:escape";
+    libinput = {
+      enable = true;
+      touchpad.disableWhileTyping = true;
+    };
+    autoRepeatInterval = 20;
+    autoRepeatDelay = 200;
+    displayManager = {
+      lightdm = {
+        enable = true;
+        greeters.gtk = {
+          enable = true;
+          cursorTheme = {
+            package = pkgs.vanilla-dmz;
+            name = "Vanilla-DMZ";
+          };
+          indicators = [
+            "~host"
+            "~spacer"
+            "~clock"
+            "~spacer"
+            "~session"
+            "~power"
+          ];
+          extraConfig = ''
+            xft-dpi=192
+            font-name=Fira Code
+          '';
+        };
+      };
+      defaultSession = "none+xmonad";
+    };
+    windowManager.xmonad = {
+      enable = true;
     };
   };
 
-  services.xserver.desktopManager.gnome3.enable = true;
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs;[ hplip ];
+  };
 }

@@ -14,7 +14,7 @@ with lib;
       # I can't find a way to merge multiple dconf profiles. qaq
       programs.dconf.profiles.gdm =
         let
-          gdm = pkgs.gnome3.gdm;
+          gdm = pkgs.gnome.gdm;
           customDconf = pkgs.writeTextFile {
             name = "gdm-dconf";
             destination = "/dconf/gdm-custom";

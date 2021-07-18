@@ -1,7 +1,6 @@
-{ system, ... }:
-(self: super: {
+_self: super: {
   feeluown = super.feeluown.overrideAttrs (
-    old: {
+    _: {
       buildInputs = with super;[
         feeluown-core
         feeluown-netease
@@ -9,4 +8,4 @@
       ];
     }
   );
-})
+}

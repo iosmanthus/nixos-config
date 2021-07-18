@@ -1,9 +1,14 @@
-{ config, pkgs, ... }:
+{ auto-fix-vscode-server, config, pkgs, ... }:
 {
+  home.packages = with pkgs;[ gh htop speedtest-cli ihaskell rustup ];
+
   imports = [
+    ./shell
+    ./xserver
     ./fusuma.nix
     ./tilix.nix
-    ./shell
+    ./vscode.nix
+    ./tmux.nix
   ];
 
   programs.rofi = {
@@ -75,9 +80,7 @@
     userEmail = "myosmanthustree@gmail.com";
     extraConfig = {
       core = {
-        editor = ''
-          ${pkgs.vscode}/bin/code --wait
-        '';
+        editor = "${pkgs.vscode}/bin/code --wait";
       };
       pull = {
         rebase = false;
@@ -103,7 +106,7 @@
 
   programs.kitty =
     let
-      kitty-base16 = "${pkgs.callPackage ./kitty-base16.nix {}}/usr/share/base16-kitty/colors";
+      base16 = pkgs.callPackage ./base16-kitty.nix {};
     in
       {
         enable = true;
@@ -111,7 +114,7 @@
           name = "monospace";
         };
         settings = {
-          include = "${kitty-base16}/base16-material-darker.conf";
+          include = "${base16.mkKittyBase16Theme { name = "material-darker"; }}";
         };
       };
 }

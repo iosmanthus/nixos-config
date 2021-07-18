@@ -15,7 +15,7 @@
     isNormalUser = true;
     home = "/home/iosmanthus";
     description = "iosmanthus";
-    extraGroups = [ "wheel" "networkmanager" "video" "audio" "storage" "input" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "storage" "input" "tor" ];
   };
 
   users.users.root = {

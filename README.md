@@ -1,6 +1,9 @@
 # TODO List
 
-- [ ] **(WIP)** Refactor firewall construction
+- [ ] **WIP** Configure XMonad, make it more productive
+    - [ ] a status bar
+    - [ ] a two-pane layout
+- [ ] **WIP** Refactor firewall construction
     - [x] Use `tun2socks` to replace `tproxy`
       - [x] Pull out the logic of `tun2socks` module to a generic module.
         ```nix
@@ -18,4 +21,5 @@
     - [ ] **WIP** Migrating to `home-manager`
 - [ ] **WIP** use `sops-nix` to manage secret
     - [x] OpenVPN
+    - [ ] SSH config private key, archiving that we only need to keep one SSH/GPG key privately maybe using Vault backended with AWS S3.
     - [ ] Maybe Clash 

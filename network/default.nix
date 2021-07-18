@@ -7,7 +7,7 @@
 
   networking.hostName = "iosmanthus-nixos";
   networking = {
-    nameservers = [ "127.0.0.1" "::1" ];
+    nameservers = [ "172.18.0.2" ];
     networkmanager = {
       enable = true;
       dns = "none";
@@ -37,5 +37,16 @@
     enable = true;
     package = pkgs.wireshark-qt;
   };
+
+  services.tor = {
+    enable = true;
+    settings = {
+      ControlPort = 9051;
+      CookieAuthentication = true;
+      CookieAuthFileGroupReadable = true;
+      DataDirectoryGroupReadable = true;
+    };
+  };
+
   users.extraGroups.wireshark.members = [ "iosmanthus" ];
 }

@@ -1,6 +1,3 @@
-{ system, ... }:
-(
-  self: super: {
-    clash-premium = super.callPackage (import ../packages/clash-premium.nix) {};
-  }
-)
+_self: super: {
+  clash-premium = super.callPackage ../packages/clash-premium.nix {};
+}

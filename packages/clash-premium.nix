@@ -1,27 +1,36 @@
-{ lib, pkgs, stdenv }:
+{ lib
+, pkgs
+, stdenv
+, fetchurl
+, autoPatchelfHook
+}:
 let
   inherit (stdenv.hostPlatform) system;
   supportedPlatform = {
     x86_64-linux = {
       alias = "linux-amd64";
-      sha256 = "1akxsbib4fdkapl82pcihy2w69s22fb5p19n5j4vxxrhzq7887k1";
+      sha256 = "sha256-EBDTscrfYHiUDRFD5ISZFl+32Imj1M+Q0asOcaV/oIQ=";
     };
     x86_64-darwin =
       {
         alias = "darwin-amd64";
-        sha256 = "130m2glqclysc9yrc6bsac5fm0zlw905y96hqs0nw84i68bv18q1";
+        sha256 = "sha256-rrNOBk8XpPBZB0WJ90JsarFGYK1lhWOkMEOnDqI+lXM=";
       };
   };
 in
 stdenv.mkDerivation rec {
   name = "clash-premium";
-  version = "2021.03.10";
+  version = "2021.04.08";
 
   src = fetchurl {
     url =
       "https://github.com/Dreamacro/clash/releases/download/premium/clash-${supportedPlatform.${system}.alias}-${version}.gz";
     sha256 = supportedPlatform.${system}.sha256;
   };
+
+  nativeBuildInputs = [
+    autoPatchelfHook
+  ];
 
   phases = [ "installPhase" ];
 

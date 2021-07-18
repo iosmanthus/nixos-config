@@ -5,16 +5,16 @@
 }:
 buildGoModule {
   name = "tun2socks";
-  version = "master";
+  version = "unstable-2021-05-31";
 
   src = fetchFromGitHub {
     owner = "xjasonlyu";
     repo = "tun2socks";
-    rev = "3f7fdc1d83ea3ce13510e2443727038bc9aafe19";
-    sha256 = "10898m6pkdpjwr9q24hckwgh72djfc2n49zf5lsa7ysg0kv7n941";
+    rev = "67cc84d1d03c992e455ac1bb791fcfbf557d8348";
+    sha256 = "sha256-0F14eg3/d4mo7BaER6teOwQ8QlNFh6APaXd9byw8Am0=";
   };
 
-  vendorSha256 = "0vq0rw7ddk2iyrasbgs28k8aq257lhli9wfxw534xlsfdhclzasy";
+  vendorSha256 = "sha256-5DVoiQX7DSN1z0j6M/SYnKS+zR611U4Q/MxuYKNSG1U=";
 
   meta = with lib; {
     description = "tun2socks - powered by gVisor TCP/IP stack";
