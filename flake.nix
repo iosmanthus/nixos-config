@@ -56,6 +56,7 @@
                         "vscode"
                         "kitty"
                         "discord"
+                        "flameshot"
                         "starship"
                         "jetbrains.goland"
                         "jetbrains.idea-ultimate"
