@@ -7,6 +7,12 @@
     enable = true;
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
+        name = "even-better-toml";
+        publisher = "tamasfe";
+        version = "0.14.2";
+        sha256 = "sha256-lE2t+KUfClD/xjpvexTJlEr7Kufo+22DUM9Ju4Tisp0=";
+      }
+      {
         name = "vscode-yaml";
         publisher = "redhat";
         version = "0.20.0";

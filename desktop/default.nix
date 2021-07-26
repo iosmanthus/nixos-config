@@ -40,7 +40,6 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    xkbOptions = "caps:escape";
     libinput = {
       enable = true;
       touchpad.disableWhileTyping = true;
@@ -66,7 +65,7 @@
           ];
           extraConfig = ''
             xft-dpi=192
-            font-name=Fira Code
+            font-name=Roboto
           '';
         };
       };

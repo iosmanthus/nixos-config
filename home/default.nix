@@ -11,6 +11,8 @@
     ./tmux.nix
   ];
 
+  home.keyboard.options = [ "caps:escape" ];
+
   programs.rofi = {
     enable = true;
     theme = "gruvbox-dark-hard";

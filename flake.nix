@@ -44,32 +44,28 @@
             {
               nixpkgs.overlays =
                 let
+                  genOverlay = import ./utils/branch-overlay.nix;
                   master = import inputs.master {
                     inherit system;
                     config.allowUnfree = true;
                   };
-                  genMasterOverlay = packages: (
-                    nixpkgs.lib.foldl
-                      (
-                        overlay: package:
-                          (overlay // { ${package} = master.${package}; })
-                      )
-                      {}
-                      packages
-                  );
-                  masterOverlay = self: super: (
-                    genMasterOverlay [
-                      "vscode"
-                      "kitty"
-                      "discord"
-                      "jetbrains.goland"
-                      "jetbrains.idea-ultimate"
-                      "jetbrains.clion"
-                      "google-chrome"
-                    ]
+                  overlay = (
+                    self: super: genOverlay {
+                      branch = master;
+                      packages = [
+                        "vscode"
+                        "kitty"
+                        "discord"
+                        "starship"
+                        "jetbrains.goland"
+                        "jetbrains.idea-ultimate"
+                        "jetbrains.clion"
+                        "google-chrome"
+                      ];
+                    }
                   );
                 in
-                  [ masterOverlay inputs.berberman.overlay ] ++ (import ./overlays);
+                  [ overlay inputs.berberman.overlay ] ++ (import ./overlays);
             }
           ];
         };
