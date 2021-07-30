@@ -21,7 +21,7 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 myConfig =
   ewmh
     def
-      { terminal = "kitty",
+      { terminal = "kitty tmux",
         modMask = mod4Mask,
         borderWidth = 3,
         startupHook = customStartupHook,
