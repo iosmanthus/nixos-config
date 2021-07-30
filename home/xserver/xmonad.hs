@@ -12,7 +12,7 @@ main = do
 myBar = "xmobar"
 
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
-myPP = xmobarPP {ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"}
+myPP = xmobarPP {ppCurrent = xmobarColor "#c792ea" "" . wrap "<" ">"}
 
 -- Key binding to toggle the gap for the bar.
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)

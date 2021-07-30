@@ -8,6 +8,7 @@
       noto-fonts-extra
       noto-fonts-emoji
       source-han-sans
+      source-han-mono
       fira-code
       cascadia-code
       hasklig

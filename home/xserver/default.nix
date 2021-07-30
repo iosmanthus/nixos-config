@@ -12,10 +12,11 @@
     extraConfig = ''
       Config
       { font = "xft:monospace:size=9:bold:antialias=true",
-        bgColor = "black",
-        fgColor = "white",
+        additionalFonts = ["xft:Source Han Mono SC:size=9:bold:antialias=true"],
+        bgColor = "#212121",
+        fgColor = "#FFCB6B",
         position = Bottom,
-        template = "%StdinReader% }{ %wlp110s0% %wlp110s0wi% %date% | %battery%",
+        template = "<fn=1>%StdinReader%</fn> }{ %wlp110s0% %wlp110s0wi% %date% | %battery%",
         commands =
           [ 
             Run Date "%a %b %_d %Y <fc=#ee9a00>%H:%M:%S</fc>" "date" 10,

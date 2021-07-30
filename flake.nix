@@ -56,12 +56,20 @@
                         "vscode"
                         "kitty"
                         "discord"
+                        "firefox"
                         "flameshot"
                         "starship"
                         "jetbrains.goland"
                         "jetbrains.idea-ultimate"
                         "jetbrains.clion"
                         "google-chrome"
+
+                        # Utils
+                        "gh"
+                        "neovim"
+                        "fd"
+                        "bat"
+                        "zoxide"
                       ];
                     }
                   );

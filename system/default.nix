@@ -3,7 +3,9 @@
   imports = [
     ./monitoring.nix
   ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  environment.systemPackages = with pkgs; [ lm_sensors ];
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.loader = {
     systemd-boot = {
       consoleMode = "max";
