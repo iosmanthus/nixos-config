@@ -2,6 +2,7 @@
 , ...
 }:
 {
+  environment.systemPackages = with pkgs; [ pavucontrol ];
   hardware.enableAllFirmware = true;
   # video driver
   hardware.opengl.extraPackages = with pkgs; [
@@ -25,5 +26,9 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+  services.upower.enable = true;
+  services.throttled = {
+    enable = true;
   };
 }

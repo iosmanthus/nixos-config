@@ -25,7 +25,7 @@
 
     flameshot
     zoom-us
-    firefox
+    firefox-bin
     discord
     google-chrome
     jetbrains.goland

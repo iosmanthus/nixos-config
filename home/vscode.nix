@@ -145,6 +145,7 @@
       in
         {
           "extensions.autoUpdate" = false;
+          "security.workspace.trust.enabled" = false;
 
           "keyboard.dispatch" = "keyCode";
           "vim.autoSwitchInputMethod.defaultIM" = "1";

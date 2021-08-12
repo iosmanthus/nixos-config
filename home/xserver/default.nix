@@ -16,7 +16,7 @@
         bgColor = "#212121",
         fgColor = "#FFCB6B",
         position = Bottom,
-        template = "<fn=1>%StdinReader%</fn> }{ %wlp110s0% %wlp110s0wi% %date% | %battery%",
+        template = "<fn=1>%StdinReader%</fn> }{ | %wlp110s0% %wlp110s0wi% | %date% | %thermal1% | %battery%",
         commands =
           [ 
             Run Date "%a %b %_d %Y <fc=#ee9a00>%H:%M:%S</fc>" "date" 10,
@@ -26,7 +26,7 @@
               [ "-S",
                 "True",
                 "-t",
-                "<dev>: up:<tx>|down:<rx>",
+                "<dev>: up:<tx>/down:<rx>",
                 "--Low",
                 "1000000", -- units: B/s
                 "--High",
@@ -50,6 +50,7 @@
                  , "-l", "red", "-h", "green"
                  , "--", "-O", "Charging", "-o", "Battery: <left>%"
                  ] 10,
+            Run ThermalZone 1 ["-t","temp: <temp>"] 30,
             Run
               StdinReader
           ]
@@ -71,10 +72,6 @@
       enable = true;
       enableContribAndExtras = true;
       config = ./xmonad.hs;
-      extraPackages = hp: [
-        hp.dbus
-        hp.taffybar
-      ];
     };
   };
 }

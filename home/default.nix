@@ -1,6 +1,6 @@
 { auto-fix-vscode-server, config, pkgs, ... }:
 {
-  home.packages = with pkgs;[ gh htop speedtest-cli ihaskell rustup ];
+  home.packages = with pkgs;[ gh ripgrep fd htop speedtest-cli ihaskell rustup joplin-desktop ];
 
   imports = [
     ./shell

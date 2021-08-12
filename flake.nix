@@ -49,16 +49,17 @@
                     inherit system;
                     config.allowUnfree = true;
                   };
-                  overlay = (
+                  masterOverlay = (
                     self: super: genOverlay {
                       branch = master;
                       packages = [
                         "vscode"
                         "kitty"
                         "discord"
-                        "firefox"
+                        "firefox-bin"
                         "flameshot"
                         "starship"
+                        "joplin-desktop"
                         "jetbrains.goland"
                         "jetbrains.idea-ultimate"
                         "jetbrains.clion"
@@ -67,6 +68,7 @@
                         # Utils
                         "gh"
                         "neovim"
+                        "ripgrep"
                         "fd"
                         "bat"
                         "zoxide"
@@ -74,7 +76,7 @@
                     }
                   );
                 in
-                  [ overlay inputs.berberman.overlay ] ++ (import ./overlays);
+                  [ masterOverlay inputs.berberman.overlay ] ++ (import ./overlays);
             }
           ];
         };

@@ -13,6 +13,8 @@
       cascadia-code
       hasklig
       roboto
+      vistafonts-chs
+      ubuntu_font_family
       (nerdfonts.override { fonts = [ "DroidSansMono" "LiberationMono" ]; })
     ];
 
@@ -27,7 +29,7 @@
             <string>sans-serif</string>
            </test>
            <edit mode="prepend" binding="strong" name="family">
-            <string>Roboto</string>
+            <string>Ubuntu</string>
            </edit>
           </match>
           <match target="pattern">
@@ -35,7 +37,7 @@
             <string>serif</string>
            </test>
            <edit mode="prepend" binding="strong" name="family">
-            <string>Roboto</string>
+            <string>Ubuntu</string>
            </edit>
           </match>
           <match target="pattern">
@@ -57,14 +59,14 @@
            <family>sans-serif</family>
            <prefer>
             <family>Noto Color Emoji</family>
-            <family>Source Han Sans SC</family>
+            <family>Microsoft YaHei</family>
            </prefer>
           </alias>
           <alias>
            <family>serif</family>
            <prefer>
             <family>Noto Color Emoji</family>
-            <family>Source Han Sans SC</family>
+            <family>Microsoft YaHei</family>
            </prefer>
           </alias>
           <alias>
