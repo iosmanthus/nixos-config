@@ -12,7 +12,6 @@
 
   virtualisation.libvirtd = {
     enable = true;
-    extraConfig = ''uri_default = "qemu:///system"'';
   };
   users.extraGroups.vboxusers.members = [ "iosmanthus" ];
   users.extraGroups.libvirtd.members = [ "iosmanthus" ];

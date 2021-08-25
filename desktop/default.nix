@@ -21,8 +21,6 @@
   services.gnome.gnome-keyring.enable = true;
 
   environment.systemPackages = with pkgs;[
-    glib.dev
-
     flameshot
     zoom-us
     firefox-bin
@@ -36,6 +34,9 @@
     slack
   ];
   services.autorandr.enable = true;
+  services.dbus = {
+    enable = true;
+  };
 
   services.xserver = {
     enable = true;
@@ -69,9 +70,9 @@
           '';
         };
       };
-      defaultSession = "none+xmonad";
+      defaultSession = "none+i3";
     };
-    windowManager.xmonad = {
+    windowManager.i3 = {
       enable = true;
     };
   };

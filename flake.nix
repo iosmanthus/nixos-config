@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     master.url = "github:NixOS/nixpkgs/master";
-
+    stable.url = "github:NixOS/nixpkgs/nixos-21.05";
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -49,6 +49,10 @@
                     inherit system;
                     config.allowUnfree = true;
                   };
+                  stable = import inputs.stable {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
                   masterOverlay = (
                     self: super: genOverlay {
                       branch = master;
@@ -64,10 +68,15 @@
                         "jetbrains.idea-ultimate"
                         "jetbrains.clion"
                         "google-chrome"
+                        "zoom-us"
+                        "rofi"
+                        "neovim"
+                        "i3"
+                        "joplin-desktop"
 
                         # Utils
                         "gh"
-                        "neovim"
+                        "exa"
                         "ripgrep"
                         "fd"
                         "bat"
@@ -76,7 +85,10 @@
                     }
                   );
                 in
-                  [ masterOverlay inputs.berberman.overlay ] ++ (import ./overlays);
+                  [
+                    masterOverlay
+                    inputs.berberman.overlay
+                  ] ++ (import ./overlays);
             }
           ];
         };

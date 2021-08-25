@@ -42,6 +42,7 @@
       lsof
       wget
       vim
+      file
       git
       bind
     ];

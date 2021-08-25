@@ -1,8 +1,7 @@
 # TODO List
 
-- [ ] **WIP** Configure XMonad, make it more productive
-    - [ ] a status bar
-    - [ ] a two-pane layout
+- [x] **DONE** Configure i3, make it more productive
+    - [x] a status bar
 - [ ] **WIP** Refactor firewall construction
     - [x] Use `tun2socks` to replace `tproxy`
       - [x] Pull out the logic of `tun2socks` module to a generic module.

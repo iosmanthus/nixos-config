@@ -9,12 +9,12 @@ let
   supportedPlatform = {
     x86_64-linux = {
       alias = "linux-amd64";
-      sha256 = "sha256-EBDTscrfYHiUDRFD5ISZFl+32Imj1M+Q0asOcaV/oIQ=";
+      sha256 = "1150gyjp23mbs68czm53i7cbfpqnk62f8hqi1na7hq6zraqx640h";
     };
     x86_64-darwin =
       {
         alias = "darwin-amd64";
-        sha256 = "sha256-rrNOBk8XpPBZB0WJ90JsarFGYK1lhWOkMEOnDqI+lXM=";
+        sha256 = "0wwm7si0x9s362j671b5mmh4dcbadi1gg2a50xcz190p9w34xcxf";
       };
   };
 in

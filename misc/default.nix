@@ -18,6 +18,13 @@
     extraGroups = [ "wheel" "networkmanager" "video" "audio" "storage" "input" "tor" ];
   };
 
+  services.udev = {
+    extraRules = ''
+      RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/intel_backlight/brightness"
+      RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/intel_backlight/brightness"
+    '';
+  };
+
   users.users.root = {
     shell = pkgs.zsh;
   };

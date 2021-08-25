@@ -15,7 +15,8 @@
       roboto
       vistafonts-chs
       ubuntu_font_family
-      (nerdfonts.override { fonts = [ "DroidSansMono" "LiberationMono" ]; })
+      siji
+      (nerdfonts.override { fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" ]; })
     ];
 
 
