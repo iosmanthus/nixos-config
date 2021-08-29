@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs;[
     gh
+    cloc
     ripgrep
     fd
     htop
@@ -12,7 +13,7 @@
 
     flameshot
     zoom-us
-    firefox-bin
+    firefox-nightly
     discord
     google-chrome
     jetbrains.goland

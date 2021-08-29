@@ -13,6 +13,12 @@
         sha256 = "0kmmk6bpsdrvbb7dqf0d3annpg41n9g6ljzc1dh0akjzpbchdcwp";
       }
       {
+        name = "color-highlight";
+        publisher = "naumovs";
+        version = "2.4.0";
+        sha256 = "118y2wzmxxm9y4n96gld4nqlm5dglac3vp4fm96mipdjj2ll6n7s";
+      }
+      {
         name = "gitlens";
         publisher = "eamodio";
         version = "11.6.0";
@@ -174,7 +180,7 @@
           ];
           "vim.visualstar" = true;
 
-          "editor.fontFamily" = "monospace";
+          "editor.fontFamily" = "Hasklig, 'Material-Design-Iconic-Font', feather";
           "editor.fontLigatures" = true;
           "editor.fontSize" = 16;
           # "editor.fontWeight": "650",

@@ -8,6 +8,14 @@
     "Xft.dpi" = 192;
   };
 
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.tela-icon-theme;
+      name = "Tela";
+    };
+  };
+
   services.mpd.enable = true;
   services.mpris-proxy.enable = true;
   services.mpdris2 = {
@@ -53,10 +61,10 @@
                   "${modifier0}+3" = "workspace 3: chat";
                   "${modifier0}+4" = "workspace 4: misc";
 
-                  "${modifier0}+Shift+1" = "move container to workspace number 1";
-                  "${modifier0}+Shift+2" = "move container to workspace number 2";
-                  "${modifier0}+Shift+3" = "move container to workspace number 3";
-                  "${modifier0}+Shift+4" = "move container to workspace number 4";
+                  "${modifier0}+Shift+1" = "move container to workspace 1: work";
+                  "${modifier0}+Shift+2" = "move container to workspace 2: vm";
+                  "${modifier0}+Shift+3" = "move container to workspace 3: chat";
+                  "${modifier0}+Shift+4" = "move container to workspace 4: misc";
 
                   "${modifier0}+j" = "focus down";
                   "${modifier0}+h" = "focus left";
@@ -105,6 +113,33 @@
               ];
               bars = [];
             };
+        extraConfig = ''
+          set $base00 #212121
+          set $base01 #303030
+          set $base02 #353535
+          set $base03 #4A4A4A
+          set $base04 #B2CCD6
+          set $base05 #EEFFFF
+          set $base06 #EEFFFF
+          set $base07 #FFFFFF
+          set $base08 #F07178
+          set $base09 #F78C6C
+          set $base0A #FFCB6B
+          set $base0B #C3E88D
+          set $base0C #89DDFF
+          set $base0D #82AAFF
+          set $base0E #C792EA
+          set $base0F #FF5370
+
+          # Basic color configuration using the Base16 variables for windows and borders.
+          # Property Name         Border  BG      Text    Indicator Child Border
+          client.focused          $base01 $base01 $base05 $base0D $base0C
+          client.focused_inactive $base01 $base01 $base05 $base03 $base01
+          client.unfocused        $base01 $base00 $base05 $base01 $base01
+          client.urgent           $base08 $base08 $base00 $base08 $base08
+          client.placeholder      $base00 $base00 $base05 $base00 $base00
+          client.background       $base07
+        '';
       };
     };
   };

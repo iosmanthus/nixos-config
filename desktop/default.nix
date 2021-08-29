@@ -20,19 +20,6 @@
   programs.dconf.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
-  environment.systemPackages = with pkgs;[
-    flameshot
-    zoom-us
-    firefox-bin
-    discord
-    google-chrome
-    jetbrains.goland
-    jetbrains.idea-ultimate
-    jetbrains.clion
-    tdesktop
-    feeluown
-    slack
-  ];
   services.autorandr.enable = true;
   services.dbus = {
     enable = true;

@@ -11,12 +11,15 @@
       source-han-mono
       fira-code
       cascadia-code
+      material-design-icons
+      jetbrains-mono
+      font-awesome
       hasklig
       roboto
       vistafonts-chs
       ubuntu_font_family
       siji
-      (nerdfonts.override { fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" ]; })
+      (nerdfonts.override { fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" "Hasklig" ]; })
     ];
 
 

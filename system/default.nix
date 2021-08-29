@@ -19,4 +19,9 @@
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=5s
   '';
+  services.journald = {
+    extraConfig = ''
+      SystemMaxUse=1G
+    '';
+  };
 }
