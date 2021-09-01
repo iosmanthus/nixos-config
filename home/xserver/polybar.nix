@@ -63,7 +63,7 @@
           background=''${colors.base00}
           foreground=''${colors.base07}
 
-          modules-left = i3 player-mpris-simple
+          modules-left = i3 sep player-mpris-simple
           modules-center =
           modules-right = sep temperature sep cpu sep network sep backlight sep date sep pulseaudio sep battery sep
 
@@ -199,7 +199,7 @@
 
           [module/i3]
           type = internal/i3
-          pin-workspaces = true
+          pin-workspaces = false
           strip-wsnumbers = true
           index-sort = true
           enable-click = true

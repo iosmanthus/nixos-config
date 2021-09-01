@@ -3,7 +3,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     master.url = "github:NixOS/nixpkgs/master";
-    stable.url = "github:NixOS/nixpkgs/nixos-21.05";
     sops-nix.url = "github:Mic92/sops-nix";
     firefox-nightly = {
       url = "github:colemickens/flake-firefox-nightly";
@@ -59,10 +58,6 @@
                 let
                   genOverlay = import ./utils/branch-overlay.nix;
                   master = import inputs.master {
-                    inherit system;
-                    config.allowUnfree = true;
-                  };
-                  stable = import inputs.stable {
                     inherit system;
                     config.allowUnfree = true;
                   };

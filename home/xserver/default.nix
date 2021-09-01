@@ -42,6 +42,10 @@
           let
             modifier0 = "Mod4";
             modifier1 = "Mod1";
+            wallpaper = pkgs.fetchurl {
+              url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/master/wallpapers/nix-wallpaper-simple-blue.png";
+              sha256 = "1llr175m454aqixxwbp3kb5qml2hi1kn7ia6lm7829ny6y7xrnms";
+            };
           in
             {
               modifier = modifier0;
@@ -102,12 +106,14 @@
               startup = [
                 {
                   command = "fcitx5 -d";
-                  notification = true;
+                }
+                {
+                  command = "feh --bg-scale ${wallpaper}";
+                  always = true;
                 }
                 {
                   command = "systemctl restart --user polybar.service";
                   always = true;
-                  notification = true;
                 }
                 { command = "firefox"; }
               ];

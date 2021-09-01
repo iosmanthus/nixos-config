@@ -10,6 +10,7 @@
     ihaskell
     rustup
     joplin-desktop
+    httpie
 
     flameshot
     zoom-us
@@ -35,6 +36,7 @@
 
   home.keyboard.options = [ "caps:escape" ];
 
+  programs.feh.enable = true;
   programs.rofi = {
     enable = true;
     theme = "gruvbox-dark-hard";
