@@ -3,7 +3,7 @@ with pkgs;
 let
   pname = "yesplaymusic";
   version = "0.4.0";
-  url = "https://github.com/qier222/YesPlayMusic/releases/download/v0.4.0/YesPlayMusic-${version}.AppImage";
+  url = "https://github.com/qier222/YesPlayMusic/releases/download/v${version}/YesPlayMusic-${version}.AppImage";
   sha256 = "1dx0127xr0mlkskvspqmdbl0q1ysdxbdjf17d7mwkzxsrbky6xi1";
   src = builtins.fetchurl {
     inherit url sha256;
