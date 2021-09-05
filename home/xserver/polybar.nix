@@ -5,7 +5,7 @@
       mpdSupport = true;
       iwSupport = true;
       i3Support = true;
-      i3GapsSupport = false;
+      i3GapsSupport = true;
       alsaSupport = true;
       pulseSupport = true;
       githubSupport = true;
@@ -57,7 +57,7 @@
           radius = 0.0
           override-redirect = false
           fixed-center = true
-          bottom = false
+          bottom = true
           line-size = 4
 
           background=''${colors.base00}
@@ -65,7 +65,7 @@
 
           modules-left = i3 sep player-mpris-simple
           modules-center =
-          modules-right = sep temperature sep cpu sep network sep backlight sep date sep pulseaudio sep battery sep
+          modules-right = sep temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep
 
           font-0 = "Jetbrains Mono:size=18;3"
           font-1 = "Material\-Design\-Iconic\-Font:size=18;3"
@@ -108,9 +108,16 @@
           ramp-3 = 
           ramp-4 = 
 
+          [module/memory]
+          type = internal/memory
+          interval = 1
+          format = <label>
+          format-prefix = 
+          label = " %gb_used%/%percentage_used%%"
+          
           [module/cpu]
           type = internal/cpu
-          interval = 1
+          interval = 5
           format = <label>
           format-prefix = 
           label = " %percentage%%"

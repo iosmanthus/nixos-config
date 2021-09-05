@@ -13,12 +13,6 @@
         sha256 = "0kmmk6bpsdrvbb7dqf0d3annpg41n9g6ljzc1dh0akjzpbchdcwp";
       }
       {
-        name = "color-highlight";
-        publisher = "naumovs";
-        version = "2.4.0";
-        sha256 = "118y2wzmxxm9y4n96gld4nqlm5dglac3vp4fm96mipdjj2ll6n7s";
-      }
-      {
         name = "gitlens";
         publisher = "eamodio";
         version = "11.6.0";
@@ -39,20 +33,20 @@
       {
         name = "go";
         publisher = "golang";
-        version = "0.27.1";
-        sha256 = "1985bbmnqqlss8h2ma0qgzj2g9xp4za58y2dyiwkh64bzpd6814x";
+        version = "0.27.2";
+        sha256 = "1ayyqm7bpz9axxp9avnr0y7kcqzpl1l538m7szdqgrra3956irna";
       }
       {
         name = "haskell";
         publisher = "haskell";
-        version = "1.6.0";
-        sha256 = "01f87wn7lnrh9cyk6yxdv91bn9z6a9c6h62vxznqd6ff5ryv2fiw";
+        version = "1.6.1";
+        sha256 = "1l6nrbqkq1p62dkmzs4sy0rxbid3qa1104s3fd9fzkmc1sldzgsn";
       }
       {
         name = "nix-ide";
         publisher = "jnoortheen";
-        version = "0.1.12";
-        sha256 = "1wkc5mvxv7snrpd0py6x83aci05b9fb9v4w9pl9d1hyaszqbfnif";
+        version = "0.1.16";
+        sha256 = "04ky1mzyjjr1mrwv3sxz4mgjcq5ylh6n01lvhb19h3fmwafkdxbp";
       }
       {
         name = "language-haskell";
@@ -63,8 +57,8 @@
       {
         name = "rust-analyzer";
         publisher = "matklad";
-        version = "0.2.710";
-        sha256 = "091wkpq65nqc86fnbwy9glpskvhl4w07k7zjy0jhry78qjlaizb3";
+        version = "0.2.727";
+        sha256 = "110328yvhic9l8as0s81k4jbjcd602vmbz0khrnfbj9rpl2m3sds";
       }
       {
         name = "remote-ssh-edit";
@@ -75,14 +69,20 @@
       {
         name = "remote-ssh-nightly";
         publisher = "ms-vscode-remote";
-        version = "2021.8.18181";
-        sha256 = "1433n5a2j1mqbh26in7f3j08skygj2n1nm4qwyf4fc4lr02ldi8c";
+        version = "2021.8.42660";
+        sha256 = "11yffdjflpy3lv7h6b4f5bi6pk0s5dsffib7rwlv0v6d6pbpl0yl";
+      }
+      {
+        name = "color-highlight";
+        publisher = "naumovs";
+        version = "2.4.0";
+        sha256 = "118y2wzmxxm9y4n96gld4nqlm5dglac3vp4fm96mipdjj2ll6n7s";
       }
       {
         name = "material-icon-theme";
         publisher = "PKief";
-        version = "4.9.0";
-        sha256 = "133mmcvbmks3xp2wlay00gzbnqmjm019ziksaz4xadc7r19cy0fv";
+        version = "4.10.0";
+        sha256 = "119zpdx2hx9d1xb3d9d773b88i2awr62ivmmnhxm9zp77x9y6b70";
       }
       {
         name = "vscode-commons";
@@ -99,8 +99,8 @@
       {
         name = "tabnine-vscode";
         publisher = "TabNine";
-        version = "3.4.22";
-        sha256 = "11m50d3zsk8ihwfir177v484s466p8nyyl6q9zhzzhagb9xw0b51";
+        version = "3.4.26";
+        sha256 = "04ll5zbndc0pknpdp2p5v9l4ifiq1v43n7azv5j7y4gwfp9mqirq";
       }
       {
         name = "even-better-toml";
@@ -111,8 +111,8 @@
       {
         name = "vim";
         publisher = "vscodevim";
-        version = "1.21.6";
-        sha256 = "1hk6aqa3mxh0n2ka78p6ral5s0y2pcmnrnfhz4vhxdvgjx0zypn3";
+        version = "1.21.7";
+        sha256 = "160h8svp78snwq7bl6acbkmsb2664fiznnjqim9lh2bnyrlh69ww";
       }
       {
         name = "markdown-all-in-one";

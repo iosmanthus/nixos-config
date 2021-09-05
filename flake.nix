@@ -81,6 +81,7 @@
                         "neovim"
                         "i3"
                         "joplin-desktop"
+                        "thunderbird"
 
                         # Utils
                         "gh"

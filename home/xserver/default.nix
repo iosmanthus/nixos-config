@@ -139,7 +139,7 @@
 
           # Basic color configuration using the Base16 variables for windows and borders.
           # Property Name         Border  BG      Text    Indicator Child Border
-          client.focused          $base01 $base01 $base05 $base0D $base0C
+          client.focused          $base03 $base01 $base05 $base0D $base0C
           client.focused_inactive $base01 $base01 $base05 $base03 $base01
           client.unfocused        $base01 $base00 $base05 $base01 $base01
           client.urgent           $base08 $base08 $base00 $base08 $base08

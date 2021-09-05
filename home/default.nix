@@ -11,8 +11,10 @@
     rustup
     joplin-desktop
     httpie
+    nnn
 
     flameshot
+    thunderbird
     zoom-us
     firefox-nightly
     discord
@@ -42,7 +44,6 @@
     theme = "gruvbox-dark-hard";
     font = "monospace 20";
     terminal = "${pkgs.kitty}/bin/kitty";
-    package = pkgs.rofi.override { plugins = [ pkgs.rofi-mpd ]; };
     extraConfig = {
       ssh-command = "{terminal} -- {terminal} +kitten ssh {host} [-p {port}]";
       show-icons = true;
@@ -53,53 +54,6 @@
       sorting-method = "fzf";
     };
   };
-
-  # services.fusuma = {
-  #   enable = true;
-  #   extraPackages = with pkgs;[ xdotool ];
-  #   config = {
-  #     threshold = {
-  #       swipe = 0.1;
-  #     };
-  #     interval = {
-  #       swipe = 0.7;
-  #     };
-  #     swipe = {
-  #       "3" = {
-  #         left = {
-  #           # GNOME: Switch to left workspace
-  #           command = "xdotool key ctrl+alt+Right";
-  #         };
-  #         right = {
-  #           # GNOME: Switch to right workspace
-  #           command = "xdotool key ctrl+alt+Left";
-  #         };
-  #         up = {
-  #           # GNOME Activity
-  #           command = "xdotool key super";
-  #         };
-  #         down = {
-  #           # GNOME Activity
-  #           command = "xdotool key super";
-  #         };
-  #       };
-  #       "4" = {
-  #         left = {
-  #           # GNOME: Move window to right workspace
-  #           command = "xdotool key ctrl+shift+alt+Right";
-  #         };
-  #         right = {
-  #           # GNOME: Move window to left workspace
-  #           command = "xdotool key ctrl+shift+alt+Left";
-  #         };
-  #         up = {
-  #           # GNOME: Show all applications
-  #           command = "xdotool key super+a";
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
 
   programs.git = {
     enable = true;

@@ -16,7 +16,6 @@
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
   };
 
-  programs.evolution.enable = true;
   programs.dconf.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
