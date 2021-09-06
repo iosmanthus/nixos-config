@@ -1,5 +1,13 @@
 { auto-fix-vscode-server, config, pkgs, ... }:
 {
+  imports = [
+    ./shell
+    ./xserver
+    ./vscode.nix
+    ./tmux.nix
+    #./fusuma.nix
+  ];
+
   home.packages = with pkgs;[
     gh
     cloc
@@ -13,6 +21,7 @@
     httpie
     nnn
 
+    yesplaymusic
     flameshot
     thunderbird
     zoom-us
@@ -23,17 +32,7 @@
     jetbrains.idea-ultimate
     jetbrains.clion
     tdesktop
-    feeluown
     slack
-  ];
-
-  imports = [
-    ./shell
-    ./xserver
-    ./fusuma.nix
-    ./tilix.nix
-    ./vscode.nix
-    ./tmux.nix
   ];
 
   home.keyboard.options = [ "caps:escape" ];

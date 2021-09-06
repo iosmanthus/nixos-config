@@ -9,7 +9,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./hardware-extra.nix
-      ./desktop
+      ./xserver-entry
       ./system
       ./network
       ./virtualisation
@@ -45,7 +45,6 @@
       file
       git
       bind
-      yesplaymusic
     ];
 
   # This value determines the NixOS release from which the default

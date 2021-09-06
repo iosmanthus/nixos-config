@@ -2,17 +2,10 @@
 {
   imports = [
     ./fonts.nix
-    ./input-method.nix
-    #./gdm-tapping.nix
   ];
 
-  qt5 = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-  };
-
   environment.variables = {
+    GLFW_IM_MODULE = "ibus";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
   };
 
