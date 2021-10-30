@@ -38,7 +38,6 @@
         "docker"
         "git"
         "vi-mode"
-        "cargo"
         "golang"
       ];
     };

@@ -6,10 +6,13 @@
         let
           modifier0 = "Mod4";
           modifier1 = "Mod1";
-          wallpaper = pkgs.fetchurl {
-            url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/master/wallpapers/nix-wallpaper-simple-blue.png";
-            sha256 = "1llr175m454aqixxwbp3kb5qml2hi1kn7ia6lm7829ny6y7xrnms";
-          };
+          wallpaper = let
+            commit = "03c6c20be96c38827037d2238357f2c777ec4aa5";
+          in
+            pkgs.fetchurl {
+              url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/${commit}/wallpapers/nix-wallpaper-simple-dark-gray.png";
+              sha256 = "1282cnqc5qynp0q9gdll7bgpw23yp5bhvaqpar59ibkh3iscg8i5";
+            };
         in
           {
             modifier = modifier0;
@@ -106,7 +109,7 @@
 
         # Basic color configuration using the Base16 variables for windows and borders.
         # Property Name         Border  BG      Text    Indicator Child Border
-        client.focused          $base03 $base01 $base05 $base0D $base0C
+        client.focused          $base04 $base01 $base05 $base0D $base0C
         client.focused_inactive $base01 $base01 $base05 $base03 $base01
         client.unfocused        $base01 $base00 $base05 $base01 $base01
         client.urgent           $base08 $base08 $base00 $base08 $base08

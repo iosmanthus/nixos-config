@@ -20,6 +20,9 @@
     joplin-desktop
     httpie
     nnn
+    gnome.gnome-system-monitor
+    peek
+    vlc
 
     yesplaymusic
     flameshot
@@ -31,6 +34,7 @@
     jetbrains.goland
     jetbrains.idea-ultimate
     jetbrains.clion
+    jetbrains.pycharm-professional
     tdesktop
     slack
   ];

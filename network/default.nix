@@ -7,7 +7,7 @@
 
   networking.hostName = "iosmanthus-nixos";
   networking = {
-    nameservers = [ "172.18.0.2" ];
+    nameservers = [ "172.18.0.1" ];
     networkmanager = {
       enable = true;
       dns = "none";
@@ -29,7 +29,7 @@
     udp = {
       udpTimeout = 2;
     };
-    socksProxy = "172.18.0.2:1080";
+    socksProxy = "172.18.0.4:1080";
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };
 

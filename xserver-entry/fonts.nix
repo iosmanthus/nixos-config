@@ -18,6 +18,7 @@
       roboto
       vistafonts-chs
       ubuntu_font_family
+      polybar-fonts
       siji
       (nerdfonts.override { fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" "Hasklig" ]; })
     ];
