@@ -45,6 +45,8 @@
       CookieAuthentication = true;
       CookieAuthFileGroupReadable = true;
       DataDirectoryGroupReadable = true;
+      ExcludeNodes = "{cn},{hk},{mo}";
+      StrictNodes = true;
     };
   };
 

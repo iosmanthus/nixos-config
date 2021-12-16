@@ -45,7 +45,7 @@
   programs.rofi = {
     enable = true;
     theme = "gruvbox-dark-hard";
-    font = "monospace 20";
+    font = "Dejavu Sans Mono 20";
     terminal = "${pkgs.kitty}/bin/kitty";
     extraConfig = {
       ssh-command = "{terminal} -- {terminal} +kitten ssh {host} [-p {port}]";
@@ -95,7 +95,7 @@
       {
         enable = true;
         font = {
-          name = "monospace";
+          name = "Dejavu Sans Mono";
         };
         settings = {
           include = "${base16.mkKittyBase16Theme { name = "material-darker"; }}";

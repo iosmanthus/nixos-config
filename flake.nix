@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     master.url = "github:NixOS/nixpkgs/master";
+    latest-jetbrains.url = "github:iosmanthus/nixpkgs/latest-jetbrains-packages";
     sops-nix.url = "github:Mic92/sops-nix";
     firefox-nightly = {
       url = "github:colemickens/flake-firefox-nightly";
@@ -61,6 +62,10 @@
                     inherit system;
                     config.allowUnfree = true;
                   };
+                  latest-jetbrains = import inputs.latest-jetbrains {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
                   masterOverlay = (
                     self: super: genOverlay {
                       branch = master;
@@ -72,9 +77,6 @@
                         "flameshot"
                         "starship"
                         "joplin-desktop"
-                        "jetbrains.goland"
-                        "jetbrains.idea-ultimate"
-                        "jetbrains.clion"
                         "google-chrome"
                         "zoom-us"
                         "rofi"
@@ -93,11 +95,18 @@
                       ];
                     }
                   );
+                  jetbrainsOverlay =
+                    (
+                      self: super: {
+                        jetbrains = latest-jetbrains.jetbrains;
+                      }
+                    );
                 in
-                  [
-                    masterOverlay
-                    inputs.berberman.overlay
-                  ] ++ (import ./overlays);
+                [
+                  masterOverlay
+                  jetbrainsOverlay
+                  inputs.berberman.overlay
+                ] ++ (import ./overlays);
             }
           ];
         };

@@ -192,15 +192,15 @@
         ];
         "vim.visualstar" = true;
 
-        "editor.fontFamily" = "Hasklig, 'Material-Design-Iconic-Font', feather";
+        "editor.fontFamily" = "'Dejavu Sans Mono', 'Material-Design-Iconic-Font', feather";
         "editor.fontLigatures" = true;
-        "editor.fontSize" = 16;
+        "editor.fontSize" = 13;
         # "editor.fontWeight": "650",
-        "editor.lineHeight" = 28;
+        "editor.lineHeight" = 25;
         "editor.lineNumbers" = "relative";
 
         "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
-        "terminal.integrated.fontFamily" = "monospace";
+        "terminal.integrated.fontFamily" = "'Dejavu Sans Mono'";
         "terminal.integrated.fontWeight" = "normal";
         "terminal.integrated.fontWeightBold" = "600";
 

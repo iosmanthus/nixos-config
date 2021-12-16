@@ -67,7 +67,7 @@
           modules-center =
           modules-right = sep temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep
 
-          font-0 = "Jetbrains Mono:size=18;3"
+          font-0 = "Dejavu Sans Mono:size=18;3"
           font-1 = "Material\-Design\-Iconic\-Font:size=18;3"
           font-2 = "NotoEmoji:scale=5;3"
           font-3 = "feather:size=18;3"
