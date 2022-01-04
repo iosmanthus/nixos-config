@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./monitoring.nix
+    #./monitoring.nix
   ];
 
   environment.systemPackages = with pkgs; [ lm_sensors ];

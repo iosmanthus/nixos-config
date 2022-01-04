@@ -15,8 +15,8 @@
       {
         name = "gitlens";
         publisher = "eamodio";
-        version = "11.6.1";
-        sha256 = "0nghanaxa5db7lxfi4nly45iaps560zkwsfhmzhiiaan0hj0qmcs";
+        version = "11.7.0";
+        sha256 = "0apjjlfdwljqih394ggz2d8m599pyyjrb0b4cfcz83601b7hk3x6";
       }
       {
         name = "vsc-community-material-theme";
@@ -27,20 +27,26 @@
       {
         name = "shell-format";
         publisher = "foxundermoon";
-        version = "7.1.1";
-        sha256 = "1b9q7919gaycg465d3k3pi8n54ljvam3qr6r2ys399x3ppyv17sn";
+        version = "7.2.2";
+        sha256 = "00wc0y2wpdjs2pbxm6wj9ghhfsvxyzhw1vjvrnn1jfyl4wh3krvi";
+      }
+      {
+        name = "copilot";
+        publisher = "GitHub";
+        version = "1.7.4421";
+        sha256 = "1wvzf8rq8ligj079f1m74zzna2mfmhcbgvvrsw6w0wxw9x8fn4wy";
       }
       {
         name = "go";
         publisher = "golang";
-        version = "0.29.0";
-        sha256 = "1ky5xnl300m42ja8sh3b4ynn8k1nnrcbxxhn3c3g5bsyzsrr1nmz";
+        version = "0.30.0";
+        sha256 = "15rmc79ad743hb6pmnzv91rkvl2fb1qwh5gk5q6n9f9vygiyjrix";
       }
       {
         name = "haskell";
         publisher = "haskell";
-        version = "1.7.1";
-        sha256 = "11myrk3hcc2hdw2n07w092s78aa6igpm7rgvn7ac9rbkkvc66rsi";
+        version = "1.8.0";
+        sha256 = "0yzcibigxlvh6ilba1jpri2irsjnvyy74vzn3rydcywfc17ifkzs";
       }
       {
         name = "nix-ide";
@@ -57,26 +63,26 @@
       {
         name = "rust-analyzer";
         publisher = "matklad";
-        version = "0.2.792";
-        sha256 = "1m4g6nf5yhfjrjja0x8pfp79v04lxp5lfm6z91y0iilmqbb9kx1q";
+        version = "0.2.853";
+        sha256 = "0fasdv9wazir6qv2qvmn0wsy2v5lwa4lhxq7scqwr16wxhzbr2hx";
       }
       {
         name = "vscode-docker";
         publisher = "ms-azuretools";
-        version = "1.17.0";
-        sha256 = "01na7j64mavn2zqfxkly9n6fpr6bs3vyiipy09jkmr5m86fq0cdx";
+        version = "1.18.0";
+        sha256 = "0hhlhx3xy7x31xx2v3srvk67immajs6dm9h0wi49ii1rwx61zxah";
       }
       {
         name = "remote-ssh-edit";
         publisher = "ms-vscode-remote";
-        version = "0.65.8";
-        sha256 = "07w085crhvp8wh3n1gyfhfailfq940rffpahsp5pv8j200v2s0js";
+        version = "0.71.2021121615";
+        sha256 = "0ymrfsvls2y9dzhxx71kb3jqm7vznj1z39nb89pykyk76jsn70gv";
       }
       {
         name = "remote-ssh-nightly";
         publisher = "ms-vscode-remote";
-        version = "2021.10.36984";
-        sha256 = "1ck6whn231z6lwg9li1494vsia7nciggg57xzs47awzzlj1ad0k5";
+        version = "2021.12.12420";
+        sha256 = "1z0mizgb92w3hxj3m8mffdmkd5724mzn34szbnf27hiixmyzp32j";
       }
       {
         name = "color-highlight";
@@ -87,8 +93,8 @@
       {
         name = "material-icon-theme";
         publisher = "PKief";
-        version = "4.10.0";
-        sha256 = "119zpdx2hx9d1xb3d9d773b88i2awr62ivmmnhxm9zp77x9y6b70";
+        version = "4.11.0";
+        sha256 = "1l2s8j645riqjmj09i3v71s8ycin5vd6brdp35z472fnk6wyi1y6";
       }
       {
         name = "vscode-commons";
@@ -99,14 +105,14 @@
       {
         name = "vscode-yaml";
         publisher = "redhat";
-        version = "1.1.0";
-        sha256 = "1cc871wdbasfkf37vkkanqf9jfzzvmvzi7gxyl63w613hb9g75w2";
+        version = "1.2.2";
+        sha256 = "06n4fxqr3lqmiyns9jdk3rdnanamcpzhrivllai8z9d997xmwcx6";
       }
       {
         name = "tabnine-vscode";
         publisher = "TabNine";
-        version = "3.4.33";
-        sha256 = "1labprw5hjar0mnjarqzfanzc16p4dx9qjf1wygzrf4dwj4isixh";
+        version = "3.5.11";
+        sha256 = "1is8dsjs5kqn960wnr548ivy9r94nvzhgn7nky28wi9w42xi64im";
       }
       {
         name = "even-better-toml";
@@ -127,10 +133,10 @@
         sha256 = "0ihfrsg2sc8d441a2lkc453zbw1jcpadmmkbkaf42x9b9cipd5qb";
       }
       {
-        name = "copilot";
-        publisher = "GitHub";
-        version = "1.6.3503";
-        sha256 = "0yv82a5gn8w3hj4djn52001wbdhxwwaxc7r7mw702yqf4qaa2q8m";
+        name = "vscode-proto3";
+        publisher = "zxh404";
+        version = "0.5.5";
+        sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
       }
     ];
 

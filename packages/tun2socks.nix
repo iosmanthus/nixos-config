@@ -1,20 +1,26 @@
 { lib
-, buildGoModule
+, buildGo117Module
 , fetchFromGitHub
 , ...
 }:
-buildGoModule {
+buildGo117Module rec{
   name = "tun2socks";
-  version = "2.3.0";
+  version = "2.3.2";
+  overrideModAttrs = _oldAttrs: {
+    GOPROXY = "https://goproxy.cn,direct";
+    GO111MODULE = "on";
+  };
+
+  proxyVendor = true;
 
   src = fetchFromGitHub {
     owner = "xjasonlyu";
     repo = "tun2socks";
-    rev = "bf59ddf897d128f47b6f2622f5aaef49caa33f33";
-    sha256 = "3410cb374087f889dd3a394936c3ff65075f349c8b06c3311e73592ab9ecf98a";
+    rev = "v${version}";
+    sha256 = "1p8hifl30zq80k16240c8ssaab3mi1c4j9i0rirlv6algj8zzd9s";
   };
 
-  vendorSha256 = "bb269a690c993d6e693f8c3ea45b7e979d947ca9c4433c9f9c5abf11f7871335";
+  vendorSha256 = "08xc1kgri8vi4mlhkjhaxl20ld4km7fydmfdsrfh0sjs656vzg1h";
 
   meta = with lib; {
     description = "tun2socks - powered by gVisor TCP/IP stack";

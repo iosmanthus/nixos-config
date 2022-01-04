@@ -119,7 +119,7 @@ in
           (rules: addr: "${rules}\n-A tun2socks-pre -s ${addr} -j RETURN")
           ""
           cfg.ignoreSrcAddresses}
-          ${optionalString (cfg.ignoreMark != null) "-A tun2socks-out -m mark --mark ${toString cfg.ignoreMark} -j RETURN"}
+          ${optionalString (cfg.ignoreMark != null) "-A tun2socks-pre -m mark --mark ${toString cfg.ignoreMark} -j RETURN"}
           -A tun2socks-pre -d 0.0.0.0/8 -j RETURN
           -A tun2socks-pre -d 10.0.0.0/8 -j RETURN
           -A tun2socks-pre -d 127.0.0.0/8 -j RETURN

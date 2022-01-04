@@ -28,7 +28,7 @@
     flameshot
     thunderbird
     zoom-us
-    firefox-nightly
+    firefox-bin
     discord
     google-chrome
     jetbrains.goland

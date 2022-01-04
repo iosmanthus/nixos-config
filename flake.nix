@@ -5,10 +5,6 @@
     master.url = "github:NixOS/nixpkgs/master";
     latest-jetbrains.url = "github:iosmanthus/nixpkgs/latest-jetbrains-packages";
     sops-nix.url = "github:Mic92/sops-nix";
-    firefox-nightly = {
-      url = "github:colemickens/flake-firefox-nightly";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,15 +40,6 @@
                 verbose = true;
                 users.iosmanthus = import ./home;
               };
-            }
-            {
-              nixpkgs.overlays = [
-                (
-                  self: super: {
-                    firefox-nightly = inputs.firefox-nightly.defaultPackage.${system};
-                  }
-                )
-              ];
             }
             {
               nixpkgs.overlays =
