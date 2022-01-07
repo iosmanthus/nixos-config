@@ -71,6 +71,7 @@
                         "i3"
                         "joplin-desktop"
                         "thunderbird"
+                        "jetbrains"
 
                         # Utils
                         "gh"
@@ -82,16 +83,15 @@
                       ];
                     }
                   );
-                  jetbrainsOverlay =
-                    (
-                      self: super: {
-                        jetbrains = latest-jetbrains.jetbrains;
-                      }
-                    );
+                  # jetbrainsOverlay =
+                  #   (
+                  #     self: super: {
+                  #       jetbrains = latest-jetbrains.jetbrains;
+                  #     }
+                  #   );
                 in
                 [
                   masterOverlay
-                  jetbrainsOverlay
                   inputs.berberman.overlay
                 ] ++ (import ./overlays);
             }

@@ -2,9 +2,9 @@
 with pkgs;
 let
   pname = "yesplaymusic";
-  version = "0.4.1";
+  version = "0.4.3";
   url = "https://github.com/qier222/YesPlayMusic/releases/download/v${version}/YesPlayMusic-${version}.AppImage";
-  sha256 = "0bqybqkikr82mbwkyfb1ld6n9mi4mgcfcsry5jxxas15lraszx8d";
+  sha256 = "1nrb2dzacpsq05ps49mi1vza4j7y18ab2vvi5vda3npa1nckznl7";
   src = builtins.fetchurl {
     inherit url sha256;
   };
