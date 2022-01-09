@@ -5,69 +5,69 @@
 }:
 
 let
-  cfg = config.services.tproxy;
+  cfg = config.services.tun2socks;
 in
 with lib;
 {
-  options.services.tproxy = {
-    enable = mkEnableOption "tproxy service";
+  options.services.tun2socks = {
+    enable = mkEnableOption "Enable tun2socks service";
 
     tcp = mkOption {
       type = types.submodule {
         options = {
-          enable = mkEnableOption "Enable TCP service";
+          enable = mkEnableOption "Enable proxy service for TCP";
         };
       };
       default = {
         enable = true;
       };
-      description = "TCP tproxy settings";
+      description = "TCP settings";
     };
 
     udp = mkOption {
       default = {
         enable = true;
-        udpTimeout = 15;
+        udpTimeout = 60;
       };
-      type = types.nullOr (
-        types.submodule {
+      type = types.submodule
+        {
           options = {
-            enable = mkEnableOption "Enable UDP service";
+            enable = mkEnableOption "Enable proxy service for UDP";
             udpTimeout = mkOption {
               description = "UDP session timeout";
               type = types.int;
             };
           };
-        }
-      );
+        };
+      description = "UDP settings";
     };
 
     icmp = mkOption {
       type = types.submodule {
         options = {
-          enable = mkEnableOption "Enable ICMP service";
+          enable = mkEnableOption "Enable echo service for ICMP";
         };
       };
       default = {
         enable = false;
       };
-      description = "If proxy the ICMP packet";
+      description = "ICMP settings";
     };
 
-    socksProxy = mkOption {
-      type = types.nullOr types.str;
-      default = null;
-      example = "127.0.0.1:1080";
-      description = "The SOCK5 proxy for tproxy service";
+    proxy = mkOption {
+      type = types.submodule {
+        options = {
+          type = mkOption {
+            description = "Proxy type";
+            type = types.str;
+          };
+          address = mkOption {
+            description = "Proxy address";
+            type = types.str;
+          };
+        };
+      };
     };
-
-    tproxy = mkOption {
-      type = types.nullOr types.ints.u16;
-      default = null;
-      example = 10086;
-      description = "The TPROXY port for tproxy service";
-    };
-
     fwmark = mkOption {
       type = types.ints.u8;
       default = 255;
@@ -120,42 +120,40 @@ with lib;
         "${dir}/bin/${name}";
 
       iptablesRules = pkgs.writeText "tun2socks-iptables.rules" ''
-        *mangle
-        :tun2socks-out - [0:0]
-        :tun2socks-pre - [0:0]
-        -A PREROUTING -j tun2socks-pre
-        -A OUTPUT -j tun2socks-out
-        ${optionalString (cfg.ignoreMark != null) "-A tun2socks-out -m mark --mark ${toString cfg.ignoreMark} -j RETURN"}
-        -A tun2socks-out -d 0.0.0.0/8 -j RETURN
-        -A tun2socks-out -d 10.0.0.0/8 -j RETURN
-        -A tun2socks-out -d 127.0.0.0/8 -j RETURN
-        -A tun2socks-out -d 169.254.0.0/16 -j RETURN
-        -A tun2socks-out -d 172.16.0.0/12 -j RETURN
-        -A tun2socks-out -d 192.168.0.0/16 -j RETURN
-        -A tun2socks-out -d 224.0.0.0/4 -j RETURN
-        -A tun2socks-out -d 240.0.0.0/4 -j RETURN
-        ${optionalString cfg.udp.enable "-A tun2socks-out -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString cfg.tcp.enable "-A tun2socks-out -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString cfg.icmp.enable "-A tun2socks-out -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
+                *mangle
+                :tun2socks-out - [0:0]
+                :tun2socks-pre - [0:0]
+                -A PREROUTING -j tun2socks-pre
+                -A OUTPUT -j tun2socks-out
+                ${optionalString (cfg.ignoreMark != null) "-A tun2socks-out -m mark --mark ${toString cfg.ignoreMark} -j RETURN"}
+                -A tun2socks-out -d 0.0.0.0/8 -j RETURN
+                -A tun2socks-out -d 10.0.0.0/8 -j RETURN
+                -A tun2socks-out -d 127.0.0.0/8 -j RETURN
+                -A tun2socks-out -d 169.254.0.0/16 -j RETURN
+                -A tun2socks-out -d 172.16.0.0/12 -j RETURN
+                -A tun2socks-out -d 192.168.0.0/16 -j RETURN
+                -A tun2socks-out -d 224.0.0.0/4 -j RETURN
+                -A tun2socks-out -d 240.0.0.0/4 -j RETURN
+                ${optionalString cfg.udp.enable "-A tun2socks-out -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
+                ${optionalString cfg.tcp.enable "-A tun2socks-out -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
+                ${optionalString cfg.icmp.enable "-A tun2socks-out -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
 
-        ${foldl'
+                ${foldl'
         (rules: addr: "${rules}\n-A tun2socks-pre -s ${addr} -j RETURN")
         ""
         cfg.ignoreSrcAddresses}
-        -A tun2socks-pre -d 0.0.0.0/8 -j RETURN
-        -A tun2socks-pre -d 10.0.0.0/8 -j RETURN
-        -A tun2socks-pre -d 127.0.0.0/8 -j RETURN
-        -A tun2socks-pre -d 169.254.0.0/16 -j RETURN
-        -A tun2socks-pre -d 172.16.0.0/12 -j RETURN
-        -A tun2socks-pre -d 192.168.0.0/16 -j RETURN
-        -A tun2socks-pre -d 224.0.0.0/4 -j RETURN
-        -A tun2socks-pre -d 240.0.0.0/4 -j RETURN
-        ${optionalString (cfg.tcp.enable && cfg.tproxy != null) "-A tun2socks-pre -p tcp -j TPROXY --on-port ${toString cfg.tproxy} --tproxy-mark ${toString cfg.fwmark}"}
-        ${optionalString (cfg.tcp.enable && cfg.tproxy != null) "-A tun2socks-pre -p udp -j TPROXY --on-port ${toString cfg.tproxy} --tproxy-mark ${toString cfg.fwmark}"}
-        ${optionalString (cfg.udp.enable  && cfg.socksProxy != null) "-A tun2socks-pre -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString (cfg.tcp.enable  && cfg.socksProxy != null) "-A tun2socks-pre -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString (cfg.icmp.enable && cfg.socksProxy != null)  "-A tun2socks-pre -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
-        COMMIT
+                -A tun2socks-pre -d 0.0.0.0/8 -j RETURN
+                -A tun2socks-pre -d 10.0.0.0/8 -j RETURN
+                -A tun2socks-pre -d 127.0.0.0/8 -j RETURN
+                -A tun2socks-pre -d 169.254.0.0/16 -j RETURN
+                -A tun2socks-pre -d 172.16.0.0/12 -j RETURN
+                -A tun2socks-pre -d 192.168.0.0/16 -j RETURN
+                -A tun2socks-pre -d 224.0.0.0/4 -j RETURN
+                -A tun2socks-pre -d 240.0.0.0/4 -j RETURN
+                ${optionalString cfg.udp.enable "-A tun2socks-pre -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
+                ${optionalString cfg.tcp.enable "-A tun2socks-pre -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
+                ${optionalString cfg.icmp.enable  "-A tun2socks-pre -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
+                COMMIT
       '';
 
       cleanIptables = ''
@@ -170,19 +168,19 @@ with lib;
       '';
 
       udpTimeoutOption = optionalString (cfg.udp.enable) "-udp-timeout ${toString cfg.udp.udpTimeout}";
-      startTun2socks = optionalString (cfg.socksProxy != null) ''
-        tun2socks -loglevel warn -device ${cfg.tunName} -proxy ${cfg.socksProxy} ${udpTimeoutOption}
+      startTun2socks = ''
+        tun2socks -loglevel warn -device ${cfg.tunName} -proxy ${cfg.proxy.type}://${cfg.proxy.address} ${udpTimeoutOption}
       '';
       tun2socksStart = writeShScript "tun2socks-start" ''
         ${startTun2socks}
-        tail -f /dev/null
       '';
 
-      setupTun = optionalString (cfg.socksProxy != null) ''
+      setupTun = ''
         while [ ! -d /sys/class/net/${cfg.tunName} ]; do sleep 1; done
         ip link set ${cfg.tunName} up
         ip addr replace ${cfg.gateway} dev ${cfg.tunName}
       '';
+
       tun2socksStartPost = writeShScript "tun2socks-start-post" ''
         ${setupTun}
         ip route replace default dev ${cfg.tunName} table ${toString cfg.rtTable}
@@ -200,11 +198,6 @@ with lib;
       '';
     in
     mkIf cfg.enable {
-      assertions =
-        [{
-          assertion = (cfg.tproxy == null || cfg.socksProxy == null) && (cfg.tproxy != null || cfg.socksProxy != null);
-          message = "tproxy conflicts with socksProxy, and need at least one is not null";
-        }];
       environment.systemPackages = with pkgs; [ iptables ];
       networking.firewall.enable = mkForce false;
       systemd.services.tun2socks =

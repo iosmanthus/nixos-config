@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./tproxy.nix
+    ./tun2socks.nix
     ./openvpn.nix
   ];
 
@@ -24,14 +24,12 @@
     "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0CpL+RLwnpBp1VzD3VUZpCEOIb1U+R6Jyu/SBq+Msg+CRlxfJThUJY4ZGwp6/d+VPWuQQHvvQ6OoLQdV5Pa9xZAFYOUEDWjAnD16gh29aoVDFzv+sDt2wyA4WZfqydrFSD9QhP88RpcGAcHZXCjzaGT1tEOw2wIOgGs6P53Mrti46Yw=="
   ];
 
-  services.tproxy = {
+  services.tun2socks = {
     enable = true;
-    udp = {
-      enable = true;
-      udpTimeout = 2;
+    proxy = {
+      type = "socks5";
+      address = "172.18.0.2:1080";
     };
-    socksProxy = "127.0.0.1:1080";
-    ignoreMark = 254;
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };
 
