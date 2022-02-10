@@ -16,6 +16,11 @@
   sound.enable = true;
   services.blueman.enable = true;
   hardware.bluetooth = {
+    settings = {
+      General = {
+        ControllerMode = "bredr";
+      };
+    };
     enable = true;
     powerOnBoot = true;
   };

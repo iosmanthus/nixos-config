@@ -2,8 +2,8 @@
   description = "iosmanthus 💓 NixOS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stable.url = "github:NixOS/nixpkgs/nixos-21.11";
     master.url = "github:NixOS/nixpkgs/master";
-    latest-jetbrains.url = "github:iosmanthus/nixpkgs/latest-jetbrains-packages";
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -49,10 +49,16 @@
                     inherit system;
                     config.allowUnfree = true;
                   };
-                  latest-jetbrains = import inputs.latest-jetbrains {
+                  stable = import inputs.stable {
                     inherit system;
                     config.allowUnfree = true;
                   };
+                  stableOverlay = (
+                    self: super: genOverlay {
+                      branch = stable;
+                      packages = [ "thunderbird" ];
+                    }
+                  );
                   masterOverlay = (
                     self: super: genOverlay {
                       branch = master;
@@ -61,7 +67,6 @@
                         "kitty"
                         "discord"
                         "firefox-bin"
-                        "flameshot"
                         "starship"
                         "joplin-desktop"
                         "google-chrome"
@@ -69,8 +74,6 @@
                         "rofi"
                         "neovim"
                         "i3"
-                        "joplin-desktop"
-                        "thunderbird"
                         "jetbrains"
 
                         # Utils
@@ -83,14 +86,9 @@
                       ];
                     }
                   );
-                  # jetbrainsOverlay =
-                  #   (
-                  #     self: super: {
-                  #       jetbrains = latest-jetbrains.jetbrains;
-                  #     }
-                  #   );
                 in
                 [
+                  stableOverlay
                   masterOverlay
                   inputs.berberman.overlay
                 ] ++ (import ./overlays);

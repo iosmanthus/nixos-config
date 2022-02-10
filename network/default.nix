@@ -7,7 +7,7 @@
 
   networking.hostName = "iosmanthus-nixos";
   networking = {
-    nameservers = [ "172.18.0.1" ];
+    nameservers = [ "172.17.0.1" ];
     networkmanager = {
       enable = true;
       dns = "none";
@@ -24,6 +24,7 @@
     "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0CpL+RLwnpBp1VzD3VUZpCEOIb1U+R6Jyu/SBq+Msg+CRlxfJThUJY4ZGwp6/d+VPWuQQHvvQ6OoLQdV5Pa9xZAFYOUEDWjAnD16gh29aoVDFzv+sDt2wyA4WZfqydrFSD9QhP88RpcGAcHZXCjzaGT1tEOw2wIOgGs6P53Mrti46Yw=="
   ];
 
+  #networking.firewall.enable = false;
   services.tun2socks = {
     enable = true;
     proxy = {

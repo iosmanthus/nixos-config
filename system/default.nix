@@ -5,7 +5,7 @@
   ];
 
   environment.systemPackages = with pkgs; [ lm_sensors ];
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader = {
     systemd-boot = {
       consoleMode = "max";

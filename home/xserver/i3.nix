@@ -19,13 +19,13 @@
         {
           modifier = modifier0;
           window = {
-            border = 0;
+            border = 2;
           };
           gaps = {
-            top = 5;
-            bottom = 5;
-            inner = 5;
-            outer = 5;
+            # top = 5;
+            # bottom = 5;
+            # inner = 5;
+            # outer = 5;
             smartGaps = true;
           };
           terminal = "kitty tmux";
@@ -121,7 +121,7 @@
 
         # Basic color configuration using the Base16 variables for windows and borders.
         # Property Name         Border  BG      Text    Indicator Child Border
-        client.focused          $base04 $base01 $base05 $base0D $base0C
+        client.focused          $base0A $base01 $base05 $base0D $base0C
         client.focused_inactive $base01 $base01 $base05 $base03 $base01
         client.unfocused        $base01 $base00 $base05 $base01 $base01
         client.urgent           $base08 $base08 $base00 $base08 $base08

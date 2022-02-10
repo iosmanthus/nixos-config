@@ -72,12 +72,12 @@
         version = "1.18.0";
         sha256 = "0hhlhx3xy7x31xx2v3srvk67immajs6dm9h0wi49ii1rwx61zxah";
       }
-      {
-        name = "remote-ssh-edit";
-        publisher = "ms-vscode-remote";
-        version = "0.71.2021121615";
-        sha256 = "0ymrfsvls2y9dzhxx71kb3jqm7vznj1z39nb89pykyk76jsn70gv";
-      }
+      # {
+      #   name = "remote-ssh-edit";
+      #   publisher = "ms-vscode-remote";
+      #   version = "0.71.2021121615";
+      #   sha256 = "0ymrfsvls2y9dzhxx71kb3jqm7vznj1z39nb89pykyk76jsn70gv";
+      # }
       {
         name = "remote-ssh-nightly";
         publisher = "ms-vscode-remote";
@@ -213,7 +213,7 @@
         "window.menuBarVisibility" = "toggle";
         "window.newWindowDimensions" = "inherit";
 
-        "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
+        "workbench.colorTheme" = "Community Material Theme Ocean High Contrast";
         "workbench.iconTheme" = "material-icon-theme";
 
         "nix.enableLanguageServer" = true;

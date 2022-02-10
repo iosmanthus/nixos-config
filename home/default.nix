@@ -24,6 +24,7 @@
     peek
     vlc
 
+    iperf3
     yesplaymusic
     flameshot
     thunderbird
@@ -37,6 +38,7 @@
     jetbrains.pycharm-professional
     tdesktop
     slack
+    wireguard-tools
   ];
 
   home.keyboard.options = [ "caps:escape" ];
