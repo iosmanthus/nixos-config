@@ -66,7 +66,6 @@
                       branch = master;
                       packages = [
                         "vscode"
-                        "kitty"
                         "discord"
                         "firefox-bin"
                         "starship"
