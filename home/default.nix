@@ -24,6 +24,7 @@
     peek
     vlc
 
+    sops
     iperf3
     yesplaymusic
     flameshot

@@ -56,7 +56,9 @@
                   stableOverlay = (
                     self: super: genOverlay {
                       branch = stable;
-                      packages = [ "thunderbird" ];
+                      packages = [
+                        "thunderbird"
+                      ];
                     }
                   );
                   masterOverlay = (
@@ -81,6 +83,7 @@
                         "exa"
                         "ripgrep"
                         "fd"
+                        "sops"
                         "bat"
                         "zoxide"
                       ];

@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
+    ./ssh.nix
     ./tun2socks.nix
-    ./openvpn.nix
   ];
 
   networking.hostName = "iosmanthus-nixos";

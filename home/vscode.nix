@@ -33,14 +33,20 @@
       {
         name = "copilot";
         publisher = "GitHub";
-        version = "1.7.4421";
-        sha256 = "1wvzf8rq8ligj079f1m74zzna2mfmhcbgvvrsw6w0wxw9x8fn4wy";
+        version = "1.7.4924";
+        sha256 = "1zvz95a1csyy8cfyhfybkwiva9kabm4i900dxim01rn36gpas9dj";
+      }
+      {
+        name = "github-vscode-theme";
+        publisher = "GitHub";
+        version = "5.2.2";
+        sha256 = "1ivwjc8immvvzhmykxfs3f9da24k6hf8ln0291ysg9cj1q82533x";
       }
       {
         name = "go";
         publisher = "golang";
-        version = "0.30.0";
-        sha256 = "15rmc79ad743hb6pmnzv91rkvl2fb1qwh5gk5q6n9f9vygiyjrix";
+        version = "0.31.1";
+        sha256 = "1x25x2dxcmi7h1q19qjxgnvdfzhsicq6sf6qig8jc0wg98g0gxry";
       }
       {
         name = "haskell";
@@ -51,8 +57,8 @@
       {
         name = "nix-ide";
         publisher = "jnoortheen";
-        version = "0.1.18";
-        sha256 = "1v3j67j8bydyqba20b2wzsfximjnbhknk260zkc0fid1xzzb2sbn";
+        version = "0.1.19";
+        sha256 = "1ms96ij6z4bysdhqgdaxx2znvczyhzx57iifbqws50m1c3m7pkx7";
       }
       {
         name = "language-haskell";
@@ -63,26 +69,20 @@
       {
         name = "rust-analyzer";
         publisher = "matklad";
-        version = "0.2.853";
-        sha256 = "0fasdv9wazir6qv2qvmn0wsy2v5lwa4lhxq7scqwr16wxhzbr2hx";
+        version = "0.3.936";
+        sha256 = "12ag6nn6n7bf8y004r7f254vrwx4s2wkdpq3fbh83rk4b2iklnj5";
       }
       {
         name = "vscode-docker";
         publisher = "ms-azuretools";
-        version = "1.18.0";
-        sha256 = "0hhlhx3xy7x31xx2v3srvk67immajs6dm9h0wi49ii1rwx61zxah";
+        version = "1.19.0";
+        sha256 = "0qg4k5ivwa54i9f5ls1a0wl7blpymaq03dakdvvzallarip01qkf";
       }
-      # {
-      #   name = "remote-ssh-edit";
-      #   publisher = "ms-vscode-remote";
-      #   version = "0.71.2021121615";
-      #   sha256 = "0ymrfsvls2y9dzhxx71kb3jqm7vznj1z39nb89pykyk76jsn70gv";
-      # }
       {
-        name = "remote-ssh-nightly";
+        name = "remote-ssh";
         publisher = "ms-vscode-remote";
-        version = "2021.12.12420";
-        sha256 = "1z0mizgb92w3hxj3m8mffdmkd5724mzn34szbnf27hiixmyzp32j";
+        version = "0.73.2022021015";
+        sha256 = "18gwf9r9fsqxrgdjh70ii3b0fw9i1yvq9g978ww69mr25yai2p7j";
       }
       {
         name = "color-highlight";
@@ -93,8 +93,8 @@
       {
         name = "material-icon-theme";
         publisher = "PKief";
-        version = "4.11.0";
-        sha256 = "1l2s8j645riqjmj09i3v71s8ycin5vd6brdp35z472fnk6wyi1y6";
+        version = "4.13.0";
+        sha256 = "0b5z08v34q10xlbjbb5sn3zdwq6bflhd96z3dqsiakywhrsxi0jm";
       }
       {
         name = "vscode-commons";
@@ -105,14 +105,14 @@
       {
         name = "vscode-yaml";
         publisher = "redhat";
-        version = "1.2.2";
-        sha256 = "06n4fxqr3lqmiyns9jdk3rdnanamcpzhrivllai8z9d997xmwcx6";
+        version = "1.4.0";
+        sha256 = "19a7ii4zrwcqb331jx78h7qpz8a4ar1w77k7nw43mcczx9gkb7sa";
       }
       {
         name = "tabnine-vscode";
         publisher = "TabNine";
-        version = "3.5.11";
-        sha256 = "1is8dsjs5kqn960wnr548ivy9r94nvzhgn7nky28wi9w42xi64im";
+        version = "3.5.24";
+        sha256 = "09ybkshjinr9rzwbg6pcbs7qjiww8x2rz00293qb2jhvp6ljk0m0";
       }
       {
         name = "even-better-toml";
@@ -123,8 +123,8 @@
       {
         name = "vim";
         publisher = "vscodevim";
-        version = "1.21.10";
-        sha256 = "0c9m7mc2kmfzj3hkwq3d4hj43qha8a75q5r1rdf1xfx8wi5hhb1n";
+        version = "1.22.1";
+        sha256 = "0hp2qw9qpp70pqblpybgpngisz98q6jk8zsabxlxy25j3hgzbhc3";
       }
       {
         name = "markdown-all-in-one";
@@ -204,6 +204,7 @@
         # "editor.fontWeight": "650",
         "editor.lineHeight" = 25;
         "editor.lineNumbers" = "relative";
+        "editor.inlineSuggest.enabled" = true;
 
         "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
         "terminal.integrated.fontFamily" = "'Dejavu Sans Mono'";
@@ -213,7 +214,7 @@
         "window.menuBarVisibility" = "toggle";
         "window.newWindowDimensions" = "inherit";
 
-        "workbench.colorTheme" = "Community Material Theme Ocean High Contrast";
+        "workbench.colorTheme" = "GitHub Dark";
         "workbench.iconTheme" = "material-icon-theme";
 
         "nix.enableLanguageServer" = true;

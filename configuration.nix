@@ -16,6 +16,8 @@
       ./misc
     ];
 
+  sops.age.keyFile = "${config.users.users.iosmanthus.home}/.config/sops/age/keys.txt";
+
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
@@ -30,7 +32,7 @@
   };
 
   environment.etc = {
-    "nixos/flake.nix".source = config.users.users.iosmanthus.home + "/projects/nix/nixos-config/flake.nix";
+    "nixos/flake.nix".source = config.users.users.iosmanthus.home + "/nixos-config/flake.nix";
   };
   environment.pathsToLink = [ "/share/zsh" ];
 

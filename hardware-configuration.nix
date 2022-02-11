@@ -20,6 +20,7 @@
 
   fileSystems."/home" =
     {
+      neededForBoot = true;
       device = "/dev/nvme1n1p2";
       fsType = "btrfs";
       options = [ "subvol=home" ];
