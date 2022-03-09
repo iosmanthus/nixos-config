@@ -6,11 +6,11 @@
     master.url = "github:NixOS/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     berberman = {
-      url = "github:berberman/flakes";
+      url = "github:berberman/flakes/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -58,6 +58,9 @@
                       branch = stable;
                       packages = [
                         "thunderbird"
+                        "kitty"
+                        "linuxPackages_latest"
+                        "polybar"
                       ];
                     }
                   );
@@ -70,7 +73,7 @@
                         "firefox-bin"
                         "starship"
                         "joplin-desktop"
-                        "google-chrome"
+                        #"google-chrome"
                         "zoom-us"
                         "rofi"
                         "neovim"
@@ -85,6 +88,8 @@
                         "sops"
                         "bat"
                         "zoxide"
+                        "remarshal"
+                        "spice-gtk"
                       ];
                     }
                   );

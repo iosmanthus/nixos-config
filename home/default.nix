@@ -3,14 +3,15 @@
   imports = [
     ./shell
     ./xserver
-    ./vscode.nix
     ./tmux.nix
-    #./fusuma.nix
+    ./fusuma.nix
+    ./vscode
   ];
 
   home.packages = with pkgs;[
     gh
     cloc
+    tree
     ripgrep
     fd
     htop
@@ -30,7 +31,6 @@
     flameshot
     thunderbird
     zoom-us
-    firefox-bin
     discord
     google-chrome
     jetbrains.goland
@@ -93,15 +93,43 @@
 
   programs.kitty =
     let
-      base16 = pkgs.callPackage ./base16-kitty.nix {};
+      base16 = pkgs.callPackage ./base16-kitty.nix { };
     in
-      {
-        enable = true;
-        font = {
-          name = "Dejavu Sans Mono";
-        };
-        settings = {
-          include = "${base16.mkKittyBase16Theme { name = "material-darker"; }}";
-        };
+    {
+      enable = true;
+      font = {
+        name = "Dejavu Sans Mono";
       };
+      settings = {
+        include = "${base16.mkKittyBase16Theme { name = "material-darker"; }}";
+      };
+    };
+
+  programs.firefox = {
+    enable = true;
+    profiles.iosmanthus = {
+      settings = {
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      };
+      userChrome = ''
+        #main-window[tabsintitlebar="true"]:not([extradragspace="true"])
+          #TabsToolbar
+          > .toolbar-items {
+          opacity: 0;
+          pointer-events: none;
+        }
+        #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+          visibility: collapse !important;
+        }
+
+        #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+          display: none;
+        }
+
+        #urlbar {
+          font-size: 15pt !important;
+        }
+      '';
+    };
+  };
 }

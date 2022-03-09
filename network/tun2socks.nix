@@ -185,7 +185,7 @@ with lib;
         ${setupTun}
         ip route replace default dev ${cfg.tunName} table ${toString cfg.rtTable}
         ip rule add fwmark ${toString cfg.fwmark} table ${toString cfg.rtTable}
-        iptables-restore ${iptablesRules} -w
+        iptables-restore ${iptablesRules} -w --noflush
       '';
 
       tun2socksStop = writeShScript "tun2socks-stop" ''

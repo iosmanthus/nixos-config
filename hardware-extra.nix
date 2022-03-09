@@ -4,6 +4,7 @@
 {
   environment.systemPackages = with pkgs; [ pavucontrol ];
   hardware.enableAllFirmware = true;
+  hardware.firmware = [ pkgs.firmwareLinuxNonfree ];
   # video driver
   hardware.opengl.extraPackages = with pkgs; [
     vaapiIntel

@@ -1,10 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 with pkgs;
 let
   pname = "yesplaymusic";
-  version = "0.4.3";
-  url = "https://github.com/qier222/YesPlayMusic/releases/download/v${version}/YesPlayMusic-${version}.AppImage";
-  sha256 = "1nrb2dzacpsq05ps49mi1vza4j7y18ab2vvi5vda3npa1nckznl7";
+  version = "0.4.4";
+  tag = "beta.1";
+  releaseVersion =
+    if
+      tag != ""
+    then "${version}-${tag}"
+    else version;
+  url = "https://github.com/qier222/YesPlayMusic/releases/download/v${releaseVersion}/YesPlayMusic-${version}.AppImage";
+  sha256 = "0940nj89ca0rxx1958319zj42z2dv4rr0249shafs5jf37xanwb7";
   src = builtins.fetchurl {
     inherit url sha256;
   };
@@ -15,20 +21,18 @@ let
   wrapped = appimageTools.wrapType2 {
     name = pname;
     inherit src;
-    extraPkgs = pkgs: with pkgs; [];
+    extraPkgs = pkgs: with pkgs; [ ];
   };
   desktop = makeDesktopItem rec {
     name = "YesPlayMusic";
     desktopName = name;
     exec = "yesplaymusic";
-    categories = "Audio;Player;";
-    terminal = "false";
+    categories = [ "Audio" "Player" ];
+    terminal = false;
     icon = "${extracted}/yesplaymusic.png";
     comment = "YesPlayMusic Launcher";
-    startupNotify = "true";
-    extraEntries = ''
-      StartupWMClass=${name}
-    '';
+    startupNotify = true;
+    startupWMClass = name;
   };
 in
 stdenv.mkDerivation rec {

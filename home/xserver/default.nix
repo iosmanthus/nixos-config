@@ -28,6 +28,10 @@
       package = pkgs.tela-icon-theme;
       name = "Tela";
     };
+    theme = {
+      package = pkgs.gnome.gnome-themes-extra;
+      name = "Adwaita-dark";
+    };
   };
 
   qt = {

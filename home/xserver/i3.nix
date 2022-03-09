@@ -2,7 +2,7 @@
   xsession.windowManager = {
     i3 = {
       enable = true;
-      package = pkgs.i3-gaps;
+      package = pkgs.i3;
       config =
         let
           modifier0 = "Mod4";
@@ -21,13 +21,13 @@
           window = {
             border = 2;
           };
-          gaps = {
-            # top = 5;
-            # bottom = 5;
-            # inner = 5;
-            # outer = 5;
-            smartGaps = true;
-          };
+          # gaps = {
+          #   top = 5;
+          #   bottom = 5;
+          #   inner = 5;
+          #   outer = 5;
+          #   smartGaps = true;
+          # };
           terminal = "kitty tmux";
           keybindings =
             lib.mkOptionDefault {

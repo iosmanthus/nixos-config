@@ -15,8 +15,8 @@
       {
         name = "gitlens";
         publisher = "eamodio";
-        version = "11.7.0";
-        sha256 = "0apjjlfdwljqih394ggz2d8m599pyyjrb0b4cfcz83601b7hk3x6";
+        version = "12.0.2";
+        sha256 = "16l2wy6zyh11mq7d1r1qg668d5c637yd3arzqlqhjf91drmaxpbs";
       }
       {
         name = "vsc-community-material-theme";
@@ -33,20 +33,20 @@
       {
         name = "copilot";
         publisher = "GitHub";
-        version = "1.7.4924";
-        sha256 = "1zvz95a1csyy8cfyhfybkwiva9kabm4i900dxim01rn36gpas9dj";
+        version = "1.7.5250";
+        sha256 = "1dc9dkc60v4pbn6s223i7m1lr14pjkjg1m9rfny90rjf248838d1";
       }
       {
         name = "github-vscode-theme";
         publisher = "GitHub";
-        version = "5.2.2";
-        sha256 = "1ivwjc8immvvzhmykxfs3f9da24k6hf8ln0291ysg9cj1q82533x";
+        version = "6.0.0";
+        sha256 = "1vakkwnw43my74j7yjp30kfmmbc37jmr3qia5lvg8sbws3fq40jj";
       }
       {
         name = "go";
         publisher = "golang";
-        version = "0.31.1";
-        sha256 = "1x25x2dxcmi7h1q19qjxgnvdfzhsicq6sf6qig8jc0wg98g0gxry";
+        version = "0.32.0";
+        sha256 = "0a3pmpmmr8gd0p8zw984a73cp2yyi4lvz0s03msvkrxmn5k9xhis";
       }
       {
         name = "haskell";
@@ -57,8 +57,8 @@
       {
         name = "nix-ide";
         publisher = "jnoortheen";
-        version = "0.1.19";
-        sha256 = "1ms96ij6z4bysdhqgdaxx2znvczyhzx57iifbqws50m1c3m7pkx7";
+        version = "0.1.20";
+        sha256 = "16mmivdssjky11gmih7zp99d41m09r0ii43n17d4i6xwivagi9a3";
       }
       {
         name = "language-haskell";
@@ -67,22 +67,28 @@
         sha256 = "0ab7m5jzxakjxaiwmg0jcck53vnn183589bbxh3iiylkpicrv67y";
       }
       {
+        name = "blockman";
+        publisher = "leodevbro";
+        version = "1.5.6";
+        sha256 = "0sjvv9jk5cxndhff6nb7nvpxzh5463n0lbypklhcj7cbc9dxw8f2";
+      }
+      {
         name = "rust-analyzer";
         publisher = "matklad";
-        version = "0.3.936";
-        sha256 = "12ag6nn6n7bf8y004r7f254vrwx4s2wkdpq3fbh83rk4b2iklnj5";
+        version = "0.3.968";
+        sha256 = "0kkfsvpl639f4zisbmgkjv4anm6lcm981g5qhaiv3fhv8scmvqy2";
       }
       {
         name = "vscode-docker";
         publisher = "ms-azuretools";
-        version = "1.19.0";
-        sha256 = "0qg4k5ivwa54i9f5ls1a0wl7blpymaq03dakdvvzallarip01qkf";
+        version = "1.20.0";
+        sha256 = "0a1v8hqbrl51pxbzvjd69azqcyqid4gmva3dnk440q7szr61hy4b";
       }
       {
         name = "remote-ssh";
         publisher = "ms-vscode-remote";
-        version = "0.73.2022021015";
-        sha256 = "18gwf9r9fsqxrgdjh70ii3b0fw9i1yvq9g978ww69mr25yai2p7j";
+        version = "0.77.2022030315";
+        sha256 = "1wyz3lnz821znsbdwjigndy3pq43f31v0jg8hfnhgmj05a4y8kjn";
       }
       {
         name = "color-highlight";
@@ -93,8 +99,8 @@
       {
         name = "material-icon-theme";
         publisher = "PKief";
-        version = "4.13.0";
-        sha256 = "0b5z08v34q10xlbjbb5sn3zdwq6bflhd96z3dqsiakywhrsxi0jm";
+        version = "4.14.1";
+        sha256 = "1d6wv5jxg4syz9dlj3q4rrv1cfk86hlff5132qga7j6y8z8f4x9q";
       }
       {
         name = "vscode-commons";
@@ -105,14 +111,14 @@
       {
         name = "vscode-yaml";
         publisher = "redhat";
-        version = "1.4.0";
-        sha256 = "19a7ii4zrwcqb331jx78h7qpz8a4ar1w77k7nw43mcczx9gkb7sa";
+        version = "1.5.1";
+        sha256 = "1qsjsfggfya282rh618fc89cfgpxii7yv2kyh5is6x2r2606cy15";
       }
       {
         name = "tabnine-vscode";
         publisher = "TabNine";
-        version = "3.5.24";
-        sha256 = "09ybkshjinr9rzwbg6pcbs7qjiww8x2rz00293qb2jhvp6ljk0m0";
+        version = "3.5.26";
+        sha256 = "0brlklxmfinvmxivci7s36a72jpxdxcka93vizps6hpx33h4wwr0";
       }
       {
         name = "even-better-toml";
@@ -123,8 +129,8 @@
       {
         name = "vim";
         publisher = "vscodevim";
-        version = "1.22.1";
-        sha256 = "0hp2qw9qpp70pqblpybgpngisz98q6jk8zsabxlxy25j3hgzbhc3";
+        version = "1.22.2";
+        sha256 = "1d85dwlnfgn7d32ivza0bv1zf9bh36fx7gbi586dligkw202blkn";
       }
       {
         name = "markdown-all-in-one";
@@ -164,6 +170,7 @@
       {
         "extensions.autoUpdate" = false;
         "security.workspace.trust.enabled" = false;
+        "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
 
         "keyboard.dispatch" = "keyCode";
         "vim.autoSwitchInputMethod.defaultIM" = "1";
@@ -198,23 +205,23 @@
         ];
         "vim.visualstar" = true;
 
-        "editor.fontFamily" = "'Dejavu Sans Mono', 'Material-Design-Iconic-Font', feather";
+        "editor.fontFamily" = "'Hasklig', 'Material-Design-Iconic-Font', feather";
         "editor.fontLigatures" = true;
-        "editor.fontSize" = 13;
+        "editor.fontSize" = 15;
         # "editor.fontWeight": "650",
         "editor.lineHeight" = 25;
         "editor.lineNumbers" = "relative";
         "editor.inlineSuggest.enabled" = true;
 
         "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
-        "terminal.integrated.fontFamily" = "'Dejavu Sans Mono'";
+        "terminal.integrated.fontFamily" = "'Hasklig'";
         "terminal.integrated.fontWeight" = "normal";
         "terminal.integrated.fontWeightBold" = "600";
 
         "window.menuBarVisibility" = "toggle";
         "window.newWindowDimensions" = "inherit";
 
-        "workbench.colorTheme" = "GitHub Dark";
+        "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
         "workbench.iconTheme" = "material-icon-theme";
 
         "nix.enableLanguageServer" = true;
