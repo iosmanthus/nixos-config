@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-{
-  imports = [
-    ./ssh.nix
-    ./tun2socks.nix
-  ];
+{ pkgs
+, ...
+}: {
+  imports = [ ./ssh.nix ./tun2socks.nix ./proxy ];
 
   networking.hostName = "iosmanthus-nixos";
   networking = {

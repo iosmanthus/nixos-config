@@ -1,14 +1,12 @@
-{ auto-fix-vscode-server, config, pkgs, ... }:
-{
+{ auto-fix-vscode-server, config, pkgs, ... }: {
   imports = [
     ./shell
     ./xserver
     ./tmux.nix
-    ./fusuma.nix
     ./vscode
   ];
 
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     gh
     cloc
     tree
@@ -21,6 +19,8 @@
     joplin-desktop
     httpie
     nnn
+    nix-output-monitor
+    feeluown
     gnome.gnome-system-monitor
     peek
     vlc
@@ -47,8 +47,8 @@
   programs.feh.enable = true;
   programs.rofi = {
     enable = true;
-    theme = "gruvbox-dark-hard";
-    font = "Dejavu Sans Mono 20";
+    theme = "sidebar";
+    font = "Dejavu Sans Mono 24";
     terminal = "${pkgs.kitty}/bin/kitty";
     extraConfig = {
       ssh-command = "{terminal} -- {terminal} +kitten ssh {host} [-p {port}]";
@@ -66,18 +66,12 @@
     userName = "iosmanthus";
     userEmail = "myosmanthustree@gmail.com";
     extraConfig = {
-      core = {
-        editor = "${pkgs.vscode}/bin/code --wait";
-      };
-      pull = {
-        rebase = false;
-      };
+      core = { editor = "${pkgs.vscode}/bin/code --wait"; };
+      pull = { rebase = false; };
     };
   };
 
-  programs.gpg = {
-    enable = true;
-  };
+  programs.gpg = { enable = true; };
 
   services.gpg-agent = {
     enable = true;
@@ -92,14 +86,11 @@
   };
 
   programs.kitty =
-    let
-      base16 = pkgs.callPackage ./base16-kitty.nix { };
+    let base16 = pkgs.callPackage ./base16-kitty.nix { };
     in
     {
       enable = true;
-      font = {
-        name = "Dejavu Sans Mono";
-      };
+      font = { name = "Dejavu Sans Mono"; };
       settings = {
         include = "${base16.mkKittyBase16Theme { name = "material-darker"; }}";
       };

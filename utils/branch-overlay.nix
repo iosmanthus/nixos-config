@@ -1,10 +1,5 @@
 { branch, packages, ... }:
-(
-  branch.lib.foldl
-    (
-      overlay: package:
-        (overlay // { ${package} = branch.${package}; })
-    )
-    {}
-    packages
-)
+(branch.lib.foldl
+  (overlay: package: (overlay // { ${package} = branch.${package}; }))
+  { }
+  packages)

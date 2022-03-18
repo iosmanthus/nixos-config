@@ -17,5 +17,6 @@
     '';
   };
 
-  mkKittyBase16Theme = { name }: "${base16-kitty}/share/base16-kitty/colors/base16-${name}.conf";
+  mkKittyBase16Theme = { name }:
+    "${base16-kitty}/share/base16-kitty/colors/base16-${name}.conf";
 }

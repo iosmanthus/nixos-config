@@ -4,15 +4,6 @@
 with pkgs;
 
 mkShell {
-  packages = [
-    bash
-    curl
-    gawk
-    gnugrep
-    gnused
-    jq
-    nix
-    nix-prefetch
-    nix-prefetch-scripts
-  ];
+  packages =
+    [ bash curl gawk gnugrep gnused jq nix nix-prefetch nix-prefetch-scripts ];
 }

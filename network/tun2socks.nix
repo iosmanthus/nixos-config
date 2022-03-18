@@ -4,23 +4,17 @@
 , ...
 }:
 
-let
-  cfg = config.services.tun2socks;
+let cfg = config.services.tun2socks;
 in
-with lib;
-{
+with lib; {
   options.services.tun2socks = {
     enable = mkEnableOption "Enable tun2socks service";
 
     tcp = mkOption {
       type = types.submodule {
-        options = {
-          enable = mkEnableOption "Enable proxy service for TCP";
-        };
+        options = { enable = mkEnableOption "Enable proxy service for TCP"; };
       };
-      default = {
-        enable = true;
-      };
+      default = { enable = true; };
       description = "TCP settings";
     };
 
@@ -29,28 +23,23 @@ with lib;
         enable = true;
         udpTimeout = 60;
       };
-      type = types.submodule
-        {
-          options = {
-            enable = mkEnableOption "Enable proxy service for UDP";
-            udpTimeout = mkOption {
-              description = "UDP session timeout";
-              type = types.int;
-            };
+      type = types.submodule {
+        options = {
+          enable = mkEnableOption "Enable proxy service for UDP";
+          udpTimeout = mkOption {
+            description = "UDP session timeout";
+            type = types.int;
           };
         };
+      };
       description = "UDP settings";
     };
 
     icmp = mkOption {
       type = types.submodule {
-        options = {
-          enable = mkEnableOption "Enable echo service for ICMP";
-        };
+        options = { enable = mkEnableOption "Enable echo service for ICMP"; };
       };
-      default = {
-        enable = false;
-      };
+      default = { enable = false; };
       description = "ICMP settings";
     };
 
@@ -120,40 +109,46 @@ with lib;
         "${dir}/bin/${name}";
 
       iptablesRules = pkgs.writeText "tun2socks-iptables.rules" ''
-                *mangle
-                :tun2socks-out - [0:0]
-                :tun2socks-pre - [0:0]
-                -A PREROUTING -j tun2socks-pre
-                -A OUTPUT -j tun2socks-out
-                ${optionalString (cfg.ignoreMark != null) "-A tun2socks-out -m mark --mark ${toString cfg.ignoreMark} -j RETURN"}
-                -A tun2socks-out -d 0.0.0.0/8 -j RETURN
-                -A tun2socks-out -d 10.0.0.0/8 -j RETURN
-                -A tun2socks-out -d 127.0.0.0/8 -j RETURN
-                -A tun2socks-out -d 169.254.0.0/16 -j RETURN
-                -A tun2socks-out -d 172.16.0.0/12 -j RETURN
-                -A tun2socks-out -d 192.168.0.0/16 -j RETURN
-                -A tun2socks-out -d 224.0.0.0/4 -j RETURN
-                -A tun2socks-out -d 240.0.0.0/4 -j RETURN
-                ${optionalString cfg.udp.enable "-A tun2socks-out -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
-                ${optionalString cfg.tcp.enable "-A tun2socks-out -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
-                ${optionalString cfg.icmp.enable "-A tun2socks-out -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
+        *mangle
+        :tun2socks-out - [0:0]
+        :tun2socks-pre - [0:0]
+        -A PREROUTING -j tun2socks-pre
+        -A OUTPUT -j tun2socks-out
+        ${optionalString (cfg.ignoreMark != null)
+        "-A tun2socks-out -m mark --mark ${toString cfg.ignoreMark} -j RETURN"}
+        -A tun2socks-out -d 0.0.0.0/8 -j RETURN
+        -A tun2socks-out -d 10.0.0.0/8 -j RETURN
+        -A tun2socks-out -d 127.0.0.0/8 -j RETURN
+        -A tun2socks-out -d 169.254.0.0/16 -j RETURN
+        -A tun2socks-out -d 172.16.0.0/12 -j RETURN
+        -A tun2socks-out -d 192.168.0.0/16 -j RETURN
+        -A tun2socks-out -d 224.0.0.0/4 -j RETURN
+        -A tun2socks-out -d 240.0.0.0/4 -j RETURN
+        ${optionalString cfg.udp.enable
+        "-A tun2socks-out -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
+        ${optionalString cfg.tcp.enable
+        "-A tun2socks-out -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
+        ${optionalString cfg.icmp.enable
+        "-A tun2socks-out -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
 
-                ${foldl'
-        (rules: addr: "${rules}\n-A tun2socks-pre -s ${addr} -j RETURN")
-        ""
-        cfg.ignoreSrcAddresses}
-                -A tun2socks-pre -d 0.0.0.0/8 -j RETURN
-                -A tun2socks-pre -d 10.0.0.0/8 -j RETURN
-                -A tun2socks-pre -d 127.0.0.0/8 -j RETURN
-                -A tun2socks-pre -d 169.254.0.0/16 -j RETURN
-                -A tun2socks-pre -d 172.16.0.0/12 -j RETURN
-                -A tun2socks-pre -d 192.168.0.0/16 -j RETURN
-                -A tun2socks-pre -d 224.0.0.0/4 -j RETURN
-                -A tun2socks-pre -d 240.0.0.0/4 -j RETURN
-                ${optionalString cfg.udp.enable "-A tun2socks-pre -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
-                ${optionalString cfg.tcp.enable "-A tun2socks-pre -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
-                ${optionalString cfg.icmp.enable  "-A tun2socks-pre -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
-                COMMIT
+        ${foldl' (rules: addr: ''
+          ${rules}
+          -A tun2socks-pre -s ${addr} -j RETURN'') "" cfg.ignoreSrcAddresses}
+        -A tun2socks-pre -d 0.0.0.0/8 -j RETURN
+        -A tun2socks-pre -d 10.0.0.0/8 -j RETURN
+        -A tun2socks-pre -d 127.0.0.0/8 -j RETURN
+        -A tun2socks-pre -d 169.254.0.0/16 -j RETURN
+        -A tun2socks-pre -d 172.16.0.0/12 -j RETURN
+        -A tun2socks-pre -d 192.168.0.0/16 -j RETURN
+        -A tun2socks-pre -d 224.0.0.0/4 -j RETURN
+        -A tun2socks-pre -d 240.0.0.0/4 -j RETURN
+        ${optionalString cfg.udp.enable
+        "-A tun2socks-pre -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
+        ${optionalString cfg.tcp.enable
+        "-A tun2socks-pre -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
+        ${optionalString cfg.icmp.enable
+        "-A tun2socks-pre -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
+        COMMIT
       '';
 
       cleanIptables = ''
@@ -167,7 +162,8 @@ with lib;
         iptables -t mangle -w -X tun2socks-out
       '';
 
-      udpTimeoutOption = optionalString (cfg.udp.enable) "-udp-timeout ${toString cfg.udp.udpTimeout}";
+      udpTimeoutOption = optionalString (cfg.udp.enable)
+        "-udp-timeout ${toString cfg.udp.udpTimeout}";
       startTun2socks = ''
         tun2socks -loglevel warn -device ${cfg.tunName} -proxy ${cfg.proxy.type}://${cfg.proxy.address} ${udpTimeoutOption}
       '';
@@ -200,19 +196,18 @@ with lib;
     mkIf cfg.enable {
       environment.systemPackages = with pkgs; [ iptables ];
       networking.firewall.enable = mkForce false;
-      systemd.services.tun2socks =
-        {
-          wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" ];
-          description = "Enable tun2socks service";
-          path = with pkgs; [ tun2socks iproute2 iptables ];
-          serviceConfig = {
-            Type = "simple";
-            ExecStart = "${tun2socksStart}";
-            ExecStartPost = "${tun2socksStartPost}";
-            ExecStop = "${tun2socksStop}";
-            ExecStopPost = "${tun2socksStopPost}";
-          };
+      systemd.services.tun2socks = {
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
+        description = "Enable tun2socks service";
+        path = with pkgs; [ tun2socks iproute2 iptables ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${tun2socksStart}";
+          ExecStartPost = "${tun2socksStartPost}";
+          ExecStop = "${tun2socksStop}";
+          ExecStopPost = "${tun2socksStopPost}";
         };
+      };
     };
 }

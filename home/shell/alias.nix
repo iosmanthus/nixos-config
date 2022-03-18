@@ -1,15 +1,13 @@
-{ config, pkgs, ... }:
-{
-  home.packages = with pkgs;
-    [
-      bat
-      exa
-      neovim
-      systemd
-      sudo
-      bind
-      iptables
-    ];
+{ config, pkgs, ... }: {
+  home.packages = with pkgs; [
+    bat
+    exa
+    neovim
+    systemd
+    sudo
+    bind
+    iptables
+  ];
 
   programs.zsh = {
     shellAliases = {

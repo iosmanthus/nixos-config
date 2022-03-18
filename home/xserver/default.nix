@@ -1,13 +1,15 @@
-{ config, pkgs, lib, ... }: {
+{ config
+, pkgs
+, lib
+, ...
+}: {
   imports = [
     ./i3.nix
     ./monitors.nix
-    ./polybar.nix
+    ./polybar
   ];
 
-  xresources.properties = {
-    "Xft.dpi" = 192;
-  };
+  xresources.properties = { "Xft.dpi" = 192; };
 
   xsession = {
     enable = true;
@@ -45,12 +47,14 @@
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-rime ];
+    fcitx5.addons = with pkgs; [
+      fcitx5-chinese-addons
+      fcitx5-pinyin-zhwiki
+      fcitx5-rime
+    ];
   };
 
-  services.clipmenu = {
-    enable = true;
-  };
+  services.clipmenu = { enable = true; };
 
   services.mpd.enable = true;
   services.mpris-proxy.enable = true;

@@ -1,3 +1,3 @@
 self: super: {
-  yesplaymusic = super.callPackage ../packages/yesplaymusic.nix {};
+  yesplaymusic = super.callPackage ../packages/yesplaymusic.nix { };
 }

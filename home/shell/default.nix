@@ -1,7 +1,4 @@
-{ config
-, pkgs
-, ...
-}: {
+{ config, pkgs, ... }: {
   imports = [
     ./starship.nix
     ./alias.nix
@@ -9,9 +6,7 @@
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
-    nix-direnv = {
-      enable = true;
-    };
+    nix-direnv = { enable = true; };
   };
 
   programs.zoxide = {
@@ -33,12 +28,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "docker"
-        "git"
-        "vi-mode"
-        "golang"
-      ];
+      plugins = [ "docker" "git" "vi-mode" "golang" ];
     };
 
     plugins = [

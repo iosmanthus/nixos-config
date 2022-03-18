@@ -2,21 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-{
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./hardware-extra.nix
-      ./xserver-entry
-      ./system
-      ./network
-      ./virtualisation
-      ./misc
-    ];
+{ config, pkgs, lib, ... }: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./hardware-extra.nix
+    ./xserver-entry
+    ./system
+    ./network
+    ./virtualisation
+    ./misc
+  ];
 
-  sops.age.keyFile = "${config.users.users.iosmanthus.home}/.config/sops/age/keys.txt";
+  sops.age.keyFile =
+    "${config.users.users.iosmanthus.home}/.config/sops/age/keys.txt";
 
   nix = {
     package = pkgs.nixUnstable;
@@ -32,13 +31,13 @@
   };
 
   environment.etc = {
-    "nixos/flake.nix".source = config.users.users.iosmanthus.home + "/nixos-config/flake.nix";
+    "nixos/flake.nix".source = config.users.users.iosmanthus.home
+      + "/nixos-config/flake.nix";
   };
   environment.pathsToLink = [ "/share/zsh" ];
 
   # nixpkgs configuration
   nixpkgs.config.allowUnfree = true;
-
 
   system.activationScripts.ldso = lib.stringAfter [ "usrbinenv" ] ''
     mkdir -m 0755 -p /lib64
@@ -46,16 +45,7 @@
     mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
   '';
 
-
-  environment.systemPackages = with pkgs;
-    [
-      lsof
-      wget
-      vim
-      file
-      git
-      bind
-    ];
+  environment.systemPackages = with pkgs; [ lsof wget neovim file git bind ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

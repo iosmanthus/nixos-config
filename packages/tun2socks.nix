@@ -3,7 +3,7 @@
 , fetchFromGitHub
 , ...
 }:
-buildGo117Module rec{
+buildGo117Module rec {
   name = "tun2socks";
   version = "2.3.2";
   overrideModAttrs = _oldAttrs: {

@@ -1,8 +1,8 @@
-{ pkgs
-, ...
-}:
-{
-  home.packages = with pkgs;[ nixpkgs-fmt rnix-lsp ];
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    nixpkgs-fmt
+    rnix-lsp
+  ];
   programs.vscode = {
     enable = true;
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -65,12 +65,6 @@
         publisher = "justusadam";
         version = "3.4.0";
         sha256 = "0ab7m5jzxakjxaiwmg0jcck53vnn183589bbxh3iiylkpicrv67y";
-      }
-      {
-        name = "blockman";
-        publisher = "leodevbro";
-        version = "1.5.6";
-        sha256 = "0sjvv9jk5cxndhff6nb7nvpxzh5463n0lbypklhcj7cbc9dxw8f2";
       }
       {
         name = "rust-analyzer";
@@ -144,28 +138,36 @@
         version = "0.5.5";
         sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
       }
+      {
+        name = "markdown-preview-github-styles";
+        publisher = "bierner";
+        version = "1.0.1";
+        sha256 = "1bjx46v17d18c9bplz70dx6fpsc6pr371ihpawhlr1y61b59n5aj";
+      }
     ];
 
     keybindings = [
       {
         command = "selectNextSuggestion";
         key = "tab";
-        when = "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
+        when =
+          "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
       }
       {
         command = "selectPrevSuggestion";
         key = "shift+tab";
-        when = "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
+        when =
+          "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
       }
       {
         command = "-rust-analyzer.onEnter";
         key = "enter";
-        when = "editorTextFocus && !suggestWidgetVisible && editorLangId == 'rust'";
+        when =
+          "editorTextFocus && !suggestWidgetVisible && editorLangId == 'rust'";
       }
     ];
     userSettings =
-      let
-        fcitx5-remote = "${pkgs.fcitx5}/bin/fcitx5-remote";
+      let fcitx5-remote = "${pkgs.fcitx5}/bin/fcitx5-remote";
       in
       {
         "extensions.autoUpdate" = false;
@@ -213,7 +215,8 @@
         "editor.lineNumbers" = "relative";
         "editor.inlineSuggest.enabled" = true;
 
-        "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
+        "terminal.integrated.commandsToSkipShell" =
+          [ "-workbench.action.quickOpen" ];
         "terminal.integrated.fontFamily" = "'Hasklig'";
         "terminal.integrated.fontWeight" = "normal";
         "terminal.integrated.fontWeightBold" = "600";

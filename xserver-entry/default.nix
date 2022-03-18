@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-{
-  imports = [
-    ./fonts.nix
-  ];
+{ pkgs, ... }: {
+  imports = [ ./fonts.nix ];
 
   environment.variables = {
     GLFW_IM_MODULE = "ibus";
@@ -13,9 +10,7 @@
   services.gnome.gnome-keyring.enable = true;
 
   services.autorandr.enable = true;
-  services.dbus = {
-    enable = true;
-  };
+  services.dbus = { enable = true; };
 
   services.xserver = {
     enable = true;
@@ -35,14 +30,8 @@
             package = pkgs.vanilla-dmz;
             name = "Vanilla-DMZ";
           };
-          indicators = [
-            "~host"
-            "~spacer"
-            "~clock"
-            "~spacer"
-            "~session"
-            "~power"
-          ];
+          indicators =
+            [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
             xft-dpi=192
             font-name=Roboto
@@ -51,13 +40,11 @@
       };
       defaultSession = "none+i3";
     };
-    windowManager.i3 = {
-      enable = true;
-    };
+    windowManager.i3 = { enable = true; };
   };
 
   services.printing = {
     enable = true;
-    drivers = with pkgs;[ hplip ];
+    drivers = with pkgs; [ hplip ];
   };
 }

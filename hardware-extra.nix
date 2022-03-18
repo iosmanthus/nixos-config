@@ -1,7 +1,4 @@
-{ pkgs
-, ...
-}:
-{
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [ pavucontrol ];
   hardware.enableAllFirmware = true;
   hardware.firmware = [ pkgs.firmwareLinuxNonfree ];
@@ -17,11 +14,7 @@
   sound.enable = true;
   services.blueman.enable = true;
   hardware.bluetooth = {
-    settings = {
-      General = {
-        ControllerMode = "bredr";
-      };
-    };
+    settings = { General = { ControllerMode = "bredr"; }; };
     enable = true;
     powerOnBoot = true;
   };
@@ -34,7 +27,5 @@
     pulse.enable = true;
   };
   services.upower.enable = true;
-  services.throttled = {
-    enable = true;
-  };
+  services.throttled = { enable = true; };
 }

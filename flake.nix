@@ -13,13 +13,21 @@
       url = "github:berberman/flakes/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils.url = "github:numtide/flake-utils/master";
 
     nixos-vscode-server = {
       url = "github:iosmanthus/nixos-vscode-server/add-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs =
+    { self
+    , nixpkgs
+    , flake-utils
+    , home-manager
+    , sops-nix
+    , ...
+    }@inputs:
     {
       nixosConfigurations = {
         iosmanthus-nixos = nixpkgs.lib.nixosSystem rec {
@@ -28,8 +36,8 @@
           # https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/eval-config.nix
           modules = [
             ./configuration.nix
-            inputs.sops-nix.nixosModules.sops
-            inputs.home-manager.nixosModules.home-manager
+            sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
             {
               imports = [ inputs.nixos-vscode-server.nixosModules.system ];
               services.auto-fix-vscode-server.enable = true;
@@ -53,8 +61,8 @@
                     inherit system;
                     config.allowUnfree = true;
                   };
-                  stableOverlay = (
-                    self: super: genOverlay {
+                  stableOverlay = (self: super:
+                    genOverlay {
                       branch = stable;
                       packages = [
                         "thunderbird"
@@ -62,10 +70,9 @@
                         "linuxPackages_latest"
                         "polybar"
                       ];
-                    }
-                  );
-                  masterOverlay = (
-                    self: super: genOverlay {
+                    });
+                  masterOverlay = (self: super:
+                    genOverlay {
                       branch = master;
                       packages = [
                         "vscode"
@@ -73,17 +80,18 @@
                         "firefox-bin"
                         "starship"
                         "joplin-desktop"
-                        #"google-chrome"
+                        "google-chrome"
                         "zoom-us"
                         "rofi"
                         "neovim"
                         "i3"
-                        "jetbrains"
+                        # "jetbrains"
 
                         # Utils
                         "gh"
                         "exa"
                         "ripgrep"
+                        "rnix-lsp"
                         "fd"
                         "sops"
                         "bat"
@@ -91,17 +99,20 @@
                         "remarshal"
                         "spice-gtk"
                       ];
-                    }
-                  );
+                    });
                 in
-                [
-                  stableOverlay
-                  masterOverlay
-                  inputs.berberman.overlay
-                ] ++ (import ./overlays);
+                [ stableOverlay masterOverlay inputs.berberman.overlay ]
+                ++ (import ./overlays);
             }
           ];
         };
       };
-    };
+    } // flake-utils.lib.eachDefaultSystem (system:
+    let pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      devShell = pkgs.mkShell {
+        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd ];
+      };
+    });
 }
