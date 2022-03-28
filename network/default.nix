@@ -3,7 +3,6 @@
 }: {
   imports = [ ./ssh.nix ./tun2socks.nix ./proxy ];
 
-  networking.hostName = "iosmanthus-nixos";
   networking = {
     nameservers = [ "172.17.0.1" ];
     networkmanager = {
