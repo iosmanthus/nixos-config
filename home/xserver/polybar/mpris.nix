@@ -2,7 +2,7 @@
 let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   colrm = "${pkgs.util-linux}/bin/colrm";
-  limit = 60;
+  limit = 30;
   playerMprisSimple = pkgs.writeShellScript "player-mpris-simple" ''
     player_status=$(${playerctl} status 2> /dev/null)
 

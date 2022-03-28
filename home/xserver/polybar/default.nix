@@ -1,6 +1,9 @@
 { pkgs, ... }:
 
-let playerMprisSimpleModule = (import ./mpris.nix { inherit pkgs; });
+let
+  playerMprisSimpleModule = (import ./mpris.nix { inherit pkgs; });
+  iw = "${pkgs.iw}/bin/iw";
+  awk = "${pkgs.gawk}/bin/awk";
 in
 {
   services.polybar = {
@@ -15,28 +18,50 @@ in
     };
     enable = true;
     script = ''
+      export COLOR_BASE00=#212121
+      export COLOR_BASE01=#303030
+      export COLOR_BASE02=#353535
+      export COLOR_BASE03=#4A4A4A
+      export COLOR_BASE04=#B2CCD6
+      export COLOR_BASE05=#EEFFFF
+      export COLOR_BASE06=#EEFFFF
+      export COLOR_BASE07=#FFFFFF
+      export COLOR_BASE08=#F07178
+      export COLOR_BASE09=#F78C6C
+      export COLOR_BASE0A=#FFCB6B
+      export COLOR_BASE0B=#C3E88D
+      export COLOR_BASE0C=#89DDFF
+      export COLOR_BASE0D=#82AAFF
+      export COLOR_BASE0E=#C792EA
+      export COLOR_BASE0F=#FF5370
+
+      export NETWORK_LABEL_CONNECTED="%{u$COLOR_BASE0C}%{+u} %essid% %{-u} %{u$COLOR_BASE0D}%{+u} %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{-u}"
+      export DATE_LABEL="%{u$COLOR_BASE0E}%{+u}%date% %time%%{-u}"
+      export HWMON_PATH=$(echo /sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input)
+
+      export WIFI_DEVICE=$(${iw} dev | ${awk} '$1=="Interface"{print $2}')
       polybar main &
     '';
     extraConfig = ''
       ${playerMprisSimpleModule}
 
       [colors]
-      base00= #212121
-      base01= #303030
-      base02= #353535
-      base03= #4A4A4A
-      base04= #B2CCD6
-      base05= #EEFFFF
-      base06= #EEFFFF
-      base07= #FFFFFF
-      base08= #F07178
-      base09= #F78C6C
-      base0A= #FFCB6B
-      base0B= #C3E88D
-      base0C= #89DDFF
-      base0D= #82AAFF
-      base0E= #C792EA
-      base0F= #FF5370
+      base00=#212121
+      base01=#303030
+      base02=#353535
+      base03=#4A4A4A
+      base04=#B2CCD6
+      base05=#EEFFFF
+      base06=#EEFFFF
+      base07=#FFFFFF
+      base08=#F07178
+      base09=#F78C6C
+      base0A=#FFCB6B
+      base0B=#C3E88D
+      base0C=#89DDFF
+      base0D=#82AAFF
+      base0E=#C792EA
+      base0F=#FF5370
 
       [bar/main]
       width = 100%
@@ -80,7 +105,7 @@ in
       time = " %H:%M:%S"
       date = " %A, %d %b %Y"
       format = <label>
-      label = %date% %time% 
+      label = ''${env:DATE_LABEL}
 
       [module/backlight]
       type = internal/backlight
@@ -112,8 +137,8 @@ in
       [module/temperature]
       type = internal/temperature
       interval = 5
-      hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
-      warn-temperature = 65
+      hwmon-path = ''${env:HWMON_PATH}
+      warn-temperature = 70
       units = true
 
       format = <ramp> <label>
@@ -161,7 +186,7 @@ in
 
       [module/network]
       type = internal/network
-      interface = wlp110s0
+      interface = ''${env:WIFI_DEVICE}
 
       interval = 2.0
       accumulate-stats = false
@@ -170,7 +195,7 @@ in
       format-connected = <ramp-signal> <label-connected>
       format-disconnected = <label-disconnected>
       format-disconnected-prefix = 
-      label-connected = %essid% %{F#C3E88D}%upspeed%%{F-} %{F#FFCB6B}%downspeed%%{F-}
+      label-connected = ''${env:NETWORK_LABEL_CONNECTED}
       label-disconnected = "Offline"
       ramp-signal-0 = 
       ramp-signal-1 = 
@@ -206,6 +231,7 @@ in
       ws-icon-1 = 2;
       ws-icon-2 = 3;
       ws-icon-3 = 4;
+      ws-icon-4 = 5;
       ws-icon-default = 
 
       format = <label-state> <label-mode>

@@ -6,14 +6,17 @@ with lib;
 
 let
   eachNetwork = config.services.docker-network;
-  jsonFormat = pkgs.formats.json { };
   dockerCli = "${config.virtualisation.docker.package}/bin/docker";
-  dockerNetworkOpts = { name }: {
-    enable = mkEnableOption "enable this docker network";
-    name = mkOption { type = types.str; };
-    bridgeName = mkOption { type = types.str; };
-    subnet = mkOption { type = types.str; };
-    opt = mkOption { type = jsonFormat.type; };
+  dockerNetworkOpts = { config, lib, name, ... }: {
+    options = {
+      enable = mkEnableOption "enable this docker network";
+      subnet = mkOption {
+        type = types.str;
+      };
+      opts = mkOption {
+        type = with types; attrsOf str;
+      };
+    };
   };
 in
 {
@@ -21,25 +24,31 @@ in
     type = with types; attrsOf (submodule dockerNetworkOpts);
     default = { };
   };
-  config = {
-    systemd.services.docker-network-init = { };
-
-    # {
-    #   description = "Create docker network";
-    #   after = [ "network.target" ];
-    #   wantedBy = [ "multi-user.target" ];
-
-    #   serviceConfig.Type = "oneshot";
-    #   script = ''
-    #     # Put a true at the end to prevent getting non-zero return code, which will
-    #     # crash the whole service.
-    #     check=$(${dockerCli} network ls | grep "${cfg.name}" || true)
-    #     if [ -z "$check" ]; then
-    #       ${dockerCli} network create ${cfg.name}
-    #     else
-    #       echo "${cfg.name} already exists in docker network list"
-    #     fi
-    #   '';
-    # };
+  config = mkIf (eachNetwork != { }) {
+    systemd.services = mapAttrs'
+      (netName: netCfg: (
+        nameValuePair "docker-network-${netName}-init" (mkIf netCfg.enable {
+          description = "initialise the docker network ${netName}";
+          after = [ "network.target" ];
+          wantedBy = [ "multi-user.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+          };
+          script =
+            let
+              optsList = mapAttrsToList (name: value: "--opt ${name}=${value}") netCfg.opts;
+              optsStr = foldl (acc: x: "${acc} ${x}") "" optsList;
+            in
+            ''
+              check=$(${dockerCli} network ls | grep "${netName}" || true)
+              if [ -z "$check" ]; then
+                ${dockerCli} network create --subnet ${netCfg.subnet} ${netName} ${optsStr}
+              else
+                echo "${netName} already exists in docker network list"
+              fi
+            '';
+        })
+      ))
+      eachNetwork;
   };
 }

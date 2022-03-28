@@ -49,5 +49,15 @@
     };
   };
 
+  # services.docker-network = {
+  #   test-net = {
+  #     enable = true;
+  #     subnet = "172.19.0.1/24";
+  #     opts = {
+  #       "com.docker.network.bridge.name" = "test-tun";
+  #     };
+  #   };
+  # };
+
   users.extraGroups.wireshark.members = [ "iosmanthus" ];
 }

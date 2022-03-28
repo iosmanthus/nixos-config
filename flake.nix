@@ -6,7 +6,7 @@
     master.url = "github:NixOS/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager?rev=7cf15b19a931b99f9a918887fc488d577fd07516";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     berberman = {
@@ -35,6 +35,7 @@
           # For more information of this field, check:
           # https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/eval-config.nix
           modules = [
+            ./machines/legion
             ./configuration.nix
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
@@ -67,7 +68,6 @@
                       packages = [
                         "thunderbird"
                         "kitty"
-                        "linuxPackages_latest"
                         "polybar"
                       ];
                     });
@@ -81,6 +81,7 @@
                         "starship"
                         "joplin-desktop"
                         "google-chrome"
+                        "notion-app-enhanced"
                         "zoom-us"
                         "rofi"
                         "neovim"
@@ -89,6 +90,7 @@
 
                         # Utils
                         "gh"
+                        "tmux"
                         "exa"
                         "ripgrep"
                         "rnix-lsp"
@@ -98,6 +100,9 @@
                         "zoxide"
                         "remarshal"
                         "spice-gtk"
+
+                        # Kernel
+                        # "linuxPackages_latest"
                       ];
                     });
                 in

@@ -67,12 +67,6 @@
         sha256 = "0ab7m5jzxakjxaiwmg0jcck53vnn183589bbxh3iiylkpicrv67y";
       }
       {
-        name = "rust-analyzer";
-        publisher = "matklad";
-        version = "0.3.968";
-        sha256 = "0kkfsvpl639f4zisbmgkjv4anm6lcm981g5qhaiv3fhv8scmvqy2";
-      }
-      {
         name = "vscode-docker";
         publisher = "ms-azuretools";
         version = "1.20.0";
@@ -144,7 +138,15 @@
         version = "1.0.1";
         sha256 = "1bjx46v17d18c9bplz70dx6fpsc6pr371ihpawhlr1y61b59n5aj";
       }
-    ];
+      {
+        name = "vscode-theme-onedark";
+        publisher = "akamud";
+        version = "2.2.3";
+        sha256 = "1m6f6p7x8vshhb03ml7sra3v01a7i2p3064mvza800af7cyj3w5m";
+      }
+    ] ++ (with pkgs.vscode-extensions; [
+      matklad.rust-analyzer
+    ]);
 
     keybindings = [
       {
@@ -207,9 +209,9 @@
         ];
         "vim.visualstar" = true;
 
-        "editor.fontFamily" = "'Hasklig', 'Material-Design-Iconic-Font', feather";
-        "editor.fontLigatures" = true;
-        "editor.fontSize" = 15;
+        "editor.fontFamily" = "'Meslo LG L', 'Material-Design-Iconic-Font', feather";
+        "editor.fontLigatures" = false;
+        "editor.fontSize" = 13;
         # "editor.fontWeight": "650",
         "editor.lineHeight" = 25;
         "editor.lineNumbers" = "relative";
@@ -217,14 +219,14 @@
 
         "terminal.integrated.commandsToSkipShell" =
           [ "-workbench.action.quickOpen" ];
-        "terminal.integrated.fontFamily" = "'Hasklig'";
+        "terminal.integrated.fontFamily" = "'Meslo LG L', 'Hasklug Nerd Font'";
         "terminal.integrated.fontWeight" = "normal";
         "terminal.integrated.fontWeightBold" = "600";
 
         "window.menuBarVisibility" = "toggle";
         "window.newWindowDimensions" = "inherit";
 
-        "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
+        "workbench.colorTheme" = "Atom One Dark";
         "workbench.iconTheme" = "material-icon-theme";
 
         "nix.enableLanguageServer" = true;

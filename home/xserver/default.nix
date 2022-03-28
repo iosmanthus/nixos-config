@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./i3.nix
+    ./rofi.nix
     ./monitors.nix
     ./polybar
   ];

@@ -12,6 +12,7 @@
       fira-code
       cascadia-code
       material-design-icons
+      meslo-lg
       jetbrains-mono
       font-awesome
       hasklig

@@ -22,6 +22,9 @@
     nix-output-monitor
     feeluown
     gnome.gnome-system-monitor
+    gnome.gnome-font-viewer
+    imagemagick
+    geoipWithDatabase
     peek
     vlc
 
@@ -40,26 +43,16 @@
     tdesktop
     slack
     wireguard-tools
+    notion-app-enhanced
   ];
+
+  home.sessionVariables = {
+    "TERMINAL" = "${pkgs.kitty}/bin/kitty";
+  };
 
   home.keyboard.options = [ "caps:escape" ];
 
   programs.feh.enable = true;
-  programs.rofi = {
-    enable = true;
-    theme = "sidebar";
-    font = "Dejavu Sans Mono 24";
-    terminal = "${pkgs.kitty}/bin/kitty";
-    extraConfig = {
-      ssh-command = "{terminal} -- {terminal} +kitten ssh {host} [-p {port}]";
-      show-icons = true;
-      modi = "window,drun,ssh,combi";
-      combi-modi = "window,drun,ssh";
-      disable-history = false;
-      sort = true;
-      sorting-method = "fzf";
-    };
-  };
 
   programs.git = {
     enable = true;
@@ -90,7 +83,7 @@
     in
     {
       enable = true;
-      font = { name = "Dejavu Sans Mono"; };
+      font = { name = "Meslo LG M"; };
       settings = {
         include = "${base16.mkKittyBase16Theme { name = "material-darker"; }}";
       };

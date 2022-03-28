@@ -7,8 +7,8 @@ let
   modifier1 = "Mod1";
   wallPaperCommit = "03c6c20be96c38827037d2238357f2c777ec4aa5";
   wallpaper = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/${wallPaperCommit}/wallpapers/nix-wallpaper-simple-dark-gray.png";
-    sha256 = "1282cnqc5qynp0q9gdll7bgpw23yp5bhvaqpar59ibkh3iscg8i5";
+    url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/${wallPaperCommit}/wallpapers/nix-wallpaper-nineish.src.svg";
+    sha256 = "0a7501pq29h1fbg35ih3zjhsdqgjlcaxi7gz780cgd8yvzgikhld";
   };
 in
 {
@@ -21,7 +21,7 @@ in
           fonts =
             {
               names = [ "Iosevka Nerd Font" ];
-              size = 11.0;
+              size = 10.0;
             };
           modifier = modifier0;
           window = {
@@ -48,12 +48,14 @@ in
             "${modifier0}+1" = "workspace 1: work";
             "${modifier0}+2" = "workspace 2: vm";
             "${modifier0}+3" = "workspace 3: chat";
-            "${modifier0}+4" = "workspace 4: misc";
+            "${modifier0}+4" = "workspace 4: mail";
+            "${modifier0}+5" = "workspace 5: music";
 
             "${modifier0}+Shift+1" = "move container to workspace 1: work";
             "${modifier0}+Shift+2" = "move container to workspace 2: vm";
             "${modifier0}+Shift+3" = "move container to workspace 3: chat";
-            "${modifier0}+Shift+4" = "move container to workspace 4: misc";
+            "${modifier0}+Shift+4" = "move container to workspace 4: mail";
+            "${modifier0}+Shift+5" = "move container to workspace 5: music";
 
             "${modifier0}+j" = "focus down";
             "${modifier0}+h" = "focus left";
@@ -82,7 +84,7 @@ in
           };
           modes = lib.mkOptionDefault {
             resize = {
-              j = "resize shink height 10 px or 10 ppt";
+              j = "resize shrink height 10 px or 10 ppt";
               h = "resize shrink width 10 px or 10 ppt";
               l = "resize grow width 10 px or 10 ppt";
               k = "resize grow height 10 px or 10 ppt";
@@ -93,7 +95,7 @@ in
           workspaceLayout = "tabbed";
           startup = [
             {
-              command = "feh --bg-scale ${wallpaper}";
+              command = "feh --bg-scale --conversion-timeout 1 ${wallpaper}";
               always = true;
             }
             {
@@ -129,7 +131,7 @@ in
 
         # Basic color configuration using the Base16 variables for windows and borders.
         # Property Name         Border  BG      Text    Indicator Child Border
-        client.focused          $base04 $base01 $base0B $base0D $base0C
+        client.focused          $base04 $base01 $base07 $base0D $base0C
         client.focused_inactive $base01 $base01 $base07 $base03 $base01
         client.unfocused        $base01 $base00 $base05 $base01 $base01
         client.urgent           $base08 $base08 $base00 $base08 $base08
