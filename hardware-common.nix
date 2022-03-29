@@ -1,7 +1,5 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [ pavucontrol ];
-  hardware.enableAllFirmware = true;
-  hardware.firmware = [ pkgs.firmwareLinuxNonfree ];
   # video driver
   hardware.opengl.extraPackages = with pkgs; [
     vaapiIntel
@@ -11,7 +9,6 @@
   ];
 
   # Enable sound.
-  sound.enable = true;
   services.blueman.enable = true;
   hardware.bluetooth = {
     settings = { General = { ControllerMode = "bredr"; }; };
@@ -20,12 +17,13 @@
   };
 
   security.rtkit.enable = true;
+  hardware.enableAllFirmware = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
   services.upower.enable = true;
-  services.throttled = { enable = true; };
 }
