@@ -43,7 +43,6 @@
           home-manager = {
             useGlobalPkgs = true;
             verbose = true;
-            users.iosmanthus = import ./home;
           };
         }
         {
@@ -82,7 +81,7 @@
                     "rofi"
                     "neovim"
                     "i3"
-                    # "jetbrains"
+                    "jetbrains"
 
                     # Utils
                     "gh"
@@ -112,21 +111,31 @@
           iosmanthus-legion = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             modules = [
-              ./machines/legion
+              ./machines/iosmanthus
+              ./machines/iosmanthus/legion
+              ./secrets/iosmanthus
               { networking.hostName = "iosmanthus-legion"; }
             ] ++ (commonModuleBuilder system);
           };
           iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             modules = [
-              ./machines/xps
-              inputs.nixos-hardware.nixosModules.dell-xps-17-9710-intel
+              ./machines/iosmanthus
+              ./machines/iosmanthus/xps
+              ./secrets/iosmanthus
               { networking.hostName = "iosmanthus-xps"; }
+              {
+                home-manager = {
+                  sharedModules = [ ./machines/iosmanthus ];
+                  users.iosmanthus = import ./home;
+                };
+              }
             ] ++ (commonModuleBuilder system);
           };
         };
     } // flake-utils.lib.eachDefaultSystem (system:
-    let pkgs = nixpkgs.legacyPackages.${system};
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       devShell = pkgs.mkShell {

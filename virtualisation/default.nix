@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     docker-compose
     virt-manager
@@ -11,10 +11,9 @@
     '';
   };
 
-  users.extraGroups.docker.members = [ "iosmanthus" ];
+  users.extraGroups.docker.members = [ "${config.machine.userName}" ];
 
   virtualisation.libvirtd = { enable = true; };
 
-  users.extraGroups.vboxusers.members = [ "iosmanthus" ];
-  users.extraGroups.libvirtd.members = [ "iosmanthus" ];
+  users.extraGroups.libvirtd.members = [ "${config.machine.userName}" ];
 }

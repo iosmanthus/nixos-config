@@ -1,4 +1,4 @@
-{ auto-fix-vscode-server, config, pkgs, ... }: {
+{ config, pkgs, ... }: {
   imports = [
     ./shell
     ./xserver
@@ -56,8 +56,8 @@
 
   programs.git = {
     enable = true;
-    userName = "iosmanthus";
-    userEmail = "myosmanthustree@gmail.com";
+    userName = config.machine.userName;
+    userEmail = config.machine.userEmail;
     extraConfig = {
       core = { editor = "${pkgs.vscode}/bin/code --wait"; };
       pull = { rebase = false; };
@@ -91,7 +91,7 @@
 
   programs.firefox = {
     enable = true;
-    profiles.iosmanthus = {
+    profiles.${config.machine.userName} = {
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };

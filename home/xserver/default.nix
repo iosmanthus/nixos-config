@@ -6,11 +6,10 @@
   imports = [
     ./i3.nix
     ./rofi.nix
-    ./monitors.nix
     ./polybar
   ];
 
-  xresources.properties = { "Xft.dpi" = 192; };
+  xresources.properties = { "Xft.dpi" = 216; };
 
   xsession = {
     enable = true;

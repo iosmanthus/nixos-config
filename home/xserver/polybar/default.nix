@@ -38,6 +38,8 @@ in
       export NETWORK_LABEL_CONNECTED="%{u$COLOR_BASE0C}%{+u} %essid% %{-u} %{u$COLOR_BASE0D}%{+u} %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{-u}"
       export DATE_LABEL="%{u$COLOR_BASE0E}%{+u}%date% %time%%{-u}"
       export HWMON_PATH=$(echo /sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input)
+      export ADAPTER=$(ls -1 /sys/class/power_supply | grep AC)
+      export BATTERY=$(ls -1 /sys/class/power_supply | grep BAT)
 
       export WIFI_DEVICE=$(${iw} dev | ${awk} '$1=="Interface"{print $2}')
       polybar main &
@@ -155,8 +157,8 @@ in
       [module/battery]
       type = internal/battery
       full-at = 97
-      battery = BAT1
-      adapter = ACAD
+      battery = ''${env:BATTERY}
+      adapter = ''${env:ADAPTER}
       poll-interval = 2
 
       time-format = %H:%M

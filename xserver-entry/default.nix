@@ -1,5 +1,8 @@
 { pkgs, ... }: {
-  imports = [ ./fonts.nix ];
+  imports = [
+    ./fonts.nix
+    ./monitors.nix
+  ];
 
   environment.variables = {
     GLFW_IM_MODULE = "ibus";
@@ -9,7 +12,6 @@
   programs.dconf.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
-  services.autorandr.enable = true;
   services.dbus = { enable = true; };
 
   services.xserver = {
@@ -17,7 +19,10 @@
     layout = "us";
     libinput = {
       enable = true;
-      touchpad.disableWhileTyping = true;
+      touchpad = {
+        naturalScrolling = true;
+        disableWhileTyping = true;
+      };
     };
     autoRepeatInterval = 20;
     autoRepeatDelay = 200;

@@ -1,4 +1,5 @@
-{ pkgs
+{ config
+, pkgs
 , ...
 }: {
   i18n.defaultLocale = "en_US.UTF-8";
@@ -7,14 +8,13 @@
 
   programs.zsh.enable = true;
   users.mutableUsers = false;
-  users.users.iosmanthus = {
-    hashedPassword =
-      "$6$gR32JQgFbRXc8tU$McsRQyVYcImRhIajbCWxtte51jOZ8hf6h4Mk7WLap0.Bl9NNamdXUv9aRggBsibGGmp1SHVESVF1qLBl79l/c1";
+  users.users.${config.machine.userName} = {
+    hashedPassword = config.machine.hashedPassword;
     group = "users";
-    shell = pkgs.zsh;
+    shell = config.machine.shell;
     isNormalUser = true;
-    home = "/home/iosmanthus";
-    description = "iosmanthus";
+    home = "/home/${config.machine.userName}";
+    description = "user ${config.machine.userName}";
     extraGroups =
       [ "wheel" "networkmanager" "video" "audio" "storage" "input" "tor" ];
   };
@@ -28,10 +28,10 @@
 
   users.users.root = { shell = pkgs.zsh; };
 
-  security.pam.services.iosmanthus.gnupg.enable = true;
+  security.pam.services.${config.machine.userName}.gnupg.enable = true;
 
   security.sudo.extraRules = [{
-    users = [ "iosmanthus" ];
+    users = [ "${config.machine.userName}" ];
     commands = [{
       command = "ALL";
       options = [ "NOPASSWD" ];
