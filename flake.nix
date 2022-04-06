@@ -95,8 +95,9 @@
                     "sops"
                     "bat"
                     "zoxide"
-                    # "remarshal"
-                    # "spice-gtk"
+                    "virt-viewer"
+                    "remarshal"
+                    "spice-gtk"
 
                     # Kernel
                     # "linuxPackages_latest"
