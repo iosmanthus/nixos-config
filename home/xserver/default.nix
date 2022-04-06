@@ -9,7 +9,9 @@
     ./polybar
   ];
 
-  xresources.properties = { "Xft.dpi" = 216; };
+  xresources.properties = {
+    "Xft.dpi" = 216;
+  };
 
   xsession = {
     enable = true;

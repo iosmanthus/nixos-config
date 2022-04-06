@@ -34,12 +34,17 @@
           cursorTheme = {
             package = pkgs.vanilla-dmz;
             name = "Vanilla-DMZ";
+            size = 48;
+          };
+          theme = {
+            package = pkgs.orchis-theme;
+            name = "Orchis";
           };
           indicators =
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
-            xft-dpi=192
-            font-name=Roboto
+            xft-dpi=216
+            font-name=Ubuntu
           '';
         };
       };
