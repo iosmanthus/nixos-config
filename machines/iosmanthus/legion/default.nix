@@ -14,8 +14,4 @@
     libvdpau-va-gl
     intel-media-driver
   ];
-
-  machine = {
-    displayPort = "eDP-1";
-  };
 }

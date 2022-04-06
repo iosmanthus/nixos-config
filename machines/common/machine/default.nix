@@ -11,6 +11,9 @@ with lib;
     displayPort = mkOption {
       type = types.str;
     };
+    displayPortFingerprint = mkOption {
+      type = types.str;
+    };
     hashedPassword = mkOption {
       type = types.str;
     };

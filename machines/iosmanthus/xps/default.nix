@@ -11,8 +11,4 @@
     nvidiaBusId = "PCI:1:0:0";
     intelBusId = "PCI:0:02:0";
   };
-
-  machine = {
-    displayPort = "eDP-1-1";
-  };
 }

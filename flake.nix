@@ -39,12 +39,14 @@
           imports = [ inputs.nixos-vscode-server.nixosModules.system ];
           services.auto-fix-vscode-server.enable = true;
         }
-        {
+        ({ config, ... }: {
           home-manager = {
+            sharedModules = [ ./machines/${config.machine.userName} ];
+            users.${config.machine.userName} = import ./home;
             useGlobalPkgs = true;
             verbose = true;
           };
-        }
+        })
         {
           nixpkgs.overlays =
             let
@@ -63,7 +65,6 @@
                   packages = [
                     "thunderbird"
                     "kitty"
-                    "polybar"
                   ];
                 });
               masterOverlay = (self: super:
@@ -88,13 +89,14 @@
                     "tmux"
                     "exa"
                     "ripgrep"
+                    "polybar"
                     "rnix-lsp"
                     "fd"
                     "sops"
                     "bat"
                     "zoxide"
-                    "remarshal"
-                    "spice-gtk"
+                    # "remarshal"
+                    # "spice-gtk"
 
                     # Kernel
                     # "linuxPackages_latest"
@@ -111,25 +113,19 @@
           iosmanthus-legion = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             modules = [
+              { networking.hostName = "iosmanthus-legion"; }
               ./machines/iosmanthus
               ./machines/iosmanthus/legion
               ./secrets/iosmanthus
-              { networking.hostName = "iosmanthus-legion"; }
             ] ++ (commonModuleBuilder system);
           };
           iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             modules = [
+              { networking.hostName = "iosmanthus-xps"; }
               ./machines/iosmanthus
               ./machines/iosmanthus/xps
               ./secrets/iosmanthus
-              { networking.hostName = "iosmanthus-xps"; }
-              {
-                home-manager = {
-                  sharedModules = [ ./machines/iosmanthus ];
-                  users.iosmanthus = import ./home;
-                };
-              }
             ] ++ (commonModuleBuilder system);
           };
         };
