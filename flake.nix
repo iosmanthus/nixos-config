@@ -4,10 +4,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/nixos-21.11";
     master.url = "github:NixOS/nixpkgs/master";
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.url = "github:Mic92/sops-nix/master";
     nixos-hardware.url = github:NixOS/nixos-hardware/master;
     home-manager = {
-      url = "github:nix-community/home-manager?rev=7cf15b19a931b99f9a918887fc488d577fd07516";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     berberman = {
@@ -82,7 +82,7 @@
                     "rofi"
                     "neovim"
                     "i3"
-                    "jetbrains"
+                    # "jetbrains"
 
                     # Utils
                     "gh"
