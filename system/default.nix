@@ -23,4 +23,7 @@
       SystemMaxUse=1G
     '';
   };
+  services.logind = {
+    lidSwitch = "suspend-then-hibernate";
+  };
 }

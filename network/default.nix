@@ -4,6 +4,7 @@
 }: {
   imports = [
     ./tun2socks.nix
+    ./leaf-tun.nix
     ./proxy
   ];
 
