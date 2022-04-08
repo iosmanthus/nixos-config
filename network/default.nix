@@ -31,11 +31,15 @@
   ];
 
   #networking.firewall.enable = false;
-  services.tun2socks = {
+  services.leaf-tun = {
     enable = true;
     proxy = {
-      type = "socks5";
-      address = "172.18.0.2:1080";
+      type = "socks";
+      address = "172.18.0.2";
+      port = 1080;
+    };
+    tun = {
+      name = "utun8";
     };
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };

@@ -3,4 +3,5 @@ builtins.map import [
   ./yesplaymusic.nix
   ./polybar-fonts.nix
   ./firmware.nix
+  ./leaf.nix
 ]

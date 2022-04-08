@@ -3,30 +3,196 @@
 , lib
 , ...
 }:
+with lib;
 
-let cfg = config.services.leaf-tun;
+let
+  cfg = config.services.leaf-tun;
+
+  proxyOptions = {
+    options = {
+      type = mkOption {
+        description = "Proxy type";
+        type = types.str;
+      };
+      address = mkOption {
+        description = "Proxy address";
+        type = types.str;
+      };
+      port = mkOption {
+        description = "Proxy port";
+        type = types.ints.u16;
+      };
+    };
+  };
+
+  tunOptions = {
+    options = {
+      name = mkOption {
+        type = types.str;
+        default = "utun8";
+        description = "The tun device name for leaf";
+      };
+
+      address = mkOption {
+        type = types.str;
+        default = "10.10.0.2";
+        description = "The tun device address";
+      };
+
+      netmask = mkOption {
+        type = types.str;
+        default = "255.255.255.0";
+        description = "The tun device netmask";
+      };
+
+      gateway = mkOption {
+        type = types.str;
+        default = "10.10.0.1";
+        description = "The tun device gateway address";
+      };
+
+      mtu = mkOption {
+        type = types.int;
+        default = 1500;
+        description = "The tun device MTU";
+      };
+    };
+  };
+
+  prerouting = "leaf-tun-pre";
+
+  output = "leaf-tun-out";
+
+  writeScriptBin = name: text: pkgs.writeScriptBin name ''
+    #! ${pkgs.runtimeShell} -e
+    ${text}
+  '';
+
+  writeShScript = name: text: "${writeScriptBin name text}/bin/${name}";
+
+  genIgnoreRule = chain: action: subnet: ''
+    -A ${chain} ${action} ${subnet} -j RETURN
+  '';
+
+  builtinIgnoreAddresses = [
+    "0.0.0.0/8"
+    "10.0.0.0/8"
+    "127.0.0.0/8"
+    "169.254.0.0/16"
+    "172.16.0.0/12"
+    "192.168.0.0/16"
+    "224.0.0.0/4"
+    "240.0.0.0/4"
+  ];
+
+  genIgnoreRules = chain: action: subnets:
+    foldl'
+      (text: net: ''
+        ${text}
+        ${genIgnoreRule chain action net}
+      '') ""
+      subnets;
+
+  iptablesRules = pkgs.writeText "leaf-tun-iptables.rules" ''
+    *mangle
+    :${output} - [0:0]
+    :${prerouting} - [0:0]
+
+    -A PREROUTING -j ${prerouting}
+    -A OUTPUT -j ${output}
+
+    # Ignore marked packets
+    ${optionalString (cfg.ignoreMark != null) ''
+      -A ${output} -m mark --mark ${toString cfg.ignoreMark} -j RETURN
+    ''}
+
+    # Ignore private network packets
+    ${genIgnoreRules "${prerouting}" "-s" cfg.ignoreSrcAddresses}
+    ${genIgnoreRules "${prerouting}" "-d" builtinIgnoreAddresses}
+    ${genIgnoreRules "${output}" "-d" builtinIgnoreAddresses}
+
+    # Mark all TCP/UDP packets should route to leaf-tun
+    -A ${output} -p udp -j MARK --set-mark ${toString cfg.fwmark}
+    -A ${output} -p tcp -j MARK --set-mark ${toString cfg.fwmark}
+    -A ${prerouting} -p udp -j MARK --set-mark ${toString cfg.fwmark}
+    -A ${prerouting} -p tcp -j MARK --set-mark ${toString cfg.fwmark}
+
+    COMMIT
+  '';
+
+  leafConfig = pkgs.writeText "leaf.json" ''
+      {
+        "inbounds": [
+            {
+                "tag": "tun",
+                "protocol": "tun",
+                "settings": {
+                    "name": "${cfg.tun.name}",
+                    "address": "${cfg.tun.address}",
+                    "netmask": "${cfg.tun.netmask}",
+                    "gateway": "${cfg.tun.gateway}",
+                    "mtu": ${toString cfg.tun.mtu}
+                }
+            }
+        ],
+        "outbounds": [
+            {
+                "tag": "proxy",
+                "protocol": "${cfg.proxy.type}",
+                "settings": {
+                    "address": "${cfg.proxy.address}",
+                    "port": ${toString cfg.proxy.port}
+                }
+            }
+        ]
+    }
+  '';
+
+  leafStart = writeShScript "leaf-start" ''
+    leaf -c ${leafConfig}
+  '';
+
+  leafStartPost = writeShScript "leaf-start-post" ''
+    while [ ! -d /sys/class/net/${cfg.tun.name} ]; do
+      sleep 1;
+    done
+    ip route replace default dev ${cfg.tun.name} table ${toString cfg.rtTable}
+    ip rule add fwmark ${toString cfg.fwmark} table ${toString cfg.rtTable}
+    iptables-restore ${iptablesRules} -w --noflush
+  '';
+
+  cleanIptables = writeShScript "iptables-clean" ''
+    iptables -t mangle -w -D PREROUTING -j ${prerouting}
+    iptables -t mangle -w -D OUTPUT -j ${output}
+
+    iptables -t mangle -w -F ${prerouting}
+    iptables -t mangle -w -F ${output}
+
+    iptables -t mangle -w -X ${prerouting}
+    iptables -t mangle -w -X ${output}
+  '';
+
+  leafStop = writeShScript "leaf-stop" ''
+    ${cleanIptables}
+    ip rule delete table ${toString cfg.rtTable}
+  '';
+
+  leafPostStop = writeShScript "leaf-post-stop" ''
+    ${leafStop} > /dev/null 2>&1
+  '';
 in
-with lib; {
+{
   options.services.leaf-tun = {
     enable = mkEnableOption "Enable leaf-tun service";
 
+    tun = mkOption {
+      default = { };
+      type = types.submodule tunOptions;
+    };
+
+
     proxy = mkOption {
-      type = types.submodule {
-        options = {
-          proto = mkOption {
-            description = "Proxy protocol";
-            type = types.str;
-          };
-          address = mkOption {
-            description = "Proxy address";
-            type = types.str;
-          };
-          port = mkOption {
-            description = "Proxy port";
-            type = types.ints.u8;
-          };
-        };
-      };
+      type = types.submodule proxyOptions;
     };
 
     fwmark = mkOption {
@@ -41,18 +207,6 @@ with lib; {
       description = "The firewall mark for the packet need not to be proxied";
     };
 
-    tunName = mkOption {
-      type = types.str;
-      default = "utun8";
-      description = "The tun device name for tun2socks";
-    };
-
-    gateway = mkOption {
-      type = types.str;
-      default = "10.10.0.1/24";
-      description = "The tun device gateway address";
-    };
-
     rtTable = mkOption {
       type = types.int;
       default = 1000;
@@ -63,123 +217,27 @@ with lib; {
       type = types.listOf types.str;
       default = [ ];
       description = ''
-        Extra address that the tun2socks service will ignore,
+        Extra address that the leaf-tun service will ignore,
         usually an address of a virtual subnet.
       '';
     };
   };
 
-  config =
-    let
-      writeShScript = name: text:
-        let
-          dir = pkgs.writeScriptBin name ''
-            #! ${pkgs.runtimeShell} -e
-            ${text}
-          '';
-        in
-        "${dir}/bin/${name}";
-
-      iptablesRules = pkgs.writeText "tun2socks-iptables.rules" ''
-        *mangle
-        :tun2socks-out - [0:0]
-        :tun2socks-pre - [0:0]
-        -A PREROUTING -j tun2socks-pre
-        -A OUTPUT -j tun2socks-out
-        ${optionalString (cfg.ignoreMark != null)
-        "-A tun2socks-out -m mark --mark ${toString cfg.ignoreMark} -j RETURN"}
-        -A tun2socks-out -d 0.0.0.0/8 -j RETURN
-        -A tun2socks-out -d 10.0.0.0/8 -j RETURN
-        -A tun2socks-out -d 127.0.0.0/8 -j RETURN
-        -A tun2socks-out -d 169.254.0.0/16 -j RETURN
-        -A tun2socks-out -d 172.16.0.0/12 -j RETURN
-        -A tun2socks-out -d 192.168.0.0/16 -j RETURN
-        -A tun2socks-out -d 224.0.0.0/4 -j RETURN
-        -A tun2socks-out -d 240.0.0.0/4 -j RETURN
-        ${optionalString cfg.udp.enable
-        "-A tun2socks-out -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString cfg.tcp.enable
-        "-A tun2socks-out -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString cfg.icmp.enable
-        "-A tun2socks-out -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
-
-        ${foldl' (rules: addr: ''
-          ${rules}
-          -A tun2socks-pre -s ${addr} -j RETURN'') "" cfg.ignoreSrcAddresses}
-        -A tun2socks-pre -d 0.0.0.0/8 -j RETURN
-        -A tun2socks-pre -d 10.0.0.0/8 -j RETURN
-        -A tun2socks-pre -d 127.0.0.0/8 -j RETURN
-        -A tun2socks-pre -d 169.254.0.0/16 -j RETURN
-        -A tun2socks-pre -d 172.16.0.0/12 -j RETURN
-        -A tun2socks-pre -d 192.168.0.0/16 -j RETURN
-        -A tun2socks-pre -d 224.0.0.0/4 -j RETURN
-        -A tun2socks-pre -d 240.0.0.0/4 -j RETURN
-        ${optionalString cfg.udp.enable
-        "-A tun2socks-pre -p udp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString cfg.tcp.enable
-        "-A tun2socks-pre -p tcp -j MARK --set-mark ${toString cfg.fwmark}"}
-        ${optionalString cfg.icmp.enable
-        "-A tun2socks-pre -p icmp -j MARK --set-mark ${toString cfg.fwmark}"}
-        COMMIT
-      '';
-
-      cleanIptables = ''
-        iptables -t mangle -w -D PREROUTING -j tun2socks-pre
-        iptables -t mangle -w -D OUTPUT -j tun2socks-out
-
-        iptables -t mangle -w -F tun2socks-pre
-        iptables -t mangle -w -F tun2socks-out
-
-        iptables -t mangle -w -X tun2socks-pre
-        iptables -t mangle -w -X tun2socks-out
-      '';
-
-      udpTimeoutOption = optionalString (cfg.udp.enable)
-        "-udp-timeout ${toString cfg.udp.udpTimeout}";
-      startTun2socks = ''
-        tun2socks -loglevel warn -device ${cfg.tunName} -proxy ${cfg.proxy.type}://${cfg.proxy.address} ${udpTimeoutOption}
-      '';
-      tun2socksStart = writeShScript "tun2socks-start" ''
-        ${startTun2socks}
-      '';
-
-      setupTun = ''
-        while [ ! -d /sys/class/net/${cfg.tunName} ]; do sleep 1; done
-        ip link set ${cfg.tunName} up
-        ip addr replace ${cfg.gateway} dev ${cfg.tunName}
-      '';
-
-      tun2socksStartPost = writeShScript "tun2socks-start-post" ''
-        ${setupTun}
-        ip route replace default dev ${cfg.tunName} table ${toString cfg.rtTable}
-        ip rule add fwmark ${toString cfg.fwmark} table ${toString cfg.rtTable}
-        iptables-restore ${iptablesRules} -w --noflush
-      '';
-
-      tun2socksStop = writeShScript "tun2socks-stop" ''
-        ${cleanIptables}
-        ip rule delete table ${toString cfg.rtTable}
-      '';
-
-      tun2socksStopPost = writeShScript "tun2socks-stop-post" ''
-        ip rule delete table ${toString cfg.rtTable} > /dev/null 2>&1
-      '';
-    in
-    mkIf cfg.enable {
-      environment.systemPackages = with pkgs; [ iptables ];
-      networking.firewall.enable = mkForce false;
-      systemd.services.tun2socks = {
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
-        description = "Enable tun2socks service";
-        path = with pkgs; [ tun2socks iproute2 iptables ];
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${tun2socksStart}";
-          ExecStartPost = "${tun2socksStartPost}";
-          ExecStop = "${tun2socksStop}";
-          ExecStopPost = "${tun2socksStopPost}";
-        };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ iptables ];
+    networking.firewall.enable = mkForce false;
+    systemd.services.leaf-tun = {
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      description = "Enable leaf-tun service";
+      path = with pkgs; [ leaf iproute2 iptables ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${leafStart}";
+        ExecStartPost = "${leafStartPost}";
+        ExecStop = "${leafStop}";
+        ExecStopPost = "${leafPostStop}";
       };
     };
+  };
 }
