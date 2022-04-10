@@ -16,7 +16,6 @@
     speedtest-cli
     ihaskell
     rustup
-    joplin-desktop
     httpie
     nnn
     nix-output-monitor

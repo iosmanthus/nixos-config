@@ -75,7 +75,6 @@
                     "discord"
                     "firefox-bin"
                     "starship"
-                    "joplin-desktop"
                     "google-chrome"
                     "notion-app-enhanced"
                     "zoom-us"
@@ -96,6 +95,7 @@
                     "bat"
                     "zoxide"
                     "virt-viewer"
+                    "virt-manager"
                     "remarshal"
                     "spice-gtk"
 

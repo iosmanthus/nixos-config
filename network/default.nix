@@ -30,7 +30,6 @@
     "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0CpL+RLwnpBp1VzD3VUZpCEOIb1U+R6Jyu/SBq+Msg+CRlxfJThUJY4ZGwp6/d+VPWuQQHvvQ6OoLQdV5Pa9xZAFYOUEDWjAnD16gh29aoVDFzv+sDt2wyA4WZfqydrFSD9QhP88RpcGAcHZXCjzaGT1tEOw2wIOgGs6P53Mrti46Yw=="
   ];
 
-  #networking.firewall.enable = false;
   services.leaf-tun = {
     enable = true;
     proxy = {
@@ -60,16 +59,6 @@
       StrictNodes = true;
     };
   };
-
-  # services.docker-network = {
-  #   test-net = {
-  #     enable = true;
-  #     subnet = "172.19.0.1/24";
-  #     opts = {
-  #       "com.docker.network.bridge.name" = "test-tun";
-  #     };
-  #   };
-  # };
 
   users.extraGroups.wireshark.members = [ "${config.machine.userName}" ];
 }
