@@ -29,8 +29,66 @@
     , sops-nix
     , ...
     }@inputs:
-    {
-      nixosConfigurations = let commonModuleBuilder = system: [
+    let
+      mkOverlay = import ./utils/branch-overlay.nix;
+
+      mkMaster = system: (import inputs.master {
+        inherit system;
+        config.allowUnfree = true;
+      });
+
+      mkStable = system: import inputs.stable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
+      mkStableOverlay = (system: self: super:
+        mkOverlay {
+          branch = mkStable system;
+          packages = [
+            "thunderbird"
+            "kitty"
+          ];
+        });
+
+      mkMasterOverlay = (system: self: super:
+        mkOverlay {
+          branch = mkMaster system;
+          packages = [
+            "vscode"
+            "discord"
+            "firefox-bin"
+            "starship"
+            "google-chrome"
+            "notion-app-enhanced"
+            "zoom-us"
+            "rofi"
+            "neovim"
+            "i3"
+            # "jetbrains"
+
+            # Utils
+            "gh"
+            "tmux"
+            "exa"
+            "ripgrep"
+            "polybar"
+            "rnix-lsp"
+            "fd"
+            "sops"
+            "bat"
+            "zoxide"
+            "virt-viewer"
+            "virt-manager"
+            "remarshal"
+            "spice-gtk"
+
+            # Kernel
+            # "linuxPackages_latest"
+          ];
+        });
+
+      commonModuleBuilder = system: [
         ./configuration.nix
         ./hardware-common.nix
         sops-nix.nixosModules.sops
@@ -49,65 +107,14 @@
         })
         {
           nixpkgs.overlays =
-            let
-              mkOverlay = import ./utils/branch-overlay.nix;
-              master = import inputs.master {
-                inherit system;
-                config.allowUnfree = true;
-              };
-              stable = import inputs.stable {
-                inherit system;
-                config.allowUnfree = true;
-              };
-              stableOverlay = (self: super:
-                mkOverlay {
-                  branch = stable;
-                  packages = [
-                    "thunderbird"
-                    "kitty"
-                  ];
-                });
-              masterOverlay = (self: super:
-                mkOverlay {
-                  branch = master;
-                  packages = [
-                    "vscode"
-                    "discord"
-                    "firefox-bin"
-                    "starship"
-                    "google-chrome"
-                    "notion-app-enhanced"
-                    "zoom-us"
-                    "rofi"
-                    "neovim"
-                    "i3"
-                    # "jetbrains"
-
-                    # Utils
-                    "gh"
-                    "tmux"
-                    "exa"
-                    "ripgrep"
-                    "polybar"
-                    "rnix-lsp"
-                    "fd"
-                    "sops"
-                    "bat"
-                    "zoxide"
-                    "virt-viewer"
-                    "virt-manager"
-                    "remarshal"
-                    "spice-gtk"
-
-                    # Kernel
-                    # "linuxPackages_latest"
-                  ];
-                });
-            in
-            [ stableOverlay masterOverlay inputs.berberman.overlay ]
+            map (builder: builder system) [ mkStableOverlay mkMasterOverlay ]
+            ++ [ inputs.berberman.overlay ]
             ++ (import ./overlays);
         }
-      ]; in
+      ];
+    in
+    {
+      nixosConfigurations =
         {
           # For more information of this field, check:
           # https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/eval-config.nix
@@ -135,7 +142,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      devShell = pkgs.mkShell {
+      devShells.default = pkgs.mkShell {
         buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd ];
       };
     });
