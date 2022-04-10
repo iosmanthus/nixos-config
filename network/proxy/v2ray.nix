@@ -15,6 +15,10 @@ in
       type = types.str;
     };
 
+    imageFile = mkOption {
+      type = with types; nullOr package;
+    };
+
     configFile = mkOption {
       type = types.path;
     };
@@ -27,8 +31,14 @@ in
       type = types.package;
     };
 
-    extraOptions = mkOption {
+    dependsOn = mkOption {
+      default = [ ];
       type = with types; listOf str;
+    };
+
+    extraOptions = mkOption {
+      type = with types;
+        listOf str;
       default = [ ];
     };
   };
@@ -37,7 +47,8 @@ in
     virtualisation.oci-containers = {
       containers = {
         v2ray = rec {
-          image = "${cfg.image}";
+          image = cfg.image;
+          imageFile = cfg.imageFile;
           workdir = "/etc/v2ray";
           cmd = [ "xray" "run" "-confdir" "./" ];
           volumes = [
@@ -46,6 +57,7 @@ in
             "${cfg.geosite}:${workdir}/geosite.dat"
           ];
           extraOptions = cfg.extraOptions;
+          dependsOn = cfg.dependsOn;
         };
       };
     };

@@ -15,12 +15,21 @@ in
       type = types.str;
     };
 
+    imageFile = mkOption {
+      type = with types; nullOr package;
+    };
+
     configFile = mkOption {
       type = types.path;
     };
 
     mmdb = mkOption {
       type = types.package;
+    };
+
+    dependsOn = mkOption {
+      default = [ ];
+      type = with types; listOf str;
     };
 
     extraOptions = mkOption {
@@ -33,7 +42,8 @@ in
     virtualisation.oci-containers = {
       containers = {
         clash = rec {
-          image = "${cfg.image}";
+          image = cfg.image;
+          imageFile = cfg.imageFile;
           workdir = "/etc/clash";
           cmd = [ "-d" "./" ];
           volumes = [
@@ -41,6 +51,7 @@ in
             "${cfg.mmdb}:${workdir}/Country.mmdb"
           ];
           extraOptions = cfg.extraOptions;
+          dependsOn = cfg.dependsOn;
         };
       };
     };

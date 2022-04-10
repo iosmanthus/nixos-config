@@ -1,9 +1,12 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
   v2rayImage = "teddysun/xray";
-
-  v2rayTag = "1.5.4";
+  v2rayImageFile = pkgs.dockerTools.pullImage {
+    imageName = "${v2rayImage}";
+    imageDigest = "sha256:3765e7940f414d4ebbf1eb5f4f624c60cc92212737bca68ff5fdb18b1371dfd2";
+    sha256 = "166mhlyismfpyp15dv1zcnwfby3n72ckfz71j57d5q2qrylg0jc1";
+  };
 
   geoVersion = "202204082211";
 
@@ -18,12 +21,22 @@ let
   };
 
   clashImage = "dreamacro/clash-premium";
-
-  clashTag = "latest";
+  clashImageFile = pkgs.dockerTools.pullImage {
+    imageName = "${clashImage}";
+    imageDigest = "sha256:550f4edca1b0420c45dfb32f62ebf65150c9660da1b9468bf4cdcc7c4d01b0fc";
+    sha256 = "1zsbsz7i7nqg7x7cm22wgg8hnxdl28ypm5za1pfh3951q90x1wmf";
+  };
 
   mmdb = builtins.fetchurl {
     url = "https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb";
     sha256 = "199psf7q6f87mmg1jsnn1gkszmg16cv2wgi3pi7mbdjgyc6n7b2w";
+  };
+
+  yacdImage = "haishanh/yacd";
+  yacdImageFile = pkgs.dockerTools.pullImage {
+    imageName = "${yacdImage}";
+    imageDigest = "sha256:4a9d0f286b2d48887628507df7d2090660c9211c7526fb1a1808130298cc30e8";
+    sha256 = "14nyb2vq124cj4dg1ks6y307qch6vdpfcnc8xjfiawghjyvw51dp";
   };
 
   networkName = "proxy";
@@ -47,11 +60,16 @@ in
 
   virtualisation.v2ray-container = {
     enable = true;
-    image = "${v2rayImage}:${v2rayTag}";
+    image = v2rayImage;
+    imageFile = v2rayImageFile;
 
     configFile = config.sops.secrets.v2ray-config.path;
 
     inherit geoip geosite;
+
+    dependsOn = [
+      "clash"
+    ];
 
     extraOptions = [
       "--network=${networkName}"
@@ -62,7 +80,8 @@ in
 
   virtualisation.clash-container = {
     enable = true;
-    image = "${clashImage}:${clashTag}";
+    image = clashImage;
+    imageFile = clashImageFile;
 
     configFile = config.sops.secrets.clash-config.path;
 
@@ -78,7 +97,8 @@ in
   virtualisation.oci-containers = {
     containers = {
       yacd = {
-        image = "haishanh/yacd:latest";
+        image = yacdImage;
+        imageFile = yacdImageFile;
         dependsOn = [
           "clash"
         ];
