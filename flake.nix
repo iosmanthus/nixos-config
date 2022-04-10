@@ -50,7 +50,7 @@
         {
           nixpkgs.overlays =
             let
-              genOverlay = import ./utils/branch-overlay.nix;
+              mkOverlay = import ./utils/branch-overlay.nix;
               master = import inputs.master {
                 inherit system;
                 config.allowUnfree = true;
@@ -60,7 +60,7 @@
                 config.allowUnfree = true;
               };
               stableOverlay = (self: super:
-                genOverlay {
+                mkOverlay {
                   branch = stable;
                   packages = [
                     "thunderbird"
@@ -68,7 +68,7 @@
                   ];
                 });
               masterOverlay = (self: super:
-                genOverlay {
+                mkOverlay {
                   branch = master;
                   packages = [
                     "vscode"
