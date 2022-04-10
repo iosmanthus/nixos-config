@@ -209,7 +209,7 @@ in
 
     rtTable = mkOption {
       type = types.int;
-      default = 1000;
+      default = 1080;
       description = "The route table for the leaf-tun device";
     };
 
