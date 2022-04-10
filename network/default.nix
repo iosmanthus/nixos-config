@@ -50,6 +50,7 @@
 
   services.tor = {
     enable = true;
+    client.enable = true;
     settings = {
       ControlPort = 9051;
       CookieAuthentication = true;
