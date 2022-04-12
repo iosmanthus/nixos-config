@@ -88,7 +88,7 @@
           ];
         });
 
-      commonModuleBuilder = system: [
+      mkCommonModules = system: [
         ./configuration.nix
         ./hardware-common.nix
         sops-nix.nixosModules.sops
@@ -107,9 +107,9 @@
         })
         {
           nixpkgs.overlays =
-            map (builder: builder system) [ mkStableOverlay mkMasterOverlay ]
+            map (mkBuilder: mkBuilder system) [ mkStableOverlay mkMasterOverlay ]
             ++ [ inputs.berberman.overlay ]
-            ++ (import ./overlays);
+            ++ [ (import ./overlays.nix) ];
         }
       ];
     in
@@ -125,7 +125,7 @@
               ./machines/iosmanthus
               ./machines/iosmanthus/legion
               ./secrets/iosmanthus
-            ] ++ (commonModuleBuilder system);
+            ] ++ (mkCommonModules system);
           };
           iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
@@ -134,7 +134,7 @@
               ./machines/iosmanthus
               ./machines/iosmanthus/xps
               ./secrets/iosmanthus
-            ] ++ (commonModuleBuilder system);
+            ] ++ (mkCommonModules system);
           };
         };
     } // flake-utils.lib.eachDefaultSystem (system:

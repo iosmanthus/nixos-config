@@ -3,11 +3,15 @@
 , ...
 }: {
   i18n.defaultLocale = "en_US.UTF-8";
+
   console = { keyMap = "us"; };
+
   time.timeZone = "Asia/Shanghai";
 
   programs.zsh.enable = true;
+
   users.mutableUsers = false;
+
   users.users.${config.machine.userName} = {
     hashedPassword = config.machine.hashedPassword;
     group = "users";

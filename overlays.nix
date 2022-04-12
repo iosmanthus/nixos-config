@@ -1,5 +1,6 @@
-self: super:
-with super; {
+_self: super:
+with super;
+{
   firmwareLinuxNonfree = firmwareLinuxNonfree.overrideAttrs (_: rec {
     version = "2021-05-11";
     src = fetchgit {
@@ -10,4 +11,16 @@ with super; {
     };
     outputHash = "sha256-yrygxx8Q9/Z1LXkotkWI/N/6W/p+LwbpoX+bYOjiiww=";
   });
+
+  leaf = super.callPackage ./packages/leaf.nix { };
+
+  polybar-fonts = super.callPackage ./packages/polybar-fonts.nix { };
+
+  tun2socks = super.callPackage ./packages/tun2socks.nix { };
+
+  yesplaymusic = super.callPackage ./packages/yesplaymusic.nix { };
+
+  base16-kitty = super.callPackage ./packages/base16-kitty.nix { };
+
+  base16-rofi = super.callPackage ./packages/base16-rofi.nix { };
 }

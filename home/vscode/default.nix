@@ -150,6 +150,12 @@
         version = "0.232.4";
         sha256 = "0cznn5pba51p3nhjf2qn3lp6l9gvjp1qmp4zdbmpcfy5zpw8gmpr";
       }
+      {
+        name = "path-intellisense";
+        publisher = "christian-kohler";
+        version = "2.8.0";
+        sha256 = "04vardis9k6yzaha5hhhv16c3z6np48adih46xj88y83ipvg5z2l";
+      }
     ] ++ (with pkgs.vscode-extensions; [
       matklad.rust-analyzer
     ]);

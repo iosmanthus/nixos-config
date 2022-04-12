@@ -70,10 +70,6 @@ let
 
   writeShScript = name: text: "${writeScriptBin name text}/bin/${name}";
 
-  genIgnoreRule = chain: action: subnet: ''
-    -A ${chain} ${action} ${subnet} -j RETURN
-  '';
-
   builtinIgnoreAddresses = [
     "0.0.0.0/8"
     "10.0.0.0/8"
@@ -85,11 +81,15 @@ let
     "240.0.0.0/4"
   ];
 
-  genIgnoreRules = chain: action: subnets:
+  mkIgnoreRule = chain: action: subnet: ''
+    -A ${chain} ${action} ${subnet} -j RETURN
+  '';
+
+  mkIgnoreRules = chain: action: subnets:
     foldl'
       (text: net: ''
         ${text}
-        ${genIgnoreRule chain action net}
+        ${mkIgnoreRule chain action net}
       '') ""
       subnets;
 
@@ -107,9 +107,9 @@ let
     ''}
 
     # Ignore private network packets
-    ${genIgnoreRules "${prerouting}" "-s" cfg.ignoreSrcAddresses}
-    ${genIgnoreRules "${prerouting}" "-d" builtinIgnoreAddresses}
-    ${genIgnoreRules "${output}" "-d" builtinIgnoreAddresses}
+    ${mkIgnoreRules "${prerouting}" "-s" cfg.ignoreSrcAddresses}
+    ${mkIgnoreRules "${prerouting}" "-d" builtinIgnoreAddresses}
+    ${mkIgnoreRules "${output}" "-d" builtinIgnoreAddresses}
 
     # Mark all TCP/UDP packets should route to leaf-tun
     -A ${output} -p udp -j MARK --set-mark ${toString cfg.fwmark}

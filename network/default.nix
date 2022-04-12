@@ -3,8 +3,6 @@
 , ...
 }: {
   imports = [
-    ./tun2socks.nix
-    ./leaf-tun.nix
     ./proxy
   ];
 
@@ -29,19 +27,6 @@
   users.users.${config.machine.userName}.openssh.authorizedKeys.keys = [
     "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAE0CpL+RLwnpBp1VzD3VUZpCEOIb1U+R6Jyu/SBq+Msg+CRlxfJThUJY4ZGwp6/d+VPWuQQHvvQ6OoLQdV5Pa9xZAFYOUEDWjAnD16gh29aoVDFzv+sDt2wyA4WZfqydrFSD9QhP88RpcGAcHZXCjzaGT1tEOw2wIOgGs6P53Mrti46Yw=="
   ];
-
-  services.leaf-tun = {
-    enable = true;
-    proxy = {
-      type = "socks";
-      address = "172.18.0.2";
-      port = 1080;
-    };
-    tun = {
-      name = "utun8";
-    };
-    ignoreSrcAddresses = [ "172.18.0.1/24" ];
-  };
 
   programs.wireshark = {
     enable = true;

@@ -5,10 +5,10 @@
 { config, pkgs, lib, ... }: {
   imports = [
     # Include the results of the hardware scan.
-    ./xserver-entry
     ./system
     ./network
     ./virtualisation
+    ./desktop-entry
     ./misc
   ];
 

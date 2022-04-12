@@ -37,7 +37,6 @@ stdenv.mkDerivation rec {
   src = wrapped;
   installPhase = ''
     mkdir -p $out/bin
-    ls ${src}/bin
     cp ${src}/bin/* $out/bin
     install -D ${desktop}/share/applications/YesPlayMusic.desktop $out/share/applications/YesPlayMusic.desktop
   '';

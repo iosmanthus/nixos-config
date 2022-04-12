@@ -1,8 +1,20 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+
+let
+  mkKittyBase16Theme = name:
+    "${pkgs.base16-kitty}/share/base16-kitty/colors/base16-${name}.conf";
+in
+{
   imports = [
-    ./shell
-    ./xserver
+    ./fcitx5.nix
+    ./firefox.nix
+    ./media.nix
+    ./rofi.nix
     ./tmux.nix
+
+    ./desktop
+    ./polybar
+    ./shell
     ./vscode
   ];
 
@@ -77,42 +89,11 @@
     goPath = ".go";
   };
 
-  programs.kitty =
-    let base16 = pkgs.callPackage ./base16-kitty.nix { };
-    in
-    {
-      enable = true;
-      font = { name = "Meslo LG M"; };
-      settings = {
-        include = "${base16.mkKittyBase16Theme { name = "material-darker"; }}";
-      };
-    };
-
-  programs.firefox = {
+  programs.kitty = {
     enable = true;
-    profiles.${config.machine.userName} = {
-      settings = {
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-      };
-      userChrome = ''
-        #main-window[tabsintitlebar="true"]:not([extradragspace="true"])
-          #TabsToolbar
-          > .toolbar-items {
-          opacity: 0;
-          pointer-events: none;
-        }
-        #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
-          visibility: collapse !important;
-        }
-
-        #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
-          display: none;
-        }
-
-        #urlbar {
-          font-size: 15pt !important;
-        }
-      '';
+    font = { name = "Meslo LG M"; };
+    settings = {
+      include = mkKittyBase16Theme "material-darker";
     };
   };
 }
