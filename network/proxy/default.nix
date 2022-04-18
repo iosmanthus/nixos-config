@@ -36,6 +36,8 @@ let
     sha256 = "199psf7q6f87mmg1jsnn1gkszmg16cv2wgi3pi7mbdjgyc6n7b2w";
   };
 
+  clashConfig = config.sops.secrets.clash-config.path;
+
   yacdImage = "haishanh/yacd";
 
   yacdImageFile = pkgs.dockerTools.pullImage {
@@ -103,7 +105,7 @@ in
         workdir = "/etc/clash";
         cmd = [ "-d" "./" ];
         volumes = [
-          "${config.sops.secrets.clash-config.path}:${workdir}/config.yaml"
+          "${clashConfig}:${workdir}/config.yaml"
           "${mmdb}:${workdir}/Country.mmdb"
         ];
         extraOptions = [

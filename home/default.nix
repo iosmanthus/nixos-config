@@ -72,6 +72,11 @@ in
     extraConfig = {
       core = { editor = "${pkgs.vscode}/bin/code --wait"; };
       pull = { rebase = false; };
+      url = {
+        "git@github.com:" = {
+          insteadOf = "https://github.com/";
+        };
+      };
     };
   };
 

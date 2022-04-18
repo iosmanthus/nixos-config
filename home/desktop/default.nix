@@ -8,7 +8,7 @@
   ];
 
   xresources.properties = {
-    "Xft.dpi" = 228;
+    "Xft.dpi" = 192;
   };
 
   xsession = {
@@ -46,12 +46,4 @@
   };
 
   services.clipmenu = { enable = true; };
-
-  services.mpd.enable = true;
-  services.mpris-proxy.enable = true;
-  services.mpdris2 = {
-    enable = true;
-    multimediaKeys = true;
-    notifications = true;
-  };
 }

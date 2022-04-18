@@ -47,7 +47,6 @@
           branch = mkStable system;
           packages = [
             "thunderbird"
-            "kitty"
           ];
         });
 
@@ -68,6 +67,8 @@
             # "jetbrains"
 
             # Utils
+            "oh-my-zsh"
+            "zsh"
             "gh"
             "tmux"
             "exa"
@@ -78,10 +79,12 @@
             "sops"
             "bat"
             "zoxide"
-            "virt-viewer"
-            "virt-manager"
-            "remarshal"
-            "spice-gtk"
+
+            # Virtualisation
+            # "virt-viewer"
+            # "virt-manager"
+            # "remarshal"
+            # "spice-gtk"
 
             # Kernel
             # "linuxPackages_latest"
@@ -143,7 +146,7 @@
     in
     {
       devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd ];
+        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops ];
       };
     });
 }

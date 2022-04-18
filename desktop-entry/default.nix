@@ -44,7 +44,7 @@
           indicators =
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
-            xft-dpi=216
+            xft-dpi=192
             font-name=Ubuntu
           '';
         };

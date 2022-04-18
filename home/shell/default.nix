@@ -14,6 +14,7 @@
     enableZshIntegration = true;
     enableBashIntegration = true;
   };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -28,7 +29,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "docker" "git" "vi-mode" "golang" ];
+      plugins = [ "docker" "git" "vi-mode" "golang" "fd" "systemd" ];
     };
 
     plugins = [
@@ -38,8 +39,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "chisui";
           repo = "zsh-nix-shell";
-          rev = "v0.1.0";
-          sha256 = "0snhch9hfy83d4amkyxx33izvkhbwmindy0zjjk28hih1a9l2jmx";
+          rev = "v0.5.0";
+          sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
         };
       }
       {
@@ -48,8 +49,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-syntax-highlighting";
-          rev = "ebef4e55691f62e630318d56468e5798367aa81c";
-          sha256 = "0qimb90655hkm64mjqcn48kqq38cbfxlfhs324cbdi9gqpdi6q4b";
+          rev = "c5ce0014677a0f69a10b676b6038ad127f40c6b1";
+          sha256 = "000ksv6bb4qkdzp6fdgz8z126pwin6ywib5d6cfwqa2w27xqm9sj";
         };
       }
     ];

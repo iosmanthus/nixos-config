@@ -41,7 +41,7 @@ let
 
       netmask = mkOption {
         type = types.str;
-        default = "255.255.255.0";
+        default = "255.255.0.0";
         description = "The tun device netmask";
       };
 
