@@ -7,7 +7,7 @@
   ];
 
   networking = {
-    nameservers = [ "1.1.1.1" ];
+    nameservers = [ "119.29.29.29" ];
     networkmanager = {
       enable = true;
       dns = "none";

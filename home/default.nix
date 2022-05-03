@@ -101,4 +101,10 @@ in
       include = mkKittyBase16Theme "material-darker";
     };
   };
+
+  services.picom = {
+    enable = true;
+    fade = true;
+    fadeDelta = 5;
+  };
 }

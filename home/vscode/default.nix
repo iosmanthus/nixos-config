@@ -9,14 +9,32 @@
       {
         name = "better-comments";
         publisher = "aaron-bond";
-        version = "2.1.0";
-        sha256 = "0kmmk6bpsdrvbb7dqf0d3annpg41n9g6ljzc1dh0akjzpbchdcwp";
+        version = "3.0.0";
+        sha256 = "17b7m50z0fbifs8azgn6ygcmgwclssilw9j8nb178szd6zrjz2vf";
+      }
+      {
+        name = "vscode-theme-onedark";
+        publisher = "akamud";
+        version = "2.2.3";
+        sha256 = "1m6f6p7x8vshhb03ml7sra3v01a7i2p3064mvza800af7cyj3w5m";
+      }
+      {
+        name = "markdown-preview-github-styles";
+        publisher = "bierner";
+        version = "1.0.1";
+        sha256 = "1bjx46v17d18c9bplz70dx6fpsc6pr371ihpawhlr1y61b59n5aj";
+      }
+      {
+        name = "path-intellisense";
+        publisher = "christian-kohler";
+        version = "2.8.0";
+        sha256 = "04vardis9k6yzaha5hhhv16c3z6np48adih46xj88y83ipvg5z2l";
       }
       {
         name = "gitlens";
         publisher = "eamodio";
-        version = "12.0.2";
-        sha256 = "16l2wy6zyh11mq7d1r1qg668d5c637yd3arzqlqhjf91drmaxpbs";
+        version = "12.0.6";
+        sha256 = "1d7gzxsyxrhvvx2md6gbcwiawd8f3jarxfbv2qhj7xl1phd7zja3";
       }
       {
         name = "vsc-community-material-theme";
@@ -33,8 +51,8 @@
       {
         name = "copilot";
         publisher = "GitHub";
-        version = "1.7.5250";
-        sha256 = "1dc9dkc60v4pbn6s223i7m1lr14pjkjg1m9rfny90rjf248838d1";
+        version = "1.12.5517";
+        sha256 = "07ayx6ikka48nyj143zyn5x1mdr23gnz8m43hayg4ybyw1y9dglf";
       }
       {
         name = "github-vscode-theme";
@@ -51,8 +69,8 @@
       {
         name = "haskell";
         publisher = "haskell";
-        version = "1.8.0";
-        sha256 = "0yzcibigxlvh6ilba1jpri2irsjnvyy74vzn3rydcywfc17ifkzs";
+        version = "2.1.2";
+        sha256 = "0jk78cadi0fx2bjm7pfw24gqpyzs2jj32zml99a6zkpjljvs2hvw";
       }
       {
         name = "nix-ide";
@@ -63,20 +81,26 @@
       {
         name = "language-haskell";
         publisher = "justusadam";
-        version = "3.4.0";
-        sha256 = "0ab7m5jzxakjxaiwmg0jcck53vnn183589bbxh3iiylkpicrv67y";
+        version = "3.6.0";
+        sha256 = "115y86w6n2bi33g1xh6ipz92jz5797d3d00mr4k8dv5fz76d35dd";
       }
       {
         name = "vscode-docker";
         publisher = "ms-azuretools";
-        version = "1.20.0";
-        sha256 = "0a1v8hqbrl51pxbzvjd69azqcyqid4gmva3dnk440q7szr61hy4b";
+        version = "1.22.0";
+        sha256 = "12qfwfqaa6nxm6gg2g7g4m001lh57bbhhbpyawxqk81qnjw3vipr";
+      }
+      {
+        name = "remote-containers";
+        publisher = "ms-vscode-remote";
+        version = "0.232.6";
+        sha256 = "1jl9053x25bl095b6465i2cjqn3d06dmdy3z2mqhmazb0ihbd0rf";
       }
       {
         name = "remote-ssh";
         publisher = "ms-vscode-remote";
-        version = "0.77.2022030315";
-        sha256 = "1wyz3lnz821znsbdwjigndy3pq43f31v0jg8hfnhgmj05a4y8kjn";
+        version = "0.79.2022040715";
+        sha256 = "041x9q2nb86p5npf5gjmg102phvm4s4nxmirfz7nfa2qlbn2rl74";
       }
       {
         name = "color-highlight";
@@ -87,8 +111,8 @@
       {
         name = "material-icon-theme";
         publisher = "PKief";
-        version = "4.14.1";
-        sha256 = "1d6wv5jxg4syz9dlj3q4rrv1cfk86hlff5132qga7j6y8z8f4x9q";
+        version = "4.16.0";
+        sha256 = "1alj7xbldfj35sajfkas3fspz5n3c6h9q1016qdagns1hmdfzq80";
       }
       {
         name = "vscode-commons";
@@ -99,14 +123,14 @@
       {
         name = "vscode-yaml";
         publisher = "redhat";
-        version = "1.5.1";
-        sha256 = "1qsjsfggfya282rh618fc89cfgpxii7yv2kyh5is6x2r2606cy15";
+        version = "1.6.0";
+        sha256 = "123ycy1lky6gcz22gp2zc0y2wiyq97v85p2dxhdsm5dqf6bxjz1q";
       }
       {
         name = "tabnine-vscode";
         publisher = "TabNine";
-        version = "3.5.26";
-        sha256 = "0brlklxmfinvmxivci7s36a72jpxdxcka93vizps6hpx33h4wwr0";
+        version = "3.5.42";
+        sha256 = "0dhd31262zllzbnqv30yiyr97c3lq9kwvs9na8fb3njv6azyj80l";
       }
       {
         name = "even-better-toml";
@@ -123,38 +147,14 @@
       {
         name = "markdown-all-in-one";
         publisher = "yzhang";
-        version = "3.4.0";
-        sha256 = "0ihfrsg2sc8d441a2lkc453zbw1jcpadmmkbkaf42x9b9cipd5qb";
+        version = "3.4.2";
+        sha256 = "1qv4rmfn594hxinbp2h3903dbp5c5p3rz8ig0w2iiabj2zj2k6hn";
       }
       {
         name = "vscode-proto3";
         publisher = "zxh404";
         version = "0.5.5";
         sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
-      }
-      {
-        name = "markdown-preview-github-styles";
-        publisher = "bierner";
-        version = "1.0.1";
-        sha256 = "1bjx46v17d18c9bplz70dx6fpsc6pr371ihpawhlr1y61b59n5aj";
-      }
-      {
-        name = "vscode-theme-onedark";
-        publisher = "akamud";
-        version = "2.2.3";
-        sha256 = "1m6f6p7x8vshhb03ml7sra3v01a7i2p3064mvza800af7cyj3w5m";
-      }
-      {
-        name = "remote-containers";
-        publisher = "ms-vscode-remote";
-        version = "0.232.4";
-        sha256 = "0cznn5pba51p3nhjf2qn3lp6l9gvjp1qmp4zdbmpcfy5zpw8gmpr";
-      }
-      {
-        name = "path-intellisense";
-        publisher = "christian-kohler";
-        version = "2.8.0";
-        sha256 = "04vardis9k6yzaha5hhhv16c3z6np48adih46xj88y83ipvg5z2l";
       }
     ] ++ (with pkgs.vscode-extensions; [
       matklad.rust-analyzer
@@ -238,7 +238,7 @@
         "window.menuBarVisibility" = "toggle";
         "window.newWindowDimensions" = "inherit";
 
-        "workbench.colorTheme" = "Atom One Dark";
+        "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
         "workbench.iconTheme" = "material-icon-theme";
 
         "nix.enableLanguageServer" = true;

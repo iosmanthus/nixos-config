@@ -131,7 +131,8 @@ let
                     "address": "${cfg.tun.address}",
                     "netmask": "${cfg.tun.netmask}",
                     "gateway": "${cfg.tun.gateway}",
-                    "mtu": ${toString cfg.tun.mtu}
+                    "mtu": ${toString cfg.tun.mtu},
+                    "fakeDnsExclude": [ "pingcap.net" ]
                 }
             }
         ],

@@ -9,6 +9,7 @@
     powerOnBoot = true;
   };
 
+  services.gvfs.enable = true;
   security.rtkit.enable = true;
   hardware.enableAllFirmware = true;
   hardware.pulseaudio.enable = true;
