@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p curl jq unzip
+#! nix-shell -i bash -p curl jq unzip -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 set -eu -o pipefail
 
 # Helper to just fail with a message and non-zero exit code.
