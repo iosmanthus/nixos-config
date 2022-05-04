@@ -94,30 +94,50 @@
           ];
         });
 
-      mkCommonModules = system: [
-        ./configuration.nix
-        ./hardware-common.nix
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        {
-          imports = [ inputs.nixos-vscode-server.nixosModules.system ];
-          services.auto-fix-vscode-server.enable = true;
-        }
-        ({ config, ... }: {
-          home-manager = {
-            sharedModules = [ ./machines/${config.machine.userName} ];
-            users.${config.machine.userName} = import ./home;
-            useGlobalPkgs = true;
-            verbose = true;
+      mkCommonModules =
+        { system
+        , extraHomeConfig
+        }: [
+          ./configuration.nix
+          ./hardware-common.nix
+          sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
+          {
+            imports = [ inputs.nixos-vscode-server.nixosModules.system ];
+            services.auto-fix-vscode-server.enable = true;
+          }
+          ({ config, ... }: {
+            home-manager = {
+              sharedModules = [
+                (builtins.toPath ./.
+                  + "/machines/${config.machine.userName}.nix")
+              ];
+              users.${config.machine.userName} = {
+                imports = [ ./home extraHomeConfig ];
+              };
+              useGlobalPkgs = true;
+              verbose = true;
+            };
+          })
+          {
+            nixpkgs.overlays =
+              map (mkBuilder: mkBuilder system) [ mkJetbrainsOverlay mkStableOverlay mkMasterOverlay ]
+              ++ [ inputs.berberman.overlay ]
+              ++ [ (import ./overlays.nix) ];
+          }
+        ];
+      mkIosmanthusPks = {
+        home.file = {
+          "id_ecdsa_iosmanthus.pub" = {
+            source = ./secrets/iosmanthus/id_ecdsa_iosmanthus.pub;
+            target = ".ssh/id_ecdsa_iosmanthus.pub";
           };
-        })
-        {
-          nixpkgs.overlays =
-            map (mkBuilder: mkBuilder system) [ mkJetbrainsOverlay mkStableOverlay mkMasterOverlay ]
-            ++ [ inputs.berberman.overlay ]
-            ++ [ (import ./overlays.nix) ];
-        }
-      ];
+          "id_rsa_iosmanthus.pub" = {
+            source = ./secrets/iosmanthus/id_rsa_iosmanthus.pub;
+            target = ".ssh/id_rsa_iosmanthus.pub";
+          };
+        };
+      };
     in
     {
       nixosConfigurations =
@@ -128,19 +148,23 @@
             system = "x86_64-linux";
             modules = [
               { networking.hostName = "iosmanthus-legion"; }
-              ./machines/iosmanthus
-              ./machines/iosmanthus/legion
+              ./machines/iosmanthus-legion
               ./secrets/iosmanthus
-            ] ++ (mkCommonModules system);
+            ] ++ (mkCommonModules {
+              inherit system;
+              extraHomeConfig = mkIosmanthusPks;
+            });
           };
           iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             modules = [
               { networking.hostName = "iosmanthus-xps"; }
-              ./machines/iosmanthus
-              ./machines/iosmanthus/xps
+              ./machines/iosmanthus-xps
               ./secrets/iosmanthus
-            ] ++ (mkCommonModules system);
+            ] ++ (mkCommonModules {
+              inherit system;
+              extraHomeConfig = mkIosmanthusPks;
+            });
           };
         };
     } // flake-utils.lib.eachDefaultSystem (system:

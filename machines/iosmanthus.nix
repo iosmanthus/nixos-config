@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
-    ../common
+    ./common
   ];
   machine = {
     userName = "iosmanthus";

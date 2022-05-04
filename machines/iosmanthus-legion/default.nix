@@ -1,8 +1,9 @@
 { pkgs, ... }: {
   imports = [
+    ../common
+    ../iosmanthus.nix
     ./hardware-configuration.nix
     ./monitors.nix
-    ../../common
   ];
 
   services.throttled = { enable = true; };

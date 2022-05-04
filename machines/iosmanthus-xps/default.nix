@@ -1,8 +1,9 @@
 { config, ... }: {
   imports = [
+    ../common
+    ../iosmanthus.nix
     ./hardware-configuration.nix
     ./monitors.nix
-    ../../common
   ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
