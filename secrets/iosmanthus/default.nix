@@ -1,8 +1,21 @@
 { config, ... }:
 let
-  home = "${config.users.users.${config.machine.userName}.home}";
+  user = "${config.machine.userName}";
+  home = "${config.users.users.${user}.home}";
 in
 {
+  home-manager.users.${user} = {
+    home.file = {
+      "id_ecdsa_iosmanthus.pub" = {
+        source = ./id_ecdsa_iosmanthus.pub;
+        target = ".ssh/id_ecdsa_iosmanthus.pub";
+      };
+      "id_rsa_iosmanthus.pub" = {
+        source = ./id_rsa_iosmanthus.pub;
+        target = ".ssh/id_rsa_iosmanthus.pub";
+      };
+    };
+  };
   sops.secrets.id-ecdsa-iosmanthus = {
     format = "binary";
     sopsFile = ./id_ecdsa_iosmanthus;

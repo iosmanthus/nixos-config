@@ -71,6 +71,7 @@
 
             # Utils
             "oh-my-zsh"
+            "kitty"
             "zsh"
             "gh"
             "tmux"
@@ -95,9 +96,7 @@
         });
 
       mkCommonModules =
-        { system
-        , extraHomeConfig
-        }: [
+        system: [
           ./configuration.nix
           ./hardware-common.nix
           sops-nix.nixosModules.sops
@@ -112,9 +111,7 @@
                 (builtins.toPath ./.
                   + "/machines/${config.machine.userName}.nix")
               ];
-              users.${config.machine.userName} = {
-                imports = [ ./home extraHomeConfig ];
-              };
+              users.${config.machine.userName} = import ./home;
               useGlobalPkgs = true;
               verbose = true;
             };
@@ -150,10 +147,7 @@
               { networking.hostName = "iosmanthus-legion"; }
               ./machines/iosmanthus-legion
               ./secrets/iosmanthus
-            ] ++ (mkCommonModules {
-              inherit system;
-              extraHomeConfig = mkIosmanthusPks;
-            });
+            ] ++ (mkCommonModules system);
           };
           iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
@@ -161,10 +155,7 @@
               { networking.hostName = "iosmanthus-xps"; }
               ./machines/iosmanthus-xps
               ./secrets/iosmanthus
-            ] ++ (mkCommonModules {
-              inherit system;
-              extraHomeConfig = mkIosmanthusPks;
-            });
+            ] ++ (mkCommonModules system);
           };
         };
     } // flake-utils.lib.eachDefaultSystem (system:
