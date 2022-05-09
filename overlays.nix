@@ -12,6 +12,11 @@ with super;
     outputHash = "sha256-yrygxx8Q9/Z1LXkotkWI/N/6W/p+LwbpoX+bYOjiiww=";
   });
 
+  mmdb = builtins.fetchurl {
+    url = "https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb";
+    sha256 = "199psf7q6f87mmg1jsnn1gkszmg16cv2wgi3pi7mbdjgyc6n7b2w";
+  };
+
   leaf = super.callPackage ./packages/leaf.nix { };
 
   polybar-fonts = super.callPackage ./packages/polybar-fonts.nix { };

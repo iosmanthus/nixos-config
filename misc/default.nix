@@ -18,7 +18,7 @@
     shell = config.machine.shell;
     isNormalUser = true;
     home = "/home/${config.machine.userName}";
-    description = "user ${config.machine.userName}";
+    description = "${config.machine.userName}";
     extraGroups =
       [ "wheel" "networkmanager" "video" "audio" "storage" "input" "tor" ];
   };

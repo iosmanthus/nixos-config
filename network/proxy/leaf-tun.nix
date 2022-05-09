@@ -56,6 +56,14 @@ let
         default = 1500;
         description = "The tun device MTU";
       };
+
+      fakeDnsExclude = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = ''
+          Extra domains that the leaf-tun service will return the real IP address.
+        '';
+      };
     };
   };
 
@@ -106,6 +114,9 @@ let
       -A ${output} -m mark --mark ${toString cfg.ignoreMark} -j RETURN
     ''}
 
+    # Ignore self packets
+    -A ${output} -m owner --uid-owner ${cfg.user} -j RETURN
+
     # Ignore private network packets
     ${mkIgnoreRules "${prerouting}" "-s" cfg.ignoreSrcAddresses}
     ${mkIgnoreRules "${prerouting}" "-d" builtinIgnoreAddresses}
@@ -120,8 +131,53 @@ let
     COMMIT
   '';
 
+  geoVersion = "202205082211";
+
+  geosite = builtins.fetchurl {
+    url = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/${geoVersion}/geosite.dat";
+    sha256 = "087dfa5damv2v1gfva224ljs43ngm8prmh49q7n7n3vq1shrg0gr";
+  };
+
   leafConfig = pkgs.writeText "leaf.json" ''
       {
+        "dns": {
+            "servers": [
+                "119.29.29.29"
+            ]
+        },
+        "router": {
+            "rules": [
+                {
+                    "domainSuffix": [ "pingcap.net" ],
+                    "target": "direct"
+                },
+                {
+                    "external": [
+                        "site:${geosite}:geolocation-!cn"
+                    ],
+                    "target": "proxy"
+                },
+                {
+                    "external": [
+                        "site:${geosite}:tld-cn",
+                        "site:${geosite}:cn"
+                    ],
+                    "target": "direct"
+                },
+                {
+                    "external": [
+                        "mmdb:${pkgs.mmdb}:cn"
+                    ],
+                    "target": "direct"
+                },
+                {
+                    "inboundTag": [
+                        "tun"
+                    ],
+                    "target": "proxy"
+                }
+            ]
+        },
         "inbounds": [
             {
                 "tag": "tun",
@@ -132,7 +188,7 @@ let
                     "netmask": "${cfg.tun.netmask}",
                     "gateway": "${cfg.tun.gateway}",
                     "mtu": ${toString cfg.tun.mtu},
-                    "fakeDnsExclude": [ "pingcap.net" ]
+                    "fakeDnsExclude": ${builtins.toJSON cfg.tun.fakeDnsExclude}
                 }
             }
         ],
@@ -144,6 +200,10 @@ let
                     "address": "${cfg.proxy.address}",
                     "port": ${toString cfg.proxy.port}
                 }
+            },
+            {
+                "tag": "direct",
+                "protocol": "direct"
             }
         ]
     }
@@ -196,6 +256,12 @@ in
       type = types.submodule proxyOptions;
     };
 
+    user = mkOption {
+      type = types.str;
+      default = "leaf";
+      description = "The system user for leaf-tun service";
+    };
+
     fwmark = mkOption {
       type = types.ints.u8;
       default = 255;
@@ -218,15 +284,25 @@ in
       type = types.listOf types.str;
       default = [ ];
       description = ''
-        Extra address that the leaf-tun service will ignore,
-        usually an address of a virtual subnet.
+        Extra addresses that the leaf-tun service will ignore,
+        usually the addresses of virtual subnets.
       '';
     };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ iptables ];
+
+    users.users = {
+      leaf = {
+        isSystemUser = true;
+        group = cfg.user;
+      };
+    };
+    users.groups.${cfg.user} = { };
+
     networking.firewall.enable = mkForce false;
+
     systemd.services.leaf-tun = {
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
@@ -234,6 +310,10 @@ in
       path = with pkgs; [ leaf iproute2 iptables ];
       serviceConfig = {
         Type = "simple";
+        User = cfg.user;
+        Group = cfg.user;
+        CapabilityBoundingSet = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
+        AmbientCapabilities = [ "CAP_NET_ADMIN" "CAP_NET_BIND_SERVICE" ];
         ExecStart = "${leafStart}";
         ExecStartPost = "${leafStartPost}";
         ExecStop = "${leafStop}";

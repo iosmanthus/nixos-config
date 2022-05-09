@@ -1,16 +1,19 @@
-{ lib, fetchgit, rustPlatform }:
+{ lib
+, fetchgit
+, rustPlatform
+}:
 with lib;
 rustPlatform.buildRustPackage rec {
   name = "leaf";
 
   src = fetchgit {
     url = "https://github.com/iosmanthus/leaf.git";
-    rev = "335ea3b0dd0ee9779c0d5d2cee70a187f813c082";
+    rev = "51c9e03ca1614b2f80deb8603f8bb2d25a417470";
     fetchSubmodules = true;
-    sha256 = "0wq3y341v0zi1x0prkwkwi23zckh32gcic10kcq8rw033grsvn6i";
+    sha256 = "1q9pmc8dx6jkvz48182x8bncmjb585d0l00pa9sdxhpby7ial9qz";
   };
 
-  cargoSha256 = "0y7fn7l8zff5ick0xh4rbnvv00cfl75sbq9071gb77i4k13yx4qg";
+  cargoSha256 = "06wl0abl1x4g8z0y9iqw2ch747skxmd0vka4kmhs9hs9x139bq0s";
 
   meta = {
     description = "A versatile and efficient proxy framework with nice features suitable for various use cases.";

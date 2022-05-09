@@ -11,29 +11,12 @@ let
     sha256 = "166mhlyismfpyp15dv1zcnwfby3n72ckfz71j57d5q2qrylg0jc1";
   };
 
-  geoVersion = "202204082211";
-
-  geoip = builtins.fetchurl {
-    url = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/${geoVersion}/geoip.dat";
-    sha256 = "11nfharqsbz4swmlrzdf0qkqq5x77z29ry2qgg4x2nzcq1mq8dsp";
-  };
-
-  geosite = builtins.fetchurl {
-    url = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/${geoVersion}/geosite.dat";
-    sha256 = "0bq2paj5116knb9ygyjhd9s4aq9z8qmhqyvi38frcrnmw9klbplj";
-  };
-
   clashImage = "dreamacro/clash-premium";
 
   clashImageFile = pkgs.dockerTools.pullImage {
     imageName = "${clashImage}";
     imageDigest = "sha256:550f4edca1b0420c45dfb32f62ebf65150c9660da1b9468bf4cdcc7c4d01b0fc";
     sha256 = "1zsbsz7i7nqg7x7cm22wgg8hnxdl28ypm5za1pfh3951q90x1wmf";
-  };
-
-  mmdb = builtins.fetchurl {
-    url = "https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb";
-    sha256 = "199psf7q6f87mmg1jsnn1gkszmg16cv2wgi3pi7mbdjgyc6n7b2w";
   };
 
   clashConfig = config.sops.secrets.clash-config.path;
@@ -63,6 +46,7 @@ in
     };
     tun = {
       name = "utun8";
+      fakeDnsExclude = [ "pingcap.net" "ntp" ];
     };
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };
@@ -87,8 +71,6 @@ in
         cmd = [ "xray" "run" "-confdir" "./" ];
         volumes = [
           "${config.sops.secrets.v2ray-config.path}:${workdir}/config.json"
-          "${geoip}:${workdir}/geoip.dat"
-          "${geosite}:${workdir}/geosite.dat"
         ];
         extraOptions = [
           "--network=${networkName}"
@@ -106,7 +88,7 @@ in
         cmd = [ "-d" "./" ];
         volumes = [
           "${clashConfig}:${workdir}/config.yaml"
-          "${mmdb}:${workdir}/Country.mmdb"
+          "${pkgs.mmdb}:${workdir}/Country.mmdb"
         ];
         extraOptions = [
           "--network=${networkName}"
