@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./i3.nix
+    ./dunst.nix
   ];
 
   xresources.properties = {
@@ -31,8 +32,8 @@
       name = "Tela";
     };
     theme = {
-      package = pkgs.gnome.gnome-themes-extra;
-      name = "Adwaita-dark";
+      package = pkgs.orchis-theme;
+      name = "Orchis";
     };
   };
 

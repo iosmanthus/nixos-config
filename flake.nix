@@ -4,9 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/nixos-21.11";
     master.url = "github:NixOS/nixpkgs/master";
-    jetbrains.url = "github:NixOS/nixpkgs?rev=8d636482f1eb7113e629ae604074e4c706068c1f";
     sops-nix.url = "github:Mic92/sops-nix/master";
-    nixos-hardware.url = github:NixOS/nixos-hardware/master;
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,21 +36,6 @@
         config.allowUnfree = true;
       };
 
-      mkStableOverlay = (system: self: super:
-        mkOverlay {
-          branch = mkBranch system "stable";
-          packages = [
-            "thunderbird"
-          ];
-        });
-
-      mkJetbrainsOverlay = (system: self: super:
-        mkOverlay {
-          branch = mkBranch system "jetbrains";
-          packages = [ "jetbrains" ];
-        }
-      );
-
       mkMasterOverlay = (system: self: super:
         mkOverlay {
           branch = mkBranch system "master";
@@ -67,7 +50,7 @@
             "rofi"
             "neovim"
             "i3"
-            # "jetbrains"
+            "jetbrains"
 
             # Utils
             "oh-my-zsh"
@@ -118,23 +101,11 @@
           })
           {
             nixpkgs.overlays =
-              map (mkBuilder: mkBuilder system) [ mkJetbrainsOverlay mkStableOverlay mkMasterOverlay ]
+              map (mkBuilder: mkBuilder system) [ mkMasterOverlay ]
               ++ [ inputs.berberman.overlay ]
               ++ [ (import ./overlays.nix) ];
           }
         ];
-      mkIosmanthusPks = {
-        home.file = {
-          "id_ecdsa_iosmanthus.pub" = {
-            source = ./secrets/iosmanthus/id_ecdsa_iosmanthus.pub;
-            target = ".ssh/id_ecdsa_iosmanthus.pub";
-          };
-          "id_rsa_iosmanthus.pub" = {
-            source = ./secrets/iosmanthus/id_rsa_iosmanthus.pub;
-            target = ".ssh/id_rsa_iosmanthus.pub";
-          };
-        };
-      };
     in
     {
       nixosConfigurations =

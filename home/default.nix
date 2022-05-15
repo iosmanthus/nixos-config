@@ -31,8 +31,8 @@ in
     httpie
     nnn
     nix-output-monitor
-    feeluown
-    gnome.gnome-system-monitor
+    xfce.thunar
+    xfce.xfce4-taskmanager
     gnome.gnome-font-viewer
     imagemagick
     geoipWithDatabase

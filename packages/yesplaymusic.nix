@@ -5,11 +5,11 @@
 with pkgs;
 let
   pname = "yesplaymusic";
-  version = "0.4.4-1";
+  version = "0.4.5";
   tag = "";
   releaseVersion = if tag != "" then "${version}-${tag}" else version;
   url = "https://github.com/qier222/YesPlayMusic/releases/download/v${releaseVersion}/YesPlayMusic-${version}.AppImage";
-  sha256 = "1i6zkcvgaqijj121mcymbxbdzqha2zm05bq0w1sqqs80z7q2bpr5";
+  sha256 = "08yq79nayxnjyq2j9rfil341r899qjil2a2ml1vcq8n4m9bgi67l";
   src = builtins.fetchurl { inherit url sha256; };
   extracted = appimageTools.extractType2 {
     name = pname;

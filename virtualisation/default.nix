@@ -15,5 +15,7 @@
 
   virtualisation.libvirtd = { enable = true; };
 
+  virtualisation.spiceUSBRedirection.enable = true;
+
   users.extraGroups.libvirtd.members = [ "${config.machine.userName}" ];
 }

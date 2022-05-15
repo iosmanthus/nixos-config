@@ -72,8 +72,7 @@ in
             "${modifier0}+Shift+k" = "move up";
 
             "${modifier0}+Shift+q" = "exec i3-msg restart";
-            "${modifier0}+Shift+x" =
-              "exec ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
+            "${modifier0}+Shift+x" = "exec ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
             "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
             "${modifier0}+m" = "exec autorandr --change";
             "${modifier0}+w" = "exec firefox";
@@ -81,6 +80,8 @@ in
             "${modifier0}+d" = "exec Discord";
             "${modifier0}+t" = "exec telegram-desktop";
             "${modifier0}+s" = "exec flameshot gui";
+            "${modifier0}+n" = "exec dunstctl history-pop";
+            "${modifier0}+Shift+n" = "exec dunstctl close-all";
           };
           modes = lib.mkOptionDefault {
             resize = {
@@ -108,6 +109,10 @@ in
               always = true;
             }
             { command = "firefox"; }
+            {
+              command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+              always = true;
+            }
           ];
           bars = [ ];
         };
