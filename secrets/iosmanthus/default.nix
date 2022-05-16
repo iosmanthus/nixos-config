@@ -16,6 +16,7 @@ in
       };
     };
   };
+
   sops.secrets.id-ecdsa-iosmanthus = {
     format = "binary";
     sopsFile = ./id_ecdsa_iosmanthus;
@@ -45,5 +46,12 @@ in
   sops.secrets.clash-config = {
     format = "binary";
     sopsFile = ./clash_config;
+  };
+
+  sops.secrets.nix-conf = {
+    format = "binary";
+    sopsFile = ./nix.conf;
+    owner = config.machine.userName;
+    path = "${home}/.config/nix/nix.conf";
   };
 }
