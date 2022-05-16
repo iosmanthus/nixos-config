@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{ lib
+, config
+, pkgs
+, ...
+}:
 
 let
   mkKittyBase16Theme = name:
@@ -59,6 +63,12 @@ in
 
   home.sessionVariables = {
     "TERMINAL" = "${pkgs.kitty}/bin/kitty";
+  };
+
+  home.activation = {
+    createGoPath = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG $HOME/.go
+    '';
   };
 
   home.keyboard.options = [ "caps:escape" ];
