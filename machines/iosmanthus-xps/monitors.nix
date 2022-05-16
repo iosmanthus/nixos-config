@@ -2,22 +2,25 @@
 , ...
 }:
 let
+  name = "eDP-1-1";
   fingerprint = "00ffffffffffff004d10d61400000000051e0104b52517780a0dc2a95533ba240d50570000000101010101010101010101010101010172e700a0f0604590302036006ee51000001828b900a0f0604590302036006ee510000018000000fe00374a584b38814c513137305231000000000002410332011200000b010a2020014702030f00e3058000e606050160602800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000aa";
 in
 {
   machine = {
-    displayPortFingerprint = fingerprint;
-    displayPort = "eDP-1-1";
+    builtinDisplayPort = {
+      inherit name fingerprint;
+    };
+    displayPorts = builtins.map (p: "DP-1-" + (builtins.toString p)) [ 1 2 3 4 ];
   };
   services.autorandr = {
     enable = true;
     profiles = {
       default = {
         fingerprint = {
-          "${config.machine.displayPort}" = fingerprint;
+          "${name}" = fingerprint;
         };
         config = {
-          "${config.machine.displayPort}" = {
+          "${name}" = {
             enable = true;
             mode = "3840x2400";
           };

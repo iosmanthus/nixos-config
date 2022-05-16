@@ -4,7 +4,7 @@
   # Enable sound.
   services.blueman.enable = true;
   hardware.bluetooth = {
-    settings = { General = { ControllerMode = "bredr"; }; };
+    #settings = { General = { ControllerMode = "bredr"; }; };
     enable = true;
     powerOnBoot = true;
   };
