@@ -100,7 +100,7 @@ in
               always = true;
             }
             {
-              command = "${pkgs.ibus}/bin/ibus-daemon -drxR";
+              command = "${pkgs.ibus}/bin/ibus-daemon -dxrR";
               always = true;
             }
             {

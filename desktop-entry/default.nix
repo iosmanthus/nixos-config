@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs
+, lib
+, ...
+}: {
   imports = [
     ./fonts.nix
     ./monitors.nix
@@ -7,7 +10,7 @@
   environment.variables = {
     GLFW_IM_MODULE = "ibus";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    GTK_IM_MODULE = "ibus";
+    GTK_IM_MODULE = lib.mkForce "xim";
     QT_IM_MODULE = "ibus";
     XMODIFIERS = "@im=ibus";
   };
