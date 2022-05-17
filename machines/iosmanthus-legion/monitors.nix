@@ -9,6 +9,7 @@ in
     builtinDisplayPort = {
       inherit name fingerprint;
     };
+    displayPorts = builtins.map (p: "DP-" + (builtins.toString p)) [ 1 2 ];
   };
   services.autorandr = {
     enable = true;
