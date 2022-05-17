@@ -7,6 +7,9 @@
   environment.variables = {
     GLFW_IM_MODULE = "ibus";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    GTK_IM_MODULE = "ibus";
+    QT_IM_MODULE = "ibus";
+    XMODIFIERS = "@im=ibus";
   };
 
   programs.dconf.enable = true;
@@ -57,5 +60,10 @@
   services.printing = {
     enable = true;
     drivers = with pkgs; [ hplip ];
+  };
+
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
   };
 }

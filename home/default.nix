@@ -10,13 +10,13 @@ let
 in
 {
   imports = [
-    ./fcitx5.nix
     ./firefox.nix
     ./media.nix
     ./rofi.nix
     ./tmux.nix
 
     ./desktop
+    ./ibus
     ./polybar
     ./shell
     ./vscode

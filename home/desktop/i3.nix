@@ -100,6 +100,10 @@ in
               always = true;
             }
             {
+              command = "${pkgs.ibus}/bin/ibus-daemon -drxR";
+              always = true;
+            }
+            {
               command =
                 "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}";
               always = true;

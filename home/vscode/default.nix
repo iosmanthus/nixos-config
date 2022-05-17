@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  ibus = "${pkgs.ibus}/bin/ibus";
+in
+{
   home.packages = with pkgs; [
     nixpkgs-fmt
     rnix-lsp
@@ -180,69 +184,66 @@
           "editorTextFocus && !suggestWidgetVisible && editorLangId == 'rust'";
       }
     ];
-    userSettings =
-      let fcitx5-remote = "${pkgs.fcitx5}/bin/fcitx5-remote";
-      in
-      {
-        "extensions.autoUpdate" = false;
-        "security.workspace.trust.enabled" = false;
-        "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+    userSettings = {
+      "extensions.autoUpdate" = false;
+      "security.workspace.trust.enabled" = false;
+      "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
 
-        "keyboard.dispatch" = "keyCode";
-        "vim.autoSwitchInputMethod.defaultIM" = "1";
-        "vim.autoSwitchInputMethod.enable" = true;
-        "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx5-remote}";
-        "vim.autoSwitchInputMethod.switchIMCmd" = "${fcitx5-remote} -t {im}";
-        "vim.camelCaseMotion.enable" = true;
-        "vim.debug.silent" = true;
-        "vim.easymotion" = true;
-        "vim.enableNeovim" = true;
-        "vim.easymotionMarkerFontFamily" = "monospace";
-        "vim.handleKeys" = {
-          "<C-a>" = false;
-          "<C-c>" = false;
-          "<C-d>" = false;
-          "<C-f>" = false;
-          "<C-j>" = false;
-          "<C-k>" = false;
-        };
-        "vim.highlightedyank.enable" = true;
-        "vim.hlsearch" = true;
-        "vim.leader" = "<space>";
-        "vim.normalModeKeyBindingsNonRecursive" = [
-          {
-            before = [ "<C-n>" ];
-            commands = [ ":nohl" ];
-          }
-          {
-            before = [ ";" ];
-            commands = [ "vim.showQuickpickCmdLine" ];
-          }
-        ];
-        "vim.visualstar" = true;
-
-        "editor.fontFamily" = "'Meslo LG L', 'Material-Design-Iconic-Font', feather";
-        "editor.fontLigatures" = false;
-        "editor.fontSize" = 13;
-        # "editor.fontWeight": "650",
-        "editor.lineHeight" = 25;
-        "editor.lineNumbers" = "relative";
-        "editor.inlineSuggest.enabled" = true;
-
-        "terminal.integrated.commandsToSkipShell" =
-          [ "-workbench.action.quickOpen" ];
-        "terminal.integrated.fontFamily" = "'Meslo LG L', 'Hasklug Nerd Font'";
-        "terminal.integrated.fontWeight" = "normal";
-        "terminal.integrated.fontWeightBold" = "600";
-
-        "window.menuBarVisibility" = "toggle";
-        "window.newWindowDimensions" = "inherit";
-
-        "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
-        "workbench.iconTheme" = "material-icon-theme";
-
-        "nix.enableLanguageServer" = true;
-        "tabnine.experimentalAutoImports" = true;
+      "keyboard.dispatch" = "keyCode";
+      "vim.autoSwitchInputMethod.defaultIM" = "xkb:us::eng";
+      "vim.autoSwitchInputMethod.enable" = true;
+      "vim.autoSwitchInputMethod.obtainIMCmd" = "${ibus} engine";
+      "vim.autoSwitchInputMethod.switchIMCmd" = "${ibus} engine {im}";
+      "vim.camelCaseMotion.enable" = true;
+      "vim.debug.silent" = true;
+      "vim.easymotion" = true;
+      "vim.enableNeovim" = true;
+      "vim.easymotionMarkerFontFamily" = "monospace";
+      "vim.handleKeys" = {
+        "<C-a>" = false;
+        "<C-c>" = false;
+        "<C-d>" = false;
+        "<C-f>" = false;
+        "<C-j>" = false;
+        "<C-k>" = false;
       };
+      "vim.highlightedyank.enable" = true;
+      "vim.hlsearch" = true;
+      "vim.leader" = "<space>";
+      "vim.normalModeKeyBindingsNonRecursive" = [
+        {
+          before = [ "<C-n>" ];
+          commands = [ ":nohl" ];
+        }
+        {
+          before = [ ";" ];
+          commands = [ "vim.showQuickpickCmdLine" ];
+        }
+      ];
+      "vim.visualstar" = true;
+
+      "editor.fontFamily" = "'Meslo LG L', 'Material-Design-Iconic-Font', feather";
+      "editor.fontLigatures" = false;
+      "editor.fontSize" = 13;
+      # "editor.fontWeight": "650",
+      "editor.lineHeight" = 25;
+      "editor.lineNumbers" = "relative";
+      "editor.inlineSuggest.enabled" = true;
+
+      "terminal.integrated.commandsToSkipShell" =
+        [ "-workbench.action.quickOpen" ];
+      "terminal.integrated.fontFamily" = "'Meslo LG L', 'Hasklug Nerd Font'";
+      "terminal.integrated.fontWeight" = "normal";
+      "terminal.integrated.fontWeightBold" = "600";
+
+      "window.menuBarVisibility" = "toggle";
+      "window.newWindowDimensions" = "inherit";
+
+      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
+      "workbench.iconTheme" = "material-icon-theme";
+
+      "nix.enableLanguageServer" = true;
+      "tabnine.experimentalAutoImports" = true;
+    };
   };
 }
