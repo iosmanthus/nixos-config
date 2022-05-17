@@ -18,11 +18,13 @@
       eval $(${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
       export SSH_AUTH_SOCK
     '';
-    pointerCursor = {
-      package = pkgs.vanilla-dmz;
-      name = "Vanilla-DMZ";
-      size = 48;
-    };
+  };
+
+  home.pointerCursor = {
+    x11.enable = true;
+    package = pkgs.vanilla-dmz;
+    name = "Vanilla-DMZ";
+    size = 48;
   };
 
   gtk = {
@@ -34,6 +36,12 @@
     theme = {
       package = pkgs.orchis-theme;
       name = "Orchis";
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-application-prefer-dark-theme = true;
     };
   };
 
