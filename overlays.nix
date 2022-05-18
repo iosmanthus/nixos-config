@@ -12,18 +12,6 @@ with super;
     outputHash = "sha256-yrygxx8Q9/Z1LXkotkWI/N/6W/p+LwbpoX+bYOjiiww=";
   });
 
-  ibus-engines = super.ibus-engines // {
-    libpinyin = super.ibus-engines.libpinyin.overrideAttrs (_: {
-      version = "unstable-2022-05-18";
-      src = fetchFromGitHub {
-        owner = "libpinyin";
-        repo = "ibus-libpinyin";
-        rev = "109de24d222478edaae4cadcdf31e0aec89b44ee";
-        sha256 = "0ps8abc671dk4q440vghmfdijzqjqrjmyszymznk87wl76nd4mvv";
-      };
-    });
-  };
-
   mmdb = builtins.fetchurl {
     url = "https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb";
     sha256 = "199psf7q6f87mmg1jsnn1gkszmg16cv2wgi3pi7mbdjgyc6n7b2w";

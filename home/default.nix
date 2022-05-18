@@ -16,7 +16,7 @@ in
     ./tmux.nix
 
     ./desktop
-    ./ibus
+    ./fcitx5
     ./polybar
     ./shell
     ./vscode

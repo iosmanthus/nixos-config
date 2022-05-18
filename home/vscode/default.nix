@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  ibus = "${pkgs.ibus}/bin/ibus";
+  fcitx = "${pkgs.fcitx5}/bin/fcitx5-remote";
 in
 {
   home.packages = with pkgs; [
@@ -192,8 +192,8 @@ in
       "keyboard.dispatch" = "keyCode";
       "vim.autoSwitchInputMethod.defaultIM" = "xkb:us::eng";
       "vim.autoSwitchInputMethod.enable" = true;
-      "vim.autoSwitchInputMethod.obtainIMCmd" = "${ibus} engine";
-      "vim.autoSwitchInputMethod.switchIMCmd" = "${ibus} engine {im}";
+      "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx}";
+      "vim.autoSwitchInputMethod.switchIMCmd" = "${fcitx} -t {im}";
       "vim.camelCaseMotion.enable" = true;
       "vim.debug.silent" = true;
       "vim.easymotion" = true;
