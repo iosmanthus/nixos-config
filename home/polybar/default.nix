@@ -72,6 +72,7 @@ in
       height = 36
       radius = 0.0
       override-redirect = false
+      wm-restack = i3
       fixed-center = true
       bottom = true
       line-size = 4
