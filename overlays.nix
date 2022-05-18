@@ -7,9 +7,9 @@ with super;
       url =
         "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
       rev = "refs/tags/" + lib.replaceStrings [ "-" ] [ "" ] version;
-      sha256 = "sha256-vGPty0+ZzGzRbbyVm27nEbdPRtxe88Kh2A3hOpxUsAQ=";
+      sha256 = "015hajf3mq8dv2hw5wsyvi34zdqiwxp9p5dwdp8nrk4r9z5ysqxw";
     };
-    outputHash = "sha256-yrygxx8Q9/Z1LXkotkWI/N/6W/p+LwbpoX+bYOjiiww=";
+    outputHash = "034bwbl616vzl7lhcbvyz9dzmpzwi12vca3r5mszdxqh3z3s1g6a";
   });
 
   mmdb = builtins.fetchurl {
@@ -28,4 +28,8 @@ with super;
   base16-kitty = super.callPackage ./packages/base16-kitty.nix { };
 
   base16-rofi = super.callPackage ./packages/base16-rofi.nix { };
+
+  fcitx5-material-color = super.callPackage ./packages/fcitx5-material-color.nix { };
+
+  fcitx5-pinyin-zhwiki = super.callPackage ./packages/fcitx5-pinyin-zhwiki.nix { };
 }
