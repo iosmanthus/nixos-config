@@ -3,9 +3,11 @@
 
 import os
 import sys
+import subprocess
 
 import requests
 import yaml
+
 from yaml import FullLoader
 
 config_file = sys.argv[1]
@@ -39,9 +41,11 @@ m |= {
     'proxy-groups': [select, auto_probe],
 }
 
-with open('./clash-rules.yml', 'r') as f:
-    rules = yaml.safe_load(f)
-    m |= rules
+rules_stream = subprocess.run(['sops', '-d', './clash-rules.yml'],
+                              capture_output=True,
+                              text=True).stdout
+rules = yaml.safe_load(rules_stream)
+m |= rules
 
 with open(config_file, 'w') as f:
     f.write(yaml.dump(m))

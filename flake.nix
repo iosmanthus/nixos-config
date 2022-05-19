@@ -135,7 +135,7 @@
     in
     {
       devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops ];
+        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf ];
       };
     });
 }

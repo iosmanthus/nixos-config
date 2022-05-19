@@ -22,7 +22,7 @@ with lib ;
         if [ -f $1 ]; then
           sudo chattr -i $1
         fi
-        cp $2 $1
+        sudo cp $2 $1
         sudo chattr +i $1
       }
 
@@ -42,7 +42,7 @@ with lib ;
   };
 
   xdg.dataFile."fcitx5/themes/fcitx5-material-color".source = pkgs.fcitx5-material-color.override {
-    themeVariant = "teal";
+    themeVariant = "sakuraPink";
   };
 
   xdg.dataFile."fcitx5/pinyin/dictionaries/zhwiki.dict".source = pkgs.fcitx5-pinyin-zhwiki;

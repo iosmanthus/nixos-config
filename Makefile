@@ -6,6 +6,7 @@ switch:
 
 format:
 	@fd ".nix" --exec-batch "nixpkgs-fmt"
+	@fd ".py" --exec-batch "yapf" "-i"
 
 update:
 	@nix flake update
