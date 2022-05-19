@@ -21,7 +21,7 @@ let
     };
   };
 
-  mkOptList = opts: mapAttrsToList (name: value: "--opt ${name}=${value}") opts;
+  mkOptList = mapAttrsToList (name: value: "--opt ${name}=${value}");
 
   mkOptStr = opts: foldl (acc: x: "${acc} ${x}") "" (mkOptList opts);
 

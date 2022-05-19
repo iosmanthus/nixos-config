@@ -93,13 +93,11 @@ let
     -A ${chain} ${action} ${subnet} -j RETURN
   '';
 
-  mkIgnoreRules = chain: action: subnets:
-    foldl'
-      (text: net: ''
-        ${text}
-        ${mkIgnoreRule chain action net}
-      '') ""
-      subnets;
+  mkIgnoreRules = chain: action: foldl'
+    (text: net: ''
+      ${text}
+      ${mkIgnoreRule chain action net}
+    '') "";
 
   iptablesRules = pkgs.writeText "leaf-tun-iptables.rules" ''
     *mangle

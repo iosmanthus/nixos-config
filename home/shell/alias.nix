@@ -27,6 +27,11 @@
       reboot = "sudo systemctl reboot -i";
       poweroff = "sudo systemctl poweroff -i";
 
+      connect-xm3 = "bluetoothctl connect 38:18:4C:F9:98:A9";
+      connect-jbl = "bluetoothctl connect 70:99:1C:7F:E3:EF";
+
+      i3-logout = "i3-msg exit";
+
       dig = "dig +ttlunits";
 
       nat = "sudo iptables -t nat -nvL";

@@ -190,7 +190,7 @@ in
       "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
 
       "keyboard.dispatch" = "keyCode";
-      "vim.autoSwitchInputMethod.defaultIM" = "xkb:us::eng";
+      "vim.autoSwitchInputMethod.defaultIM" = "1";
       "vim.autoSwitchInputMethod.enable" = true;
       "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx}";
       "vim.autoSwitchInputMethod.switchIMCmd" = "${fcitx} -t {im}";
