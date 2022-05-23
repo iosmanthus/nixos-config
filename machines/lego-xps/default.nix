@@ -3,7 +3,7 @@
 }:
 {
   imports = [
-    ../../common
+    ../common
     ./hardware-configuration.nix
     ./monitors.nix
   ];
