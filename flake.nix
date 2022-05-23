@@ -128,7 +128,7 @@
             system = "x86_64-linux";
             modules = [
               { networking.hostName = "lego-xps"; }
-              ./machines/lego
+              ./machines/lego-xps
               ./secrets/iosmanthus
             ] ++ (mkCommonModules system);
           };
