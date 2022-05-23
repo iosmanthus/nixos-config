@@ -5,6 +5,7 @@
 let
   modifier0 = "Mod4";
   modifier1 = "Mod1";
+  wallPapaerCmd = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
 in
 {
   xsession.windowManager = {
@@ -95,7 +96,9 @@ in
             "${modifier0}+Shift+k" = "move up";
 
             "${modifier0}+Shift+q" = "exec i3-msg restart";
-            "${modifier0}+Shift+x" = "exec ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
+            "${modifier0}+Shift+x" = ''
+              exec betterlockscreen --wallpaper-cmd "${wallPapaerCmd}" -l dim
+            '';
             "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
             "${modifier0}+m" = "exec autorandr --change";
             "${modifier0}+w" = "exec firefox";
@@ -114,7 +117,6 @@ in
               k = "resize grow height 10 px or 10 ppt";
             };
           };
-          defaultWorkspace = "workspace 1: work";
           workspaceAutoBackAndForth = true;
           workspaceLayout = "tabbed";
           assigns = {
@@ -123,7 +125,11 @@ in
           };
           startup = [
             {
-              command = "i3-msg workspace 1";
+              command = "${wallPapaerCmd}";
+              always = true;
+            }
+            {
+              command = "i3-msg workspace 1: work";
             }
             {
               command = "systemctl restart --user polybar.service";
@@ -159,7 +165,7 @@ in
 
         # Basic color configuration using the Base16 variables for windows and borders.
         # Property Name         Border  BG      Text    Indicator Child Border
-        client.focused          $base00 $base02 $base07 $base0D $base0C
+        client.focused          $base00 $base03 $base07 $base0D $base0C
         client.focused_inactive $base01 $base01 $base07 $base03 $base01
         client.unfocused        $base01 $base00 $base05 $base01 $base01
         client.urgent           $base00 $base0A $base00 $base08 $base08

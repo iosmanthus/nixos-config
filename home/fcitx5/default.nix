@@ -41,9 +41,7 @@ with lib ;
     '';
   };
 
-  xdg.dataFile."fcitx5/themes/fcitx5-material-color".source = pkgs.fcitx5-material-color.override {
-    themeVariant = "sakuraPink";
-  };
+  xdg.dataFile."fcitx5/themes/fcitx5-adwaita-dark".source = pkgs.fcitx5-adwaita-dark;
 
   xdg.dataFile."fcitx5/pinyin/dictionaries/zhwiki.dict".source = pkgs.fcitx5-pinyin-zhwiki;
 }

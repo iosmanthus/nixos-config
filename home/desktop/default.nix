@@ -63,10 +63,16 @@ in
 
   services.clipmenu = { enable = true; };
 
-  # home.file = {
-  #   wallpaper = {
-  #     source = wallpaper;
-  #     target = ".background-image";
-  #   };
-  # };
+  services.betterlockscreen = {
+    enable = true;
+    inactiveInterval = 1;
+    arguments = [ "dim" ];
+  };
+
+  home.file = {
+    wallpaper = {
+      source = wallpaper;
+      target = ".background-image";
+    };
+  };
 }

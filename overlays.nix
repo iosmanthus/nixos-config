@@ -31,5 +31,7 @@ with super;
 
   fcitx5-material-color = super.callPackage ./packages/fcitx5-material-color.nix { };
 
+  fcitx5-adwaita-dark = super.callPackage ./packages/fcitx5-adwaita-dark.nix { };
+
   fcitx5-pinyin-zhwiki = super.callPackage ./packages/fcitx5-pinyin-zhwiki.nix { };
 }
