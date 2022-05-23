@@ -11,11 +11,11 @@
   ];
 
   hardware.firmware = [ pkgs.firmwareLinuxNonfree ];
-  # video driver
-  hardware.opengl.extraPackages = with pkgs; [
-    vaapiIntel
-    vaapiVdpau
-    libvdpau-va-gl
-    intel-media-driver
-  ];
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.prime = {
+    sync.enable = true;
+    nvidiaBusId = "PCI:1:0:0";
+    intelBusId = "PCI:0:02:0";
+  };
 }
