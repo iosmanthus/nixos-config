@@ -114,11 +114,21 @@
               ./secrets/iosmanthus
             ] ++ (mkCommonModules system);
           };
+
           iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             modules = [
               { networking.hostName = "iosmanthus-xps"; }
               ./machines/iosmanthus-xps
+              ./secrets/iosmanthus
+            ] ++ (mkCommonModules system);
+          };
+
+          lego-xps = nixpkgs.lib.nixosSystem rec {
+            system = "x86_64-linux";
+            modules = [
+              { networking.hostName = "lego-xps"; }
+              ./machines/lego
               ./secrets/iosmanthus
             ] ++ (mkCommonModules system);
           };
