@@ -1,4 +1,6 @@
-{ pkgs, lib, ... }:
+{ lib
+, ...
+}:
 with lib;
 {
   options.machine = {

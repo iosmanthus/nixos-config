@@ -5,11 +5,6 @@
 let
   modifier0 = "Mod4";
   modifier1 = "Mod1";
-  wallPaperCommit = "03c6c20be96c38827037d2238357f2c777ec4aa5";
-  wallpaper = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/${wallPaperCommit}/wallpapers/nix-wallpaper-nineish.src.svg";
-    sha256 = "0a7501pq29h1fbg35ih3zjhsdqgjlcaxi7gz780cgd8yvzgikhld";
-  };
 in
 {
   xsession.windowManager = {
@@ -24,13 +19,41 @@ in
               size = 10.0;
             };
           modifier = modifier0;
+          focus = {
+            newWindow = "focus";
+          };
           window = {
+            border = 0;
             titlebar = false;
             commands = [
               {
                 command = "title_window_icon on";
                 criteria = {
                   all = true;
+                };
+              }
+              {
+                command = "resize set 640 480";
+                criteria = {
+                  window_role = "pop_up";
+                };
+              }
+              {
+                command = "resize set 640 480";
+                criteria = {
+                  window_role = "task_dialog";
+                };
+              }
+              {
+                command = "floating enable";
+                criteria = {
+                  window_role = "pop_up";
+                };
+              }
+              {
+                command = "floating enable";
+                criteria = {
+                  window_role = "task_dialog";
                 };
               }
             ];
@@ -91,29 +114,30 @@ in
               k = "resize grow height 10 px or 10 ppt";
             };
           };
-          defaultWorkspace = "1: work";
+          defaultWorkspace = "workspace 1: work";
           workspaceAutoBackAndForth = true;
           workspaceLayout = "tabbed";
+          assigns = {
+            "1: work" = [{ class = "^firefox$"; }];
+            "2: vm" = [{ class = "^Remote-viewer$"; }];
+          };
           startup = [
             {
-              command = "feh --bg-scale --conversion-timeout 1 ${wallpaper}";
-              always = true;
-            }
-            {
-              command = "${pkgs.betterlockscreen}/bin/betterlockscreen -u ${wallpaper}";
-              always = true;
+              command = "i3-msg workspace 1";
             }
             {
               command = "systemctl restart --user polybar.service";
               always = true;
             }
-            { command = "firefox"; }
+            {
+              command = "firefox";
+            }
             {
               command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
               always = true;
             }
           ];
-          bars = [ ];
+          bars = lib.mkForce [ ];
         };
       extraConfig = ''
         set $base00 #212121
@@ -135,10 +159,10 @@ in
 
         # Basic color configuration using the Base16 variables for windows and borders.
         # Property Name         Border  BG      Text    Indicator Child Border
-        client.focused          $base04 $base01 $base07 $base0D $base0C
+        client.focused          $base00 $base02 $base07 $base0D $base0C
         client.focused_inactive $base01 $base01 $base07 $base03 $base01
         client.unfocused        $base01 $base00 $base05 $base01 $base01
-        client.urgent           $base08 $base08 $base00 $base08 $base08
+        client.urgent           $base00 $base0A $base00 $base08 $base08
         client.placeholder      $base00 $base00 $base05 $base00 $base00
         client.background       $base07
       '';

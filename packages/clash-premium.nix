@@ -1,4 +1,4 @@
-{ lib, pkgs, stdenv, fetchurl, autoPatchelfHook }:
+{ lib, stdenv, fetchurl, autoPatchelfHook }:
 let
   inherit (stdenv.hostPlatform) system;
   supportedPlatform = {

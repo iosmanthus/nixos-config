@@ -131,12 +131,6 @@ in
         sha256 = "1bbjpaypp0mq5akww5f0pkpq01j0xhhvkfr44f4lb2rdhr5nmnvc";
       }
       {
-        name = "tabnine-vscode";
-        publisher = "TabNine";
-        version = "3.5.45";
-        sha256 = "0biyc7wc9nnnr3jax7d2vjnr7yp46hlyy5fm7kqdlgm6hqn4361b";
-      }
-      {
         name = "even-better-toml";
         publisher = "tamasfe";
         version = "0.14.2";

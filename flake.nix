@@ -9,10 +9,6 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    berberman = {
-      url = "github:berberman/flakes/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-utils.url = "github:numtide/flake-utils/master";
 
     nixos-vscode-server = {
@@ -21,8 +17,7 @@
     };
   };
   outputs =
-    { self
-    , nixpkgs
+    { nixpkgs
     , flake-utils
     , home-manager
     , sops-nix
@@ -36,7 +31,7 @@
         config.allowUnfree = true;
       };
 
-      mkMasterOverlay = (system: self: super:
+      mkMasterOverlay = (system: _self: _super:
         mkOverlay {
           branch = mkBranch system "master";
           packages = [
@@ -102,7 +97,6 @@
           {
             nixpkgs.overlays =
               map (mkBuilder: mkBuilder system) [ mkMasterOverlay ]
-              ++ [ inputs.berberman.overlay ]
               ++ [ (import ./overlays.nix) ];
           }
         ];
@@ -135,7 +129,7 @@
     in
     {
       devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf ];
+        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf nix-linter ];
       };
     });
 }

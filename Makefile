@@ -11,4 +11,7 @@ format:
 update:
 	@nix flake update
 
+lint:
+	@fd ".nix" --exec-batch "nix-linter"
+
 upgrade: update switch

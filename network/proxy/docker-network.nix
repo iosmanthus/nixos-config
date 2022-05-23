@@ -9,7 +9,7 @@ let
 
   dockerCli = "${config.virtualisation.docker.package}/bin/docker";
 
-  dockerNetworkOpts = { config, lib, name, ... }: {
+  dockerNetworkOpts = { ... }: {
     options = {
       enable = mkEnableOption "enable this docker network";
       subnet = mkOption {

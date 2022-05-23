@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 let
   name = "eDP-1";
   fingerprint =

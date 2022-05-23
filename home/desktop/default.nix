@@ -1,8 +1,15 @@
-{ config
-, pkgs
-, lib
+{ pkgs
 , ...
-}: {
+}:
+let
+  wallPaperCommit = "374482a43a8c266924d8eda210a82ac359820c9c";
+  wallPaperSha256 = "05ypq2lgc50frb5w56gkhpx8q4bjxrk5lw18qz71adzchy788ppb";
+  wallpaper = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/small-tech/catts/${wallPaperCommit}/wallpapers/catts-wallpaper-4k-by-margo-de-weerdt-small-technology-foundation.jpg";
+    sha256 = wallPaperSha256;
+  };
+in
+{
   imports = [
     ./i3.nix
     ./dunst.nix
@@ -55,4 +62,11 @@
   };
 
   services.clipmenu = { enable = true; };
+
+  # home.file = {
+  #   wallpaper = {
+  #     source = wallpaper;
+  #     target = ".background-image";
+  #   };
+  # };
 }

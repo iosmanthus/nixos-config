@@ -37,8 +37,8 @@ in
       export COLOR_BASE0E=#C792EA
       export COLOR_BASE0F=#FF5370
 
-      export NETWORK_LABEL_CONNECTED="%{u$COLOR_BASE0C}%{+u} %essid% %{-u} %{u$COLOR_BASE0D}%{+u} %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{-u}"
-      export DATE_LABEL="%{u$COLOR_BASE0E}%{+u}%date% %time%%{-u}"
+      export NETWORK_LABEL_CONNECTED="%essid% %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{F$COLOR_BASE0E}%signal%%%{F-}"
+      export DATE_LABEL="%date% %{F$COLOR_BASE0C}%time%%{F-}"
       export HWMON_PATH=$(echo /sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input)
       export ADAPTER=$(${ls} -1 /sys/class/power_supply | ${grep} AC)
       export BATTERY=$(${ls} -1 /sys/class/power_supply | ${grep} BAT)
@@ -82,9 +82,9 @@ in
 
       modules-left = i3 sep player-mpris-simple
       modules-center =
-      modules-right = sep temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep
+      modules-right = temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep
 
-      font-0 = "Dejavu Sans Mono:size=18;3"
+      font-0 = "Meslo LG M:size=18;3"
       font-1 = "Material\-Design\-Iconic\-Font:size=18;3"
       font-2 = "NotoEmoji:scale=5;3"
       font-3 = "feather:size=18;3"

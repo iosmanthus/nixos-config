@@ -1,5 +1,4 @@
 { config
-, pkgs
 , ...
 }: {
   programs.firefox = {
@@ -7,6 +6,7 @@
     profiles.${config.machine.userName} = {
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "browser.sessionstore.resume_from_crash" = false;
       };
       userChrome = ''
         #main-window[tabsintitlebar="true"]:not([extradragspace="true"])
