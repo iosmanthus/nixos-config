@@ -14,7 +14,7 @@ with super;
 
   mmdb = builtins.fetchurl {
     url = "https://github.com/Dreamacro/maxmind-geoip/releases/download/20220512/Country.mmdb";
-    sha256 = "0000000000000000000000000000000000000000000000000000";
+    sha256 = "1vhygp5pvkx4jq0m69v9xcxxic52ih98rlz5hq0s4fzqp12pnis0";
   };
 
   leaf = super.callPackage ./packages/leaf.nix { };
