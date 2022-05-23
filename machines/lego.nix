@@ -1,5 +1,7 @@
 { ... }: {
-  imports = [ ./common ];
+  imports = [
+    ./common
+  ];
   machine = {
     userName = "lego";
     userEmail = "mugglelego@gmail.com";

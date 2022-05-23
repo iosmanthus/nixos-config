@@ -4,6 +4,8 @@
 {
   imports = [
     ../common
+
+    ../lego.nix
     ./hardware-configuration.nix
     ./monitors.nix
   ];
