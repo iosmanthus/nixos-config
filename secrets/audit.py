@@ -18,16 +18,23 @@ def match(patterns, name):
 
 ignore_files = ['.*\.py', ".*\.pub", ".*\.nix", "\.sops\.yaml"]
 for (dirpath, _, files) in walk('./'):
-    for f in files:
-        if match(ignore_files, f):
+    for file in files:
+        if match(ignore_files, file):
             continue
-        path = dirpath + f
+        if dirpath == './':
+            path = dirpath + file
+        else:
+            path = dirpath + '/' + file
+
         try:
             with open(path, 'r') as f:
                 o = yaml.safe_load(f)
         except Exception:
             with open(path, 'r') as f:
                 o = json.load(f)
+
+        if not o:
+            raise Exception("invalid file " + path)
 
         if 'sops' not in o or 'age' not in o['sops']:
             msg = f'{path} is not encrypted by sops'

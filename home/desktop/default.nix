@@ -63,12 +63,6 @@ in
 
   services.clipmenu = { enable = true; };
 
-  services.betterlockscreen = {
-    enable = true;
-    inactiveInterval = 1;
-    arguments = [ "dim" ];
-  };
-
   home.file = {
     wallpaper = {
       source = wallpaper;
