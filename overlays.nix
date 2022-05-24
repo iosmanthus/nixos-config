@@ -13,8 +13,8 @@ with super;
   });
 
   mmdb = builtins.fetchurl {
-    url = "https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb";
-    sha256 = "199psf7q6f87mmg1jsnn1gkszmg16cv2wgi3pi7mbdjgyc6n7b2w";
+    url = "https://github.com/Dreamacro/maxmind-geoip/releases/download/20220512/Country.mmdb";
+    sha256 = "1vhygp5pvkx4jq0m69v9xcxxic52ih98rlz5hq0s4fzqp12pnis0";
   };
 
   leaf = super.callPackage ./packages/leaf.nix { };
