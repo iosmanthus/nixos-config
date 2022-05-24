@@ -13,8 +13,24 @@ jobs:
       with:
         extra_nix_config: |
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-    - run: nix develop
-    - run: make lint
+    - run: nix develop --command make lint
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.4.0
+    - uses: cachix/install-nix-action@v15
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+    - run: |
+        nix develop --command make format
+        if [[ $(git diff) != "" ]]
+        then
+            echo "code format error, please run the following commands:"
+            echo "   make format"
+            exit 1
+        fi
 
   tests:
     runs-on: ubuntu-latest
