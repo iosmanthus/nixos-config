@@ -112,6 +112,7 @@
               { networking.hostName = "iosmanthus-legion"; }
               ./machines/iosmanthus-legion
               ./secrets/iosmanthus
+              ./secrets/proxy
             ] ++ (mkCommonModules system);
           };
 
@@ -121,6 +122,7 @@
               { networking.hostName = "iosmanthus-xps"; }
               ./machines/iosmanthus-xps
               ./secrets/iosmanthus
+              ./secrets/proxy
             ] ++ (mkCommonModules system);
           };
 

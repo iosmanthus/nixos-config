@@ -38,16 +38,6 @@ in
     path = "${home}/.ssh/config";
   };
 
-  sops.secrets.v2ray-config = {
-    format = "binary";
-    sopsFile = ./v2ray_config;
-  };
-
-  sops.secrets.clash-config = {
-    format = "binary";
-    sopsFile = ./clash_config;
-  };
-
   sops.secrets.nix-conf = {
     format = "binary";
     sopsFile = ./nix.conf;
