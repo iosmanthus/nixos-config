@@ -5,6 +5,7 @@
 let
   modifier0 = "Mod4";
   modifier1 = "Mod1";
+  betterlockscreen = "${pkgs.betterlockscreen}/bin/betterlockscreen";
 in
 {
   xsession.windowManager = {
@@ -96,7 +97,7 @@ in
 
             "${modifier0}+Shift+q" = "exec i3-msg restart";
             "${modifier0}+Shift+x" = ''
-              exec betterlockscreen -l dim
+              exec ${betterlockscreen} -l dim
             '';
             "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
             "${modifier0}+m" = "exec autorandr --change";
@@ -128,7 +129,7 @@ in
               always = true;
             }
             {
-              command = "betterlockscreen -u ~/.background-image --fx dim,pixel";
+              command = "${betterlockscreen} -u ~/.background-image --fx dim,pixel";
               always = true;
             }
             {
