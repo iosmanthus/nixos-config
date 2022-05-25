@@ -41,7 +41,7 @@ m |= {
     'proxy-groups': [select, auto_probe],
 }
 
-rules_stream = subprocess.run(['sops', '-d', './clash-rules.yml'],
+rules_stream = subprocess.run(['sops', '-d', './clash_rules.yml'],
                               capture_output=True,
                               text=True).stdout
 rules = yaml.safe_load(rules_stream)

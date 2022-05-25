@@ -45,6 +45,7 @@
             "rofi"
             "neovim"
             "i3"
+            "nixUnstable"
             "jetbrains"
 
             # Utils
