@@ -8,4 +8,12 @@
     format = "binary";
     sopsFile = ./clash_config;
   };
+
+  systemd.services.docker-clash.restartTriggers = [
+    ./clash_config
+  ];
+
+  systemd.services.docker-v2ray.restartTriggers = [
+    ./v2ray_config
+  ];
 }

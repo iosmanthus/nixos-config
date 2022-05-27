@@ -46,6 +46,7 @@
             "neovim"
             "i3"
             "nixUnstable"
+            "vscode-extensions"
             "jetbrains"
 
             # Utils

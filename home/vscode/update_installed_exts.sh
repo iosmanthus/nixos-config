@@ -1,5 +1,6 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p curl jq unzip -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
+# shellcheck shell=bash
 set -eu -o pipefail
 
 # Helper to just fail with a message and non-zero exit code.
@@ -24,7 +25,7 @@ function get_vsixpkg() {
     URL="https://$1.gallery.vsassets.io/_apis/public/gallery/publisher/$1/extension/$2/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
 
     # Quietly but delicately curl down the file, blowing up at the first sign of trouble.
-    curl --silent --show-error --fail -X GET -o "$EXTTMP/$N.zip" "$URL"
+    curl --silent --show-error --retry 3 --fail -X GET -o "$EXTTMP/$N.zip" "$URL"
     # Unpack the file we need to stdout then pull out the version
     VER=$(jq -r '.version' <(unzip -qc "$EXTTMP/$N.zip" "extension/package.json"))
     # Calculate the SHA
@@ -48,7 +49,7 @@ EOF
 if [ $# -ne 0 ]; then
     CODE=$1
 else
-    CODE=$(command -v code)
+    CODE=$(command -v code || command -v codium)
 fi
 
 if [ -z "$CODE" ]; then
