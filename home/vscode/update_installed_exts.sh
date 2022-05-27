@@ -45,16 +45,8 @@ function get_vsixpkg() {
 EOF
 }
 
-# See if we can find our `code` binary somewhere.
-if [ $# -ne 0 ]; then
-    CODE=$1
-else
-    CODE=$(command -v code || command -v codium)
-fi
-
-if [ -z "$CODE" ]; then
-    # Not much point continuing.
-    fail "VSCode executable not found"
+if [ $# -ne 1 ]; then
+    fail "Usage: $0 <extension-list-cmd>"
 fi
 
 # Try to be a good citizen and clean up after ourselves if we're killed.
@@ -63,13 +55,12 @@ trap clean_up SIGINT
 # Begin the printing of the nix expression that will house the list of extensions.
 printf '{ extensions = [\n'
 
-# Note that we are only looking to update extensions that are already installed.
-for i in $($CODE --list-extensions)
-do
+# Note that we are only looking to update extensions that provided by the argument.
+for i in $($1); do
     OWNER=$(echo "$i" | cut -d. -f1)
     EXT=$(echo "$i" | cut -d. -f2)
 
     get_vsixpkg "$OWNER" "$EXT"
 done
 # Close off the nix expression.
-printf '];\n}'
+printf '];\n}\n'

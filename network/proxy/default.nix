@@ -20,6 +20,7 @@ let
   };
 
   clashConfig = config.sops.secrets.clash-config.path;
+  clashRules = ../../secrets/proxy/ruleset;
 
   yacdImage = "haishanh/yacd";
 
@@ -30,6 +31,9 @@ let
   };
 
   networkName = "proxy";
+  environment = {
+    TZ = config.time.timeZone;
+  };
 in
 {
   imports = [
@@ -72,6 +76,7 @@ in
         volumes = [
           "${config.sops.secrets.v2ray-config.path}:${workdir}/config.json"
         ];
+        inherit environment;
         extraOptions = [
           "--network=${networkName}"
           "--ip=172.18.0.2"
@@ -88,8 +93,10 @@ in
         cmd = [ "-d" "./" ];
         volumes = [
           "${clashConfig}:${workdir}/config.yaml"
+          "${clashRules}:${workdir}/ruleset"
           "${pkgs.mmdb}:${workdir}/Country.mmdb"
         ];
+        inherit environment;
         extraOptions = [
           "--network=${networkName}"
           "--ip=172.18.0.3"
@@ -102,6 +109,7 @@ in
         dependsOn = [
           "clash"
         ];
+        inherit environment;
         extraOptions = [
           "--network=${networkName}"
           "--ip=172.18.0.4"

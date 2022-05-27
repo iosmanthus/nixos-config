@@ -45,8 +45,8 @@
     {
       name = "copilot";
       publisher = "GitHub";
-      version = "1.23.5969";
-      sha256 = "06j4jmb33k97kp6n2qhxqiharqngjrpq746cplkpfyqz0yp4blz5";
+      version = "1.24.6022";
+      sha256 = "1dv7pzs4206z3hfbh2rk4rxqd131zqjgj9zhbyd0pvzqfafmksln";
     }
     {
       name = "github-vscode-theme";
@@ -125,12 +125,6 @@
       publisher = "redhat";
       version = "1.7.0";
       sha256 = "1bbjpaypp0mq5akww5f0pkpq01j0xhhvkfr44f4lb2rdhr5nmnvc";
-    }
-    {
-      name = "rust-analyzer";
-      publisher = "rust-lang";
-      version = "0.4.1071";
-      sha256 = "1qavhn0jxdchv2afiq3xsvxw45hq0fh8kc1ifqgjfxjrciy0px48";
     }
     {
       name = "even-better-toml";

@@ -11,6 +11,7 @@
 
   systemd.services.docker-clash.restartTriggers = [
     ./clash_config
+    ./ruleset
   ];
 
   systemd.services.docker-v2ray.restartTriggers = [

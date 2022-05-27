@@ -9,9 +9,13 @@ in
   ];
   programs.vscode = {
     enable = true;
-    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace (
-      (import ./extensions.nix).extensions
-    );
+    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
+      (
+        (import ./extensions.nix).extensions
+      )
+    ++ (with pkgs.vscode-extensions; [
+      matklad.rust-analyzer
+    ]);
 
     keybindings = [
       {
@@ -38,6 +42,7 @@ in
       "security.workspace.trust.enabled" = false;
       "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
       "python.formatting.yapfPath" = "${pkgs.yapf}/bin/yapf";
+      "python.formatting.provider" = "yapf";
 
       "keyboard.dispatch" = "keyCode";
       "vim.autoSwitchInputMethod.defaultIM" = "1";

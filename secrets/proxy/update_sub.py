@@ -1,53 +1,112 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i python3 -p sops python3 python3Packages.pyyaml python3Packages.requests -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
+#! nix-shell -i python3 -p sops python3Packages.pyyaml python3Packages.requests -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 
 import os
 import sys
 import subprocess
-
 import requests
 import yaml
+import rules
 
 from yaml import FullLoader
 
-config_file = sys.argv[1]
-sub = sys.argv[2]
 
-resp = requests.get(sub)
-m = yaml.load(resp.text, Loader=FullLoader)
-m['port'] = 80
-m['socks-port'] = 1080
-m['mixed-port'] = 0
-m['allow-lan'] = True
-m['external-controller'] = '0.0.0.0:9090'
-m['script'] = None
+def get_sub(url):
+    resp = requests.get(url)
+    return yaml.load(resp.text, Loader=FullLoader)
 
-outbounds = list(map(lambda p: p['name'], m['proxies']))
-auto_probe = {
-    'name': "Auto",
-    'type': 'url-test',
-    'proxies': outbounds,
-    'url': 'http://www.gstatic.com/generate_204',
-    'interval': 10
-}
 
-select = {
-    'type': 'select',
-    'name': 'Proxy',
-    'proxies': [auto_probe['name']] + outbounds
-}
+def main():
+    try:
+        config_file = sys.argv[1]
+        rule_dir = sys.argv[2]
+        sub_link = sys.argv[3]
+    except IndexError:
+        print('Usage: update_sub.py <config_file> <rule_dir> <sub_link>')
+        sys.exit(1)
 
-m |= {
-    'proxy-groups': [select, auto_probe],
-}
+    m = get_sub(sub_link)
 
-rules_stream = subprocess.run(['sops', '-d', './clash_rules.yml'],
-                              capture_output=True,
-                              text=True).stdout
-rules = yaml.safe_load(rules_stream)
-m |= rules
+    m['port'] = 80
+    m['socks-port'] = 1080
+    m['mixed-port'] = 0
+    m['allow-lan'] = True
+    m['external-controller'] = '0.0.0.0:9090'
+    m['script'] = None
 
-with open(config_file, 'w') as f:
-    f.write(yaml.dump(m))
+    outbounds = list(map(lambda p: p['name'], m['proxies']))
+    auto_probe = {
+        'name': "Auto",
+        'type': 'url-test',
+        'proxies': outbounds,
+        'url': 'http://www.gstatic.com/generate_204',
+        'interval': 10
+    }
 
-os.system(f'sops -i -e {config_file}')
+    select = {
+        'type': 'select',
+        'name': 'Proxy',
+        'proxies': [auto_probe['name']] + outbounds
+    }
+
+    rules.update_rules('./ruleset', [
+        'private', 'reject', 'proxy', 'direct', 'lancidr', 'cncidr',
+        'telegramcidr'
+    ])
+
+    m |= {
+        'proxy-groups': [select, auto_probe],
+        'rules': [
+            'RULE-SET,private,DIRECT', 'RULE-SET,reject,REJECT',
+            f'RULE-SET,proxy,{select["name"]}', 'RULE-SET,direct,DIRECT',
+            'RULE-SET,lancidr,DIRECT', 'RULE-SET,cncidr,DIRECT',
+            f'RULE-SET,telegramcidr,{select["name"]}', 'GEOIP,LAN,DIRECT',
+            'GEOIP,CN,DIRECT', f'MATCH,{select["name"]}'
+        ],
+        'rule-providers': {
+            'private': {
+                'type': 'file',
+                'behavior': 'domain',
+                'path': './ruleset/private.txt',
+            },
+            'reject': {
+                'type': 'file',
+                'behavior': 'domain',
+                'path': './ruleset/reject.txt',
+            },
+            'proxy': {
+                'type': 'file',
+                'behavior': 'domain',
+                'path': './ruleset/proxy.txt',
+            },
+            'direct': {
+                'type': 'file',
+                'behavior': 'domain',
+                'path': './ruleset/direct.txt',
+            },
+            'lancidr': {
+                'type': 'file',
+                'behavior': 'ipcidr',
+                'path': './ruleset/lancidr.txt',
+            },
+            'cncidr': {
+                'type': 'file',
+                'behavior': 'ipcidr',
+                'path': './ruleset/cncidr.txt',
+            },
+            'telegramcidr': {
+                'type': 'file',
+                'behavior': 'ipcidr',
+                'path': './ruleset/telegramcidr.txt',
+            }
+        }
+    }
+
+    with open(config_file, 'w') as f:
+        f.write(yaml.dump(m))
+
+    os.system(f'sops -i -e {config_file}')
+
+
+if __name__ == "__main__":
+    main()
