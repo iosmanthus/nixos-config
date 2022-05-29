@@ -1,5 +1,4 @@
-{ lib
-, config
+{ config
 , ...
 }: {
   home.immutable-file = {
