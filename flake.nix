@@ -2,7 +2,7 @@
   description = "iosmanthus 💓 NixOS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/nixos-21.11";
+    stable.url = "github:NixOS/nixpkgs/nixos-22.05";
     master.url = "github:NixOS/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix/master";
     home-manager = {
@@ -24,12 +24,21 @@
     , ...
     }@inputs:
     let
-      mkOverlay = import ./utils/branch-overlay.nix;
+      inherit (import ./lib) mkOverlay;
 
       mkBranch = system: branch: import inputs.${branch} {
         inherit system;
         config.allowUnfree = true;
       };
+
+      mkStableOverlay = (system: _self: _super:
+        mkOverlay {
+          branch = mkBranch system "stable";
+          packages = [
+            "tdesktop"
+          ];
+        }
+      );
 
       mkMasterOverlay = (system: _self: _super:
         mkOverlay {
@@ -63,31 +72,25 @@
             "sops"
             "bat"
             "zoxide"
-
-            # Virtualisation
-            # "virt-viewer"
-            # "virt-manager"
-            # "remarshal"
-            # "spice-gtk"
-
-            # Kernel
-            # "linuxPackages_latest"
           ];
         });
 
       mkCommonModules =
         system: [
-          ./configuration.nix
-          ./hardware-common.nix
+          ./system/configuration.nix
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
-          {
+          ({ pkgs, ... }: {
             imports = [ inputs.nixos-vscode-server.nixosModules.system ];
-            services.auto-fix-vscode-server.enable = true;
-          }
+            services.auto-fix-vscode-server = {
+              enable = true;
+              nodePackage = pkgs.nodejs-16_x;
+            };
+          })
           ({ config, ... }: {
             home-manager = {
               sharedModules = [
+                ./modules/immutable-file.nix
                 (builtins.toPath ./.
                   + "/machines/${config.machine.userName}.nix")
               ];
@@ -98,7 +101,7 @@
           })
           {
             nixpkgs.overlays =
-              map (mkBuilder: mkBuilder system) [ mkMasterOverlay ]
+              map (mkBuilder: mkBuilder system) [ mkMasterOverlay mkStableOverlay ]
               ++ [ (import ./overlays.nix) ];
           }
         ];

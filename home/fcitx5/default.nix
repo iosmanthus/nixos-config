@@ -4,6 +4,9 @@
 , ...
 }:
 with lib ;
+let
+  fcitx5Home = "${config.xdg.configHome}/fcitx5";
+in
 {
 
   i18n.inputMethod = {
@@ -15,30 +18,51 @@ with lib ;
     fcitx5-configtool
   ];
 
-  # The trick here is to create immutable file to prevent overriding from fcitx5
-  home.activation = {
-    mkFcitx5Config = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      function mk_immutable_file() {
-        if [ -f $1 ]; then
-          sudo chattr -i $1
-        fi
-        sudo cp $2 $1
-        sudo chattr +i $1
-      }
+  home.immutable-file = {
+    fcitx5-profile = {
+      src = ./profile;
+      dst = "${fcitx5Home}/profile";
+    };
 
-      fcitx5_home=${config.xdg.configHome}/fcitx5
-      mkdir -p ''${fcitx5_home}/conf
+    fcitx5-config = {
+      src = ./config;
+      dst = "${fcitx5Home}/config";
+    };
 
-      mk_immutable_file ''${fcitx5_home}/profile ${builtins.toPath ./profile}
-      mk_immutable_file ''${fcitx5_home}/config ${builtins.toPath ./config}
-      mk_immutable_file ''${fcitx5_home}/conf/chttrans.conf ${builtins.toPath ./chttrans.conf}
-      mk_immutable_file ''${fcitx5_home}/conf/clipboard.conf ${builtins.toPath ./clipboard.conf}
-      mk_immutable_file ''${fcitx5_home}/conf/cloudpinyin.conf ${builtins.toPath ./cloudpinyin.conf}
-      mk_immutable_file ''${fcitx5_home}/conf/notifications.conf ${builtins.toPath ./notifications.conf}
-      mk_immutable_file ''${fcitx5_home}/conf/pinyin.conf ${builtins.toPath ./pinyin.conf}
-      mk_immutable_file ''${fcitx5_home}/conf/punctuation.conf ${builtins.toPath ./punctuation.conf}
-      mk_immutable_file ''${fcitx5_home}/conf/classicui.conf ${builtins.toPath ./classicui.conf}
-    '';
+    fcitx5-chttrans = {
+      src = ./chttrans.conf;
+      dst = "${fcitx5Home}/conf/chttrans.conf";
+    };
+
+    fcitx5-clipboard = {
+      src = ./clipboard.conf;
+      dst = "${fcitx5Home}/conf/clipboard.conf";
+    };
+
+    fcitx5-cloudpinyin = {
+      src = ./cloudpinyin.conf;
+      dst = "${fcitx5Home}/conf/cloudpinyin.conf";
+    };
+
+    fcitx5-notifications = {
+      src = ./notifications.conf;
+      dst = "${fcitx5Home}/conf/notifications.conf";
+    };
+
+    fcitx5-pinyin = {
+      src = ./pinyin.conf;
+      dst = "${fcitx5Home}/conf/pinyin.conf";
+    };
+
+    fcitx5-punctuation = {
+      src = ./punctuation.conf;
+      dst = "${fcitx5Home}/conf/punctuation.conf";
+    };
+
+    fcitx5-classicui = {
+      src = ./classicui.conf;
+      dst = "${fcitx5Home}/conf/classicui.conf";
+    };
   };
 
   xdg.dataFile."fcitx5/themes/fcitx5-adwaita-dark".source = pkgs.fcitx5-adwaita-dark;

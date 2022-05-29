@@ -25,7 +25,7 @@ in
           };
           window = {
             border = 0;
-            titlebar = false;
+            titlebar = true;
             commands = [
               {
                 command = "title_window_icon on";

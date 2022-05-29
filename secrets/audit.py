@@ -20,6 +20,7 @@ ignore_paths = [
     '.*\.py', ".*\.pub", ".*\.nix", "\.sops\.yaml", ".*__pycache__.*",
     ".*ruleset.*"
 ]
+
 for (dirpath, _, files) in walk('./'):
     for file in files:
         if match(ignore_paths, file) or match(ignore_paths, dirpath):

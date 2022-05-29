@@ -20,7 +20,7 @@ let
   };
 
   clashConfig = config.sops.secrets.clash-config.path;
-  clashRules = ../../secrets/proxy/ruleset;
+  clashRules = ../../../secrets/proxy/ruleset;
 
   yacdImage = "haishanh/yacd";
 
