@@ -130,7 +130,7 @@ in
             }
             {
               command = "${betterlockscreen} -u ~/.background-image --fx dim,pixel";
-                always = true;
+              always = true;
             }
             {
               command = "i3-msg workspace 1: work";
