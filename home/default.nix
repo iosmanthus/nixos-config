@@ -17,6 +17,7 @@ in
 
     ./desktop
     ./fcitx5
+    ./flameshot
     ./polybar
     ./shell
     ./vscode
@@ -42,7 +43,7 @@ in
     geoipWithDatabase
     peek
     vlc
-
+    pavucontrol
     sops
     iperf3
     yesplaymusic

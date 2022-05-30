@@ -5,7 +5,7 @@
 let
   modifier0 = "Mod4";
   modifier1 = "Mod1";
-  wallPapaerCmd = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
+  betterlockscreen = "${pkgs.betterlockscreen}/bin/betterlockscreen";
 in
 {
   xsession.windowManager = {
@@ -25,7 +25,7 @@ in
           };
           window = {
             border = 0;
-            titlebar = false;
+            titlebar = true;
             commands = [
               {
                 command = "title_window_icon on";
@@ -97,7 +97,7 @@ in
 
             "${modifier0}+Shift+q" = "exec i3-msg restart";
             "${modifier0}+Shift+x" = ''
-              exec betterlockscreen -l dim
+              exec ${betterlockscreen} -l dim
             '';
             "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
             "${modifier0}+m" = "exec autorandr --change";
@@ -125,7 +125,15 @@ in
           };
           startup = [
             {
+<<<<<<< HEAD
               command = "${wallPapaerCmd}";
+=======
+              command = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
+              always = true;
+            }
+            {
+              command = "${betterlockscreen} -u ~/.background-image --fx dim,pixel";
+>>>>>>> main
               always = true;
             }
             {

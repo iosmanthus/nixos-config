@@ -1,16 +1,12 @@
 { config
 , pkgs
+, lib
 , ...
 }: {
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  console = { keyMap = "us"; };
-
-  time.timeZone = "Asia/Shanghai";
-
-  programs.zsh.enable = true;
-
   users.mutableUsers = false;
+
+  environment.pathsToLink = lib.mkIf (config.machine.shell == pkgs.zsh)
+    [ "/share/zsh" ];
 
   users.users.${config.machine.userName} = {
     hashedPassword = config.machine.hashedPassword;
@@ -29,8 +25,6 @@
       RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/intel_backlight/brightness"
     '';
   };
-
-  users.users.root = { shell = pkgs.zsh; };
 
   security.pam.services.${config.machine.userName}.gnupg.enable = true;
 
