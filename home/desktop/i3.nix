@@ -125,15 +125,11 @@ in
           };
           startup = [
             {
-              <<<<<<< HEAD
-                command = "${wallPapaerCmd}";
-              =======
               command = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
               always = true;
             }
             {
               command = "${betterlockscreen} -u ~/.background-image --fx dim,pixel";
-              >>>>>>> main
                 always = true;
             }
             {
