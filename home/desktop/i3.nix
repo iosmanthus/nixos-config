@@ -5,6 +5,7 @@
 let
   modifier0 = "Mod4";
   modifier1 = "Mod1";
+  wallPapaerCmd = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
 in
 {
   xsession.windowManager = {
@@ -124,11 +125,7 @@ in
           };
           startup = [
             {
-              command = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
-              always = true;
-            }
-            {
-              command = "betterlockscreen -u ~/.background-image --fx dim,pixel";
+              command = "${wallPapaerCmd}";
               always = true;
             }
             {
