@@ -35,8 +35,8 @@
         greeters.gtk = {
           enable = true;
           cursorTheme = {
-            package = pkgs.vanilla-dmz;
-            name = "Vanilla-DMZ";
+            package = pkgs.bibata-cursors;
+            name = "Bibata-Modern-Ice";
             size = 48;
           };
           theme = {
