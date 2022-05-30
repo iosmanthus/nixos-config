@@ -35,8 +35,8 @@
         greeters.gtk = {
           enable = true;
           cursorTheme = {
-            package = pkgs.vanilla-dmz;
-            name = "Vanilla-DMZ";
+            package = pkgs.quintom-cursor-theme;
+            name = "quintom-cursor-theme-unstable";
             size = 24; 
           };
           theme = {

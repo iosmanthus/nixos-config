@@ -29,9 +29,9 @@ in
 
   home.pointerCursor = {
     x11.enable = true;
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-    size = 48;
+    package = pkgs.quintom-cursor-theme;
+    name = "quintom-cursor-theme-unstable";
+    size = 24;
   };
 
   gtk = {
@@ -61,7 +61,14 @@ in
     };
   };
 
-  services.clipmenu = { enable = true; };
+
+ services.clipmenu = { enable = true; };
+
+  services.betterlockscreen = {
+    enable = true;
+    inactiveInterval = 10;
+    arguments = [ "dim" ];
+  };
 
   home.file = {
     wallpaper = {
