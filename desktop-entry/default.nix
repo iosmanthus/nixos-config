@@ -37,7 +37,7 @@
           cursorTheme = {
             package = pkgs.vanilla-dmz;
             name = "Vanilla-DMZ";
-            size = 48;
+            size = 24; 
           };
           theme = {
             package = pkgs.orchis-theme;
@@ -46,7 +46,7 @@
           indicators =
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
-            xft-dpi=192
+            xft-dpi=96
             font-name=Ubuntu
           '';
         };

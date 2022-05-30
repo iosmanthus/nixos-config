@@ -84,11 +84,11 @@ in
       modules-center =
       modules-right = temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep
 
-      font-0 = "Meslo LG M:size=18;3"
+      font-0 = "Meslo LG M:size=13;3"
       font-1 = "Material\-Design\-Iconic\-Font:size=18;3"
       font-2 = "NotoEmoji:scale=5;3"
       font-3 = "feather:size=18;3"
-      font-4 = "Microsoft YaHei:size=18;3"
+      font-4 = "Microsoft YaHei:size=13;3"
 
       tray-position = right
       tray-detached = false

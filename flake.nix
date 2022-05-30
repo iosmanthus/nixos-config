@@ -131,7 +131,7 @@
             modules = [
               { networking.hostName = "lego-xps"; }
               ./machines/lego-xps
-              ./secrets/iosmanthus
+              ./secrets/proxy
             ] ++ (mkCommonModules system);
           };
         };

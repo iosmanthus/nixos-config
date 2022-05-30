@@ -2,10 +2,10 @@
 , ...
 }:
 let
-  wallPaperCommit = "374482a43a8c266924d8eda210a82ac359820c9c";
-  wallPaperSha256 = "05ypq2lgc50frb5w56gkhpx8q4bjxrk5lw18qz71adzchy788ppb";
+  wallPaperCommit = "da01f68d21ddfdc9f1c6e520c2170871c81f1cf5";
+  wallPaperSha256 = "0a7501pq29h1fbg35ih3zjhsdqgjlcaxi7gz780cgd8yvzgikhld";
   wallpaper = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/small-tech/catts/${wallPaperCommit}/wallpapers/catts-wallpaper-4k-by-margo-de-weerdt-small-technology-foundation.jpg";
+    url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/${wallPaperCommit}/wallpapers/nix-wallpaper-nineish.src.svg";
     sha256 = wallPaperSha256;
   };
 in
@@ -16,7 +16,7 @@ in
   ];
 
   xresources.properties = {
-    "Xft.dpi" = 192;
+    "Xft.dpi" = 96;
   };
 
   xsession = {
