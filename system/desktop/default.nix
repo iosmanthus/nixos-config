@@ -37,7 +37,7 @@
           cursorTheme = {
             package = pkgs.bibata-cursors;
             name = "bibata-cursors";
-            size = 48; 
+            size = 48;
           };
           theme = {
             package = pkgs.orchis-theme;

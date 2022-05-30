@@ -62,7 +62,7 @@ in
   };
 
 
- services.clipmenu = { enable = true; };
+  services.clipmenu = { enable = true; };
 
   services.betterlockscreen = {
     enable = true;

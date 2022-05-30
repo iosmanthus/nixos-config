@@ -125,16 +125,16 @@ in
           };
           startup = [
             {
-<<<<<<< HEAD
-              command = "${wallPapaerCmd}";
-=======
+              <<<<<<< HEAD
+                command = "${wallPapaerCmd}";
+              =======
               command = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
               always = true;
             }
             {
               command = "${betterlockscreen} -u ~/.background-image --fx dim,pixel";
->>>>>>> main
-              always = true;
+              >>>>>>> main
+                always = true;
             }
             {
               command = "i3-msg workspace 1: work";
