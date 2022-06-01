@@ -47,7 +47,6 @@
             "vscode"
             "vscode-extensions"
             "discord"
-            "firefox-bin"
             "starship"
             "google-chrome"
             "notion-app-enhanced"
@@ -130,13 +129,14 @@
             ] ++ (mkCommonModules system);
           };
         };
-    } // flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf nix-linter ];
-      };
-    });
+    } // flake-utils.lib.eachDefaultSystem
+      (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf nix-linter ];
+        };
+      });
 }
