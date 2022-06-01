@@ -35,8 +35,8 @@
         greeters.gtk = {
           enable = true;
           cursorTheme = {
-            package = pkgs.bibata-cursors;
-            name = "bibata-cursors";
+            package = pkgs.quintom-cursor-theme;
+            name = "quintom-cursor-theme-unstable";
             size = 48;
           };
           theme = {

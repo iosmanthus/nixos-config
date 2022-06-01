@@ -122,6 +122,7 @@ in
           assigns = {
             "1: work" = [{ class = "^firefox$"; }];
             "2: vm" = [{ class = "^Remote-viewer$"; }];
+            "4: mail" = [{ class = "^Thunderbird$"; }];
           };
           startup = [
             {
@@ -133,18 +134,21 @@ in
               always = true;
             }
             {
-              command = "i3-msg workspace 1: work";
-            }
-            {
               command = "systemctl restart --user polybar.service";
               always = true;
+            }
+            {
+              command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+              always = true;
+            }
+            {
+              command = "i3-msg workspace 1: work";
             }
             {
               command = "firefox";
             }
             {
-              command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-              always = true;
+              command = "thunderbird";
             }
           ];
           bars = lib.mkForce [ ];

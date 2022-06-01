@@ -29,8 +29,8 @@ in
 
   home.pointerCursor = {
     x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "bibata-cursors";
+    package = pkgs.quintom-cursor-theme;
+    name = "quintom-cursor-theme-unstable";
     size = 48;
   };
 

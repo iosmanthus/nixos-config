@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i python3 -p sops python3Packages.pyyaml python3Packages.requests -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
+#! nix-shell -i python3 --pure -p sops python3Packages.pyyaml python3Packages.requests -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
 
 import os
 import sys
@@ -49,7 +49,7 @@ def main():
         'proxies': [auto_probe['name']] + outbounds
     }
 
-    rules.update_rules('./ruleset', [
+    rules.update_rules(rule_dir, [
         'private', 'reject', 'proxy', 'direct', 'lancidr', 'cncidr',
         'telegramcidr'
     ])
@@ -67,37 +67,37 @@ def main():
             'private': {
                 'type': 'file',
                 'behavior': 'domain',
-                'path': './ruleset/private.txt',
+                'path': f'./{rule_dir}/private.txt',
             },
             'reject': {
                 'type': 'file',
                 'behavior': 'domain',
-                'path': './ruleset/reject.txt',
+                'path': f'./{rule_dir}/reject.txt',
             },
             'proxy': {
                 'type': 'file',
                 'behavior': 'domain',
-                'path': './ruleset/proxy.txt',
+                'path': f'./{rule_dir}/proxy.txt',
             },
             'direct': {
                 'type': 'file',
                 'behavior': 'domain',
-                'path': './ruleset/direct.txt',
+                'path': f'./{rule_dir}/direct.txt',
             },
             'lancidr': {
                 'type': 'file',
                 'behavior': 'ipcidr',
-                'path': './ruleset/lancidr.txt',
+                'path': f'./{rule_dir}/lancidr.txt',
             },
             'cncidr': {
                 'type': 'file',
                 'behavior': 'ipcidr',
-                'path': './ruleset/cncidr.txt',
+                'path': f'./{rule_dir}/cncidr.txt',
             },
             'telegramcidr': {
                 'type': 'file',
                 'behavior': 'ipcidr',
-                'path': './ruleset/telegramcidr.txt',
+                'path': f'./{rule_dir}/telegramcidr.txt',
             }
         }
     }

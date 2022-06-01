@@ -45,6 +45,7 @@
           branch = mkBranch system "master";
           packages = [
             "vscode"
+            "vscode-extensions"
             "discord"
             "firefox-bin"
             "starship"
@@ -55,7 +56,6 @@
             "neovim"
             "i3"
             "nixUnstable"
-            "vscode-extensions"
             "jetbrains"
 
             # Utils
