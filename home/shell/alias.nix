@@ -39,6 +39,10 @@
       nat = "sudo iptables -t nat -nvL";
       mangle = "sudo iptables -t mangle -nvL";
       filter = "sudo iptables -nvL";
+
+      clion = "clion nosplash";
+      idea-ultimate = "idea-ultimate nosplash";
+      goland = "goland nosplash";
     };
   };
 }
