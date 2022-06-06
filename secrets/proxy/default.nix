@@ -1,6 +1,5 @@
-{ ... }: 
-
-let 
+{ ... }:
+let
   hashFiles = builtins.map (builtins.hashFile "sha256");
 in
 {

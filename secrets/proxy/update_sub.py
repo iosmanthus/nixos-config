@@ -27,12 +27,14 @@ def main():
 
     m = get_sub(sub_link)
 
+    proxies = m['proxies']
+    m = {}
+    m['proxies'] = proxies
     m['port'] = 80
     m['socks-port'] = 1080
-    m['mixed-port'] = 0
+    m['log-level'] = 'info'
     m['allow-lan'] = True
     m['external-controller'] = '0.0.0.0:9090'
-    m['script'] = None
 
     outbounds = list(map(lambda p: p['name'], m['proxies']))
     auto_probe = {

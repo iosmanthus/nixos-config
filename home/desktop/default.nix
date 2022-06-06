@@ -19,18 +19,15 @@ in
     "Xft.dpi" = 192;
   };
 
-  xsession = {
+  services.gnome-keyring = {
     enable = true;
-    profileExtra = ''
-      eval $(${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-      export SSH_AUTH_SOCK
-    '';
+    components = [ "pkcs11" "secrets" "ssh" ];
   };
 
   home.pointerCursor = {
     x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
+    package = pkgs.yaru-theme;
+    name = "Yaru";
     size = 48;
   };
 

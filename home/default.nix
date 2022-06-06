@@ -52,15 +52,16 @@ in
     zoom-us
     discord
     google-chrome
-    jetbrains.goland
-    jetbrains.idea-ultimate
-    jetbrains.clion
-    jetbrains.pycharm-professional
     tdesktop
     slack
     wireguard-tools
     notion-app-enhanced
-  ];
+  ] ++ (with pkgs.jetbrains ;[
+    clion
+    goland
+    idea-ultimate
+    pycharm-professional
+  ]);
 
   home.sessionVariables = {
     "TERMINAL" = "${pkgs.kitty}/bin/kitty";
@@ -117,5 +118,15 @@ in
     enable = true;
     fade = true;
     fadeDelta = 5;
+  };
+
+  programs.sioyek = {
+    enable = true;
+    bindings = {
+      "move_up" = "k";
+      "move_down" = "j";
+      "move_left" = "h";
+      "move_right" = "l";
+    };
   };
 }

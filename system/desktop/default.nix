@@ -35,8 +35,8 @@
         greeters.gtk = {
           enable = true;
           cursorTheme = {
-            package = pkgs.bibata-cursors;
-            name = "Bibata-Modern-Ice";
+            package = pkgs.yaru-theme;
+            name = "Yaru";
             size = 48;
           };
           theme = {
