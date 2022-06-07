@@ -19,11 +19,6 @@ in
     "Xft.dpi" = 192;
   };
 
-  services.gnome-keyring = {
-    enable = true;
-    components = [ "pkcs11" "secrets" "ssh" ];
-  };
-
   home.pointerCursor = {
     x11.enable = true;
     package = pkgs.yaru-theme;

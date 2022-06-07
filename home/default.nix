@@ -32,7 +32,6 @@ in
     htop
     speedtest-cli
     ihaskell
-    rustup
     httpie
     nnn
     nix-output-monitor
@@ -84,11 +83,11 @@ in
     extraConfig = {
       core = { editor = "${pkgs.vscode}/bin/code --wait"; };
       pull = { rebase = false; };
-      url = {
-        "git@github.com:" = {
-          insteadOf = "https://github.com/";
-        };
-      };
+      # url = {
+      #   "git@github.com:" = {
+      #     insteadOf = "https://github.com/";
+      #   };
+      # };
     };
   };
 
