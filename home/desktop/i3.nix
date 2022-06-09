@@ -13,7 +13,7 @@ let
       {
         fonts =
           {
-            names = [ "Hasklig" ];
+            names = [ "Meslo LG M" ];
             size = 10.0;
           };
         modifier = modifier0;
