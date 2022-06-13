@@ -77,28 +77,28 @@ in
       ];
       "vim.visualstar" = true;
 
-      "editor.fontFamily" = "'Meslo LG L', 'Material-Design-Iconic-Font', feather";
+      "editor.fontFamily" = "'SF Mono', 'Material-Design-Iconic-Font', feather";
       "editor.fontLigatures" = false;
-      "editor.fontSize" = 11;
+      "editor.fontSize" = 13;
       # "editor.fontWeight": "650",
       "editor.lineHeight" = 25;
       "editor.lineNumbers" = "relative";
       "editor.inlineSuggest.enabled" = true;
 
       "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
-      "terminal.integrated.fontFamily" = "'Meslo LG L', 'Hasklug Nerd Font'";
+      "terminal.integrated.fontFamily" = "'SF Mono', 'Hasklug Nerd Font'";
       "terminal.integrated.fontWeight" = "normal";
-      "terminal.integrated.fontSize" = 11;
+      "terminal.integrated.fontSize" = 13;
       "terminal.integrated.fontWeightBold" = "600";
 
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
-      "window.zoomLevel" = 1.1;
 
       "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
       "workbench.iconTheme" = "material-icon-theme";
 
       "nix.enableLanguageServer" = true;
+      "redhat.telemetry.enabled" = false;
     };
   };
 }

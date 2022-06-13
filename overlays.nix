@@ -38,4 +38,8 @@ with super;
   lxgw-wenkai = super.callPackage ./packages/lxgw-wenkai.nix { };
 
   segoe-ui = super.callPackage ./packages/segoe-ui.nix { };
+
+  apple-fonts = super.callPackage ./packages/apple-fonts.nix { };
+
+  sf-mono = super.callPackage ./packages/sf-mono.nix { };
 }

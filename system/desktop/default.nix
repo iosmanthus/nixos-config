@@ -53,7 +53,7 @@
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
             xft-dpi=192
-            font-name=Segoe UI
+            font-name=SF Pro Text
           '';
         };
       };

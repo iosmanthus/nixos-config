@@ -107,7 +107,7 @@ in
 
   programs.kitty = {
     enable = true;
-    font = { name = "Meslo LG M"; };
+    font = { name = "monospace"; };
     settings = {
       include = mkKittyBase16Theme "material-darker";
     };

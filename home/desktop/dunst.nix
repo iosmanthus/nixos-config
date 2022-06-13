@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       global = {
-        font = "Meslo LG M 10";
+        font = "monospace 10";
         origin = "bottom-right";
         line_height = 5;
         width = 300;

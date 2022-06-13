@@ -150,5 +150,11 @@
       version = "0.5.5";
       sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
     }
+    {
+      name = "xml";
+      publisher = "dotjoshjohnson";
+      version = "2.5.1";
+      sha256 = "1v4x6yhzny1f8f4jzm4g7vqmqg5bqchyx4n25mkgvw2xp6yls037";
+    }
   ];
 }

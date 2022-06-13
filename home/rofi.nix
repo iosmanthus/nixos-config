@@ -6,7 +6,7 @@ in
   programs.rofi = {
     theme = mkbase16Rofitheme "base16-material-darker";
     enable = true;
-    font = "Dejavu Sans Mono 18";
+    font = "monospace 18";
     terminal = "${pkgs.kitty}/bin/kitty";
     extraConfig = {
       ssh-command = "{terminal} -- {terminal} +kitten ssh {host} [-p {port}]";

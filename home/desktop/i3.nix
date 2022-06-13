@@ -13,7 +13,7 @@ let
       {
         fonts =
           {
-            names = [ "Meslo LG M" ];
+            names = [ "monospace" ];
             size = 10.0;
           };
         modifier = modifier0;
