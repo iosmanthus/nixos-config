@@ -19,7 +19,9 @@
 
   programs.ssh.startAgent = true;
 
-  services.dbus = { enable = true; };
+  services.dbus = {
+    enable = true;
+  };
 
   services.xserver = {
     enable = true;
@@ -51,7 +53,7 @@
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
             xft-dpi=192
-            font-name=Ubuntu
+            font-name=Segoe UI
           '';
         };
       };

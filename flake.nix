@@ -2,7 +2,7 @@
   description = "iosmanthus 💓 NixOS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+    stable.url = "github:NixOS/nixpkgs?rev=0c3bf3a5c3ab6be29138b88900c417660a284fbd";
     master.url = "github:NixOS/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix/master";
     home-manager = {

@@ -9,6 +9,7 @@
       noto-fonts-emoji
       source-han-sans
       source-han-mono
+      open-sans
       fira-code
       cascadia-code
       material-design-icons
@@ -20,6 +21,8 @@
       vistafonts-chs
       ubuntu_font_family
       polybar-fonts
+      inter
+      segoe-ui
       siji
       (nerdfonts.override {
         fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" "Hasklig" ];
@@ -36,7 +39,7 @@
             <string>sans-serif</string>
            </test>
            <edit mode="prepend" binding="strong" name="family">
-            <string>Ubuntu</string>
+            <string>Segoe UI</string>
            </edit>
           </match>
           <match target="pattern">
@@ -44,7 +47,7 @@
             <string>serif</string>
            </test>
            <edit mode="prepend" binding="strong" name="family">
-            <string>Ubuntu</string>
+            <string>Segoe UI</string>
            </edit>
           </match>
           <match target="pattern">

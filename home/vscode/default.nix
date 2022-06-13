@@ -93,7 +93,7 @@ in
 
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
-      "window.zoomLevel" = 1.2;
+      "window.zoomLevel" = 1.1;
 
       "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
       "workbench.iconTheme" = "material-icon-theme";

@@ -34,4 +34,8 @@ with super;
   fcitx5-adwaita-dark = super.callPackage ./packages/fcitx5-adwaita-dark.nix { };
 
   fcitx5-pinyin-zhwiki = super.callPackage ./packages/fcitx5-pinyin-zhwiki.nix { };
+
+  lxgw-wenkai = super.callPackage ./packages/lxgw-wenkai.nix { };
+
+  segoe-ui = super.callPackage ./packages/segoe-ui.nix { };
 }
