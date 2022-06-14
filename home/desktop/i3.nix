@@ -182,6 +182,10 @@ in
 {
   xsession = {
     enable = true;
+    profileExtra = ''
+      eval $(${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+      export SSH_AUTH_SOCK
+    '';
     windowManager = {
       inherit i3;
     };
