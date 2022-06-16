@@ -129,11 +129,11 @@ let
     COMMIT
   '';
 
-  geoVersion = "202205082211";
+  geoVersion = "202206152213";
 
   geosite = builtins.fetchurl {
     url = "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/download/${geoVersion}/geosite.dat";
-    sha256 = "087dfa5damv2v1gfva224ljs43ngm8prmh49q7n7n3vq1shrg0gr";
+    sha256 = "0ri52fihvjw9n76gi5nns37bqndnch23a2l0h67f0lpy1kw5kdpz";
   };
 
   leafConfig = pkgs.writeText "leaf.json" ''
