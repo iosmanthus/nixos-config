@@ -20,14 +20,15 @@ def main():
     try:
         config_file = sys.argv[1]
         rule_dir = sys.argv[2]
-        sub_link = sys.argv[3]
-    except IndexError:
-        print('Usage: update_sub.py <config_file> <rule_dir> <sub_link>')
+        sub_links = sys.argv[3:]
+    except Exception:
+        print('Usage: update_sub.py <config_file> <rule_dir> <sub_links>...')
         sys.exit(1)
 
-    m = get_sub(sub_link)
+    proxies = []
+    for sub in sub_links:
+        proxies += get_sub(sub)['proxies']
 
-    proxies = m['proxies']
     m = {}
     m['proxies'] = proxies
     m['port'] = 80
