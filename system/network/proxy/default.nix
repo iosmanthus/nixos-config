@@ -19,9 +19,6 @@ let
     sha256 = "1zsbsz7i7nqg7x7cm22wgg8hnxdl28ypm5za1pfh3951q90x1wmf";
   };
 
-  clashConfig = config.sops.secrets.clash-config.path;
-  clashRules = ../../../secrets/proxy/ruleset;
-
   yacdImage = "haishanh/yacd";
 
   yacdImageFile = pkgs.dockerTools.pullImage {
@@ -71,7 +68,7 @@ in
       v2ray = rec {
         image = v2rayImage;
         imageFile = v2rayImageFile;
-        workdir = "/etc/v2ray";
+        workdir = "/var/run/v2ray";
         cmd = [ "xray" "run" "-confdir" "./" ];
         volumes = [
           "${config.sops.secrets.v2ray-config.path}:${workdir}/config.json"
@@ -89,12 +86,13 @@ in
       clash = rec {
         image = clashImage;
         imageFile = clashImageFile;
-        workdir = "/etc/clash";
+        workdir = "/var/run/clash";
         cmd = [ "-d" "./" ];
         volumes = [
-          "${clashConfig}:${workdir}/config.yaml"
-          "${clashRules}:${workdir}/ruleset"
+          "${config.sops.secrets.clash-config.path}:${workdir}/config.yaml"
+          "${pkgs.clash-rules}:${workdir}/ruleset"
           "${pkgs.mmdb}:${workdir}/Country.mmdb"
+          "${config.users.users.${config.machine.userName}.home}/.cache/clash:${workdir}"
         ];
         inherit environment;
         extraOptions = [

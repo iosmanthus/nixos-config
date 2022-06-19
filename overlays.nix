@@ -42,4 +42,6 @@ with super;
   apple-fonts = super.callPackage ./packages/apple-fonts.nix { };
 
   sf-mono = super.callPackage ./packages/sf-mono.nix { };
+
+  clash-rules = super.callPackage ./packages/clash-rules.nix { };
 }
