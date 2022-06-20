@@ -15,4 +15,4 @@ s = base_url + "?code=" + quote(code_url)
 for link in sub_links:
     s += "&sub=" + quote(link)
 
-print(s)
+print('\n' + s)
