@@ -23,6 +23,8 @@ in
     ./vscode
   ];
 
+  home.stateVersion = "18.09";
+
   home.packages = with pkgs; [
     gh
     cloc
