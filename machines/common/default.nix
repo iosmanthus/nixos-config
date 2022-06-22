@@ -32,5 +32,8 @@ with lib;
     shell = mkOption {
       type = types.package;
     };
+    gpgPubKey = mkOption {
+      type = types.str;
+    };
   };
 }

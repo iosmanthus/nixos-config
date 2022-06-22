@@ -63,8 +63,8 @@
     {
       name = "go";
       publisher = "golang";
-      version = "0.33.1";
-      sha256 = "0dsjxs04dchw1dbzf45ryhxsb5xhalqwy40xw6cngxkp69lhf91g";
+      version = "0.34.0";
+      sha256 = "1yjrzgz03623ij3sqb00wgs6fi5akw27qxwfcmbh6qr8cxnwzyy5";
     }
     {
       name = "haskell";
@@ -135,8 +135,8 @@
     {
       name = "even-better-toml";
       publisher = "tamasfe";
-      version = "0.16.3";
-      sha256 = "1w0pmspl5xpxj3h9lh0ypv1p1wwwmik0m0ywkyjnqq03zy5zwh1x";
+      version = "0.16.4";
+      sha256 = "0pxrky5v9d9zxbfya7cyv8m2y260x9dmlinm4ybpxnw9j9v5xvfh";
     }
     {
       name = "vim";

@@ -47,7 +47,7 @@ in
     };
     tun = {
       name = "utun8";
-      fakeDnsExclude = [ "pingcap.net" "ntp" ];
+      fakeDnsExclude = [ "pingcap.net" "ntp" "keyserver.ubuntu.com" ];
     };
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };
