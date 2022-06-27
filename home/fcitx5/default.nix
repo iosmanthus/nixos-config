@@ -6,6 +6,7 @@
 with lib ;
 let
   fcitx5Home = "${config.xdg.configHome}/fcitx5";
+  fcitx5Package = pkgs.fcitx5-with-addons;
 in
 {
 
@@ -14,7 +15,11 @@ in
     fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
   };
 
-  home.packages = with pkgs;[
+  home.sessionVariables = {
+    QT_PLUGIN_PATH = [ "${fcitx5Package}/${pkgs.qt6.qtbase.qtPluginPrefix}" ];
+  };
+
+  home.packages = with pkgs; [
     fcitx5-configtool
   ];
 

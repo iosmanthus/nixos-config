@@ -7,8 +7,8 @@ let
 
   v2rayImageFile = pkgs.dockerTools.pullImage {
     imageName = "${v2rayImage}";
-    imageDigest = "sha256:3765e7940f414d4ebbf1eb5f4f624c60cc92212737bca68ff5fdb18b1371dfd2";
-    sha256 = "166mhlyismfpyp15dv1zcnwfby3n72ckfz71j57d5q2qrylg0jc1";
+    imageDigest = "sha256:174797b48525450ba8dbabfa667cc23e398d0e35c812e6cf0a81583695bde606";
+    sha256 = "1im9xyf3r40scp44bzglsqdlilkrck9405izfpyzy6kmxs3sq0wb";
   };
 
   clashImage = "dreamacro/clash-premium";
@@ -42,7 +42,7 @@ in
     enable = true;
     proxy = {
       type = "socks";
-      address = "172.18.0.2";
+      address = "172.18.0.3";
       port = 1080;
     };
     tun = {

@@ -35,7 +35,7 @@
         mkOverlay {
           branch = mkBranch system "stable";
           packages = [
-            "tdesktop"
+            #"tdesktop"
           ];
         }
       );
@@ -52,7 +52,7 @@
             "gh"
             "google-chrome"
             "i3"
-            "jetbrains"
+            #"jetbrains"
             "kitty"
             "neovim"
             "nixUnstable"
@@ -64,6 +64,7 @@
             "rofi"
             "sops"
             "starship"
+            #"tdesktop"
             "tmux"
             "vscode-extensions"
             "vscode"
