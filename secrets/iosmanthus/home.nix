@@ -49,7 +49,7 @@ in
         trust = "ultimate";
       }
       {
-        # iosmanthus@myosmanthustree@gmail.com
+        # iosmanthus@dengliming@pingcap.com
         text = ''
           -----BEGIN PGP PUBLIC KEY BLOCK-----
 

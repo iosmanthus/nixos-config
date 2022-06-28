@@ -20,7 +20,14 @@
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
+      http-connections = 16
+      keep-going = true
+      download-attempts = 2
+      connect-timeout = 5
     '';
+    settings = {
+      substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+    };
     gc = {
       dates = "weekly";
       automatic = true;
