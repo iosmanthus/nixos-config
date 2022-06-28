@@ -52,7 +52,7 @@
             "gh"
             "google-chrome"
             "i3"
-            #"jetbrains"
+            "jetbrains"
             "kitty"
             "neovim"
             "nixUnstable"
