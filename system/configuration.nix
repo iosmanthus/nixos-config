@@ -22,6 +22,7 @@
       experimental-features = nix-command flakes
       http-connections = 16
       keep-going = true
+      http2 = false
       download-attempts = 2
       connect-timeout = 5
     '';
