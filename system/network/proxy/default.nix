@@ -40,15 +40,24 @@ in
 
   services.leaf-tun = {
     enable = true;
-    proxy = {
+
+    tcpProxy = {
       type = "socks";
       address = "172.18.0.3";
       port = 1080;
     };
+
+    udpProxy = {
+      type = "socks";
+      address = "172.18.0.2";
+      port = 1080;
+    };
+
     tun = {
       name = "utun8";
       fakeDnsExclude = [ "pingcap.net" "ntp" "keyserver.ubuntu.com" ];
     };
+
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };
 

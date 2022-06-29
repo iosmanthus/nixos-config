@@ -153,7 +153,19 @@ let
                     "external": [
                         "site:${geosite}:geolocation-!cn"
                     ],
-                    "target": "proxy"
+                    "networks": [
+                        "tcp"
+                    ],
+                    "target": "tcpProxy"
+                },
+                {
+                    "external": [
+                        "site:${geosite}:geolocation-!cn"
+                    ],
+                    "networks": [
+                        "udp"
+                    ],
+                    "target": "udpProxy"
                 },
                 {
                     "external": [
@@ -169,10 +181,16 @@ let
                     "target": "direct"
                 },
                 {
-                    "inboundTag": [
-                        "tun"
+                    "networks": [
+                        "tcp"
                     ],
-                    "target": "proxy"
+                    "target": "tcpProxy"
+                },
+                {
+                    "networks": [
+                        "udp"
+                    ],
+                    "target": "udpProxy"
                 }
             ]
         },
@@ -192,11 +210,19 @@ let
         ],
         "outbounds": [
             {
-                "tag": "proxy",
-                "protocol": "${cfg.proxy.type}",
+                "tag": "tcpProxy",
+                "protocol": "${cfg.tcpProxy.type}",
                 "settings": {
-                    "address": "${cfg.proxy.address}",
-                    "port": ${toString cfg.proxy.port}
+                    "address": "${cfg.tcpProxy.address}",
+                    "port": ${toString cfg.tcpProxy.port}
+                }
+            },
+            {
+                "tag": "udpProxy",
+                "protocol": "${cfg.udpProxy.type}",
+                "settings": {
+                    "address": "${cfg.udpProxy.address}",
+                    "port": ${toString cfg.udpProxy.port}
                 }
             },
             {
@@ -250,8 +276,13 @@ in
     };
 
 
-    proxy = mkOption {
+    tcpProxy = mkOption {
       type = types.submodule proxyOptions;
+    };
+
+    udpProxy = mkOption {
+      type = types.submodule proxyOptions;
+      default = cfg.tcpProxy;
     };
 
     user = mkOption {

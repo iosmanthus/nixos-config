@@ -7,6 +7,11 @@ in
     nixpkgs-fmt
     rnix-lsp
   ];
+
+  home.sessionVariables = {
+    EDITOR = "code --wait";
+  };
+
   programs.vscode = {
     enable = true;
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
