@@ -35,7 +35,7 @@
         mkOverlay {
           branch = mkBranch system "stable";
           packages = [
-            #"tdesktop"
+            "tdesktop"
           ];
         }
       );
@@ -64,7 +64,6 @@
             "rofi"
             "sops"
             "starship"
-            #"tdesktop"
             "tmux"
             "vscode-extensions"
             "vscode"

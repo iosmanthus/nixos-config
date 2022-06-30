@@ -15,9 +15,9 @@ in
     fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
   };
 
-  home.sessionVariables = {
-    QT_PLUGIN_PATH = [ "${fcitx5Package}/${pkgs.qt6.qtbase.qtPluginPrefix}" ];
-  };
+  # home.sessionVariables = {
+  #   QT_PLUGIN_PATH = [ "${fcitx5Package}/${pkgs.qt6.qtbase.qtPluginPrefix}" ];
+  # };
 
   home.packages = with pkgs; [
     fcitx5-configtool
