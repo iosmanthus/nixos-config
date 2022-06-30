@@ -26,9 +26,6 @@
       download-attempts = 2
       connect-timeout = 5
     '';
-    settings = {
-      substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
-    };
     gc = {
       dates = "weekly";
       automatic = true;
