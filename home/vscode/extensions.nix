@@ -37,12 +37,6 @@
       sha256 = "0i1wxgc61rrf11zff0481dg9s2lmv1ngpwx8nb2ygf6lh0axr7cj";
     }
     {
-      name = "vsc-community-material-theme";
-      publisher = "Equinusocio";
-      version = "1.4.4";
-      sha256 = "005l4pr9x3v6x8450jn0dh7klv0pv7gv7si955r7b4kh19r4hz9y";
-    }
-    {
       name = "shell-format";
       publisher = "foxundermoon";
       version = "7.2.2";
@@ -115,10 +109,10 @@
       sha256 = "1ssh5d4kn3b57gfw5w99pp3xybdk2xif8z6l7m3y2qf204wd1hsd";
     }
     {
-      name = "material-icon-theme";
-      publisher = "PKief";
-      version = "4.18.1";
-      sha256 = "1mp504i45dy4fx07m921mmzsrblhvkhslm5skq8vv36qfpazivl3";
+      name = "vsc-material-theme-icons";
+      publisher = "equinusocio";
+      version = "2.3.1";
+      sha256 = "1djm4k3hcn4aq63d4mxs2n4ffq5x1qr82q6gxwi5pmabrb0hrb30";
     }
     {
       name = "vscode-commons";
@@ -155,6 +149,12 @@
       publisher = "zxh404";
       version = "0.5.5";
       sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
+    }
+    {
+      name = "gruvbox-material";
+      publisher = "sainnhe";
+      version = "6.5.0";
+      sha256 = "1r9kgwrh6jjp8i6aa07prhrb398d5isf9ics4wmdbvd6k0gnzf8n";
     }
   ];
 }

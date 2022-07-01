@@ -99,8 +99,8 @@ in
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
 
-      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
-      "workbench.iconTheme" = "material-icon-theme";
+      "workbench.colorTheme" = "Gruvbox Material Dark";
+      "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;
       "redhat.telemetry.enabled" = false;

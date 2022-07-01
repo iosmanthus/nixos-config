@@ -1,4 +1,5 @@
-{ pkgs
+{ config
+, pkgs
 , ...
 }: {
   imports = [
@@ -32,6 +33,7 @@
     displayManager = {
       lightdm = {
         enable = true;
+        background = builtins.toPath "${config.users.users.${config.machine.userName}.home}/.background-image";
         greeters.gtk = {
           enable = true;
           cursorTheme = {
