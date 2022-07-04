@@ -46,6 +46,7 @@ in
       "extensions.autoUpdate" = false;
       "security.workspace.trust.enabled" = false;
       "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+      "rust-analyzer.cargo.buildScripts.enable" = true;
       "python.formatting.yapfPath" = "${pkgs.yapf}/bin/yapf";
       "python.formatting.provider" = "yapf";
 

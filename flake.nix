@@ -70,6 +70,7 @@
             "zoom-us"
             "zoxide"
             "zsh"
+            #"rust-analyzer"
           ];
         });
 

@@ -151,22 +151,22 @@ let
         bars = lib.mkForce [ ];
       };
     extraConfig = ''
-      set $base00 #212121
-      set $base01 #303030
-      set $base02 #353535
-      set $base03 #4A4A4A
-      set $base04 #B2CCD6
-      set $base05 #EEFFFF
-      set $base06 #EEFFFF
-      set $base07 #FFFFFF
-      set $base08 #F07178
-      set $base09 #F78C6C
-      set $base0A #FFCB6B
-      set $base0B #C3E88D
-      set $base0C #89DDFF
-      set $base0D #82AAFF
-      set $base0E #C792EA
-      set $base0F #FF5370
+      set $base00 #292828
+      set $base01 #3c3836
+      set $base02 #504945
+      set $base03 #665c54
+      set $base04 #bdae93
+      set $base05 #d5c4a1
+      set $base06 #ebdbb2
+      set $base07 #fbf1c7
+      set $base08 #fb4934
+      set $base09 #fe8019
+      set $base0A #fabd2f
+      set $base0B #b8bb26
+      set $base0C #8ec07c
+      set $base0D #83a598
+      set $base0E #d3869b
+      set $base0F #d65d0e
 
       # Basic color configuration using the Base16 variables for windows and borders.
       # Property Name         Border  BG      Text    Indicator Child Border

@@ -20,22 +20,22 @@ in
     };
     enable = true;
     script = ''
-      export COLOR_BASE00=#212121
-      export COLOR_BASE01=#303030
-      export COLOR_BASE02=#353535
-      export COLOR_BASE03=#4A4A4A
-      export COLOR_BASE04=#B2CCD6
-      export COLOR_BASE05=#EEFFFF
-      export COLOR_BASE06=#EEFFFF
-      export COLOR_BASE07=#FFFFFF
-      export COLOR_BASE08=#F07178
-      export COLOR_BASE09=#F78C6C
-      export COLOR_BASE0A=#FFCB6B
-      export COLOR_BASE0B=#C3E88D
-      export COLOR_BASE0C=#89DDFF
-      export COLOR_BASE0D=#82AAFF
-      export COLOR_BASE0E=#C792EA
-      export COLOR_BASE0F=#FF5370
+      export COLOR_BASE00=#292828
+      export COLOR_BASE01=#3c3836
+      export COLOR_BASE02=#504945
+      export COLOR_BASE03=#665c54
+      export COLOR_BASE04=#bdae93
+      export COLOR_BASE05=#d5c4a1
+      export COLOR_BASE06=#ebdbb2
+      export COLOR_BASE07=#fbf1c7
+      export COLOR_BASE08=#fb4934
+      export COLOR_BASE09=#fe8019
+      export COLOR_BASE0A=#fabd2f
+      export COLOR_BASE0B=#b8bb26
+      export COLOR_BASE0C=#8ec07c
+      export COLOR_BASE0D=#83a598
+      export COLOR_BASE0E=#d3869b
+      export COLOR_BASE0F=#d65d0e
 
       export NETWORK_LABEL_CONNECTED="%essid% %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{F$COLOR_BASE0E}%signal%%%{F-}"
       export DATE_LABEL="%date% %{F$COLOR_BASE0C}%time%%{F-}"
@@ -50,22 +50,22 @@ in
       ${playerMprisSimpleModule}
 
       [colors]
-      base00=#212121
-      base01=#303030
-      base02=#353535
-      base03=#4A4A4A
-      base04=#B2CCD6
-      base05=#EEFFFF
-      base06=#EEFFFF
-      base07=#FFFFFF
-      base08=#F07178
-      base09=#F78C6C
-      base0A=#FFCB6B
-      base0B=#C3E88D
-      base0C=#89DDFF
-      base0D=#82AAFF
-      base0E=#C792EA
-      base0F=#FF5370
+      base00=#292828
+      base01=#3c3836
+      base02=#504945
+      base03=#665c54
+      base04=#bdae93
+      base05=#d5c4a1
+      base06=#ebdbb2
+      base07=#fbf1c7
+      base08=#fb4934
+      base09=#fe8019
+      base0A=#fabd2f
+      base0B=#b8bb26
+      base0C=#8ec07c
+      base0D=#83a598
+      base0E=#d3869b
+      base0F=#d65d0e
 
       [bar/main]
       width = 100%
