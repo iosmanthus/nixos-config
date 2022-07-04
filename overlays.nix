@@ -25,8 +25,6 @@ with super;
 
   yesplaymusic = super.callPackage ./packages/yesplaymusic.nix { };
 
-  base16-kitty = super.callPackage ./packages/base16-kitty.nix { };
-
   base16-rofi = super.callPackage ./packages/base16-rofi.nix { };
 
   fcitx5-material-color = super.callPackage ./packages/fcitx5-material-color.nix { };
@@ -44,4 +42,6 @@ with super;
   sf-mono = super.callPackage ./packages/sf-mono.nix { };
 
   clash-rules = super.callPackage ./packages/clash-rules.nix { };
+
+  kitty-themes = super.callPackage ./packages/kitty-themes.nix { };
 }

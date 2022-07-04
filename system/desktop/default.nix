@@ -33,7 +33,7 @@
     displayManager = {
       lightdm = {
         enable = true;
-        background = builtins.toPath "${config.users.users.${config.machine.userName}.home}/.background-image";
+        background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
         greeters.gtk = {
           enable = true;
           cursorTheme = {

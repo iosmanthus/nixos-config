@@ -58,7 +58,6 @@ in
       "vim.debug.silent" = true;
       "vim.easymotion" = true;
       "vim.enableNeovim" = true;
-      "vim.easymotionMarkerFontFamily" = "monospace";
       "vim.handleKeys" = {
         "<C-a>" = false;
         "<C-c>" = false;

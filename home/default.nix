@@ -2,13 +2,7 @@
 , config
 , pkgs
 , ...
-}:
-
-let
-  mkKittyBase16Theme = name:
-    "${pkgs.base16-kitty}/share/base16-kitty/colors/base16-${name}.conf";
-in
-{
+}: {
   imports = [
     ./firefox.nix
     ./media.nix
@@ -110,7 +104,7 @@ in
     enable = true;
     font = { name = "monospace"; };
     settings = {
-      include = mkKittyBase16Theme "material-darker";
+      include = pkgs.kitty-themes.mkKittyBase16Theme "gruvbox-material-dark-medium";
     };
   };
 
