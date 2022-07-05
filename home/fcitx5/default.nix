@@ -6,7 +6,7 @@
 with lib ;
 let
   fcitx5Home = "${config.xdg.configHome}/fcitx5";
-  fcitx5Package = pkgs.fcitx5-with-addons;
+  # fcitx5Package = pkgs.fcitx5-with-addons;
 in
 {
 

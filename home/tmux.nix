@@ -20,7 +20,7 @@
           rtpFilePath = "tmuxcolors.tmux";
         };
         extraConfig = ''
-          set -g @colors-base16 'gruvbox-dark-medium'
+          set -g @colors-base16 'material-darker'
         '';
       }
       {

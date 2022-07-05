@@ -99,7 +99,7 @@ in
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
 
-      "workbench.colorTheme" = "Gruvbox Material Dark";
+      "workbench.colorTheme" = "Material Theme Darker";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;

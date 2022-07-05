@@ -104,7 +104,7 @@
     enable = true;
     font = { name = "monospace"; };
     settings = {
-      include = pkgs.kitty-themes.mkKittyBase16Theme "gruvbox-material-dark-medium";
+      include = pkgs.kitty-themes.mkKittyTheme "base16-material-darker";
     };
   };
 

@@ -28,7 +28,7 @@ stdenv.mkDerivation {
   ];
 
   passthru = {
-    mkKittyBase16Theme = name: "${pkgs.kitty-themes}/colors/${name}.conf";
+    mkKittyTheme = name: "${pkgs.kitty-themes}/colors/${name}.conf";
   };
 
   dontUnpack = true;

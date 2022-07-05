@@ -7,12 +7,6 @@
       sha256 = "17b7m50z0fbifs8azgn6ygcmgwclssilw9j8nb178szd6zrjz2vf";
     }
     {
-      name = "vscode-theme-onedark";
-      publisher = "akamud";
-      version = "2.2.3";
-      sha256 = "1m6f6p7x8vshhb03ml7sra3v01a7i2p3064mvza800af7cyj3w5m";
-    }
-    {
       name = "markdown-preview-github-styles";
       publisher = "bierner";
       version = "1.0.1";
@@ -47,12 +41,6 @@
       publisher = "GitHub";
       version = "1.30.6165";
       sha256 = "193bvmp027lp2gabwg5zknq69lalk9di4y72pkik8gssk11373nr";
-    }
-    {
-      name = "github-vscode-theme";
-      publisher = "GitHub";
-      version = "6.0.0";
-      sha256 = "1vakkwnw43my74j7yjp30kfmmbc37jmr3qia5lvg8sbws3fq40jj";
     }
     {
       name = "go";
@@ -115,6 +103,12 @@
       sha256 = "1djm4k3hcn4aq63d4mxs2n4ffq5x1qr82q6gxwi5pmabrb0hrb30";
     }
     {
+      name = "vsc-material-theme";
+      publisher = "equinusocio";
+      version = "33.5.0";
+      sha256 = "1pr98mx7hji8jlm6ppac693ivbcpybh043w2z8sa3f49v7pksnrf";
+    }
+    {
       name = "vscode-commons";
       publisher = "redhat";
       version = "0.0.6";
@@ -149,12 +143,6 @@
       publisher = "zxh404";
       version = "0.5.5";
       sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
-    }
-    {
-      name = "gruvbox-material";
-      publisher = "sainnhe";
-      version = "6.5.0";
-      sha256 = "1r9kgwrh6jjp8i6aa07prhrb398d5isf9ics4wmdbvd6k0gnzf8n";
     }
   ];
 }
