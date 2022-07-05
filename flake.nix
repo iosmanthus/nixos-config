@@ -90,6 +90,7 @@
             home-manager = {
               sharedModules = [
                 ./modules/immutable-file.nix
+                ./modules/mutable-vscode-ext.nix
                 (builtins.toPath ./.
                   + "/machines/${config.machine.userName}.nix")
               ];

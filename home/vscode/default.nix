@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs
+, lib
+, ...
+}:
 let
   fcitx = "${pkgs.fcitx5}/bin/fcitx5-remote";
 in
@@ -14,6 +17,13 @@ in
 
   programs.vscode = {
     enable = true;
+    mutableExtensions = [
+      {
+        publisher = "Equinusocio";
+        name = "vsc-material-theme";
+        version = "33.5.0";
+      }
+    ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
       (
         (import ./extensions.nix).extensions

@@ -34,6 +34,7 @@
     xfce.thunar
     xfce.xfce4-taskmanager
     gnome.gnome-font-viewer
+    gnome.seahorse
     imagemagick
     geoipWithDatabase
     peek

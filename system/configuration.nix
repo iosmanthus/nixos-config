@@ -88,6 +88,8 @@
     lidSwitch = "suspend-then-hibernate";
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   # Enable blueman.
   services.blueman.enable = true;
 

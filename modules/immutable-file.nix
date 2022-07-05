@@ -1,4 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 with lib;
 let
   cfg = config.home.immutable-file;
@@ -13,8 +17,10 @@ let
     };
   };
   mkImmutableFile = pkgs.writeScript "make_immutable_file" ''
-    if [ ! -d "$(dirname $dst)" ]; then
-      mkdir -p $dst
+    # $1: dst
+    # $2: src
+    if [ ! -d "$(dirname $1)" ]; then
+      mkdir -p $1
     fi
 
     if [ -f $1 ]; then

@@ -103,12 +103,6 @@
       sha256 = "1djm4k3hcn4aq63d4mxs2n4ffq5x1qr82q6gxwi5pmabrb0hrb30";
     }
     {
-      name = "vsc-material-theme";
-      publisher = "equinusocio";
-      version = "33.5.0";
-      sha256 = "1pr98mx7hji8jlm6ppac693ivbcpybh043w2z8sa3f49v7pksnrf";
-    }
-    {
       name = "vscode-commons";
       publisher = "redhat";
       version = "0.0.6";
