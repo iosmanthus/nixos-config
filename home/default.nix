@@ -124,4 +124,10 @@
       "move_right" = "l";
     };
   };
+
+
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 }

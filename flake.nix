@@ -2,7 +2,7 @@
   description = "iosmanthus 💓 NixOS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs?rev=0c3bf3a5c3ab6be29138b88900c417660a284fbd";
+    telegram-stable.url = "github:NixOS/nixpkgs?rev=0c3bf3a5c3ab6be29138b88900c417660a284fbd";
     master.url = "github:NixOS/nixpkgs/master";
     sops-nix.url = "github:Mic92/sops-nix/master";
     home-manager = {
@@ -15,12 +15,15 @@
       url = "github:iosmanthus/nixos-vscode-server/add-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur.url = github:nix-community/NUR;
   };
   outputs =
     { nixpkgs
     , flake-utils
     , home-manager
     , sops-nix
+    , nur
     , ...
     }@inputs:
     let
@@ -33,7 +36,7 @@
 
       mkStableOverlay = (system: _self: _super:
         mkOverlay {
-          branch = mkBranch system "stable";
+          branch = mkBranch system "telegram-stable";
           packages = [
             "tdesktop"
           ];
@@ -102,7 +105,7 @@
           {
             nixpkgs.overlays =
               map (mkBuilder: mkBuilder system) [ mkMasterOverlay mkStableOverlay ]
-              ++ [ (import ./overlays.nix) ];
+              ++ [ (import ./overlays.nix) nur.overlay ];
           }
         ];
     in
