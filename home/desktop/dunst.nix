@@ -1,6 +1,40 @@
 { pkgs
 , ...
 }: {
+  # Fix notification disappeared.
+  systemd.user = {
+    services = {
+      restart-dunst = {
+        Unit = {
+          Description = "Restart dunst";
+          Requires = "dunst.service";
+          After = "dunst.service";
+        };
+
+        Service = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.systemd}/bin/systemctl restart --user dunst.service";
+        };
+      };
+    };
+    timers = {
+      restart-dunst = {
+        Unit = {
+          Description = "Timer for restart-dunst";
+        };
+
+        Timer = {
+          AccuracySec = "1s";
+          OnUnitActiveSec = "1h";
+        };
+
+        Install = {
+          WantedBy = [ "timers.target" ];
+        };
+      };
+    };
+  };
+
   services.dunst = {
     enable = true;
     settings = {

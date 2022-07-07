@@ -58,7 +58,6 @@
             "jetbrains"
             "kitty"
             "neovim"
-            "nixUnstable"
             "notion-app-enhanced"
             "oh-my-zsh"
             "polybar"
@@ -73,7 +72,6 @@
             "zoom-us"
             "zoxide"
             "zsh"
-            #"rust-analyzer"
           ];
         });
 
