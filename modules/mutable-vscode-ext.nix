@@ -26,7 +26,9 @@ in
   config = mkIf (config.programs.vscode.enable && config.programs.vscode.mutableExtensionsDir) {
     home.activation = {
       installMutableExtensions = hm.dag.entryAfter [ "writeBoundary" ] ''
-        exts=${toString (builtins.map ({name,publisher,version}: "${publisher}.${name}@${version}") cfg)}
+        exts=${toString (builtins.map (
+          {publisher, name, version}: "${publisher}.${name}@${version}") 
+        cfg)}
         for ext in $(echo $exts | sed 's/ /\n/g'); do
           code --install-extension $ext
         done

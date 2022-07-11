@@ -68,6 +68,7 @@ in
       "vim.debug.silent" = true;
       "vim.easymotion" = true;
       "vim.enableNeovim" = true;
+      "vim.neovimPath" = "${pkgs.neovim}/bin/nvim";
       "vim.handleKeys" = {
         "<C-a>" = false;
         "<C-c>" = false;
