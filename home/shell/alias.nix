@@ -34,6 +34,9 @@
       disconnect-xm3 = "bluetoothctl disconnect 38:18:4C:F9:98:A9";
       disconnect-jbl = "bluetoothctl disconnect 70:99:1C:7F:E3:EF";
 
+      jctl = "journalctl";
+      juctl = "journalctl --user";
+
       i3-logout = "i3-msg exit";
 
       dig = "dig +ttlunits";
