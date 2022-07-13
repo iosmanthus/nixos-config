@@ -79,6 +79,9 @@ in
         Type = "simple";
         ExecStart = "${importGPGKeys}";
       };
+      Install = {
+        WantedBy = [ "sockets.target" ];
+      };
     };
   };
 }

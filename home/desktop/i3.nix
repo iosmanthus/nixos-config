@@ -119,7 +119,7 @@ let
         assigns = {
           "1: work" = [{ class = "^firefox$"; }];
           "2: vm" = [{ class = "^Remote-viewer$"; }];
-          "4: mail" = [{ class = "^Thunderbird$"; }];
+          "4: mail" = [{ class = "^thunderbird$"; }];
         };
         startup = [
           {
