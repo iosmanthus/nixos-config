@@ -21,8 +21,13 @@ in
           Type = "oneshot";
           ExecStart = "${pkgs.systemd}/bin/systemctl restart --user dunst.service";
         };
+
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
       };
     };
+
     timers = {
       restart-dunst = {
         Unit = {

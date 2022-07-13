@@ -50,6 +50,7 @@
     google-chrome
     tdesktop
     slack
+    unzip
     wireguard-tools
     notion-app-enhanced
   ] ++ (with pkgs.jetbrains ;[
