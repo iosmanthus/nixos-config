@@ -17,33 +17,33 @@ with super;
     sha256 = "1vhygp5pvkx4jq0m69v9xcxxic52ih98rlz5hq0s4fzqp12pnis0";
   };
 
-  leaf = super.callPackage ./packages/leaf.nix { };
+  leaf = callPackage ./packages/leaf.nix { };
 
-  polybar-fonts = super.callPackage ./packages/polybar-fonts.nix { };
+  polybar-fonts = callPackage ./packages/polybar-fonts.nix { };
 
-  tun2socks = super.callPackage ./packages/tun2socks.nix { };
+  tun2socks = callPackage ./packages/tun2socks.nix { };
 
-  yesplaymusic = super.callPackage ./packages/yesplaymusic.nix { };
+  yesplaymusic = callPackage ./packages/yesplaymusic.nix { };
 
-  base16-rofi = super.callPackage ./packages/base16-rofi.nix { };
+  base16-rofi = callPackage ./packages/base16-rofi.nix { };
 
-  fcitx5-material-color = super.callPackage ./packages/fcitx5-material-color.nix { };
+  fcitx5-material-color = callPackage ./packages/fcitx5-material-color.nix { };
 
-  fcitx5-adwaita-dark = super.callPackage ./packages/fcitx5-adwaita-dark.nix { };
+  fcitx5-adwaita-dark = callPackage ./packages/fcitx5-adwaita-dark.nix { };
 
-  fcitx5-pinyin-zhwiki = super.callPackage ./packages/fcitx5-pinyin-zhwiki.nix { };
+  fcitx5-pinyin-zhwiki = callPackage ./packages/fcitx5-pinyin-zhwiki.nix { };
 
-  lxgw-wenkai = super.callPackage ./packages/lxgw-wenkai.nix { };
+  lxgw-wenkai = callPackage ./packages/lxgw-wenkai.nix { };
 
-  segoe-ui = super.callPackage ./packages/segoe-ui.nix { };
+  segoe-ui = callPackage ./packages/segoe-ui.nix { };
 
-  apple-fonts = super.callPackage ./packages/apple-fonts.nix { };
+  apple-fonts = callPackage ./packages/apple-fonts.nix { };
 
-  sf-mono = super.callPackage ./packages/sf-mono.nix { };
+  sf-mono = callPackage ./packages/sf-mono.nix { };
 
-  clash-rules = super.callPackage ./packages/clash-rules.nix { };
+  clash-rules = callPackage ./packages/clash-rules.nix { };
 
-  kitty-themes = super.callPackage ./packages/kitty-themes.nix { };
+  kitty-themes = callPackage ./packages/kitty-themes.nix { };
 
   rust-analyzer-unwrapped = rust-analyzer-unwrapped.overrideAttrs (old: rec {
     version = "2022-07-04";

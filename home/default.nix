@@ -20,6 +20,7 @@
   home.stateVersion = "18.09";
 
   home.packages = with pkgs; [
+    ascii
     gh
     cloc
     tree
