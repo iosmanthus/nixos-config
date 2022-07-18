@@ -176,7 +176,7 @@ let
                 },
                 {
                     "external": [
-                        "mmdb:${pkgs.mmdb}:cn"
+                        "mmdb:${pkgs.clash-data.mmdbPath}:cn"
                     ],
                     "target": "direct"
                 },

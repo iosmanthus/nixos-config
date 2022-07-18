@@ -12,11 +12,6 @@ with super;
     outputHash = "034bwbl616vzl7lhcbvyz9dzmpzwi12vca3r5mszdxqh3z3s1g6a";
   });
 
-  mmdb = builtins.fetchurl {
-    url = "https://github.com/Dreamacro/maxmind-geoip/releases/download/20220512/Country.mmdb";
-    sha256 = "1vhygp5pvkx4jq0m69v9xcxxic52ih98rlz5hq0s4fzqp12pnis0";
-  };
-
   leaf = callPackage ./packages/leaf.nix { };
 
   polybar-fonts = callPackage ./packages/polybar-fonts.nix { };
@@ -41,7 +36,7 @@ with super;
 
   sf-mono = callPackage ./packages/sf-mono.nix { };
 
-  clash-rules = callPackage ./packages/clash-rules.nix { };
+  clash-data = callPackage ./packages/clash-data.nix { };
 
   kitty-themes = callPackage ./packages/kitty-themes.nix { };
 

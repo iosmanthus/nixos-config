@@ -99,8 +99,8 @@ in
         cmd = [ "-d" "./" ];
         volumes = [
           "${config.sops.secrets.clash-config.path}:${workdir}/config.yaml"
-          "${pkgs.clash-rules}:${workdir}/ruleset"
-          "${pkgs.mmdb}:${workdir}/Country.mmdb"
+          "${pkgs.clash-data.rulesPath}:${workdir}/ruleset"
+          "${pkgs.clash-data.mmdbPath}:${workdir}/Country.mmdb"
           "${config.users.users.${config.machine.userName}.home}/.cache/clash:${workdir}"
         ];
         inherit environment;
