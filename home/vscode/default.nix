@@ -114,6 +114,7 @@ in
 
       "nix.enableLanguageServer" = true;
       "redhat.telemetry.enabled" = false;
+      "cmake.configureOnOpen" = true;
     };
   };
 }
