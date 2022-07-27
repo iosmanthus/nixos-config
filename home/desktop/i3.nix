@@ -123,6 +123,10 @@ let
         };
         startup = [
           {
+            command = "fcitx5 -dr";
+            always = true;
+          }
+          {
             command = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
             always = true;
           }

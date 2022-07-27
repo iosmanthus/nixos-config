@@ -17,6 +17,11 @@
     enable = true;
   };
 
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
+  };
+
   services.xserver = {
     enable = true;
     layout = "us";
@@ -54,6 +59,7 @@
       };
       defaultSession = "none+i3";
     };
+
     windowManager.i3 = { enable = true; };
   };
 
