@@ -56,4 +56,6 @@ with super;
     });
 
   });
+
+  python3Builder = callPackage ./packages/python3-builder.nix { };
 }

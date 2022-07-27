@@ -8,7 +8,7 @@ stdenv.mkDerivation {
 
   version = "unstable-2022-07-02";
 
-  src = [
+  srcs = [
     (
       fetchFromGitHub {
         owner = "kdrag0n";
@@ -35,7 +35,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/colors
-    for s in $src; do
+    for s in $srcs; do
       cp $s/colors/* $out/colors/
     done
   '';

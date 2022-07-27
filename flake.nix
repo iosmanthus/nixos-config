@@ -37,7 +37,7 @@
         mkOverlay {
           branch = mkBranch system "telegram-stable";
           packages = [
-            "tdesktop"
+            #"tdesktop"
           ];
         }
       );
