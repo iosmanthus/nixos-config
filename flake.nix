@@ -1,9 +1,10 @@
 {
   description = "iosmanthus 💓 NixOS";
   inputs = {
-    telegram-stable.url = "github:NixOS/nixpkgs?rev=0c3bf3a5c3ab6be29138b88900c417660a284fbd";
     master.url = "github:NixOS/nixpkgs/master";
+
     sops-nix.url = "github:Mic92/sops-nix/master";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,15 +33,6 @@
         inherit system;
         config.allowUnfree = true;
       };
-
-      mkStableOverlay = (system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "telegram-stable";
-          packages = [
-            #"tdesktop"
-          ];
-        }
-      );
 
       mkMasterOverlay = (system: _self: _super:
         mkOverlay {
@@ -101,7 +93,7 @@
           })
           {
             nixpkgs.overlays =
-              map (mkBuilder: mkBuilder system) [ mkMasterOverlay mkStableOverlay ]
+              map (mkBuilder: mkBuilder system) [ mkMasterOverlay ]
               ++ [ (import ./overlays.nix) nur.overlay ];
           }
         ];
