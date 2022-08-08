@@ -40,22 +40,5 @@ with super;
 
   kitty-themes = callPackage ./packages/kitty-themes.nix { };
 
-  rust-analyzer-unwrapped = rust-analyzer-unwrapped.overrideAttrs (old: rec {
-    version = "2022-07-04";
-    src = fetchFromGitHub {
-      owner = "rust-lang";
-      repo = "rust-analyzer";
-      rev = version;
-      sha256 = "sha256-NlRtzurOh6u2FNy9H8CIJE+1pDB9M4J70YsJIKsh1iA=";
-    };
-
-    cargoDeps = old.cargoDeps.overrideAttrs (lib.const {
-      name = "rust-analyzer-vendor.tar.gz";
-      inherit src;
-      outputHash = "15xczaqrrqr1cs69gppxywzcv1vyq4yb64d1am8sxcnlzmfip4i8";
-    });
-
-  });
-
   python3Builder = callPackage ./packages/python3-builder.nix { };
 }

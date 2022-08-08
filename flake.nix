@@ -55,6 +55,7 @@
             "ripgrep"
             "rnix-lsp"
             "rofi"
+            "rust-analyzer"
             "sops"
             "starship"
             "tmux"
