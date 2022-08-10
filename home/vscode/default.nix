@@ -105,6 +105,7 @@ in
       "terminal.integrated.fontWeight" = "normal";
       "terminal.integrated.fontSize" = 13;
       "terminal.integrated.fontWeightBold" = "600";
+      "terminal.integrated.shellIntegration.enabled" = false;
 
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";

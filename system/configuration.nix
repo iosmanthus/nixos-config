@@ -90,9 +90,6 @@
 
   services.gnome.gnome-keyring.enable = true;
 
-  # https://wiki.archlinux.org/title/GNOME/Keyring#Automatically_change_keyring_password_with_user_password
-  security.pam.services.passwd.enableGnomeKeyring = true;
-
   # Enable blueman.
   services.blueman.enable = true;
 
