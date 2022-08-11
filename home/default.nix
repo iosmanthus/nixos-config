@@ -30,6 +30,8 @@
     speedtest-cli
     ihaskell
     httpie
+    mycli
+    mysql
     nnn
     nix-output-monitor
     xfce.thunar

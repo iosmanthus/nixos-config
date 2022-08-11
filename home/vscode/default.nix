@@ -116,6 +116,11 @@ in
       "nix.enableLanguageServer" = true;
       "redhat.telemetry.enabled" = false;
       "cmake.configureOnOpen" = true;
+      "github.copilot.enable" = {
+        "*" = true;
+        "plaintext" = true;
+        "markdown" = true;
+      };
     };
   };
 }
