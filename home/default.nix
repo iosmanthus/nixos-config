@@ -84,10 +84,25 @@
     extraConfig = {
       core = { editor = "${pkgs.vscode}/bin/code --wait"; };
       pull = { rebase = false; };
+      url = {
+        "ssh://git@github.com/" = {
+          insteadOf = "https://github.com/";
+        };
+      };
     };
     signing = {
       key = config.machine.gpgPubKey;
       signByDefault = true;
+    };
+  };
+
+  home.file = {
+    cargoConfig = {
+      text = ''
+        [net]
+        git-fetch-with-cli = true
+      '';
+      target = ".cargo/config.toml";
     };
   };
 

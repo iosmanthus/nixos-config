@@ -15,8 +15,8 @@ let
 
   clashImageFile = pkgs.dockerTools.pullImage {
     imageName = "${clashImage}";
-    imageDigest = "sha256:550f4edca1b0420c45dfb32f62ebf65150c9660da1b9468bf4cdcc7c4d01b0fc";
-    sha256 = "1zsbsz7i7nqg7x7cm22wgg8hnxdl28ypm5za1pfh3951q90x1wmf";
+    imageDigest = "sha256:36c6ffe0e7784181950cc9c3e00c2798bcd097aa1188931239bc9c2cf2fbb39c";
+    sha256 = "04gb406k9jj5cgjclqfjdlg4qdqw3n1x1x1k1b8ys25mr1zwp0f8";
   };
 
   yacdImage = "haishanh/yacd";

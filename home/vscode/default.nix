@@ -110,7 +110,7 @@ in
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
 
-      "workbench.colorTheme" = "Material Theme Darker";
+      "workbench.colorTheme" = "Material Theme Darker High Contrast";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;
