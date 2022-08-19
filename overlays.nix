@@ -41,4 +41,6 @@ with super;
   kitty-themes = callPackage ./packages/kitty-themes.nix { };
 
   python3Builder = callPackage ./packages/python3-builder.nix { };
+
+  feishu = callPackage ./packages/feishu { };
 }
