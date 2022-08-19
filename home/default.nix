@@ -56,6 +56,7 @@
     unzip
     wireguard-tools
     notion-app-enhanced
+    feishu
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland
@@ -79,6 +80,7 @@
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = config.machine.userName;
     userEmail = config.machine.userEmail;
     extraConfig = {
