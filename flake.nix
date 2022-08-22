@@ -16,6 +16,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    feishu.url = "github:iosmanthus/feishu-flake/main";
+
     nur.url = github:nix-community/NUR;
   };
   outputs =
@@ -24,6 +26,7 @@
     , home-manager
     , sops-nix
     , nur
+    , feishu
     , ...
     }@inputs:
     let
@@ -95,7 +98,7 @@
           {
             nixpkgs.overlays =
               map (mkBuilder: mkBuilder system) [ mkMasterOverlay ]
-              ++ [ (import ./overlays.nix) nur.overlay ];
+              ++ [ (import ./overlays.nix) nur.overlay feishu.overlay ];
           }
         ];
     in
