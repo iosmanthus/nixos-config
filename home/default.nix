@@ -21,42 +21,46 @@
 
   home.packages = with pkgs; [
     ascii
-    gh
     cloc
-    tree
-    ripgrep
+    discord
     fd
-    htop
-    speedtest-cli
-    ihaskell
-    httpie
-    mycli
-    mysql
-    nnn
-    nix-output-monitor
-    xfce.thunar
-    xfce.xfce4-taskmanager
+    feishu
+    flameshot
+    geoipWithDatabase
+    gh
     gnome.gnome-font-viewer
     gnome.seahorse
-    imagemagick
-    geoipWithDatabase
-    peek
-    vlc
-    pavucontrol
-    sops
-    iperf3
-    yesplaymusic
-    flameshot
-    thunderbird
-    zoom-us
-    discord
     google-chrome
-    tdesktop
-    slack
-    unzip
-    wireguard-tools
+    htop
+    httpie
+    ihaskell
+    imagemagick
+    iperf3
+    kubectl
+    libnotify
+    mycli
+    mysql
+    nix-output-monitor
+    nnn
     notion-app-enhanced
-    feishu
+    pavucontrol
+    peek
+    ripgrep
+    slack
+    sops
+    speedtest-cli
+    tdesktop
+    thunderbird
+    tldr
+    tree
+    unzip
+    vlc
+    wireguard-tools
+    xfce.thunar
+    xfce.xfce4-taskmanager
+    xxd
+    yesplaymusic
+    zoom-us
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland
