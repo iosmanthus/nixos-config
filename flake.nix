@@ -3,6 +3,8 @@
   inputs = {
     master.url = "github:NixOS/nixpkgs/master";
 
+    stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+
     sops-nix.url = "github:Mic92/sops-nix/master";
 
     home-manager = {
@@ -36,6 +38,14 @@
         inherit system;
         config.allowUnfree = true;
       };
+
+      mkStableOverlay = (system: _self: _super:
+        mkOverlay {
+          branch = mkBranch system "stable";
+          packages = [
+            "sioyek"
+          ];
+        });
 
       mkMasterOverlay = (system: _self: _super:
         mkOverlay {
@@ -97,8 +107,14 @@
           })
           {
             nixpkgs.overlays =
-              map (mkBuilder: mkBuilder system) [ mkMasterOverlay ]
-              ++ [ (import ./overlays.nix) nur.overlay feishu.overlay ];
+              map (mkBuilder: mkBuilder system) [
+                mkMasterOverlay
+                mkStableOverlay
+              ] ++ [
+                (import ./overlays.nix)
+                nur.overlay
+                feishu.overlay
+              ];
           }
         ];
     in
