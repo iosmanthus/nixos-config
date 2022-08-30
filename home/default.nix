@@ -70,6 +70,7 @@
 
   home.sessionVariables = {
     "TERMINAL" = "${pkgs.kitty}/bin/kitty";
+    "LD_LIBRARY_PATH" = "${pkgs.xorg.libXcursor}/lib";
   };
 
   home.activation = {
