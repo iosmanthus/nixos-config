@@ -1,4 +1,6 @@
-{ pkgs, ... }:
+{ pkgs
+, ...
+}:
 let
   fcitx = "${pkgs.fcitx5}/bin/fcitx5-remote";
 in
@@ -7,14 +9,27 @@ in
     nixpkgs-fmt
     rnix-lsp
   ];
+
+  home.sessionVariables = {
+    EDITOR = "code --wait";
+  };
+
   programs.vscode = {
     enable = true;
+    mutableExtensions = [
+      {
+        publisher = "Equinusocio";
+        name = "vsc-material-theme";
+        version = "33.5.0";
+      }
+    ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
       (
         (import ./extensions.nix).extensions
       )
     ++ (with pkgs.vscode-extensions; [
       matklad.rust-analyzer
+      redhat.vscode-yaml
     ]);
 
     keybindings = [
@@ -41,6 +56,7 @@ in
       "extensions.autoUpdate" = false;
       "security.workspace.trust.enabled" = false;
       "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+      "rust-analyzer.cargo.buildScripts.enable" = true;
       "python.formatting.yapfPath" = "${pkgs.yapf}/bin/yapf";
       "python.formatting.provider" = "yapf";
 
@@ -53,7 +69,7 @@ in
       "vim.debug.silent" = true;
       "vim.easymotion" = true;
       "vim.enableNeovim" = true;
-      "vim.easymotionMarkerFontFamily" = "monospace";
+      "vim.neovimPath" = "${pkgs.neovim}/bin/nvim";
       "vim.handleKeys" = {
         "<C-a>" = false;
         "<C-c>" = false;
@@ -77,7 +93,7 @@ in
       ];
       "vim.visualstar" = true;
 
-      "editor.fontFamily" = "'Meslo LG L', 'Material-Design-Iconic-Font', feather";
+      "editor.fontFamily" = "'SF Mono', 'Material-Design-Iconic-Font', feather";
       "editor.fontLigatures" = false;
       "editor.fontSize" = 13;
       # "editor.fontWeight": "650",
@@ -85,20 +101,27 @@ in
       "editor.lineNumbers" = "relative";
       "editor.inlineSuggest.enabled" = true;
 
-      "terminal.integrated.commandsToSkipShell" =
-        [ "-workbench.action.quickOpen" ];
-      "terminal.integrated.fontFamily" = "'Meslo LG L', 'Hasklug Nerd Font'";
+      "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
+      "terminal.integrated.fontFamily" = "'SF Mono', 'Hasklug Nerd Font'";
       "terminal.integrated.fontWeight" = "normal";
+      "terminal.integrated.fontSize" = 13;
       "terminal.integrated.fontWeightBold" = "600";
+      "terminal.integrated.shellIntegration.enabled" = false;
 
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
 
-      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
-      "workbench.iconTheme" = "material-icon-theme";
+      "workbench.colorTheme" = "Material Theme Darker High Contrast";
+      "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;
-      "tabnine.experimentalAutoImports" = true;
+      "redhat.telemetry.enabled" = false;
+      "cmake.configureOnOpen" = true;
+      "github.copilot.enable" = {
+        "*" = true;
+        "plaintext" = true;
+        "markdown" = true;
+      };
     };
   };
 }

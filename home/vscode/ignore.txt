@@ -1,1 +1,2 @@
 rust-analyzer
+redhat.vscode-yaml

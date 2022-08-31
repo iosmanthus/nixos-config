@@ -1,21 +1,18 @@
-{ config, ... }:
+{ lib
+, config
+, ...
+}:
 let
   user = "${config.machine.userName}";
   home = "${config.users.users.${user}.home}";
+  gpgKeysPath = config.sops.secrets.gpg-private.path;
 in
 {
-  home-manager.users.${user} = {
-    home.file = {
-      "id_ecdsa_iosmanthus.pub" = {
-        source = ./id_ecdsa_iosmanthus.pub;
-        target = ".ssh/id_ecdsa_iosmanthus.pub";
-      };
-      "id_rsa_iosmanthus.pub" = {
-        source = ./id_rsa_iosmanthus.pub;
-        target = ".ssh/id_rsa_iosmanthus.pub";
-      };
-    };
-  };
+  home-manager.users.${user} = (
+    { lib, config, pkgs, ... }: import ./home.nix {
+      inherit lib config pkgs gpgKeysPath;
+    }
+  );
 
   sops.secrets.id-ecdsa-iosmanthus = {
     format = "binary";
@@ -43,5 +40,11 @@ in
     sopsFile = ./nix.conf;
     owner = config.machine.userName;
     path = "${home}/.config/nix/nix.conf";
+  };
+
+  sops.secrets.gpg-private = {
+    format = "binary";
+    owner = config.machine.userName;
+    sopsFile = ./gpg_private_keys.asc;
   };
 }

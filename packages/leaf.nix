@@ -8,9 +8,9 @@ rustPlatform.buildRustPackage rec {
 
   src = fetchgit {
     url = "https://github.com/iosmanthus/leaf.git";
-    rev = "51c9e03ca1614b2f80deb8603f8bb2d25a417470";
+    rev = "9249b46ad536ffd2aef85eb5e27c3ba2cd63ddc7";
     fetchSubmodules = true;
-    sha256 = "1q9pmc8dx6jkvz48182x8bncmjb585d0l00pa9sdxhpby7ial9qz";
+    sha256 = "02i1zn0yzdw1q28bpj2hrsg35nqim7fdzhy6k1hcccr95hqhvxgh";
   };
 
   cargoSha256 = "06wl0abl1x4g8z0y9iqw2ch747skxmd0vka4kmhs9hs9x139bq0s";

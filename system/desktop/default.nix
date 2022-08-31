@@ -13,9 +13,14 @@
 
   programs.dconf.enable = true;
 
-  services.gnome.gnome-keyring.enable = true;
+  services.dbus = {
+    enable = true;
+  };
 
-  services.dbus = { enable = true; };
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
+  };
 
   services.xserver = {
     enable = true;
@@ -32,6 +37,7 @@
     displayManager = {
       lightdm = {
         enable = true;
+        background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
         greeters.gtk = {
           enable = true;
           cursorTheme = {
@@ -47,12 +53,13 @@
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
             xft-dpi=96
-            font-name=Ubuntu
+            font-name=SF Pro Text
           '';
         };
       };
       defaultSession = "none+i3";
     };
+
     windowManager.i3 = { enable = true; };
   };
 

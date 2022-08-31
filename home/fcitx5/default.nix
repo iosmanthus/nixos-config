@@ -8,13 +8,7 @@ let
   fcitx5Home = "${config.xdg.configHome}/fcitx5";
 in
 {
-
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons ];
-  };
-
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     fcitx5-configtool
   ];
 

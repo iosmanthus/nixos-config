@@ -1,11 +1,56 @@
 { pkgs
 , ...
-}: {
+}:
+let
+  playNotificationSound = pkgs.writeShellScript "play-notification-sound" ''
+    ${pkgs.mpv}/bin/mpv ${pkgs.yaru-theme}/share/sounds/Yaru/stereo/message.oga
+  '';
+in
+{
+  # Fix notification disappeared.
+  systemd.user = {
+    services = {
+      restart-dunst = {
+        Unit = {
+          Description = "Restart dunst";
+          Requires = "dunst.service";
+          After = "dunst.service";
+        };
+
+        Service = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.systemd}/bin/systemctl restart --user dunst.service";
+        };
+
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
+      };
+    };
+
+    timers = {
+      restart-dunst = {
+        Unit = {
+          Description = "Timer for restart-dunst";
+        };
+
+        Timer = {
+          AccuracySec = "1s";
+          OnUnitActiveSec = "1h";
+        };
+
+        Install = {
+          WantedBy = [ "timers.target" ];
+        };
+      };
+    };
+  };
+
   services.dunst = {
     enable = true;
     settings = {
       global = {
-        font = "Meslo LG M 10";
+        font = "monospace 10";
         origin = "bottom-right";
         line_height = 5;
         width = 300;
@@ -33,7 +78,13 @@
         background = "#F07178";
         foreground = "#EEFFFF";
       };
+
+      play_sound = {
+        summary = "*";
+        script = "${playNotificationSound}";
+      };
     };
+
     iconTheme = {
       name = "Tela";
       package = pkgs.tela-icon-theme;

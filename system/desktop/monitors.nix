@@ -1,10 +1,19 @@
 { config
+, pkgs
 , ...
 }:
 let
   builtinDisplayPort = config.machine.builtinDisplayPort.name;
   builtinDisplayPortFingerprint = config.machine.builtinDisplayPort.fingerprint;
   displayPorts = config.machine.displayPorts;
+  restartPolybar = ''
+    ${pkgs.systemd}/bin/systemctl restart --user polybar.service
+  '';
+  hooks = {
+    postswitch = {
+      inherit restartPolybar;
+    };
+  };
   mk4k = p: {
     "${builtinDisplayPort}".enable = false;
     "${p}" = {
@@ -36,6 +45,7 @@ let
             "${p}" = fingerprint;
           };
           config = mkConfig p;
+          inherit hooks;
         };
       })
       { }
@@ -44,6 +54,7 @@ in
 {
   services.autorandr = {
     enable = true;
+    inherit hooks;
     profiles = mkProfile
       {
         name = "home";

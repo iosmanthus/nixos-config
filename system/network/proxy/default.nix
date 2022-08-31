@@ -7,20 +7,17 @@ let
 
   v2rayImageFile = pkgs.dockerTools.pullImage {
     imageName = "${v2rayImage}";
-    imageDigest = "sha256:3765e7940f414d4ebbf1eb5f4f624c60cc92212737bca68ff5fdb18b1371dfd2";
-    sha256 = "166mhlyismfpyp15dv1zcnwfby3n72ckfz71j57d5q2qrylg0jc1";
+    imageDigest = "sha256:174797b48525450ba8dbabfa667cc23e398d0e35c812e6cf0a81583695bde606";
+    sha256 = "1im9xyf3r40scp44bzglsqdlilkrck9405izfpyzy6kmxs3sq0wb";
   };
 
   clashImage = "dreamacro/clash-premium";
 
   clashImageFile = pkgs.dockerTools.pullImage {
     imageName = "${clashImage}";
-    imageDigest = "sha256:550f4edca1b0420c45dfb32f62ebf65150c9660da1b9468bf4cdcc7c4d01b0fc";
-    sha256 = "1zsbsz7i7nqg7x7cm22wgg8hnxdl28ypm5za1pfh3951q90x1wmf";
+    imageDigest = "sha256:36c6ffe0e7784181950cc9c3e00c2798bcd097aa1188931239bc9c2cf2fbb39c";
+    sha256 = "04gb406k9jj5cgjclqfjdlg4qdqw3n1x1x1k1b8ys25mr1zwp0f8";
   };
-
-  clashConfig = config.sops.secrets.clash-config.path;
-  clashRules = ../../../secrets/proxy/ruleset;
 
   yacdImage = "haishanh/yacd";
 
@@ -43,15 +40,24 @@ in
 
   services.leaf-tun = {
     enable = true;
-    proxy = {
+
+    tcpProxy = {
+      type = "socks";
+      address = "172.18.0.3";
+      port = 1080;
+    };
+
+    udpProxy = {
       type = "socks";
       address = "172.18.0.2";
       port = 1080;
     };
+
     tun = {
       name = "utun8";
-      fakeDnsExclude = [ "pingcap.net" "ntp" ];
+      fakeDnsExclude = [ "pingcap.net" "ntp" "keyserver.ubuntu.com" ];
     };
+
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
   };
 
@@ -71,7 +77,7 @@ in
       v2ray = rec {
         image = v2rayImage;
         imageFile = v2rayImageFile;
-        workdir = "/etc/v2ray";
+        workdir = "/var/run/v2ray";
         cmd = [ "xray" "run" "-confdir" "./" ];
         volumes = [
           "${config.sops.secrets.v2ray-config.path}:${workdir}/config.json"
@@ -89,12 +95,13 @@ in
       clash = rec {
         image = clashImage;
         imageFile = clashImageFile;
-        workdir = "/etc/clash";
+        workdir = "/var/run/clash";
         cmd = [ "-d" "./" ];
         volumes = [
-          "${clashConfig}:${workdir}/config.yaml"
-          "${clashRules}:${workdir}/ruleset"
-          "${pkgs.mmdb}:${workdir}/Country.mmdb"
+          "${config.sops.secrets.clash-config.path}:${workdir}/config.yaml"
+          "${pkgs.clash-data.rulesPath}:${workdir}/ruleset"
+          "${pkgs.clash-data.mmdbPath}:${workdir}/Country.mmdb"
+          "${config.users.users.${config.machine.userName}.home}/.cache/clash:${workdir}"
         ];
         inherit environment;
         extraOptions = [

@@ -16,18 +16,11 @@ in
   ];
 
   xresources.properties = {
-    "Xft.dpi" = 96;
-  };
-
-  xsession = {
-    enable = true;
-    profileExtra = ''
-      eval $(${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
-      export SSH_AUTH_SOCK
-    '';
+    "Xft.dpi" = 192;
   };
 
   home.pointerCursor = {
+    gtk.enable = true;
     x11.enable = true;
     package = pkgs.quintom-cursor-theme;
     name = "quintom-cursor-theme-unstable";
@@ -64,15 +57,9 @@ in
 
   services.clipmenu = { enable = true; };
 
-  services.betterlockscreen = {
-    enable = true;
-    inactiveInterval = 10;
-    arguments = [ "dim" ];
-  };
-
   home.file = {
     wallpaper = {
-      source = wallpaper;
+      source = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
       target = ".background-image";
     };
   };

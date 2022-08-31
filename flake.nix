@@ -2,9 +2,13 @@
   description = "iosmanthus 💓 NixOS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+
     master.url = "github:NixOS/nixpkgs/master";
+
+    stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+
     sops-nix.url = "github:Mic92/sops-nix/master";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,12 +19,18 @@
       url = "github:iosmanthus/nixos-vscode-server/add-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    feishu.url = "github:iosmanthus/feishu-flake/main";
+
+    nur.url = github:nix-community/NUR;
   };
   outputs =
     { nixpkgs
     , flake-utils
     , home-manager
     , sops-nix
+    , nur
+    , feishu
     , ...
     }@inputs:
     let
@@ -35,43 +45,40 @@
         mkOverlay {
           branch = mkBranch system "stable";
           packages = [
-            "tdesktop"
+            "sioyek"
           ];
-        }
-      );
+        });
 
       mkMasterOverlay = (system: _self: _super:
         mkOverlay {
           branch = mkBranch system "master";
           packages = [
-            "vscode"
-            "vscode-extensions"
-            "discord"
-            "firefox-bin"
-            "starship"
-            "google-chrome"
-            "notion-app-enhanced"
-            "zoom-us"
-            "rofi"
-            "neovim"
-            "i3"
-            "nixUnstable"
-            "jetbrains"
-
-            # Utils
-            "oh-my-zsh"
-            "kitty"
-            "zsh"
-            "gh"
-            "tmux"
-            "exa"
-            "ripgrep"
-            "polybar"
-            "rnix-lsp"
-            "fd"
-            "sops"
             "bat"
+            "discord"
+            "exa"
+            "fd"
+            "firefox"
+            "gh"
+            "google-chrome"
+            "i3"
+            "jetbrains"
+            "kitty"
+            "neovim"
+            "notion-app-enhanced"
+            "oh-my-zsh"
+            "polybar"
+            "ripgrep"
+            "rnix-lsp"
+            "rofi"
+            "rust-analyzer"
+            "sops"
+            "starship"
+            "tmux"
+            "vscode-extensions"
+            "vscode"
+            "zoom-us"
             "zoxide"
+            "zsh"
           ];
         });
 
@@ -91,6 +98,7 @@
             home-manager = {
               sharedModules = [
                 ./modules/immutable-file.nix
+                ./modules/mutable-vscode-ext.nix
                 (builtins.toPath ./.
                   + "/machines/${config.machine.userName}.nix")
               ];
@@ -101,8 +109,14 @@
           })
           {
             nixpkgs.overlays =
-              map (mkBuilder: mkBuilder system) [ mkMasterOverlay mkStableOverlay ]
-              ++ [ (import ./overlays.nix) ];
+              map (mkBuilder: mkBuilder system) [
+                mkMasterOverlay
+                mkStableOverlay
+              ] ++ [
+                (import ./overlays.nix)
+                nur.overlay
+                feishu.overlay
+              ];
           }
         ];
     in
@@ -140,13 +154,14 @@
             ] ++ (mkCommonModules system);
           };
         };
-    } // flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      devShells.default = pkgs.mkShell {
-        buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf nix-linter ];
-      };
-    });
+    } // flake-utils.lib.eachDefaultSystem
+      (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf nix-linter ];
+        };
+      });
 }

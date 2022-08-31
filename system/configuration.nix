@@ -20,6 +20,9 @@
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
+      keep-going = true
+      download-attempts = 2
+      connect-timeout = 5
     '';
     gc = {
       dates = "weekly";
@@ -84,6 +87,8 @@
   services.logind = {
     lidSwitch = "suspend-then-hibernate";
   };
+
+  services.gnome.gnome-keyring.enable = true;
 
   # Enable blueman.
   services.blueman.enable = true;
