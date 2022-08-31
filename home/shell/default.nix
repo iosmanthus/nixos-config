@@ -31,7 +31,15 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "docker" "git" "vi-mode" "golang" "fd" "systemd" ];
+      plugins = [
+        "docker"
+        "git"
+        "vi-mode"
+        "golang"
+        "fd"
+        "systemd"
+        "git-auto-fetch"
+      ];
     };
 
     plugins = [
