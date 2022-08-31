@@ -59,7 +59,7 @@ in
 
   home.file = {
     wallpaper = {
-      source = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
+      source = wallpaper;
       target = ".background-image";
     };
   };
