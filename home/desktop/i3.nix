@@ -14,7 +14,7 @@ let
         fonts =
           {
             names = [ "monospace" ];
-            size = 10.0;
+            size = 11.0;
           };
         modifier = modifier0;
         focus = {

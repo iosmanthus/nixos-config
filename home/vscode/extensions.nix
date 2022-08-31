@@ -27,8 +27,8 @@
     {
       name = "gitlens";
       publisher = "eamodio";
-      version = "12.1.2";
-      sha256 = "0wpmfrfpi6wl9v3dknx2qr2m74azpcw8bvhac21v67w6jxnl3jd9";
+      version = "2022.8.3100";
+      sha256 = "141ha0wfhgkrzqch07jsr7dzgm8fjyzxkhzicz0clnmafczllgja";
     }
     {
       name = "vsc-community-material-theme";
@@ -57,8 +57,8 @@
     {
       name = "copilot";
       publisher = "GitHub";
-      version = "1.42.6544";
-      sha256 = "00clcavm06f7963hr3h9lnm5ib1c9nz5r078fgy79y43a7xg71g5";
+      version = "1.43.6621";
+      sha256 = "0m52zkc2vnh6gikdc33n7ci5zahvwh3x79rysqckzgqjrjvz9c16";
     }
     {
       name = "go";
@@ -99,20 +99,20 @@
     {
       name = "python";
       publisher = "ms-python";
-      version = "2022.13.12341009";
-      sha256 = "0ln0pp5ddg0mw2wzy6gr1mqdbizfnpfzm2kabnv6nds71my6gca3";
+      version = "2022.15.12421005";
+      sha256 = "0saj2fa01am3gvdyvrkbyiih4pbpiby07yv929wvcffnfvnc4il5";
     }
     {
       name = "remote-containers";
       publisher = "ms-vscode-remote";
-      version = "0.248.0";
-      sha256 = "147hcm98bbd5ww1xps9myay6324n4c5mj6f4zpkkb4c93k2ffxj3";
+      version = "0.250.0";
+      sha256 = "1izc7vyz02an3m91w53ayr8lgwd3qrg233idlmy42vdhwgws2bzz";
     }
     {
       name = "remote-ssh";
       publisher = "ms-vscode-remote";
-      version = "0.85.2022082215";
-      sha256 = "0aws31ysfsg8cjc7fhdzk5i2nq31p3wy49g2smj433x493fc2mrw";
+      version = "0.85.2022082615";
+      sha256 = "1i5y8bffyc8i2ikw4jhywb3m84jagmbr915hmi88hp6q1h7wxmk3";
     }
     {
       name = "cpptools-extension-pack";
@@ -137,12 +137,6 @@
       publisher = "redhat";
       version = "0.0.6";
       sha256 = "1b8nlhbrsg3kj27f1kgj8n5ak438lcfq5v5zlgf1hzisnhmcda5n";
-    }
-    {
-      name = "vscode-yaml";
-      publisher = "redhat";
-      version = "1.10.20220805";
-      sha256 = "10m70sahl7vf8y82gqz9yk6bk4k4b923xn5rk7fax1nqw0pkln2w";
     }
     {
       name = "even-better-toml";

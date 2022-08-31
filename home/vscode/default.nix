@@ -29,6 +29,7 @@ in
       )
     ++ (with pkgs.vscode-extensions; [
       matklad.rust-analyzer
+      redhat.vscode-yaml
     ]);
 
     keybindings = [

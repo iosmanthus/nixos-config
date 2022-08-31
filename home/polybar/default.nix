@@ -69,7 +69,7 @@ in
 
       [bar/main]
       width = 100%
-      height = 36
+      height = 40
       radius = 0.0
       override-redirect = false
       wm-restack = i3
@@ -84,11 +84,11 @@ in
       modules-center =
       modules-right = temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep
 
-      font-0 = "monospace:size=18;3"
-      font-1 = "Material\-Design\-Iconic\-Font:size=18;3"
+      font-0 = "monospace:size=20;3"
+      font-1 = "Material\-Design\-Iconic\-Font:size=20;3"
       font-2 = "NotoEmoji:scale=5;3"
-      font-3 = "feather:size=18;3"
-      font-4 = "Microsoft YaHei:size=18;3"
+      font-3 = "feather:size=20;3"
+      font-4 = "Microsoft YaHei:size=20;3"
 
       tray-position = right
       tray-detached = false

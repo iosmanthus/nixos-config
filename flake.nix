@@ -1,6 +1,8 @@
 {
   description = "iosmanthus 💓 NixOS";
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     master.url = "github:NixOS/nixpkgs/master";
 
     stable.url = "github:NixOS/nixpkgs/nixos-22.05";
