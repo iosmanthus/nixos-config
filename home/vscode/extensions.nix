@@ -162,5 +162,11 @@
       version = "0.5.5";
       sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
     }
+    {
+      name = "makefile-tools";
+      publisher = "ms-vscode";
+      version = "0.6.0";
+      sha256 = "07zagq5ib9hd3w67yk2g728vypr4qazw0g9dyd5bax21shnmppa9";
+    }
   ];
 }
