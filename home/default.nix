@@ -22,6 +22,7 @@
   home.packages = with pkgs; [
     ascii
     cloc
+    delve
     discord
     fd
     feishu
@@ -30,6 +31,7 @@
     gh
     gnome.gnome-font-viewer
     gnome.seahorse
+    go-tools
     google-chrome
     htop
     httpie
