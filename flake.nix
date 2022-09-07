@@ -79,6 +79,7 @@
             "zoom-us"
             "zoxide"
             "zsh"
+            "firmwareLinuxNonfree"
           ];
         });
 

@@ -1,17 +1,6 @@
 _self: super:
 with super;
 {
-  firmwareLinuxNonfree = firmwareLinuxNonfree.overrideAttrs (_: rec {
-    version = "2021-05-11";
-    src = fetchgit {
-      url =
-        "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-      rev = "refs/tags/" + lib.replaceStrings [ "-" ] [ "" ] version;
-      sha256 = "015hajf3mq8dv2hw5wsyvi34zdqiwxp9p5dwdp8nrk4r9z5ysqxw";
-    };
-    outputHash = "034bwbl616vzl7lhcbvyz9dzmpzwi12vca3r5mszdxqh3z3s1g6a";
-  });
-
   leaf = callPackage ./packages/leaf.nix { };
 
   polybar-fonts = callPackage ./packages/polybar-fonts.nix { };
