@@ -15,6 +15,11 @@
     };
     flake-utils.url = "github:numtide/flake-utils/master";
 
+    vscode-insiders = {
+      url = "github:iosmanthus/code-insiders-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-vscode-server = {
       url = "github:iosmanthus/nixos-vscode-server/add-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +36,7 @@
     , sops-nix
     , nur
     , feishu
+    , vscode-insiders
     , ...
     }@inputs:
     let
@@ -116,6 +122,7 @@
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay
+                vscode-insiders.overlays.default
                 feishu.overlay
               ];
           }

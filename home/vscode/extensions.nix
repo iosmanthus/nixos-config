@@ -27,20 +27,8 @@
     {
       name = "gitlens";
       publisher = "eamodio";
-      version = "2022.8.3100";
-      sha256 = "141ha0wfhgkrzqch07jsr7dzgm8fjyzxkhzicz0clnmafczllgja";
-    }
-    {
-      name = "vsc-community-material-theme";
-      publisher = "Equinusocio";
-      version = "1.4.4";
-      sha256 = "005l4pr9x3v6x8450jn0dh7klv0pv7gv7si955r7b4kh19r4hz9y";
-    }
-    {
-      name = "vsc-material-theme";
-      publisher = "Equinusocio";
-      version = "33.5.0";
-      sha256 = "1pr98mx7hji8jlm6ppac693ivbcpybh043w2z8sa3f49v7pksnrf";
+      version = "2022.8.3105";
+      sha256 = "11axaxi06j0hb9xv35azqy4fys15pllg67gk3sqsc3s66q4qzk6w";
     }
     {
       name = "vsc-material-theme-icons";
@@ -57,8 +45,8 @@
     {
       name = "copilot";
       publisher = "GitHub";
-      version = "1.43.6621";
-      sha256 = "0m52zkc2vnh6gikdc33n7ci5zahvwh3x79rysqckzgqjrjvz9c16";
+      version = "1.44.6735";
+      sha256 = "10zv0qp8i6wzbggli97z7wszljj89fn9p51jrzls88xqy74pm7gi";
     }
     {
       name = "go";
@@ -99,32 +87,38 @@
     {
       name = "python";
       publisher = "ms-python";
-      version = "2022.15.12421005";
-      sha256 = "0saj2fa01am3gvdyvrkbyiih4pbpiby07yv929wvcffnfvnc4il5";
+      version = "2022.15.12571012";
+      sha256 = "0w9hdl4ncmlqv26rzyw7c55riylcv03sasy0lyqchml98b4gkzd8";
     }
     {
       name = "remote-containers";
       publisher = "ms-vscode-remote";
-      version = "0.250.0";
-      sha256 = "1izc7vyz02an3m91w53ayr8lgwd3qrg233idlmy42vdhwgws2bzz";
+      version = "0.252.0";
+      sha256 = "1yrjfxccvg7j64l47ixzc7r1234r7nqk0j3500a8ihfi6qi7cxx5";
     }
     {
       name = "remote-ssh";
       publisher = "ms-vscode-remote";
-      version = "0.85.2022082615";
-      sha256 = "1i5y8bffyc8i2ikw4jhywb3m84jagmbr915hmi88hp6q1h7wxmk3";
+      version = "0.87.2022090715";
+      sha256 = "02qr68q5fc5kfs2qwjnfmapr6x5b1lbbrs3bks783svlnqdgbr76";
     }
     {
       name = "cpptools-extension-pack";
       publisher = "ms-vscode";
-      version = "1.2.0";
-      sha256 = "155id1ln4nd14a5myw0b5qil4zprcwwplaxw8z7s6z24k7jqni9h";
+      version = "1.3.0";
+      sha256 = "11fk26siccnfxhbb92z6r20mfbl9b3hhp5zsvpn2jmh24vn96x5c";
     }
     {
       name = "cpptools-themes";
       publisher = "ms-vscode";
       version = "1.0.0";
       sha256 = "0nds0bx9zsnfgfqgpzlbd79wwnjnhsivf0qbnbiakhj2z8c0niqk";
+    }
+    {
+      name = "makefile-tools";
+      publisher = "ms-vscode";
+      version = "0.6.0";
+      sha256 = "07zagq5ib9hd3w67yk2g728vypr4qazw0g9dyd5bax21shnmppa9";
     }
     {
       name = "color-highlight";
@@ -141,8 +135,8 @@
     {
       name = "even-better-toml";
       publisher = "tamasfe";
-      version = "0.17.1";
-      sha256 = "028idkr23vvp5yyw360h3px5h5xqrl25np5xsmb9w0aznsa2v18j";
+      version = "0.18.1";
+      sha256 = "17xdsv0vdkzj6w3pjjw20kjr7iqh5jfg3q5yxr94qmbpvaa4hcbm";
     }
     {
       name = "vim";
@@ -161,12 +155,6 @@
       publisher = "zxh404";
       version = "0.5.5";
       sha256 = "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj";
-    }
-    {
-      name = "makefile-tools";
-      publisher = "ms-vscode";
-      version = "0.6.0";
-      sha256 = "07zagq5ib9hd3w67yk2g728vypr4qazw0g9dyd5bax21shnmppa9";
     }
   ];
 }

@@ -15,6 +15,7 @@ let
       stderr=subprocess.DEVNULL
     )
   '';
+
 in
 {
   home.packages = with pkgs; [
@@ -64,6 +65,8 @@ in
       clion = "${ignoreOutput} clion nosplash";
       goland = "${ignoreOutput} goland nosplash";
       idea-ultimate = "${ignoreOutput} idea-ultimate nosplash";
+
+      code = "${runVscode}";
     };
   };
 }

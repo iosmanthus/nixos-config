@@ -29,8 +29,9 @@ in
         exts=${toString (builtins.map (
           {publisher, name, version}: "${publisher}.${name}@${version}") 
         cfg)}
+        CODE=$(command -v code || command -v codium || command -v code-insiders)
         for ext in $(echo $exts | sed 's/ /\n/g'); do
-          code --install-extension $ext
+          $CODE --install-extension $ext
         done
       '';
     };

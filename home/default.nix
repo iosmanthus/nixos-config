@@ -21,6 +21,7 @@
 
   home.packages = with pkgs; [
     ascii
+    awscli2
     cloc
     delve
     discord
@@ -91,7 +92,7 @@
     userName = config.machine.userName;
     userEmail = config.machine.userEmail;
     extraConfig = {
-      core = { editor = "${pkgs.vscode}/bin/code --wait"; };
+      core = { editor = "code --wait"; };
       pull = { rebase = false; };
       url = {
         "ssh://git@github.com/" = {

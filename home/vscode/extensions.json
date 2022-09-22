@@ -1,0 +1,172 @@
+{
+    "extensions": [
+        {
+            "publisher": "aaron-bond",
+            "name": "better-comments",
+            "version": "3.0.2",
+            "sha256": "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5"
+        },
+        {
+            "publisher": "bierner",
+            "name": "markdown-preview-github-styles",
+            "version": "1.0.1",
+            "sha256": "1bjx46v17d18c9bplz70dx6fpsc6pr371ihpawhlr1y61b59n5aj"
+        },
+        {
+            "publisher": "christian-kohler",
+            "name": "path-intellisense",
+            "version": "2.8.1",
+            "sha256": "1j7q4mzj173sl6xl3zjw40hnqvyqsrsczakmv63066k4k0rb6clm"
+        },
+        {
+            "publisher": "DotJoshJohnson",
+            "name": "xml",
+            "version": "2.5.1",
+            "sha256": "1v4x6yhzny1f8f4jzm4g7vqmqg5bqchyx4n25mkgvw2xp6yls037"
+        },
+        {
+            "publisher": "eamodio",
+            "name": "gitlens",
+            "version": "2022.8.3105",
+            "sha256": "11axaxi06j0hb9xv35azqy4fys15pllg67gk3sqsc3s66q4qzk6w"
+        },
+        {
+            "publisher": "Equinusocio",
+            "name": "vsc-community-material-theme",
+            "version": "1.4.4",
+            "sha256": "005l4pr9x3v6x8450jn0dh7klv0pv7gv7si955r7b4kh19r4hz9y"
+        },
+        {
+            "publisher": "Equinusocio",
+            "name": "vsc-material-theme",
+            "version": "33.5.0",
+            "sha256": "1pr98mx7hji8jlm6ppac693ivbcpybh043w2z8sa3f49v7pksnrf"
+        },
+        {
+            "publisher": "equinusocio",
+            "name": "vsc-material-theme-icons",
+            "version": "2.4.0",
+            "sha256": "0grqsb6snj8817saialdgx0ilblky5jw4i8yxaf8nymiysywzkyq"
+        },
+        {
+            "publisher": "foxundermoon",
+            "name": "shell-format",
+            "version": "7.2.2",
+            "sha256": "00wc0y2wpdjs2pbxm6wj9ghhfsvxyzhw1vjvrnn1jfyl4wh3krvi"
+        },
+        {
+            "publisher": "GitHub",
+            "name": "copilot",
+            "version": "1.46.6822",
+            "sha256": "1i13068bl3cp7qg8jmn62jq8715kvvp8lrfmm2drplbx9l5ndg9g"
+        },
+        {
+            "publisher": "golang",
+            "name": "go",
+            "version": "0.35.2",
+            "sha256": "1nkf96wsnlaimganx0kn4lhdajpnps5rsm8dhyh0j8vdlw3wl0v1"
+        },
+        {
+            "publisher": "haskell",
+            "name": "haskell",
+            "version": "2.2.1",
+            "sha256": "14p9g07zsb3da4ilaasgsdvh3wagfzayqr8ichsf6k5c952zi8fk"
+        },
+        {
+            "publisher": "jeff-hykin",
+            "name": "better-cpp-syntax",
+            "version": "1.15.19",
+            "sha256": "13v1lqqfvgkf5nm89b39hci65fnz4j89ngkg9p103l1p1fhncr41"
+        },
+        {
+            "publisher": "jnoortheen",
+            "name": "nix-ide",
+            "version": "0.1.23",
+            "sha256": "0i5zqfz2ic57z9b4v6mrs68dzhvgpnr5984srjapi0nzm30k127b"
+        },
+        {
+            "publisher": "justusadam",
+            "name": "language-haskell",
+            "version": "3.6.0",
+            "sha256": "115y86w6n2bi33g1xh6ipz92jz5797d3d00mr4k8dv5fz76d35dd"
+        },
+        {
+            "publisher": "ms-azuretools",
+            "name": "vscode-docker",
+            "version": "1.22.1",
+            "sha256": "1ix363fjxi9g450rs3ghx44z3hppvasf0xpzgha93m90djd7ai52"
+        },
+        {
+            "publisher": "ms-python",
+            "name": "python",
+            "version": "2022.15.12631011",
+            "sha256": "04zhvgkpbjfjbdxflkrsi874ldlijs295phvp8f1zprxg8qd5f8a"
+        },
+        {
+            "publisher": "ms-vscode-remote",
+            "name": "remote-containers",
+            "version": "0.252.0",
+            "sha256": "1yrjfxccvg7j64l47ixzc7r1234r7nqk0j3500a8ihfi6qi7cxx5"
+        },
+        {
+            "publisher": "ms-vscode-remote",
+            "name": "remote-ssh",
+            "version": "0.87.2022090715",
+            "sha256": "02qr68q5fc5kfs2qwjnfmapr6x5b1lbbrs3bks783svlnqdgbr76"
+        },
+        {
+            "publisher": "ms-vscode",
+            "name": "cpptools-extension-pack",
+            "version": "1.3.0",
+            "sha256": "11fk26siccnfxhbb92z6r20mfbl9b3hhp5zsvpn2jmh24vn96x5c"
+        },
+        {
+            "publisher": "ms-vscode",
+            "name": "cpptools-themes",
+            "version": "1.0.0",
+            "sha256": "0nds0bx9zsnfgfqgpzlbd79wwnjnhsivf0qbnbiakhj2z8c0niqk"
+        },
+        {
+            "publisher": "ms-vscode",
+            "name": "makefile-tools",
+            "version": "0.6.0",
+            "sha256": "07zagq5ib9hd3w67yk2g728vypr4qazw0g9dyd5bax21shnmppa9"
+        },
+        {
+            "publisher": "naumovs",
+            "name": "color-highlight",
+            "version": "2.6.0",
+            "sha256": "1ssh5d4kn3b57gfw5w99pp3xybdk2xif8z6l7m3y2qf204wd1hsd"
+        },
+        {
+            "publisher": "redhat",
+            "name": "vscode-commons",
+            "version": "0.0.6",
+            "sha256": "1b8nlhbrsg3kj27f1kgj8n5ak438lcfq5v5zlgf1hzisnhmcda5n"
+        },
+        {
+            "publisher": "tamasfe",
+            "name": "even-better-toml",
+            "version": "0.18.1",
+            "sha256": "17xdsv0vdkzj6w3pjjw20kjr7iqh5jfg3q5yxr94qmbpvaa4hcbm"
+        },
+        {
+            "publisher": "vscodevim",
+            "name": "vim",
+            "version": "1.23.2",
+            "sha256": "1kb8i3l3lzi54r6v6la9ksykna172c1pwqldd8dc2ni3jqabjbs0"
+        },
+        {
+            "publisher": "yzhang",
+            "name": "markdown-all-in-one",
+            "version": "3.4.4",
+            "sha256": "0jw38vf3pzplw5dnhs8b9fxqc4z5b198wjw3y3ll14xjzxc5ymns"
+        },
+        {
+            "publisher": "zxh404",
+            "name": "vscode-proto3",
+            "version": "0.5.5",
+            "sha256": "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj"
+        }
+    ]
+}

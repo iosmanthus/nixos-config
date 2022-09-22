@@ -11,11 +11,12 @@ in
   ];
 
   home.sessionVariables = {
-    EDITOR = "code --wait";
+    EDITOR = "${pkgs.runVscode} --wait";
   };
 
   programs.vscode = {
     enable = true;
+    package = pkgs.vscode-insiders;
     mutableExtensions = [
       {
         publisher = "Equinusocio";
@@ -25,7 +26,9 @@ in
     ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
       (
-        (import ./extensions.nix).extensions
+        (builtins.fromJSON (
+          builtins.readFile ./extensions.json
+        )).extensions
       )
     ++ (with pkgs.vscode-extensions; [
       matklad.rust-analyzer
