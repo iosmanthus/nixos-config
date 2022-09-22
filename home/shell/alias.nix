@@ -66,7 +66,7 @@ in
       goland = "${ignoreOutput} goland nosplash";
       idea-ultimate = "${ignoreOutput} idea-ultimate nosplash";
 
-      code = "${runVscode}";
+      code = "${pkgs.runVscode}";
     };
   };
 }
