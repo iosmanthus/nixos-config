@@ -36,13 +36,13 @@
     google-chrome
     htop
     httpie
-    ihaskell
     imagemagick
     iperf3
+    jq
     kubectl
     libnotify
+    mariadb
     mycli
-    mysql
     nix-output-monitor
     nnn
     notion-app-enhanced
@@ -92,7 +92,7 @@
     userName = config.machine.userName;
     userEmail = config.machine.userEmail;
     extraConfig = {
-      core = { editor = "code --wait"; };
+      core = { editor = "${pkgs.runVscode} --wait"; };
       pull = { rebase = false; };
       url = {
         "ssh://git@github.com/" = {

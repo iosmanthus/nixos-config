@@ -96,19 +96,19 @@ in
       ];
       "vim.visualstar" = true;
 
-      "editor.fontFamily" = "'SF Mono', 'Material-Design-Iconic-Font', feather";
+      "editor.fontFamily" = "'Hack', 'SF Mono', 'Material-Design-Iconic-Font', feather";
       "editor.fontLigatures" = false;
-      "editor.fontSize" = 13;
+      "editor.fontSize" = 14;
       # "editor.fontWeight": "650",
       "editor.lineHeight" = 25;
       "editor.lineNumbers" = "relative";
       "editor.inlineSuggest.enabled" = true;
 
       "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
-      "terminal.integrated.fontFamily" = "'SF Mono', 'Hasklug Nerd Font'";
+      "terminal.integrated.fontFamily" = "'Hack', 'SF Mono', 'Hasklug Nerd Font'";
       "terminal.integrated.fontWeight" = "normal";
-      "terminal.integrated.fontSize" = 13;
-      "terminal.integrated.fontWeightBold" = "600";
+      "terminal.integrated.fontSize" = 14;
+      "terminal.integrated.fontWeightBold" = 600;
       "terminal.integrated.shellIntegration.enabled" = false;
 
       "window.menuBarVisibility" = "toggle";
@@ -122,6 +122,7 @@ in
       "cmake.configureOnOpen" = true;
       "github.copilot.enable" = {
         "*" = true;
+        "yaml" = true;
         "plaintext" = true;
         "markdown" = true;
       };

@@ -105,6 +105,9 @@ let
           "${modifier0}+s" = "exec flameshot gui";
           "${modifier0}+n" = "exec dunstctl history-pop";
           "${modifier0}+Shift+n" = "exec dunstctl close-all";
+
+          # Disable tiling_drag before there is a threshold for it.
+          "button1" = "focus";
         };
         modes = lib.mkOptionDefault {
           resize = {

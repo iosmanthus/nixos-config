@@ -10,7 +10,9 @@
       fira
       fira-code
       font-awesome
+      hack-font
       hasklig
+      inconsolata
       inter
       jetbrains-mono
       material-design-icons
@@ -60,7 +62,7 @@
               <string>monospace</string>
             </test>
             <edit mode="prepend" binding="strong" name="family">
-              <string>SF Mono</string>
+              <string>Hack</string>
             </edit>
           </match>
           <match>
