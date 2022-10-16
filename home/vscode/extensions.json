@@ -27,8 +27,8 @@
         {
             "publisher": "eamodio",
             "name": "gitlens-insiders",
-            "version": "2022.10.705",
-            "sha256": "1hqhkffg883s10yn6mx8s6q34008slzlbwyn7qzcpzkv7g65655q"
+            "version": "2022.10.1305",
+            "sha256": "02k6qpqxmj71vrfa5fn9n6iz6kw9jkmznavk96zxk0ihsfvghg61"
         },
         {
             "publisher": "equinusocio",
@@ -87,20 +87,20 @@
         {
             "publisher": "ms-python",
             "name": "python",
-            "version": "2022.17.12801004",
-            "sha256": "0sfds5my0lvzap7x4xxzjp40wr44sz8ym7plwbfgfqaysn42a4ph"
+            "version": "2022.17.12861055",
+            "sha256": "15mq3nh9mfzf92w6fs7y08xyf5il1h0gx4w89q108b193yzw5acp"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.256.0",
-            "sha256": "1m1jjnvhvcq14shswj638scsr5fwvil4rxsdfxxd350anmkrdam9"
+            "version": "0.259.0",
+            "sha256": "0brd9gdcb2gx04l23vfh4pispx9xdgzl1hh3qg1am83ypvywqi81"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-ssh",
-            "version": "0.87.2022100615",
-            "sha256": "0vqxb66q4f67fql9ik93jlgafzrmsr5capy7lf4sl343fp6lqgdm"
+            "version": "0.90.1",
+            "sha256": "19lrw5107d1ji80g6pm98213gfsryg6qdl5y5f360dny31p38pn4"
         },
         {
             "publisher": "ms-vscode",
