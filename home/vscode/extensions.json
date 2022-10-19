@@ -167,6 +167,12 @@
             "name": "vscodeintellicode",
             "version": "1.2.28",
             "sha256": "0c83y01rxcmmaz4zx94pi96pvjrjjzp16ms37xsaj82c53q0dis2"
+        },
+        {
+            "publisher": "alefragnani",
+            "name": "bookmarks",
+            "version": "13.3.1",
+            "sha256": "0q3zc84f4dl9zhsr6j569bm4jgyjlrzn9zf3fcpw871wnak8b509"
         }
     ]
 }

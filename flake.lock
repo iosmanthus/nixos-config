@@ -88,27 +88,6 @@
         "type": "github"
       }
     },
-    "nixos-vscode-server": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1621309617,
-        "narHash": "sha256-wVraqnUMkDzVRoicKB9hwd16u53lls8gDN2Df6CmoK8=",
-        "owner": "iosmanthus",
-        "repo": "nixos-vscode-server",
-        "rev": "b7d30b8afb614ea9da284ca8e9687689ae8fcfbd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "iosmanthus",
-        "ref": "add-flake",
-        "repo": "nixos-vscode-server",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1660819943,
@@ -194,12 +173,12 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "master": "master",
-        "nixos-vscode-server": "nixos-vscode-server",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "sops-nix": "sops-nix",
         "stable": "stable",
-        "vscode-insiders": "vscode-insiders"
+        "vscode-insiders": "vscode-insiders",
+        "vscode-server": "vscode-server"
       }
     },
     "sops-nix": {
@@ -261,16 +240,36 @@
         ]
       },
       "locked": {
-        "lastModified": 1665797321,
-        "narHash": "sha256-BQYRaVf81oUfB0gUp986teaJuSTFpig9wXw/BIz4nwM=",
+        "lastModified": 1666056529,
+        "narHash": "sha256-9psdPuhNrGpGs28bsEUv0DXGbyX43f/AkrqBlFJlQ6c=",
         "owner": "iosmanthus",
         "repo": "code-insiders-flake",
-        "rev": "b100bc9a5317cb51cccefad58c153d9cbb6290eb",
+        "rev": "5736941741b99bd9ab02d40fff1895eb6692f41b",
         "type": "github"
       },
       "original": {
         "owner": "iosmanthus",
         "repo": "code-insiders-flake",
+        "type": "github"
+      }
+    },
+    "vscode-server": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1662442857,
+        "narHash": "sha256-e2ex4mO4q6UBoJvPSRdYBX1vIvpulqs6SNxvdSsL6uE=",
+        "owner": "msteen",
+        "repo": "nixos-vscode-server",
+        "rev": "c54b714db58ad05d064f394d6603751ee6bd04f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "msteen",
+        "repo": "nixos-vscode-server",
         "type": "github"
       }
     }

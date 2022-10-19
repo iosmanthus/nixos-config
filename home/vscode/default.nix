@@ -54,6 +54,16 @@ in
         when =
           "editorTextFocus && !suggestWidgetVisible && editorLangId == 'rust'";
       }
+      {
+        key = "ctrl+]";
+        command = "workbench.action.terminal.focusNext";
+        when = "terminalFocus";
+      }
+      {
+        key = "ctrl+[";
+        command = "workbench.action.terminal.focusPrevious";
+        when = "terminalFocus";
+      }
     ];
     userSettings = {
       "extensions.autoUpdate" = false;
@@ -92,6 +102,14 @@ in
         {
           before = [ ";" ];
           commands = [ "vim.showQuickpickCmdLine" ];
+        }
+        {
+          before = [ "u" ];
+          commands = [ "undo" ];
+        }
+        {
+          before = [ "C-r" ];
+          commands = [ "redo" ];
         }
       ];
       "vim.visualstar" = true;

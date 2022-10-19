@@ -20,8 +20,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-vscode-server = {
-      url = "github:iosmanthus/nixos-vscode-server/add-flake";
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -37,6 +37,7 @@
     , nur
     , feishu
     , vscode-insiders
+    , vscode-server
     , ...
     }@inputs:
     let
@@ -94,13 +95,10 @@
           ./system/configuration.nix
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
-          ({ pkgs, ... }: {
-            imports = [ inputs.nixos-vscode-server.nixosModules.system ];
-            services.auto-fix-vscode-server = {
-              enable = true;
-              nodePackage = pkgs.nodejs-16_x;
-            };
-          })
+          vscode-server.nixosModule
+          {
+            services.vscode-server.enable = true;
+          }
           ({ config, ... }: {
             home-manager = {
               sharedModules = [
