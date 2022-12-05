@@ -24,6 +24,8 @@
 
   services.xserver = {
     enable = true;
+    # Unlock auto unlock gnome-keyring for i3 and other WMs that don't use a display manager
+    updateDbusEnvironment = true;
     layout = "us";
     libinput = {
       enable = true;

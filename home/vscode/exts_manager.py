@@ -65,10 +65,9 @@ def check_update(extensions: dict) -> dict:
     if extensions.get('extensions') is None:
         raise AttributeError('extensions is not found')
     for ext in extensions['extensions']:
-        cache = download_update(ext)
-        version = get_ext_version_from_cache(path=cache['path'])
-        ext['version'] = version
-        ext['sha256'] = cache['sha256']
+        meta = download_update(ext)
+        ext['version'] = meta['version']
+        ext['sha256'] = meta['sha256']
     return extensions
 
 
@@ -76,7 +75,11 @@ def download_update(extension: dict) -> dict:
     publisher = extension['publisher']
     name = extension['name']
     api = f'https://{publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/{publisher}/extension/{name}/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage'
-    return nix_prefetch_url(url=api)
+    meta = nix_prefetch_url(url=api)
+
+    version = get_ext_version_from_cache(path=meta['path'])
+    meta['version'] = version
+    return meta
 
 
 def nix_prefetch_url(url: str) -> dict:

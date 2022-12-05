@@ -20,9 +20,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vscode-server = {
-      url = "github:msteen/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs";
+    jetbrains = {
+      url = "github:iosmanthus/nixpkgs/jetbrains-versions-provider";
     };
 
     feishu.url = "github:iosmanthus/feishu-flake/main";
@@ -37,28 +36,41 @@
     , nur
     , feishu
     , vscode-insiders
-    , vscode-server
     , ...
     }@inputs:
     let
       inherit (import ./lib) mkOverlay;
 
-      mkBranch = system: branch: import inputs.${branch} {
-        inherit system;
-        config.allowUnfree = true;
+      mkBranch = system: branch: config: import inputs.${branch} {
+        inherit system config;
       };
 
       mkStableOverlay = (system: _self: _super:
         mkOverlay {
-          branch = mkBranch system "stable";
+          branch = mkBranch system "stable" { };
           packages = [
             "sioyek"
           ];
         });
 
+      mkJetbrainsOverlay = (system: _self: _super:
+        mkOverlay {
+          branch = mkBranch system "jetbrains" {
+            allowUnfree = true;
+            jetbrains.versions = (builtins.fromJSON
+              (builtins.readFile ./jetbrains/versions.json)
+            );
+          };
+          packages = [
+            "jetbrains"
+          ];
+        });
+
       mkMasterOverlay = (system: _self: _super:
         mkOverlay {
-          branch = mkBranch system "master";
+          branch = mkBranch system "master" {
+            allowUnfree = true;
+          };
           packages = [
             "bat"
             "discord"
@@ -68,7 +80,6 @@
             "gh"
             "google-chrome"
             "i3"
-            "jetbrains"
             "kitty"
             "neovim"
             "notion-app-enhanced"
@@ -95,10 +106,6 @@
           ./system/configuration.nix
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
-          vscode-server.nixosModule
-          {
-            services.vscode-server.enable = true;
-          }
           ({ config, ... }: {
             home-manager = {
               sharedModules = [
@@ -117,6 +124,7 @@
               map (mkBuilder: mkBuilder system) [
                 mkMasterOverlay
                 mkStableOverlay
+                mkJetbrainsOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay

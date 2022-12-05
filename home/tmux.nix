@@ -6,6 +6,7 @@
     keyMode = "vi";
     customPaneNavigationAndResize = true;
     clock24 = true;
+    sensibleOnTop = true;
     plugins = with pkgs; [
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
@@ -39,6 +40,9 @@
     extraConfig = ''
       set -g mouse
       set -g default-terminal "tmux-256color"
+      bind  c  new-window      -c "#{pane_current_path}"
+      bind  %  split-window -h -c "#{pane_current_path}"
+      bind '"' split-window -v -c "#{pane_current_path}"
     '';
   };
 }

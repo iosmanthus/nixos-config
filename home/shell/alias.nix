@@ -46,8 +46,8 @@ in
       poweroff = "sudo systemctl poweroff -i";
 
       # TODO: refactor this shit.
-      connect-xm3 = "repeat 5 { bluetoothctl connect 38:18:4C:F9:98:A9 }";
-      connect-jbl = "repeat 5 { bluetoothctl connect 70:99:1C:7F:E3:EF }";
+      connect-xm3 = "repeat 5 { bluetoothctl connect 38:18:4C:F9:98:A9; sleep 2 } 2>&1 > /dev/null &disown";
+      connect-jbl = "repeat 5 { bluetoothctl connect 70:99:1C:7F:E3:EF; sleep 2 } 2>&1 > /dev/null &disown";
       disconnect-xm3 = "bluetoothctl disconnect 38:18:4C:F9:98:A9";
       disconnect-jbl = "bluetoothctl disconnect 70:99:1C:7F:E3:EF";
 

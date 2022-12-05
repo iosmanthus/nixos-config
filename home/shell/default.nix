@@ -34,7 +34,6 @@
       plugins = [
         "docker"
         "git"
-        "vi-mode"
         "golang"
         "fd"
         "systemd"
@@ -70,6 +69,7 @@
       typeset -A ZSH_HIGHLIGHT_STYLES
 
       ZSH_HIGHLIGHT_STYLES[comment]='fg=magenta,bold'
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
     '';
   };
 }

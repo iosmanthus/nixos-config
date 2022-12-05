@@ -117,8 +117,7 @@ in
       "editor.fontFamily" = "'Hack', 'SF Mono', 'Material-Design-Iconic-Font', feather";
       "editor.fontLigatures" = false;
       "editor.fontSize" = 14;
-      # "editor.fontWeight": "650",
-      "editor.lineHeight" = 25;
+      "editor.lineHeight" = 24;
       "editor.lineNumbers" = "relative";
       "editor.inlineSuggest.enabled" = true;
 

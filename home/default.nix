@@ -64,6 +64,8 @@
     xxd
     yesplaymusic
     zoom-us
+    gnome.gnome-clocks
+    ssm-session-manager-plugin
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland
