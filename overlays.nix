@@ -32,6 +32,6 @@ with super;
   python3Builder = callPackage ./packages/python3-builder.nix { };
 
   runVscode = import ./packages/scripts/run-vscode.nix {
-    pkgs = super;
+    inherit pkgs;
   };
 }
