@@ -33,14 +33,14 @@
         {
             "publisher": "eamodio",
             "name": "gitlens-insiders",
-            "version": "2022.11.3004",
-            "sha256": "02ma8dda490blwjl3x6bgcj5qpqa4vpcinyskisvhzirlcqgbvs4"
+            "version": "2022.12.904",
+            "sha256": "18v6xb6klbk5z5dvl42hpnn7ckbsgjy09mnwf8ija4ryx28f09vc"
         },
         {
             "publisher": "equinusocio",
             "name": "vsc-material-theme-icons",
-            "version": "2.4.0",
-            "sha256": "0grqsb6snj8817saialdgx0ilblky5jw4i8yxaf8nymiysywzkyq"
+            "version": "2.5.0",
+            "sha256": "1cfrdadwcvkdb4mxkfiqpsq19kngnk98cm3qanv494vr2rrfbbar"
         },
         {
             "publisher": "foxundermoon",
@@ -51,8 +51,8 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.61.7372",
-            "sha256": "1znrij8al8r8x7j9ra13ahpbsiwf66qnayqcg3nd60pbrjkv5g4r"
+            "version": "1.62.7527",
+            "sha256": "0hjhs4bczip0cf5r31izs1iqz0ppdpzdhjhygwdmg64iky87qm3r"
         },
         {
             "publisher": "golang",
@@ -63,8 +63,8 @@
         {
             "publisher": "haskell",
             "name": "haskell",
-            "version": "2.2.1",
-            "sha256": "14p9g07zsb3da4ilaasgsdvh3wagfzayqr8ichsf6k5c952zi8fk"
+            "version": "2.2.2",
+            "sha256": "1d5b0p6r9ipwb7j4cx9w13vq31h78bh2sfwl54xri4gyvialhryd"
         },
         {
             "publisher": "jeff-hykin",
@@ -99,20 +99,20 @@
         {
             "publisher": "ms-python",
             "name": "python",
-            "version": "2022.19.13341010",
-            "sha256": "09prbiy97hwpv91q7fj5qdkkxb0dkc3qyv0hzqndm593rzh732wa"
+            "version": "2022.21.13431008",
+            "sha256": "1wd7d3x7p0hvv4yzds8sja475as7ngi0xhgnxmjhpsxri2fk56zb"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.265.0",
-            "sha256": "0yvhxj84nbji28zdi2q2wjhj2ghvz6d6ixr3fl0lcnfqpiwb3vfc"
+            "version": "0.267.0",
+            "sha256": "10rfx8mmv0ji8fksyyx05rxw5485l7ngckp6qwp6g5ig9dsc6nc2"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-ssh",
-            "version": "0.93.2022112815",
-            "sha256": "02wiha66cj5pfysy5kxr0mdhsjzbgpmr8p94rpwd6kl57mvdmssi"
+            "version": "0.94.0",
+            "sha256": "1rvxk08rh9j0r4igbivbqyccqaldag1349af2i958d40lpy5nlfn"
         },
         {
             "publisher": "ms-vscode",

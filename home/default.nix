@@ -66,6 +66,8 @@
     zoom-us
     gnome.gnome-clocks
     ssm-session-manager-plugin
+    spotify-unwrapped
+    gnome.gedit
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland

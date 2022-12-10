@@ -25,14 +25,19 @@
       name = "Tela";
     };
     theme = {
-      package = pkgs.orchis-theme;
-      name = "Orchis";
+      package = pkgs.graphite-gtk-theme;
+      name = "Graphite-Dark";
     };
   };
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       gtk-application-prefer-dark-theme = true;
+    };
+    "org/gnome/gedit/preferences/editor" = {
+      scheme = "Yaru-dark";
+      use-default-font = false;
+      wrap-last-split-mode = "word";
     };
   };
 
@@ -41,7 +46,7 @@
     platformTheme = "gnome";
     style = {
       package = pkgs.adwaita-qt;
-      name = "adwaita-dark";
+      name = "adwaita";
     };
   };
 

@@ -21,7 +21,7 @@
     };
 
     jetbrains = {
-      url = "github:iosmanthus/nixpkgs/jetbrains-versions-provider";
+      url = "github:kouyk/nixpkgs/update/jetbrains";
     };
 
     feishu.url = "github:iosmanthus/feishu-flake/main";
@@ -57,9 +57,6 @@
         mkOverlay {
           branch = mkBranch system "jetbrains" {
             allowUnfree = true;
-            jetbrains.versions = (builtins.fromJSON
-              (builtins.readFile ./jetbrains/versions.json)
-            );
           };
           packages = [
             "jetbrains"
@@ -93,6 +90,7 @@
             "starship"
             "tmux"
             "vscode-extensions"
+            "docker"
             "vscode"
             "zoom-us"
             "zoxide"

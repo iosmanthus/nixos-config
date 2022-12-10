@@ -19,9 +19,9 @@ in
     package = pkgs.vscode-insiders;
     mutableExtensions = [
       {
-        publisher = "Equinusocio";
-        name = "vsc-material-theme";
-        version = "33.5.0";
+        publisher = "equinusocio";
+        name = "vsc-community-material-theme";
+        version = "1.4.4";
       }
     ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
@@ -131,7 +131,7 @@ in
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
 
-      "workbench.colorTheme" = "Material Theme Darker High Contrast";
+      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;

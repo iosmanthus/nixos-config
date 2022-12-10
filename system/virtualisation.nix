@@ -7,7 +7,7 @@
   virtualisation.docker = {
     enable = true;
     extraOptions = ''
-      --default-ulimit nofile=1048576:1048576 --bip "172.17.0.1/24"
+      --default-ulimit nofile=1048576:1048576 --bip "172.17.0.1/24" --storage-driver btrfs
     '';
   };
 

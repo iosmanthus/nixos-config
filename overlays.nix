@@ -34,4 +34,14 @@ with super;
   runVscode = import ./packages/scripts/run-vscode.nix {
     inherit pkgs;
   };
+} // {
+  graphite-gtk-theme = super.graphite-gtk-theme.overrideAttrs (old: {
+    version = "unstable-2022-12-10";
+    src = super.fetchFromGitHub {
+      owner = "vinceliuice";
+      repo = "Graphite-gtk-theme";
+      rev = "966e98c4ea348f739594f65eae8b824abdb1a1b4";
+      sha256 = "0hc3hdvb24f2fnxbggdk30frqh6cqb4l7ybyb9slig6qivi6wnda";
+    };
+  });
 }

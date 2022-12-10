@@ -48,8 +48,8 @@
             size = 48;
           };
           theme = {
-            package = pkgs.orchis-theme;
-            name = "Orchis";
+            package = pkgs.graphite-gtk-theme;
+            name = "Graphite-Dark";
           };
           indicators =
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];

@@ -61,16 +61,17 @@ in
         frame_color = "#EEFFFF";
         separator_color = "#EEFFFF";
       };
+
       base16_low = {
         msg_urgency = "low";
-        background = "#303030";
-        foreground = "#4A4A4A";
+        background = "#353535";
+        foreground = "#EEFFFF";
       };
+
       base16_normal = {
         msg_urgency = "normal";
         background = "#353535";
         foreground = "#EEFFFF";
-
       };
 
       base16_critical = {
