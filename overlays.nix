@@ -34,8 +34,8 @@ with super;
   runVscode = import ./packages/scripts/run-vscode.nix {
     inherit pkgs;
   };
-} // {
-  graphite-gtk-theme = super.graphite-gtk-theme.overrideAttrs (old: {
+
+  graphite-gtk-theme = super.graphite-gtk-theme.overrideAttrs (_: {
     version = "unstable-2022-12-10";
     src = super.fetchFromGitHub {
       owner = "vinceliuice";
@@ -44,4 +44,4 @@ with super;
       sha256 = "0hc3hdvb24f2fnxbggdk30frqh6cqb4l7ybyb9slig6qivi6wnda";
     };
   });
-}
+} 
