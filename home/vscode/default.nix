@@ -135,6 +135,8 @@ in
       "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;
+      "nix.serverSettings.nil.formatting.command" = [ "nixpkgs-fmt" ];
+      "nix.serverPath" = "${pkgs.nil}/bin/nil";
       "redhat.telemetry.enabled" = false;
       "cmake.configureOnOpen" = true;
       "github.copilot.enable" = {

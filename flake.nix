@@ -24,6 +24,10 @@
       url = "github:kouyk/nixpkgs/update/jetbrains";
     };
 
+    bazel_5 = {
+      url = "github:divanorama/nixpkgs/bazel_5.3.2_2";
+    };
+
     feishu.url = "github:iosmanthus/feishu-flake/main";
 
     nur.url = github:nix-community/NUR;
@@ -60,6 +64,16 @@
           };
           packages = [
             "jetbrains"
+          ];
+        });
+
+      mkBazelOverlay = (system: _self: _super:
+        mkOverlay {
+          branch = mkBranch system "bazel_5" {
+            allowUnfree = true;
+          };
+          packages = [
+            "bazel_5"
           ];
         });
 
@@ -123,6 +137,7 @@
                 mkMasterOverlay
                 mkStableOverlay
                 mkJetbrainsOverlay
+                mkBazelOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay
@@ -163,7 +178,14 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [ gnumake nix-output-monitor nixpkgs-fmt fd sops yapf nix-linter ];
+          buildInputs = with pkgs; [
+            fd
+            gnumake
+            nix-output-monitor
+            nixpkgs-fmt
+            sops
+            yapf
+          ];
         };
       });
 }

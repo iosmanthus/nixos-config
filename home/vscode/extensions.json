@@ -21,8 +21,8 @@
         {
             "publisher": "christian-kohler",
             "name": "path-intellisense",
-            "version": "2.8.3",
-            "sha256": "0bx0vqxk9rv23pdk1x2zz25ahpmi9aniphc7sn9qq3d3rm15njh1"
+            "version": "2.8.4",
+            "sha256": "1729ij89hsdmpij4hcpd3gmdakx6iqdcnqbqajqhjfs769r5hh0l"
         },
         {
             "publisher": "DotJoshJohnson",
@@ -33,8 +33,8 @@
         {
             "publisher": "eamodio",
             "name": "gitlens-insiders",
-            "version": "2022.12.904",
-            "sha256": "18v6xb6klbk5z5dvl42hpnn7ckbsgjy09mnwf8ija4ryx28f09vc"
+            "version": "2023.1.104",
+            "sha256": "15byhfx161pxaj12nl5bjzkgcpyzhff3qajcpxms05plva52kh6n"
         },
         {
             "publisher": "equinusocio",
@@ -51,14 +51,14 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.62.7527",
-            "sha256": "0hjhs4bczip0cf5r31izs1iqz0ppdpzdhjhygwdmg64iky87qm3r"
+            "version": "1.65.7705",
+            "sha256": "1irddmjlymlj5s0xgivq1v559qhw424fzagwb7vi3yqkkkv3lfd7"
         },
         {
             "publisher": "golang",
             "name": "go",
-            "version": "0.36.0",
-            "sha256": "1h6h45789qwgxz6ci3alhjgfa9kl648dpp7wszpjfyy24rifz7sw"
+            "version": "0.37.0",
+            "sha256": "08xifpvpdbnm3rxzczf30qy9c80b8hxfdjas92n27j384mw7zh22"
         },
         {
             "publisher": "haskell",
@@ -69,8 +69,8 @@
         {
             "publisher": "jeff-hykin",
             "name": "better-cpp-syntax",
-            "version": "1.16.3",
-            "sha256": "1fdchrm3i7qlhqnyi2icgcmi4b0kr27bp0mgys7iyswfqh3nfji7"
+            "version": "1.17.2",
+            "sha256": "1ic55cva028368j0sdcqdzjq2ikbz754m7bxibxf7djvs6xqlx57"
         },
         {
             "publisher": "jnoortheen",
@@ -93,26 +93,26 @@
         {
             "publisher": "ms-azuretools",
             "name": "vscode-docker",
-            "version": "1.23.1",
-            "sha256": "0gck916yzn09rh863gyaaf2nhjqnv0gqdkzcn1fjy7956sn9w073"
+            "version": "1.23.3",
+            "sha256": "05lxa03hh5rslg7351dw87zlrp4drqy1jmpms1aml0yn1jxfb9yj"
         },
         {
             "publisher": "ms-python",
             "name": "python",
-            "version": "2022.21.13431008",
-            "sha256": "1wd7d3x7p0hvv4yzds8sja475as7ngi0xhgnxmjhpsxri2fk56zb"
+            "version": "2022.21.13601008",
+            "sha256": "1a7zfw6gigi27mhca1vmhh94l7zdvgxmg8lgmwh9l24igc0kmhqc"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.267.0",
-            "sha256": "10rfx8mmv0ji8fksyyx05rxw5485l7ngckp6qwp6g5ig9dsc6nc2"
+            "version": "0.269.0",
+            "sha256": "0zlssgrr5d3cxivjyv6ifx6nl8ai08nf4kahsdb4w0cv0bl3hxph"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-ssh",
-            "version": "0.94.0",
-            "sha256": "1rvxk08rh9j0r4igbivbqyccqaldag1349af2i958d40lpy5nlfn"
+            "version": "0.95.2022123015",
+            "sha256": "0p4620r6d1ch85wzrfb4z5jl8rj5c1p8sm16bkvgfqb73n6pkkny"
         },
         {
             "publisher": "ms-vscode",

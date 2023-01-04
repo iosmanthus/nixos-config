@@ -68,6 +68,7 @@
     ssm-session-manager-plugin
     spotify-unwrapped
     gnome.gedit
+    bazel_5
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland
