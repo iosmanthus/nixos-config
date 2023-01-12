@@ -18,9 +18,7 @@
       static_configs = [{
         targets =
           let
-            listenAddress =
-              config.services.prometheus.exporters.node.listenAddress;
-            port = config.services.prometheus.exporters.node.port;
+            inherit (config.services.prometheus.exporters.node) listenAddress port;
           in
           [ "${toString listenAddress}:${toString port}" ];
       }];

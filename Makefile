@@ -12,6 +12,6 @@ update:
 	@nix flake update
 
 lint:
-	@fd ".nix" --exec-batch "nix-linter"
+	@statix check
 
 upgrade: update switch

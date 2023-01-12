@@ -22,6 +22,8 @@
   home.packages = with pkgs; [
     ascii
     awscli2
+    bazel_5
+    btop
     cloc
     delve
     discord
@@ -30,6 +32,8 @@
     flameshot
     geoipWithDatabase
     gh
+    gnome.gedit
+    gnome.gnome-clocks
     gnome.gnome-font-viewer
     gnome.seahorse
     go-tools
@@ -52,6 +56,8 @@
     slack
     sops
     speedtest-cli
+    spotify-unwrapped
+    ssm-session-manager-plugin
     tdesktop
     thunderbird
     tldr
@@ -64,11 +70,6 @@
     xxd
     yesplaymusic
     zoom-us
-    gnome.gnome-clocks
-    ssm-session-manager-plugin
-    spotify-unwrapped
-    gnome.gedit
-    bazel_5
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland
@@ -94,8 +95,7 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = config.machine.userName;
-    userEmail = config.machine.userEmail;
+    inherit (config.machine) userName userEmail;
     extraConfig = {
       core = { editor = "${pkgs.runVscode} --wait"; };
       pull = { rebase = false; };

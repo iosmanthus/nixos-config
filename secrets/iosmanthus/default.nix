@@ -8,11 +8,11 @@ let
   gpgKeysPath = config.sops.secrets.gpg-private.path;
 in
 {
-  home-manager.users.${user} = (
+  home-manager.users.${user} =
     { lib, config, pkgs, ... }: import ./home.nix {
       inherit lib config pkgs gpgKeysPath;
     }
-  );
+  ;
 
   sops.secrets.id-ecdsa-iosmanthus = {
     format = "binary";

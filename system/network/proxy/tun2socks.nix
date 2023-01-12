@@ -162,7 +162,7 @@ with lib; {
         iptables -t mangle -w -X tun2socks-out
       '';
 
-      udpTimeoutOption = optionalString (cfg.udp.enable)
+      udpTimeoutOption = optionalString cfg.udp.enable
         "-udp-timeout ${toString cfg.udp.udpTimeout}";
       startTun2socks = ''
         tun2socks -loglevel warn -device ${cfg.tunName} -proxy ${cfg.proxy.type}://${cfg.proxy.address} ${udpTimeoutOption}

@@ -8,43 +8,43 @@ let
 in
 {
   # Fix notification disappeared.
-  systemd.user = {
-    services = {
-      restart-dunst = {
-        Unit = {
-          Description = "Restart dunst";
-          Requires = "dunst.service";
-          After = "dunst.service";
-        };
+  # systemd.user = {
+  #   services = {
+  #     restart-dunst = {
+  #       Unit = {
+  #         Description = "Restart dunst";
+  #         Requires = "dunst.service";
+  #         After = "dunst.service";
+  #       };
 
-        Service = {
-          Type = "oneshot";
-          ExecStart = "${pkgs.systemd}/bin/systemctl restart --user dunst.service";
-        };
+  #       Service = {
+  #         Type = "oneshot";
+  #         ExecStart = "${pkgs.systemd}/bin/systemctl restart --user dunst.service";
+  #       };
 
-        Install = {
-          WantedBy = [ "graphical-session.target" ];
-        };
-      };
-    };
+  #       Install = {
+  #         WantedBy = [ "graphical-session.target" ];
+  #       };
+  #     };
+  #   };
 
-    timers = {
-      restart-dunst = {
-        Unit = {
-          Description = "Timer for restart-dunst";
-        };
+  #   timers = {
+  #     restart-dunst = {
+  #       Unit = {
+  #         Description = "Timer for restart-dunst";
+  #       };
 
-        Timer = {
-          AccuracySec = "1s";
-          OnUnitActiveSec = "1h";
-        };
+  #       Timer = {
+  #         AccuracySec = "1s";
+  #         OnUnitActiveSec = "1h";
+  #       };
 
-        Install = {
-          WantedBy = [ "timers.target" ];
-        };
-      };
-    };
-  };
+  #       Install = {
+  #         WantedBy = [ "timers.target" ];
+  #       };
+  #     };
+  #   };
+  # };
 
   services.dunst = {
     enable = true;

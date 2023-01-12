@@ -20,17 +20,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    jetbrains = {
-      url = "github:kouyk/nixpkgs/update/jetbrains";
-    };
-
     bazel_5 = {
       url = "github:divanorama/nixpkgs/bazel_5.3.2_2";
     };
 
     feishu.url = "github:iosmanthus/feishu-flake/main";
 
-    nur.url = github:nix-community/NUR;
+    nur.url = "github:nix-community/NUR/master";
   };
   outputs =
     { nixpkgs
@@ -49,25 +45,15 @@
         inherit system config;
       };
 
-      mkStableOverlay = (system: _self: _super:
+      mkStableOverlay = system: _self: _super:
         mkOverlay {
           branch = mkBranch system "stable" { };
           packages = [
             "sioyek"
           ];
-        });
+        };
 
-      mkJetbrainsOverlay = (system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "jetbrains" {
-            allowUnfree = true;
-          };
-          packages = [
-            "jetbrains"
-          ];
-        });
-
-      mkBazelOverlay = (system: _self: _super:
+      mkBazelOverlay = system: _self: _super:
         mkOverlay {
           branch = mkBranch system "bazel_5" {
             allowUnfree = true;
@@ -75,9 +61,9 @@
           packages = [
             "bazel_5"
           ];
-        });
+        };
 
-      mkMasterOverlay = (system: _self: _super:
+      mkMasterOverlay = system: _self: _super:
         mkOverlay {
           branch = mkBranch system "master" {
             allowUnfree = true;
@@ -85,13 +71,16 @@
           packages = [
             "bat"
             "discord"
+            "docker"
             "exa"
             "fd"
             "firefox"
+            "firmwareLinuxNonfree"
             "gh"
             "google-chrome"
             "i3"
             "kitty"
+            "lens"
             "neovim"
             "notion-app-enhanced"
             "oh-my-zsh"
@@ -104,14 +93,13 @@
             "starship"
             "tmux"
             "vscode-extensions"
-            "docker"
             "vscode"
             "zoom-us"
             "zoxide"
             "zsh"
-            "firmwareLinuxNonfree"
+            "jetbrains"
           ];
-        });
+        };
 
       mkCommonModules =
         system: [
@@ -123,8 +111,7 @@
               sharedModules = [
                 ./modules/immutable-file.nix
                 ./modules/mutable-vscode-ext.nix
-                (builtins.toPath ./.
-                  + "/machines/${config.machine.userName}.nix")
+                (./. + "/machines/${config.machine.userName}.nix")
               ];
               users.${config.machine.userName} = import ./home;
               useGlobalPkgs = true;
@@ -136,7 +123,6 @@
               map (mkBuilder: mkBuilder system) [
                 mkMasterOverlay
                 mkStableOverlay
-                mkJetbrainsOverlay
                 mkBazelOverlay
               ] ++ [
                 (import ./overlays.nix)
@@ -185,6 +171,7 @@
             nixpkgs-fmt
             sops
             yapf
+            statix
           ];
         };
       });

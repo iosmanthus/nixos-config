@@ -5,7 +5,7 @@
 let
   builtinDisplayPort = config.machine.builtinDisplayPort.name;
   builtinDisplayPortFingerprint = config.machine.builtinDisplayPort.fingerprint;
-  displayPorts = config.machine.displayPorts;
+  inherit (config.machine) displayPorts;
   restartPolybar = ''
     ${pkgs.systemd}/bin/systemctl restart --user polybar.service
   '';

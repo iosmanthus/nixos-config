@@ -25,11 +25,9 @@ in
       }
     ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
-      (
-        (builtins.fromJSON (
-          builtins.readFile ./extensions.json
-        )).extensions
-      )
+      (builtins.fromJSON (
+        builtins.readFile ./extensions.json
+      )).extensions
     ++ (with pkgs.vscode-extensions; [
       matklad.rust-analyzer
       redhat.vscode-yaml

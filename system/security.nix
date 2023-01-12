@@ -9,9 +9,8 @@
     [ "/share/zsh" ];
 
   users.users.${config.machine.userName} = {
-    hashedPassword = config.machine.hashedPassword;
+    inherit (config.machine) hashedPassword shell;
     group = "users";
-    shell = config.machine.shell;
     isNormalUser = true;
     home = "/home/${config.machine.userName}";
     description = "${config.machine.userName}";

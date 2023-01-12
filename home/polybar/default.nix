@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  playerMprisSimpleModule = (import ./mpris.nix { inherit pkgs; });
+  playerMprisSimpleModule = import ./mpris.nix { inherit pkgs; };
   iw = "${pkgs.iw}/bin/iw";
   awk = "${pkgs.gawk}/bin/awk";
   ls = "${pkgs.coreutils}/bin/ls";
@@ -13,7 +13,6 @@ in
       mpdSupport = true;
       iwSupport = true;
       i3Support = true;
-      i3GapsSupport = true;
       alsaSupport = true;
       pulseSupport = true;
       githubSupport = true;

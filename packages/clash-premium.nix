@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     url = "https://github.com/Dreamacro/clash/releases/download/premium/clash-${
         supportedPlatform.${system}.alias
       }-${version}.gz";
-    sha256 = supportedPlatform.${system}.sha256;
+    inherit (supportedPlatform.${system}) sha256;
   };
 
   nativeBuildInputs = [ autoPatchelfHook ];

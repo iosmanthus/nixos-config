@@ -8,4 +8,6 @@
     enable = true;
     powerOnBoot = true;
   };
+
+  services.fwupd.enable = true;
 }
