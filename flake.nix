@@ -49,6 +49,7 @@
         mkOverlay {
           branch = mkBranch system "stable" { };
           packages = [
+            "mycli"
             "sioyek"
           ];
         };
@@ -79,6 +80,7 @@
             "gh"
             "google-chrome"
             "i3"
+            "jetbrains"
             "kitty"
             "lens"
             "neovim"
@@ -97,7 +99,6 @@
             "zoom-us"
             "zoxide"
             "zsh"
-            "jetbrains"
           ];
         };
 

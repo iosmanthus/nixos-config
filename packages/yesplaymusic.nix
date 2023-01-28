@@ -5,11 +5,9 @@
 with pkgs;
 let
   pname = "yesplaymusic";
-  version = "0.4.5";
-  tag = "";
-  releaseVersion = if tag != "" then "${version}-${tag}" else version;
-  url = "https://github.com/qier222/YesPlayMusic/releases/download/v${releaseVersion}/YesPlayMusic-${version}.AppImage";
-  sha256 = "08yq79nayxnjyq2j9rfil341r899qjil2a2ml1vcq8n4m9bgi67l";
+  version = "0.4.6";
+  url = "https://github.com/qier222/YesPlayMusic/releases/download/v${version}/YesPlayMusic-${version}.AppImage";
+  sha256 = "1ccqjy772b4mlhn11ym6n57sbknll7ykv0yp7jxh2zhv29ykv9gg";
   src = builtins.fetchurl { inherit url sha256; };
   extracted = appimageTools.extractType2 {
     name = pname;
@@ -18,7 +16,7 @@ let
   wrapped = appimageTools.wrapType2 {
     name = pname;
     inherit src;
-    extraPkgs = pkgs: with pkgs; [ ];
+    extraPkgs = _pkgs: [ ];
   };
   desktop = makeDesktopItem rec {
     name = "YesPlayMusic";

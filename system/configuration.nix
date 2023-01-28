@@ -10,7 +10,7 @@
     ./hardware.nix
     ./security.nix
     ./virtualisation.nix
-    ./monitoring.nix
+    # ./monitoring.nix
   ];
 
   # nixpkgs configuration
