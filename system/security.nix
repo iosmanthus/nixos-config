@@ -26,6 +26,7 @@
   };
 
   security.pam.services.${config.machine.userName}.gnupg.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
 
   security.sudo.extraRules = [{
     users = [ "${config.machine.userName}" ];

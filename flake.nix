@@ -13,18 +13,13 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils/master";
+
+    flake-utils.url = "github:numtide/flake-utils";
 
     vscode-insiders = {
       url = "github:iosmanthus/code-insiders-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "master";
     };
-
-    bazel_5 = {
-      url = "github:divanorama/nixpkgs/bazel_5.3.2_2";
-    };
-
-    feishu.url = "github:iosmanthus/feishu-flake/main";
 
     nur.url = "github:nix-community/NUR/master";
   };
@@ -34,7 +29,6 @@
     , home-manager
     , sops-nix
     , nur
-    , feishu
     , vscode-insiders
     , ...
     }@inputs:
@@ -51,16 +45,6 @@
           packages = [
             "mycli"
             "sioyek"
-          ];
-        };
-
-      mkBazelOverlay = system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "bazel_5" {
-            allowUnfree = true;
-          };
-          packages = [
-            "bazel_5"
           ];
         };
 
@@ -83,6 +67,7 @@
             "jetbrains"
             "kitty"
             "lens"
+            "logseq"
             "neovim"
             "notion-app-enhanced"
             "oh-my-zsh"
@@ -124,12 +109,10 @@
               map (mkBuilder: mkBuilder system) [
                 mkMasterOverlay
                 mkStableOverlay
-                mkBazelOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay
                 vscode-insiders.overlays.default
-                feishu.overlay
               ];
           }
         ];

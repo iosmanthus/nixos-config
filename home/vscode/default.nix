@@ -16,7 +16,7 @@ in
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode-insiders;
+    package = pkgs.vscode;
     mutableExtensions = [
       {
         publisher = "equinusocio";
@@ -124,7 +124,7 @@ in
       "terminal.integrated.fontWeight" = "normal";
       "terminal.integrated.fontSize" = 14;
       "terminal.integrated.fontWeightBold" = 600;
-      "terminal.integrated.shellIntegration.enabled" = false;
+      "terminal.integrated.shellIntegration.enabled" = true;
 
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";

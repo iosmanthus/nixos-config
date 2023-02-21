@@ -22,13 +22,12 @@
   home.packages = with pkgs; [
     ascii
     awscli2
-    bazel_5
+    bazel_6
     btop
     cloc
     delve
     discord
     fd
-    feishu
     flameshot
     geoipWithDatabase
     gh
@@ -45,6 +44,7 @@
     jq
     kubectl
     libnotify
+    logseq
     mariadb
     mycli
     nix-output-monitor
@@ -52,6 +52,7 @@
     notion-app-enhanced
     pavucontrol
     peek
+    regctl
     ripgrep
     slack
     sops
@@ -90,6 +91,21 @@
 
   home.keyboard.options = [ "caps:escape" ];
 
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "firefox.desktop";
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/about" = "firefox.desktop";
+        "x-scheme-handler/unknown" = "firefox.desktop";
+        "text/plain" = "vscode.desktop";
+        "text/*" = "vscode.desktop";
+      };
+    };
+  };
+
   programs.feh.enable = true;
 
   programs.git = {
@@ -109,6 +125,10 @@
       key = config.machine.gpgPubKey;
       signByDefault = true;
     };
+    ignores = [
+      "/bazel-*"
+      "/.idea"
+    ];
   };
 
   home.file = {

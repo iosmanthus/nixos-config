@@ -121,7 +121,10 @@ let
         workspaceAutoBackAndForth = true;
         workspaceLayout = "tabbed";
         assigns = {
-          "1: work" = [{ class = "^firefox$"; }];
+          "1: work" = [
+            { class = "^firefox$"; }
+            { class = "^logseq$"; }
+          ];
           "2: vm" = [{ class = "^Remote-viewer$"; }];
           "4: mail" = [{ class = "^thunderbird$"; }];
         };
@@ -154,6 +157,9 @@ let
           }
           {
             command = "thunderbird";
+          }
+          {
+            command = "logseq";
           }
         ];
         bars = lib.mkForce [ ];
