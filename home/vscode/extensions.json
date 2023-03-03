@@ -33,32 +33,32 @@
         {
             "publisher": "eamodio",
             "name": "gitlens-insiders",
-            "version": "2023.2.1204",
-            "sha256": "01a1qv43zyf5wmvziii0b4y1j68wsjrkwyxx036mc425gszmginc"
+            "version": "2023.3.204",
+            "sha256": "14bnwm17plfdrbdnag4mlcblk5l27hcras4dcmc82kcj2m4a48aq"
         },
         {
             "publisher": "equinusocio",
             "name": "vsc-material-theme-icons",
-            "version": "2.5.0",
-            "sha256": "1cfrdadwcvkdb4mxkfiqpsq19kngnk98cm3qanv494vr2rrfbbar"
+            "version": "2.6.1",
+            "sha256": "1gg122sm82s7ci4zry0k6cwfi8qh8fcs3k3xk7fpnxl5cyrcf38m"
         },
         {
             "publisher": "foxundermoon",
             "name": "shell-format",
-            "version": "7.2.2",
-            "sha256": "00wc0y2wpdjs2pbxm6wj9ghhfsvxyzhw1vjvrnn1jfyl4wh3krvi"
+            "version": "7.2.5",
+            "sha256": "0a874423xw7z6zjj7gzzl39jahrrqcf2r16zbcvncw23483m3yli"
         },
         {
             "publisher": "GitHub",
             "name": "copilot-nightly",
-            "version": "1.72.8670",
-            "sha256": "0z2sb2cf9wya7jzh56mk1d7f6p7spw286vsb66ji1c1036mnwl5m"
+            "version": "1.77.9250",
+            "sha256": "17mgypmmrzf6jh59gcx193skipxndbjdk6nq4542axashpl2l798"
         },
         {
             "publisher": "golang",
             "name": "go",
-            "version": "0.37.1",
-            "sha256": "0z81mi7x3w1pd4n7prnzm3dy05s2fx8crkc7il60k0qw95aqrs64"
+            "version": "0.38.0",
+            "sha256": "0i2kmlabpsvrb02ljy9asdlhqssm6as3h438rq0lx67qbjwsirf0"
         },
         {
             "publisher": "haskell",
@@ -93,26 +93,26 @@
         {
             "publisher": "ms-azuretools",
             "name": "vscode-docker",
-            "version": "1.23.3",
-            "sha256": "05lxa03hh5rslg7351dw87zlrp4drqy1jmpms1aml0yn1jxfb9yj"
+            "version": "1.24.0",
+            "sha256": "1fgkqcjxg77n434jjna8hs7qrj1cmq060sb7gidsagni18lzi7fd"
         },
         {
             "publisher": "ms-python",
             "name": "python",
-            "version": "2023.3.10411009",
-            "sha256": "1v9l9jgnlhqf8xvh9qq022yyjhp9jah2zdllwjm1jmbk8rc41bgx"
+            "version": "2023.5.10611012",
+            "sha256": "15p1n21271r7q0aimlgwd8kkvbrc8xb4ciqrmhc5na2axz4x9z2p"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.279.0",
-            "sha256": "117smyb86wp4wmzxb3slgy97mbv6byqzpvp86m3dp7zyw9fxwlrf"
+            "version": "0.283.0",
+            "sha256": "13b33xymj8ah7v4rmc1swj5w0jwr5ynwxjjbks75c76hnw6779id"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-ssh",
-            "version": "0.97.2023020215",
-            "sha256": "0iy0s4whm19r59a5x03phk71ryf9arbmpi5qasa44ymnhhhl1a4w"
+            "version": "0.98.0",
+            "sha256": "0xjlkbrhnwvmvhxzsb34wywcpcrlcdmlqpb7paw3i2kp00hsi69q"
         },
         {
             "publisher": "ms-vscode",
@@ -159,8 +159,8 @@
         {
             "publisher": "vscodevim",
             "name": "vim",
-            "version": "1.24.3",
-            "sha256": "02alixryryak80lmn4mxxf43izci5fk3pf3pcwy52nbd3d2fiwz1"
+            "version": "1.25.2",
+            "sha256": "0j0li3ddrknh34k2w2f13j4x8s0lb9gsmq7pxaldhwqimarqlbc7"
         },
         {
             "publisher": "yzhang",

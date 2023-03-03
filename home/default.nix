@@ -22,7 +22,7 @@
   home.packages = with pkgs; [
     ascii
     awscli2
-    bazel_6
+    feishu
     btop
     cloc
     delve

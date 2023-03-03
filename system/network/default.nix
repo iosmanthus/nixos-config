@@ -4,10 +4,19 @@
 }: {
   imports = [
     ./proxy
+    ./dns.nix
   ];
 
+  dns = {
+    servers = [
+      "114.114.114.114"
+      "119.29.29.29"
+      "223.5.5.5"
+    ];
+  };
+
   networking = {
-    nameservers = [ "119.29.29.29" ];
+    nameservers = config.dns.servers;
     networkmanager = {
       enable = true;
       dns = "none";

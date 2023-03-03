@@ -60,6 +60,7 @@
             "exa"
             "fd"
             "firefox"
+            "feishu"
             "firmwareLinuxNonfree"
             "gh"
             "google-chrome"

@@ -136,12 +136,11 @@ let
     sha256 = "0ri52fihvjw9n76gi5nns37bqndnch23a2l0h67f0lpy1kw5kdpz";
   };
 
+  mkDNSList = l: builtins.concatStringsSep "," (map (x: ''"${x}"'') l);
   leafConfig = pkgs.writeText "leaf.json" ''
       {
         "dns": {
-            "servers": [
-                "119.29.29.29"
-            ]
+            "servers": [${mkDNSList config.dns.servers}]
         },
         "router": {
             "rules": [

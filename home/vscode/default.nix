@@ -115,9 +115,9 @@ in
       "editor.fontFamily" = "'Hack', 'SF Mono', 'Material-Design-Iconic-Font', feather";
       "editor.fontLigatures" = false;
       "editor.fontSize" = 14;
-      "editor.lineHeight" = 24;
-      "editor.lineNumbers" = "relative";
       "editor.inlineSuggest.enabled" = true;
+      "editor.lineHeight" = 22;
+      "editor.lineNumbers" = "relative";
 
       "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
       "terminal.integrated.fontFamily" = "'Hack', 'SF Mono', 'Hasklug Nerd Font'";

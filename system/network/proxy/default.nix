@@ -31,6 +31,8 @@ let
   environment = {
     TZ = config.time.timeZone;
   };
+  makeDNSArgs = builtins.map (d: "--dns=${d}");
+  dnsList = makeDNSArgs config.dns.servers;
 in
 {
   imports = [
@@ -55,7 +57,7 @@ in
 
     tun = {
       name = "utun8";
-      fakeDnsExclude = [ "pingcap" "ntp" "keyserver.ubuntu.com" ];
+      fakeDnsExclude = [ "pingcap" "ntp" "clinic-dev" "keyserver.ubuntu.com" ];
     };
 
     ignoreSrcAddresses = [ "172.18.0.1/24" ];
@@ -86,8 +88,7 @@ in
         extraOptions = [
           "--network=${networkName}"
           "--ip=172.18.0.2"
-          "--dns=119.29.29.29"
-        ];
+        ] ++ dnsList;
         dependsOn = [
           "clash"
         ];
@@ -107,8 +108,7 @@ in
         extraOptions = [
           "--network=${networkName}"
           "--ip=172.18.0.3"
-          "--dns=119.29.29.29"
-        ];
+        ] ++ dnsList;
       };
       yacd = {
         image = yacdImage;
@@ -120,8 +120,7 @@ in
         extraOptions = [
           "--network=${networkName}"
           "--ip=172.18.0.4"
-          "--dns=119.29.29.29"
-        ];
+        ] ++ dnsList;
       };
     };
   };
