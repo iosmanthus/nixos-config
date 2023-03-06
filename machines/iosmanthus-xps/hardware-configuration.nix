@@ -50,7 +50,7 @@
     [{ device = "/dev/disk/by-uuid/727fdb7a-2c32-4626-9cd7-48f3515d02c8"; }];
 
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;

@@ -71,6 +71,7 @@
     xxd
     yesplaymusic
     zoom-us
+    #nur.repos.xddxdd.wine-wechat
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland

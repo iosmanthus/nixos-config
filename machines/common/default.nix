@@ -10,21 +10,27 @@ with lib;
     userEmail = mkOption {
       type = types.str;
     };
-    builtinDisplayPort = mkOption {
+    displayPorts = mkOption {
       type = types.submodule {
         options = {
-          name = mkOption {
-            type = types.str;
+          builtin = mkOption {
+            type = types.submodule {
+              options = {
+                name = mkOption {
+                  type = types.str;
+                };
+                fingerprint = mkOption {
+                  type = types.str;
+                };
+              };
+            };
           };
-          fingerprint = mkOption {
-            type = types.str;
+          extra = mkOption {
+            type = types.listOf types.str;
+            default = [ ];
           };
         };
       };
-    };
-    displayPorts = mkOption {
-      type = with types; listOf str;
-      default = [ ];
     };
     hashedPassword = mkOption {
       type = types.str;

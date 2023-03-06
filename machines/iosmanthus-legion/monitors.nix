@@ -6,10 +6,12 @@ let
 in
 {
   machine = {
-    builtinDisplayPort = {
-      inherit name fingerprint;
+    displayPorts = {
+      builtin = {
+        inherit name fingerprint;
+      };
+      extra = builtins.map (p: "DP-" + (builtins.toString p)) [ 1 2 ];
     };
-    displayPorts = builtins.map (p: "DP-" + (builtins.toString p)) [ 1 2 ];
   };
   services.autorandr = {
     enable = true;

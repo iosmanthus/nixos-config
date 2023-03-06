@@ -2,8 +2,9 @@
 , ...
 }: {
   imports = [
+    ./monitors
+
     ./fonts.nix
-    ./monitors.nix
   ];
 
   environment.variables = {

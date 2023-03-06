@@ -129,7 +129,7 @@ in
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
 
-      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
+      "workbench.colorTheme" = "Default Dark+ Experimental";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;

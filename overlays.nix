@@ -44,4 +44,9 @@ with super;
       sha256 = "0hc3hdvb24f2fnxbggdk30frqh6cqb4l7ybyb9slig6qivi6wnda";
     };
   });
+
+  feishu = super.feishu.override {
+    commandLineArgs = "--disable-features=AudioServiceSandbox";
+    nss = super.nss_latest;
+  };
 } 
