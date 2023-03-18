@@ -5,6 +5,7 @@
     ./monitors
 
     ./fonts.nix
+    ./xdg-open.nix
   ];
 
   environment.variables = {
@@ -69,12 +70,5 @@
   services.printing = {
     enable = true;
     drivers = with pkgs; [ hplip ];
-  };
-
-  # https://github.com/NixOS/nixpkgs/issues/160923
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 }

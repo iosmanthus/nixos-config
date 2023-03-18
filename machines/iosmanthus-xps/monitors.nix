@@ -44,9 +44,9 @@ in
           };
           "DP-1-1" = {
             enable = true;
-            mode = "3840x2160";
-            position = "0x0";
             primary = false;
+            position = "0x0";
+            mode = "2560x1440";
             rate = "60.00";
             rotate = "left";
           };

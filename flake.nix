@@ -39,12 +39,6 @@
         inherit system config;
       };
 
-      mkStableOverlay = system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "stable" { };
-          packages = [ ];
-        };
-
       mkMasterOverlay = system: _self: _super:
         mkOverlay {
           branch = mkBranch system "master" {
@@ -85,6 +79,12 @@
           ];
         };
 
+      mkStableOverlay = system: _self: _super:
+        mkOverlay {
+          branch = mkBranch system "stable" { };
+          packages = [ ];
+        };
+
       mkCommonModules =
         system: [
           ./system/configuration.nix
@@ -112,10 +112,6 @@
                 nur.overlay
                 vscode-insiders.overlays.default
               ];
-          }
-          {
-            nix.settings.substituters = [ "https://xddxdd.cachix.org" ];
-            nix.settings.trusted-public-keys = [ "xddxdd.cachix.org-1:ay1HJyNDYmlSwj5NXQG065C8LfoqqKaTNCyzeixGjf8=" ];
           }
         ];
     in

@@ -22,12 +22,12 @@
   home.packages = with pkgs; [
     ascii
     awscli2
-    feishu
     btop
     cloc
     delve
     discord
     fd
+    feishu
     flameshot
     geoipWithDatabase
     gh
@@ -71,7 +71,7 @@
     xxd
     yesplaymusic
     zoom-us
-    #nur.repos.xddxdd.wine-wechat
+    networkmanagerapplet
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland
@@ -91,21 +91,6 @@
   };
 
   home.keyboard.options = [ "caps:escape" ];
-
-  xdg = {
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "text/html" = "firefox.desktop";
-        "x-scheme-handler/http" = "firefox.desktop";
-        "x-scheme-handler/https" = "firefox.desktop";
-        "x-scheme-handler/about" = "firefox.desktop";
-        "x-scheme-handler/unknown" = "firefox.desktop";
-        "text/plain" = "vscode.desktop";
-        "text/*" = "vscode.desktop";
-      };
-    };
-  };
 
   programs.feh.enable = true;
 

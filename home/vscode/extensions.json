@@ -50,9 +50,9 @@
         },
         {
             "publisher": "GitHub",
-            "name": "copilot-nightly",
-            "version": "1.77.9250",
-            "sha256": "17mgypmmrzf6jh59gcx193skipxndbjdk6nq4542axashpl2l798"
+            "name": "copilot",
+            "version": "1.77.9225",
+            "sha256": "1awqw7bpyvw72hnj9l1hx21djgjpjl15h5pq5la408ll4rd2645m"
         },
         {
             "publisher": "golang",

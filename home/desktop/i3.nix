@@ -66,19 +66,19 @@ let
           "${modifier1}+s" = "layout stacking";
           "${modifier1}+w" = "layout tabbed";
 
-          "${modifier0}+0" = "workspace 0: etc";
           "${modifier0}+1" = "workspace 1: work";
           "${modifier0}+2" = "workspace 2: vm";
           "${modifier0}+3" = "workspace 3: chat";
           "${modifier0}+4" = "workspace 4: mail";
           "${modifier0}+5" = "workspace 5: music";
+          "${modifier0}+0" = "workspace 0: etc";
 
-          "${modifier0}+Shift+0" = "move container to workspace 0: etc";
           "${modifier0}+Shift+1" = "move container to workspace 1: work";
           "${modifier0}+Shift+2" = "move container to workspace 2: vm";
           "${modifier0}+Shift+3" = "move container to workspace 3: chat";
           "${modifier0}+Shift+4" = "move container to workspace 4: mail";
           "${modifier0}+Shift+5" = "move container to workspace 5: music";
+          "${modifier0}+Shift+0" = "move container to workspace 0: etc";
 
           "${modifier0}+j" = "focus down";
           "${modifier0}+h" = "focus left";
@@ -109,6 +109,8 @@ let
           "${modifier0}+Shift+n" = "exec dunstctl close-all";
           "${modifier0}+g" = "exec gedit";
 
+          "${modifier0}+b" = "exec polybar-msg cmd toggle";
+
           # Disable tiling_drag before there is a threshold for it.
           "button1" = "focus";
         };
@@ -122,11 +124,33 @@ let
         };
         workspaceAutoBackAndForth = true;
         workspaceLayout = "tabbed";
-        # TODO: workspace 0 is only supported in iosmanthus-xps, find a better way to select `output`.
-        workspaceOutputAssign = [{
-          workspace = "0: etc";
-          output = "DP-1-1";
-        }];
+        workspaceOutputAssign = [
+          {
+            workspace = "1: work";
+            output = "primary";
+          }
+          {
+            workspace = "2: vm";
+            output = "primary";
+          }
+          {
+            workspace = "3: chat";
+            output = "primary";
+          }
+          {
+            workspace = "4: mail";
+            output = "primary";
+          }
+          {
+            workspace = "5: music";
+            output = "primary";
+          }
+          # TODO: workspace 0 is only supported in iosmanthus-xps, find a better way to select `output`.
+          {
+            workspace = "0: etc";
+            output = "DP-1-1";
+          }
+        ];
         assigns = {
           "1: work" = [
             { class = "^firefox$"; }

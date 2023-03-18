@@ -31,6 +31,8 @@ with super;
 
   python3Builder = callPackage ./packages/python3-builder.nix { };
 
+  xdg-open-with-portal = callPackage ./packages/xdg-open-with-portal.nix { };
+
   runVscode = import ./packages/scripts/run-vscode.nix {
     inherit pkgs;
   };
@@ -45,8 +47,15 @@ with super;
     };
   });
 
-  feishu = super.feishu.override {
-    commandLineArgs = "--disable-features=AudioServiceSandbox";
+  feishu = (super.feishu.override {
+    commandLineArgs = "--disable-features=AudioServiceSadbox";
     nss = super.nss_latest;
-  };
+  }).overrideAttrs (_: rec {
+    version = "5.30.15";
+    packageHash = "a1d34187be81";
+    src = fetchurl {
+      url = "https://sf3-cn.feishucdn.com/obj/ee-appcenter/${packageHash}/Feishu-linux_x64-${version}.deb";
+      sha256 = "0v7qv4lldv0kxhq8dycjs0c2n33r38br7qqvrnj9s4x3jydln8k6";
+    };
+  });
 } 

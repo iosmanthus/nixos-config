@@ -75,6 +75,7 @@ in
       fixed-center = true
       bottom = true
       line-size = 4
+      enable-ipc = true
 
       background=''${colors.base00}
       foreground=''${colors.base07}
@@ -91,7 +92,7 @@ in
 
       tray-position = right
       tray-detached = false
-      tray-maxsize = 48
+      tray-maxsize = 100
       tray-background = ''${root.background}
       tray-offset-x = 0
       tray-offset-y = 0
@@ -107,7 +108,7 @@ in
       ; Seconds to sleep between updates
       interval = 1.0
       time = " %H:%M:%S"
-      date = " %A, %d %b %Y"
+      date = " %a, %d %b %Y"
       format = <label>
       label = ''${env:DATE_LABEL}
 
