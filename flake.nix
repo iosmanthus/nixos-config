@@ -21,6 +21,10 @@
       inputs.nixpkgs.follows = "master";
     };
 
+    logseq = {
+      url = "github:kilianar/nixpkgs/logseq-revert";
+    };
+
     nur.url = "github:nix-community/NUR/master";
   };
   outputs =
@@ -85,6 +89,14 @@
           packages = [ ];
         };
 
+      mkLogseqOverlay = system: _self: _super:
+        mkOverlay {
+          branch = mkBranch system "logseq" {
+            allowUnfree = true;
+          };
+          packages = [ "logseq" ];
+        };
+
       mkCommonModules =
         system: [
           ./system/configuration.nix
@@ -107,6 +119,7 @@
               map (mkBuilder: mkBuilder system) [
                 mkMasterOverlay
                 mkStableOverlay
+                mkLogseqOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay

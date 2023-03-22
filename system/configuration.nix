@@ -49,6 +49,7 @@
     git
     bind
     lm_sensors
+    alsa-utils
   ];
 
   environment.etc = {

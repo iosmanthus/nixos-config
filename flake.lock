@@ -52,6 +52,22 @@
         "type": "github"
       }
     },
+    "logseq": {
+      "locked": {
+        "lastModified": 1677805905,
+        "narHash": "sha256-IJSr95c8CVgT7izXN8/9V1cLiZXKpdtrBxj3LBSwbiU=",
+        "owner": "kilianar",
+        "repo": "nixpkgs",
+        "rev": "602d1575ff1398a3573e54fb077752e0d9809db6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kilianar",
+        "ref": "logseq-revert",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "master": {
       "locked": {
         "lastModified": 1678987459,
@@ -136,6 +152,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "logseq": "logseq",
         "master": "master",
         "nixpkgs": "nixpkgs",
         "nur": "nur",

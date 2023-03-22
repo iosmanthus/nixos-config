@@ -5,7 +5,6 @@
     ./monitors
 
     ./fonts.nix
-    ./xdg-open.nix
   ];
 
   environment.variables = {

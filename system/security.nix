@@ -22,6 +22,7 @@
     extraRules = ''
       RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/intel_backlight/brightness"
       RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/intel_backlight/brightness"
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0180", MODE="0660", TAG+="uaccess"
     '';
   };
 
@@ -35,4 +36,6 @@
       options = [ "NOPASSWD" ];
     }];
   }];
+
+  security.polkit.enable = true;
 }

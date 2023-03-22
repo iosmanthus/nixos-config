@@ -20,6 +20,7 @@
   home.stateVersion = "18.09";
 
   home.packages = with pkgs; [
+    apx
     ascii
     awscli2
     btop
@@ -47,6 +48,7 @@
     logseq
     mariadb
     mycli
+    networkmanagerapplet
     nix-output-monitor
     nnn
     notion-app-enhanced
@@ -64,6 +66,7 @@
     tldr
     tree
     unzip
+    via
     vlc
     wireguard-tools
     xfce.thunar
@@ -71,7 +74,6 @@
     xxd
     yesplaymusic
     zoom-us
-    networkmanagerapplet
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland

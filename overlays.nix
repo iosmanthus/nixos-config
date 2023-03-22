@@ -31,8 +31,6 @@ with super;
 
   python3Builder = callPackage ./packages/python3-builder.nix { };
 
-  xdg-open-with-portal = callPackage ./packages/xdg-open-with-portal.nix { };
-
   runVscode = import ./packages/scripts/run-vscode.nix {
     inherit pkgs;
   };
@@ -57,5 +55,11 @@ with super;
       url = "https://sf3-cn.feishucdn.com/obj/ee-appcenter/${packageHash}/Feishu-linux_x64-${version}.deb";
       sha256 = "0v7qv4lldv0kxhq8dycjs0c2n33r38br7qqvrnj9s4x3jydln8k6";
     };
+  });
+
+  apx = super.apx.overrideAttrs (_: {
+    postPatch = ''
+      sed -i "s#/etc/apx#$out/etc/apx#g" $(find . -name "*.go")
+    '';
   });
 } 
