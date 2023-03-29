@@ -74,6 +74,7 @@
     xxd
     yesplaymusic
     zoom-us
+    graphviz
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland

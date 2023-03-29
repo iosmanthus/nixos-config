@@ -52,6 +52,8 @@
     alsa-utils
   ];
 
+  programs.zsh.enable = true;
+
   environment.etc = {
     "nixos/flake.nix".source = config.users.users.${config.machine.userName}.home
       + "/nixos-config/flake.nix";

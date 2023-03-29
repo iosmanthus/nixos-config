@@ -9,7 +9,7 @@
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.sessionstore.resume_from_crash" = false;
-        "widget.content.gtk-theme-override" = "Graphite-Dark";
+        "widget.content.gtk-theme-override" = "Colloid-Dark";
       };
       userChrome = ''
         #main-window[tabsintitlebar="true"]:not([extradragspace="true"])

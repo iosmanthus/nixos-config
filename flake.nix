@@ -21,10 +21,6 @@
       inputs.nixpkgs.follows = "master";
     };
 
-    logseq = {
-      url = "github:kilianar/nixpkgs/logseq-revert";
-    };
-
     nur.url = "github:nix-community/NUR/master";
   };
   outputs =
@@ -89,22 +85,16 @@
           packages = [ ];
         };
 
-      mkLogseqOverlay = system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "logseq" {
-            allowUnfree = true;
-          };
-          packages = [ "logseq" ];
-        };
-
       mkCommonModules =
         system: [
           ./system/configuration.nix
+          ./modules/gtk-theme
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           ({ config, ... }: {
             home-manager = {
               sharedModules = [
+                ./modules/gtk-theme
                 ./modules/immutable-file.nix
                 ./modules/mutable-vscode-ext.nix
                 (./. + "/machines/${config.machine.userName}.nix")
@@ -119,7 +109,6 @@
               map (mkBuilder: mkBuilder system) [
                 mkMasterOverlay
                 mkStableOverlay
-                mkLogseqOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay

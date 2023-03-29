@@ -37,6 +37,7 @@
     ];
 
     fontconfig = {
+      antialias = true;
       localConf = ''
         <?xml version='1.0'?>
         <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>

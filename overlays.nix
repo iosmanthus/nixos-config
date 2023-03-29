@@ -1,13 +1,11 @@
 _self: super:
 with super;
 {
-  leaf = callPackage ./packages/leaf.nix { };
+  leaf = callPackage ./packages/leaf { };
 
   polybar-fonts = callPackage ./packages/polybar-fonts.nix { };
 
   tun2socks = callPackage ./packages/tun2socks.nix { };
-
-  yesplaymusic = callPackage ./packages/yesplaymusic.nix { };
 
   base16-rofi = callPackage ./packages/base16-rofi.nix { };
 
@@ -42,6 +40,18 @@ with super;
       repo = "Graphite-gtk-theme";
       rev = "966e98c4ea348f739594f65eae8b824abdb1a1b4";
       sha256 = "0hc3hdvb24f2fnxbggdk30frqh6cqb4l7ybyb9slig6qivi6wnda";
+    };
+  });
+
+  colloid-gtk-theme = (super.colloid-gtk-theme.override {
+    tweaks = [ "normal" ];
+    colorVariants = [ "dark" ];
+  }).overrideAttrs (_: {
+    src = super.fetchFromGitHub {
+      owner = "vinceliuice";
+      repo = "Colloid-gtk-theme";
+      rev = "6cba9239b8d04e82171899211fb6df2455d6a89d";
+      sha256 = "16wzhracfxn7cjzyz8dalrr6rd53wxvh1lcxcc13ssn02v7202z3";
     };
   });
 

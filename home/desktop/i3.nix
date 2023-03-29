@@ -66,18 +66,20 @@ let
           "${modifier1}+s" = "layout stacking";
           "${modifier1}+w" = "layout tabbed";
 
-          "${modifier0}+1" = "workspace 1: work";
-          "${modifier0}+2" = "workspace 2: vm";
+          "${modifier0}+1" = "workspace 1: web";
+          "${modifier0}+2" = "workspace 2: work";
           "${modifier0}+3" = "workspace 3: chat";
           "${modifier0}+4" = "workspace 4: mail";
           "${modifier0}+5" = "workspace 5: music";
+          "${modifier0}+6" = "workspace 6: vm";
           "${modifier0}+0" = "workspace 0: etc";
 
-          "${modifier0}+Shift+1" = "move container to workspace 1: work";
-          "${modifier0}+Shift+2" = "move container to workspace 2: vm";
+          "${modifier0}+Shift+1" = "move container to workspace 1: web";
+          "${modifier0}+Shift+2" = "move container to workspace 2: work";
           "${modifier0}+Shift+3" = "move container to workspace 3: chat";
           "${modifier0}+Shift+4" = "move container to workspace 4: mail";
           "${modifier0}+Shift+5" = "move container to workspace 5: music";
+          "${modifier0}+Shift+6" = "move container to workspace 6: vm";
           "${modifier0}+Shift+0" = "move container to workspace 0: etc";
 
           "${modifier0}+j" = "focus down";
@@ -126,11 +128,11 @@ let
         workspaceLayout = "tabbed";
         workspaceOutputAssign = [
           {
-            workspace = "1: work";
+            workspace = "1: web";
             output = "primary";
           }
           {
-            workspace = "2: vm";
+            workspace = "2: work";
             output = "primary";
           }
           {
@@ -145,6 +147,10 @@ let
             workspace = "5: music";
             output = "primary";
           }
+          {
+            workspace = "6: vm";
+            output = "primary";
+          }
           # TODO: workspace 0 is only supported in iosmanthus-xps, find a better way to select `output`.
           {
             workspace = "0: etc";
@@ -152,11 +158,11 @@ let
           }
         ];
         assigns = {
-          "1: work" = [
+          "1: web" = [
             { class = "^firefox$"; }
             { class = "^logseq$"; }
           ];
-          "2: vm" = [{ class = "^Remote-viewer$"; }];
+          "6: vm" = [{ class = "^Remote-viewer$"; }];
           "4: mail" = [{ class = "^thunderbird$"; }];
         };
         startup = [
@@ -181,7 +187,7 @@ let
             always = true;
           }
           {
-            command = "i3-msg workspace 1: work";
+            command = "i3-msg workspace 1: web";
           }
           {
             command = "firefox";

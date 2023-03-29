@@ -37,7 +37,7 @@ in
       export COLOR_BASE0F=#FF5370
 
       export NETWORK_LABEL_CONNECTED="%essid% %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{F$COLOR_BASE0E}%signal%%%{F-}"
-      export DATE_LABEL="%date% %{F$COLOR_BASE0C}%time%%{F-}"
+      export DATE_LABEL="🕓 %date% %{F$COLOR_BASE0C}%time%%{F-}"
       export HWMON_PATH=$(echo /sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input)
       export ADAPTER=$(${ls} -1 /sys/class/power_supply | ${grep} AC)
       export BATTERY=$(${ls} -1 /sys/class/power_supply | ${grep} BAT)
@@ -107,8 +107,18 @@ in
 
       ; Seconds to sleep between updates
       interval = 1.0
-      time = " %H:%M:%S"
-      date = " %a, %d %b %Y"
+
+      ; See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+      ; NOTE: if you want to use syntax tags here you need to use %%{...}
+      date = %Y-%m-%d%
+
+      ; Optional time format
+      time = %H:%M
+
+      ; if `date-alt` or `time-alt` is defined, clicking
+      ; the module will toggle between formats
+      date-alt = %A, %d %B %Y
+      time-alt = %H:%M:%S
       format = <label>
       label = ''${env:DATE_LABEL}
 
@@ -232,11 +242,12 @@ in
       reverse-scroll = false
       fuzzy-match = true
 
-      ws-icon-0 = 1;
-      ws-icon-1 = 2;
-      ws-icon-2 = 3;
-      ws-icon-3 = 4;
-      ws-icon-4 = 5;
+      ws-icon-0 = web;
+      ws-icon-1 = work;
+      ws-icon-2 = chat;
+      ws-icon-3 = mail;
+      ws-icon-4 = music;
+      ws-icon-5 = vm;
       ws-icon-default = 
 
       format = <label-state> <label-mode>

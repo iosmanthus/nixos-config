@@ -1,4 +1,5 @@
-{ pkgs
+{ config
+, pkgs
 , ...
 }: {
   imports = [
@@ -24,10 +25,7 @@
       package = pkgs.tela-icon-theme;
       name = "Tela";
     };
-    theme = {
-      package = pkgs.graphite-gtk-theme;
-      name = "Graphite-Dark";
-    };
+    theme = config.gtk.globalTheme;
   };
 
   dconf.settings = {

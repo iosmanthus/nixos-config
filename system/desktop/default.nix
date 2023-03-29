@@ -1,4 +1,5 @@
-{ pkgs
+{ config
+, pkgs
 , ...
 }: {
   imports = [
@@ -48,10 +49,7 @@
             name = "Yaru";
             size = 48;
           };
-          theme = {
-            package = pkgs.graphite-gtk-theme;
-            name = "Graphite-Dark";
-          };
+          theme = config.gtk.globalTheme;
           indicators =
             [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
           extraConfig = ''
