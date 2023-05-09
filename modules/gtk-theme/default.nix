@@ -7,7 +7,7 @@
   ];
 
   gtk.globalTheme = {
-    package = pkgs.orchis-theme;
-    name = "Orchis-Dark";
+    package = pkgs.fluent-gtk-theme;
+    name = "Fluent-Dark";
   };
 }

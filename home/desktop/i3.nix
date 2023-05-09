@@ -14,7 +14,7 @@ let
         fonts =
           {
             names = [ "monospace" ];
-            size = 11.0;
+            size = 12.0;
           };
         modifier = modifier0;
         focus = {
@@ -110,7 +110,7 @@ let
           "${modifier0}+n" = "exec dunstctl history-pop";
           "${modifier0}+Shift+n" = "exec dunstctl close-all";
           "${modifier0}+g" = "exec gedit";
-
+          "${modifier0}+space" = "exec wmfocus";
           "${modifier0}+b" = "exec polybar-msg cmd toggle";
 
           # Disable tiling_drag before there is a threshold for it.

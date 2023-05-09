@@ -1,4 +1,5 @@
 { config
+, lib
 , pkgs
 , ...
 }: {
@@ -42,19 +43,6 @@
   programs.wireshark = {
     enable = true;
     package = pkgs.wireshark-qt;
-  };
-
-  services.tor = {
-    enable = true;
-    client.enable = true;
-    settings = {
-      ControlPort = 9051;
-      CookieAuthentication = true;
-      CookieAuthFileGroupReadable = true;
-      DataDirectoryGroupReadable = true;
-      ExcludeNodes = "{cn},{hk},{mo}";
-      StrictNodes = true;
-    };
   };
 
   users.extraGroups.wireshark.members = [ "${config.machine.userName}" ];

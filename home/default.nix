@@ -30,6 +30,7 @@
     fd
     feishu
     flameshot
+    flyctl
     geoipWithDatabase
     gh
     gnome.gedit
@@ -38,6 +39,7 @@
     gnome.seahorse
     go-tools
     google-chrome
+    graphviz
     htop
     httpie
     imagemagick
@@ -69,12 +71,12 @@
     via
     vlc
     wireguard-tools
+    wmfocus
     xfce.thunar
     xfce.xfce4-taskmanager
     xxd
     yesplaymusic
     zoom-us
-    graphviz
   ] ++ (with pkgs.jetbrains ;[
     clion
     goland
@@ -102,8 +104,12 @@
     lfs.enable = true;
     inherit (config.machine) userName userEmail;
     extraConfig = {
-      core = { editor = "${pkgs.runVscode} --wait"; };
-      pull = { rebase = false; };
+      core = {
+        editor = "${pkgs.runVscode} --wait";
+      };
+      pull = {
+        rebase = false;
+      };
       url = {
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
@@ -146,7 +152,10 @@
 
   programs.kitty = {
     enable = true;
-    font = { name = "monospace"; };
+    font = {
+      name = "monospace";
+      size = 12;
+    };
     settings = {
       include = pkgs.kitty-themes.mkKittyTheme "base16-material-darker";
     };

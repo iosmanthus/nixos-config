@@ -3,21 +3,12 @@ let
   hashFiles = builtins.map (builtins.hashFile "sha256");
 in
 {
-  sops.secrets.v2ray-config = {
+  sops.secrets.sing-box = {
     format = "binary";
-    sopsFile = ./v2ray_config;
+    sopsFile = ./sing-box.json;
   };
 
-  sops.secrets.clash-config = {
-    format = "binary";
-    sopsFile = ./clash_config;
-  };
-
-  systemd.services.docker-clash.restartTriggers = hashFiles [
-    ./clash_config
-  ];
-
-  systemd.services.docker-v2ray.restartTriggers = hashFiles [
-    ./v2ray_config
+  systemd.services.sing-box.restartTriggers = hashFiles [
+    ./sing-box.json
   ];
 }

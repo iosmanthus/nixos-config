@@ -2,7 +2,8 @@
 , ...
 }:
 let
-  fcitx = "${pkgs.fcitx5}/bin/fcitx5-remote";
+  fcitx-remote = "${pkgs.fcitx5}/bin/fcitx5-remote";
+  nvim = "${pkgs.neovim}/bin/nvim";
 in
 {
   home.packages = with pkgs; [
@@ -74,13 +75,13 @@ in
       "keyboard.dispatch" = "keyCode";
       "vim.autoSwitchInputMethod.defaultIM" = "1";
       "vim.autoSwitchInputMethod.enable" = true;
-      "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx}";
-      "vim.autoSwitchInputMethod.switchIMCmd" = "${fcitx} -t {im}";
+      "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx-remote}";
+      "vim.autoSwitchInputMethod.switchIMCmd" = "${fcitx-remote} -t {im}";
       "vim.camelCaseMotion.enable" = true;
       "vim.debug.silent" = true;
       "vim.easymotion" = true;
       "vim.enableNeovim" = true;
-      "vim.neovimPath" = "${pkgs.neovim}/bin/nvim";
+      "vim.neovimPath" = "${nvim}";
       "vim.handleKeys" = {
         "<C-a>" = false;
         "<C-c>" = false;
@@ -112,24 +113,25 @@ in
       ];
       "vim.visualstar" = true;
 
-      "editor.fontFamily" = "'Hack', 'SF Mono', 'Material-Design-Iconic-Font', feather";
+      "editor.fontFamily" = "monospace, 'SF Mono', 'Material-Design-Iconic-Font', feather";
       "editor.fontLigatures" = false;
-      "editor.fontSize" = 14;
+      "editor.fontSize" = 13;
       "editor.inlineSuggest.enabled" = true;
-      "editor.lineHeight" = 22;
+      "editor.lineHeight" = 24;
       "editor.lineNumbers" = "relative";
 
       "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
-      "terminal.integrated.fontFamily" = "'Hack', 'SF Mono', 'Hasklug Nerd Font'";
+      "terminal.integrated.fontFamily" = "monospace, 'SF Mono', 'Hasklug Nerd Font'";
       "terminal.integrated.fontWeight" = "normal";
-      "terminal.integrated.fontSize" = 14;
+      "terminal.integrated.fontSize" = 13;
       "terminal.integrated.fontWeightBold" = 600;
       "terminal.integrated.shellIntegration.enabled" = true;
 
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
+      "window.zoomLevel" = 1;
 
-      "workbench.colorTheme" = "Default Dark+ Experimental";
+      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "nix.enableLanguageServer" = true;

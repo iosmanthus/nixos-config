@@ -36,7 +36,7 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/colors
     for s in $srcs; do
-      cp $s/colors/* $out/colors/
+      cp $s/*/*.conf $out/colors/
     done
   '';
 }

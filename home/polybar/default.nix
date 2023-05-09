@@ -68,7 +68,7 @@ in
 
       [bar/main]
       width = 100%
-      height = 40
+      height = 48
       radius = 0.0
       override-redirect = false
       wm-restack = i3

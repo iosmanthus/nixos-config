@@ -2,125 +2,39 @@
 , pkgs
 , ...
 }:
-let
-  v2rayImage = "teddysun/xray";
-
-  v2rayImageFile = pkgs.dockerTools.pullImage {
-    imageName = "${v2rayImage}";
-    imageDigest = "sha256:174797b48525450ba8dbabfa667cc23e398d0e35c812e6cf0a81583695bde606";
-    sha256 = "1im9xyf3r40scp44bzglsqdlilkrck9405izfpyzy6kmxs3sq0wb";
-  };
-
-  clashImage = "dreamacro/clash-premium";
-
-  clashImageFile = pkgs.dockerTools.pullImage {
-    imageName = "${clashImage}";
-    imageDigest = "sha256:36c6ffe0e7784181950cc9c3e00c2798bcd097aa1188931239bc9c2cf2fbb39c";
-    sha256 = "04gb406k9jj5cgjclqfjdlg4qdqw3n1x1x1k1b8ys25mr1zwp0f8";
-  };
-
-  yacdImage = "haishanh/yacd";
-
-  yacdImageFile = pkgs.dockerTools.pullImage {
-    imageName = "${yacdImage}";
-    imageDigest = "sha256:4a9d0f286b2d48887628507df7d2090660c9211c7526fb1a1808130298cc30e8";
-    sha256 = "14nyb2vq124cj4dg1ks6y307qch6vdpfcnc8xjfiawghjyvw51dp";
-  };
-
-  networkName = "proxy";
-  environment = {
-    TZ = config.time.timeZone;
-  };
-  makeDNSArgs = builtins.map (d: "--dns=${d}");
-  dnsList = makeDNSArgs config.dns.servers;
-in
 {
   imports = [
-    ./leaf-tun.nix
-    ./docker-network.nix
+    ./sing-box.nix
   ];
 
-  services.leaf-tun = {
+  services.sing-box = {
     enable = true;
-
-    tcpProxy = {
-      type = "socks";
-      address = "172.18.0.3";
-      port = 1080;
-    };
-
-    udpProxy = {
-      type = "socks";
-      address = "172.18.0.2";
-      port = 1080;
-    };
-
-    tun = {
-      name = "utun8";
-      fakeDnsExclude = [ "pingcap" "ntp" "clinic-dev" "keyserver.ubuntu.com" ];
-    };
-
-    ignoreSrcAddresses = [ "172.18.0.1/24" ];
-  };
-
-
-  services.docker-network = {
-    "${networkName}" = {
-      enable = true;
-      subnet = "172.18.0.1/24";
-      opts = {
-        "com.docker.network.bridge.name" = "br-${networkName}";
+    configFile = config.sops.secrets.sing-box.path;
+    override = {
+      "experimental" = {
+        "clash_api" = {
+          "cache_file" = "cache.db";
+          "external_controller" = "127.0.0.1:7990";
+          "store_selected" = true;
+          "external_ui" = "./ui";
+          "external_ui_download_detour" = "transits";
+        };
       };
-    };
-  };
-
-  virtualisation.oci-containers = {
-    containers = {
-      v2ray = rec {
-        image = v2rayImage;
-        imageFile = v2rayImageFile;
-        workdir = "/var/run/v2ray";
-        cmd = [ "xray" "run" "-confdir" "./" ];
-        volumes = [
-          "${config.sops.secrets.v2ray-config.path}:${workdir}/config.json"
-        ];
-        inherit environment;
-        extraOptions = [
-          "--network=${networkName}"
-          "--ip=172.18.0.2"
-        ] ++ dnsList;
-        dependsOn = [
-          "clash"
-        ];
-      };
-      clash = rec {
-        image = clashImage;
-        imageFile = clashImageFile;
-        workdir = "/var/run/clash";
-        cmd = [ "-d" "./" ];
-        volumes = [
-          "${config.sops.secrets.clash-config.path}:${workdir}/config.yaml"
-          "${pkgs.clash-data.rulesPath}:${workdir}/ruleset"
-          "${pkgs.clash-data.mmdbPath}:${workdir}/Country.mmdb"
-          "${config.users.users.${config.machine.userName}.home}/.cache/clash:${workdir}"
-        ];
-        inherit environment;
-        extraOptions = [
-          "--network=${networkName}"
-          "--ip=172.18.0.3"
-        ] ++ dnsList;
-      };
-      yacd = {
-        image = yacdImage;
-        imageFile = yacdImageFile;
-        dependsOn = [
-          "clash"
-        ];
-        inherit environment;
-        extraOptions = [
-          "--network=${networkName}"
-          "--ip=172.18.0.4"
-        ] ++ dnsList;
+      "inbounds" = [
+        {
+          "tag" = "tun-in";
+          "type" = "tun";
+          "auto_route" = true;
+          "strict_route" = true;
+          "inet4_address" = "198.18.0.1/16";
+          "interface_name" = "utun0";
+          "sniff" = true;
+          "stack" = "system";
+        }
+      ];
+      "log" = {
+        "level" = "debug";
+        "timestamp" = false;
       };
     };
   };

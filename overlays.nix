@@ -33,20 +33,31 @@ with super;
     inherit pkgs;
   };
 
+  yesplaymusic = callPackage ./packages/yesplaymusic.nix { };
+
+  sing-box = callPackage ./packages/sing-box.nix { };
+
   graphite-gtk-theme = super.graphite-gtk-theme.overrideAttrs (_: {
-    version = "unstable-2022-12-10";
+    version = "unstable-2023-03-31";
     src = super.fetchFromGitHub {
       owner = "vinceliuice";
       repo = "Graphite-gtk-theme";
-      rev = "966e98c4ea348f739594f65eae8b824abdb1a1b4";
-      sha256 = "0hc3hdvb24f2fnxbggdk30frqh6cqb4l7ybyb9slig6qivi6wnda";
+      rev = "54b3cf69ceb4ca204d38dda9d19f4f1bdbcf5739";
+      sha256 = "1h090lish16l36pabwkfnd469dp0pmlp6j1qy9ww21mg3rfrnmqz";
     };
   });
 
-  colloid-gtk-theme = (super.colloid-gtk-theme.override {
-    tweaks = [ "normal" ];
-    colorVariants = [ "dark" ];
-  }).overrideAttrs (_: {
+  fluent-gtk-theme = super.fluent-gtk-theme.overrideAttrs (_: {
+    version = "unstable-2023-03-31";
+    src = super.fetchFromGitHub {
+      owner = "vinceliuice";
+      repo = "Fluent-gtk-theme";
+      rev = "7fc847caf4bd226c937272faeab2946a5ae84ef5";
+      sha256 = "02sgpv89gqqixny7cmv2b7khpia7y3fd7i8qc9vdc1qpw47sb64j";
+    };
+  });
+
+  colloid-gtk-theme = super.colloid-gtk-theme.overrideAttrs (_: {
     src = super.fetchFromGitHub {
       owner = "vinceliuice";
       repo = "Colloid-gtk-theme";

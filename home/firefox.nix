@@ -1,6 +1,4 @@
-{ pkgs
-, config
-, lib
+{ config
 , ...
 }: {
   programs.firefox = {
@@ -9,7 +7,10 @@
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.sessionstore.resume_from_crash" = false;
-        "widget.content.gtk-theme-override" = "Colloid-Dark";
+        "widget.content.gtk-theme-override" = config.gtk.globalTheme.name;
+        "network.prefetch-next" = true;
+        "network.predictor.enable-prefetch" = true;
+        "network.dns.disablePrefetchFromHTTPS" = false;
       };
       userChrome = ''
         #main-window[tabsintitlebar="true"]:not([extradragspace="true"])
