@@ -51,8 +51,8 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.84.51",
-            "sha256": "1w6ir3g1fh51k0ysa1kc1y4czij9x0iangfiw50566vnixzm7d96"
+            "version": "1.88.132",
+            "sha256": "10d98bshmrwsknczgscl3vx3shr6w7nlab865m4yxr7irrkrqaps"
         },
         {
             "publisher": "golang",
@@ -87,32 +87,32 @@
         {
             "publisher": "mkhl",
             "name": "direnv",
-            "version": "0.12.1",
-            "sha256": "0lizp7r2l6dayhvxkz3ghsgywz9magvy7lzkc5dkcqxcsi1p4klb"
+            "version": "0.12.2",
+            "sha256": "1dkasigf6q7g4wqzf7mn4al9fdf391d8jjww419szk5c4sz8aps8"
         },
         {
             "publisher": "ms-azuretools",
             "name": "vscode-docker",
-            "version": "1.25.0",
-            "sha256": "1hif7f2323v1lkhzqi7n50psh5bw2jbc6h736fhv61jlfvb2z8bk"
+            "version": "1.25.1",
+            "sha256": "1r0h6mi339gbczz3rrr1k2hfxk6w9f1pvpf4lrclp670nldfch5w"
         },
         {
             "publisher": "ms-python",
             "name": "python",
-            "version": "2023.6.1",
-            "sha256": "0dna96y593pfpl9991q1m4qkd5gk63w2rlb70zi1hv5yr7v29fv8"
+            "version": "2023.9.11521013",
+            "sha256": "1vy9vv3y8d99i79wqma0vnywwqkxfvacd3vz527k97bi3xjf18ij"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.291.0",
-            "sha256": "0484zbalg5w2s0iwmzafs0pah281wqmvhs682bxdwn1amz2a1gfa"
+            "version": "0.294.0",
+            "sha256": "1zm98xypkq9w8s1z5hjxfs2h0xsb674xx799sczw9rfki2gilz1f"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-ssh",
-            "version": "0.101.2023041015",
-            "sha256": "0h5y1dygi42ibh9iv6nj66a81kll2xlnn9lp4mbl7mwi2217b0bd"
+            "version": "0.103.2023051015",
+            "sha256": "09g6jd3588nz0rh6ag3mwdsl66l9mcips1m6y43v9v26ycsab9qd"
         },
         {
             "publisher": "ms-vscode",
@@ -129,8 +129,8 @@
         {
             "publisher": "ms-vscode",
             "name": "makefile-tools",
-            "version": "0.7.0",
-            "sha256": "12gxjbry5jmjfgbp3j606dpcmyf25gw0p54r3y3rp6pfq5cdckhp"
+            "version": "0.8.1",
+            "sha256": "05swb85r4s589c0j0yff54zwy7f08735a3vwyz54im0f6y2wqajl"
         },
         {
             "publisher": "naumovs",
@@ -183,8 +183,20 @@
         {
             "publisher": "catppuccin",
             "name": "catppuccin-vsc-icons",
-            "version": "0.9.0",
-            "sha256": "1km7kjzmiinin1mpzwhm7jrj3c6qli5z0k50172ihcdwv6a7hd09"
+            "version": "0.14.0",
+            "sha256": "1hi5ci10kq6n86v0wdw58vlzwyn6iwwaili40jcsiiphk5pk26fv"
+        },
+        {
+            "publisher": "github",
+            "name": "vscode-github-actions",
+            "version": "0.25.7",
+            "sha256": "1rwxznv4mbzzcvkpp89zpm0f0pp3q094np4lwa94yg5xcxlyk6ii"
+        },
+        {
+            "publisher": "gitHub",
+            "name": "copilot-labs",
+            "version": "0.14.884",
+            "sha256": "1lq1gk80i9cnks8fnasw2b9frg3889pvkfk308fzphv3sjlpi2z3"
         }
     ]
 }

@@ -21,6 +21,8 @@
       inputs.nixpkgs.follows = "master";
     };
 
+    jetbrains.url = "github:NixOS/nixpkgs/master";
+
     nur.url = "github:nix-community/NUR/master";
   };
   outputs =
@@ -39,6 +41,17 @@
         inherit system config;
       };
 
+      mkJetbrainsOverlay = system: _self: _super:
+        mkOverlay
+          {
+            branch = mkBranch system "jetbrains" {
+              allowUnfree = true;
+            };
+            packages = [
+              "jetbrains"
+            ];
+          };
+
       mkMasterOverlay = system: _self: _super:
         mkOverlay {
           branch = mkBranch system "master" {
@@ -56,7 +69,6 @@
             "gh"
             "google-chrome"
             "i3"
-            "jetbrains"
             "kitty"
             "lens"
             "logseq"
@@ -67,7 +79,6 @@
             "rnix-lsp"
             "rofi"
             "rust-analyzer"
-            "singbox"
             "sops"
             "starship"
             "tmux"
@@ -76,6 +87,8 @@
             "zoom-us"
             "zoxide"
             "zsh"
+            "nixUnstable"
+            "thunderbird"
           ];
         };
 
@@ -109,6 +122,7 @@
               map (mkBuilder: mkBuilder system) [
                 mkMasterOverlay
                 mkStableOverlay
+                mkJetbrainsOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay

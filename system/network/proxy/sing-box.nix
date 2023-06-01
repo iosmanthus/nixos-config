@@ -39,8 +39,8 @@ let
 
   singboxStart = writeShScript "singbox-start" ''
     override=${saveAsJson cfg.override "override.json"}
-    jq -s '.[0] * .[1]' ${cfg.configFile} $override > $STATE_DIRECTORY/config.json
-    sing-box run -C $STATE_DIRECTORY -D $STATE_DIRECTORY
+    jq -s '.[0] * .[1]' ${cfg.configFile} $override > $RUNTIME_DIRECTORY/config.json
+    sing-box run -C $RUNTIME_DIRECTORY -D $STATE_DIRECTORY --disable-color
   '';
 
   cfg = config.services.sing-box;
@@ -59,6 +59,7 @@ in
       description = "Enable sing-box services";
       path = [ cfg.package ] ++ (with pkgs; [ jq ]);
       serviceConfig = {
+        RuntimeDirectory = "sing-box";
         StateDirectory = "sing-box";
         Type = "simple";
         ExecStart = "${singboxStart}";

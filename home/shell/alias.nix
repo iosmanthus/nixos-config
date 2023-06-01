@@ -20,7 +20,6 @@ in
   home.packages = with pkgs; [
     bat
     exa
-    neovim
     systemd
     sudo
     bind
@@ -66,7 +65,12 @@ in
       goland = "${ignoreOutput} goland nosplash";
       idea-ultimate = "${ignoreOutput} idea-ultimate nosplash";
 
+      k = "kubectl";
+      kx = "kubectx";
+
       code = "${pkgs.runVscode}";
+      n = "nix";
+      nrs = "nixos-rebuild switch --use-remote-sudo";
     };
   };
 }

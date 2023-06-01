@@ -30,6 +30,9 @@
       persistent = true;
       options = "--delete-older-than 2d";
     };
+    settings = {
+      auto-optimise-store = true;
+    };
   };
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -42,14 +45,15 @@
     "${config.users.users.${config.machine.userName}.home}/.config/sops/age/keys.txt";
 
   environment.systemPackages = with pkgs; [
-    lsof
-    wget
-    neovim
+    alsa-utils
+    bind
     file
     git
-    bind
+    killall
     lm_sensors
-    alsa-utils
+    lsof
+    neovim
+    wget
   ];
 
   programs.zsh.enable = true;

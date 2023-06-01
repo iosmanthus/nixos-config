@@ -10,6 +10,61 @@
     enable = true;
     configFile = config.sops.secrets.sing-box.path;
     override = {
+      "dns" = {
+        "rules" = [
+          {
+            "geosite" = [
+              "cn"
+            ];
+            "server" = "dnspod";
+          }
+          {
+            "outbound" = "any";
+            "server" = "dnspod";
+          }
+        ];
+        "servers" = [
+          {
+            "address" = "tls://1.1.1.1";
+            "detour" = "transits";
+            "tag" = "google";
+          }
+          {
+            "address" = "119.29.29.29";
+            "detour" = "direct";
+            "tag" = "dnspod";
+          }
+        ];
+        "strategy" = "ipv4_only";
+      };
+      "route" = {
+        "rules" = [
+          {
+            "outbound" = "dns-out";
+            "protocol" = "dns";
+          }
+          {
+            "geosite" = [
+              "cn"
+            ];
+            "outbound" = "direct";
+          }
+          {
+            "geoip" = [
+              "cn"
+              "private"
+            ];
+            "outbound" = "direct";
+          }
+          {
+            "domain_keyword" = [
+              "ddrk"
+              "ddys"
+            ];
+            "outbound" = "transits";
+          }
+        ];
+      };
       "experimental" = {
         "clash_api" = {
           "cache_file" = "cache.db";
@@ -28,12 +83,12 @@
           "inet4_address" = "198.18.0.1/16";
           "interface_name" = "utun0";
           "sniff" = true;
-          "stack" = "system";
+          "stack" = "gvisor";
         }
       ];
       "log" = {
         "level" = "debug";
-        "timestamp" = false;
+        "timestamp" = true;
       };
     };
   };

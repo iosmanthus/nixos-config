@@ -92,7 +92,7 @@ in
 
       tray-position = right
       tray-detached = false
-      tray-maxsize = 100
+      tray-maxsize = 32
       tray-background = ''${root.background}
       tray-offset-x = 0
       tray-offset-y = 0
@@ -242,12 +242,11 @@ in
       reverse-scroll = false
       fuzzy-match = true
 
-      ws-icon-0 = web;
-      ws-icon-1 = work;
-      ws-icon-2 = chat;
-      ws-icon-3 = mail;
-      ws-icon-4 = music;
-      ws-icon-5 = vm;
+      ws-icon-0 = main;
+      ws-icon-1 = chat;
+      ws-icon-2 = mail;
+      ws-icon-3 = music;
+      ws-icon-4 = vm;
       ws-icon-default = 
 
       format = <label-state> <label-mode>

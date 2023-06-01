@@ -1,13 +1,19 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i python3 --pure -p python3Packages.pyyaml -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz
+#! nix-shell -i python3 --pure -p python3Packages.pyyaml -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz
 
 import re
-import sys
 import json
 import yaml
 
 from os import walk
-from yaml import FullLoader
+
+ignore_paths = [
+    '.*\.py',
+    ".*\.pub",
+    ".*\.nix",
+    "\.sops\.yaml",
+    ".*__pycache__.*",
+]
 
 
 def match(patterns, name):
@@ -17,40 +23,33 @@ def match(patterns, name):
     return False
 
 
-ignore_paths = [
-    '.*\.py', ".*\.pub", ".*\.nix", "\.sops\.yaml", ".*__pycache__.*",
-    ".*ruleset.*"
-]
+def audit(base, whitelist):
+    for (dirpath, _, files) in walk(base):
+        for file in files:
+            if match(whitelist, file) or match(whitelist, dirpath):
+                continue
+            if dirpath == './':
+                path = dirpath + file
+            else:
+                path = dirpath + '/' + file
 
-try:
-    base_dir = sys.argv[1]
-except IndexError as e:
-    print(f'Usage: {sys.argv[0]} <base-dir>')
-    sys.exit(1)
+            try:
+                with open(path, 'r') as f:
+                    o = yaml.safe_load(f)
+            except Exception:
+                with open(path, 'r') as f:
+                    o = json.load(f)
 
-for (dirpath, _, files) in walk(base_dir):
-    for file in files:
-        if match(ignore_paths, file) or match(ignore_paths, dirpath):
-            continue
-        if dirpath == './':
-            path = dirpath + file
-        else:
-            path = dirpath + '/' + file
+            if not o:
+                raise Exception("invalid file " + path)
 
-        try:
-            with open(path, 'r') as f:
-                o = yaml.safe_load(f)
-        except Exception:
-            with open(path, 'r') as f:
-                o = json.load(f)
+            if 'sops' not in o or 'age' not in o['sops']:
+                msg = f'{path} is not encrypted by sops'
+                raise Exception(msg)
 
-        if not o:
-            raise Exception("invalid file " + path)
+            print(f'{path} is encrypted')
 
-        if 'sops' not in o or 'age' not in o['sops']:
-            msg = f'{path} is not encrypted by sops'
-            raise Exception(msg)
+    print('safe!')
 
-        print(f'{path} is encrypted')
 
-print('safe!')
+audit('./', ignore_paths)

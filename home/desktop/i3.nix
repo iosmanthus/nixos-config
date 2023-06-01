@@ -66,20 +66,18 @@ let
           "${modifier1}+s" = "layout stacking";
           "${modifier1}+w" = "layout tabbed";
 
-          "${modifier0}+1" = "workspace 1: web";
-          "${modifier0}+2" = "workspace 2: work";
-          "${modifier0}+3" = "workspace 3: chat";
-          "${modifier0}+4" = "workspace 4: mail";
-          "${modifier0}+5" = "workspace 5: music";
-          "${modifier0}+6" = "workspace 6: vm";
+          "${modifier0}+1" = "workspace 1: main";
+          "${modifier0}+2" = "workspace 2: chat";
+          "${modifier0}+3" = "workspace 3: mail";
+          "${modifier0}+4" = "workspace 4: music";
+          "${modifier0}+5" = "workspace 5: vm";
           "${modifier0}+0" = "workspace 0: etc";
 
-          "${modifier0}+Shift+1" = "move container to workspace 1: web";
-          "${modifier0}+Shift+2" = "move container to workspace 2: work";
-          "${modifier0}+Shift+3" = "move container to workspace 3: chat";
-          "${modifier0}+Shift+4" = "move container to workspace 4: mail";
-          "${modifier0}+Shift+5" = "move container to workspace 5: music";
-          "${modifier0}+Shift+6" = "move container to workspace 6: vm";
+          "${modifier0}+Shift+1" = "move container to workspace 1: main";
+          "${modifier0}+Shift+2" = "move container to workspace 2: chat";
+          "${modifier0}+Shift+3" = "move container to workspace 3: mail";
+          "${modifier0}+Shift+4" = "move container to workspace 4: music";
+          "${modifier0}+Shift+5" = "move container to workspace 5: vm";
           "${modifier0}+Shift+0" = "move container to workspace 0: etc";
 
           "${modifier0}+j" = "focus down";
@@ -128,27 +126,23 @@ let
         workspaceLayout = "tabbed";
         workspaceOutputAssign = [
           {
-            workspace = "1: web";
+            workspace = "1: main";
             output = "primary";
           }
           {
-            workspace = "2: work";
+            workspace = "2: chat";
             output = "primary";
           }
           {
-            workspace = "3: chat";
+            workspace = "3: mail";
             output = "primary";
           }
           {
-            workspace = "4: mail";
+            workspace = "4: music";
             output = "primary";
           }
           {
-            workspace = "5: music";
-            output = "primary";
-          }
-          {
-            workspace = "6: vm";
+            workspace = "5: vm";
             output = "primary";
           }
           # TODO: workspace 0 is only supported in iosmanthus-xps, find a better way to select `output`.
@@ -158,12 +152,12 @@ let
           }
         ];
         assigns = {
-          "1: web" = [
+          "1: main" = [
             { class = "^firefox$"; }
             { class = "^logseq$"; }
           ];
-          "6: vm" = [{ class = "^Remote-viewer$"; }];
-          "4: mail" = [{ class = "^thunderbird$"; }];
+          "5: vm" = [{ class = "^Remote-viewer$"; }];
+          "3: mail" = [{ class = "^thunderbird$"; }];
         };
         startup = [
           {
@@ -187,7 +181,7 @@ let
             always = true;
           }
           {
-            command = "i3-msg workspace 1: web";
+            command = "i3-msg workspace 1: main";
           }
           {
             command = "firefox";

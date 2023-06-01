@@ -1,12 +1,21 @@
 { pkgs, ... }:
 let
   mkbase16Rofitheme = name: "${pkgs.base16-rofi}/themes/${name}.rasi";
+  patchTheme = path: patch: pkgs.writeText "theme.rasi" ''
+    ${builtins.readFile path}
+    ${patch}
+  '';
+  theme = "${patchTheme (mkbase16Rofitheme "base16-material-darker") ''
+      element-icon { 
+        size: 2ch; 
+      }
+  ''}";
 in
 {
   programs.rofi = {
-    theme = mkbase16Rofitheme "base16-material-darker";
+    inherit theme;
     enable = true;
-    font = "monospace 18";
+    font = "monospace 20";
     terminal = "${pkgs.kitty}/bin/kitty";
     extraConfig = {
       ssh-command = "{terminal} -- {terminal} +kitten ssh {host} [-p {port}]";

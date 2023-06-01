@@ -39,6 +39,7 @@
     autoRepeatInterval = 20;
     autoRepeatDelay = 200;
     displayManager = {
+      defaultSession = "none+i3";
       lightdm = {
         enable = true;
         background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
@@ -58,7 +59,6 @@
           '';
         };
       };
-      defaultSession = "none+i3";
     };
 
     windowManager.i3 = { enable = true; };

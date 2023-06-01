@@ -30,6 +30,7 @@
       source-han-sans
       ubuntu_font_family
       vistafonts-chs
+      roboto-mono
 
       (nerdfonts.override {
         fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" "Hasklig" ];
@@ -63,7 +64,7 @@
               <string>monospace</string>
             </test>
             <edit mode="prepend" binding="strong" name="family">
-              <string>Hack</string>
+              <string>Meslo LG M</string>
             </edit>
           </match>
           <match>

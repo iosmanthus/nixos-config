@@ -24,6 +24,11 @@ in
         name = "vsc-community-material-theme";
         version = "1.4.4";
       }
+      {
+        publisher = "equinusocio";
+        name = "vsc-material-theme";
+        version = "33.8.0";
+      }
     ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
       (builtins.fromJSON (
@@ -71,6 +76,9 @@ in
       "rust-analyzer.cargo.buildScripts.enable" = true;
       "python.formatting.yapfPath" = "${pkgs.yapf}/bin/yapf";
       "python.formatting.provider" = "yapf";
+      "gopls" = {
+        "ui.semanticTokens" = true;
+      };
 
       "keyboard.dispatch" = "keyCode";
       "vim.autoSwitchInputMethod.defaultIM" = "1";
@@ -115,15 +123,15 @@ in
 
       "editor.fontFamily" = "monospace, 'SF Mono', 'Material-Design-Iconic-Font', feather";
       "editor.fontLigatures" = false;
-      "editor.fontSize" = 13;
+      "editor.fontSize" = 12;
       "editor.inlineSuggest.enabled" = true;
-      "editor.lineHeight" = 24;
+      "editor.lineHeight" = 22;
       "editor.lineNumbers" = "relative";
 
       "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
       "terminal.integrated.fontFamily" = "monospace, 'SF Mono', 'Hasklug Nerd Font'";
       "terminal.integrated.fontWeight" = "normal";
-      "terminal.integrated.fontSize" = 13;
+      "terminal.integrated.fontSize" = 12;
       "terminal.integrated.fontWeightBold" = 600;
       "terminal.integrated.shellIntegration.enabled" = true;
 

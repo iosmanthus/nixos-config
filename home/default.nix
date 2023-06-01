@@ -31,6 +31,7 @@
     feishu
     flameshot
     flyctl
+    fzf
     geoipWithDatabase
     gh
     gnome.gedit
@@ -46,6 +47,7 @@
     iperf3
     jq
     kubectl
+    kubectx
     libnotify
     logseq
     mariadb
@@ -106,6 +108,7 @@
     extraConfig = {
       core = {
         editor = "${pkgs.runVscode} --wait";
+        fsmonitor = true;
       };
       pull = {
         rebase = false;
@@ -114,6 +117,9 @@
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
         };
+      };
+      feature = {
+        manyFiles = true;
       };
     };
     signing = {
@@ -162,6 +168,7 @@
   };
 
   services.picom = {
+    package = pkgs.picom-next;
     enable = true;
     fade = true;
     fadeDelta = 5;
