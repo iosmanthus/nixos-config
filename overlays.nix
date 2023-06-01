@@ -66,10 +66,10 @@ with super;
     };
   });
 
-  feishu = (super.feishu.override {
+  feishu = super.feishu.override {
     commandLineArgs = "--disable-features=AudioServiceSadbox";
     nss = super.nss_latest;
-  });
+  };
 
   apx = super.apx.overrideAttrs (_: {
     postPatch = ''
