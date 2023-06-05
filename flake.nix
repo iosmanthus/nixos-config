@@ -5,7 +5,7 @@
 
     master.url = "github:NixOS/nixpkgs/master";
 
-    stable.url = "github:NixOS/nixpkgs/nixos-22.05";
+    stable.url = "github:NixOS/nixpkgs/nixos-23.05";
 
     sops-nix.url = "github:Mic92/sops-nix/master";
 
