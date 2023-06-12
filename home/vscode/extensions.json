@@ -183,8 +183,8 @@
         {
             "publisher": "catppuccin",
             "name": "catppuccin-vsc-icons",
-            "version": "0.14.0",
-            "sha256": "1hi5ci10kq6n86v0wdw58vlzwyn6iwwaili40jcsiiphk5pk26fv"
+            "version": "0.16.0",
+            "sha256": "0dnsmqk0bdr26sg8xv6am5lyy6364axzxnlk43bh3av5hsmbpxr2"
         },
         {
             "publisher": "github",
