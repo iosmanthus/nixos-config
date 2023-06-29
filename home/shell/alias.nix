@@ -46,8 +46,10 @@ in
 
       # TODO: refactor this shit.
       connect-xm3 = "repeat 5 { bluetoothctl connect 38:18:4C:F9:98:A9; sleep 2 } 2>&1 > /dev/null &disown";
+      connect-xm4 = "repeat 5 { bluetoothctl connect AC:80:0A:0D:E9:47; sleep 2 } 2>&1 > /dev/null &disown";
       connect-jbl = "repeat 5 { bluetoothctl connect 70:99:1C:7F:E3:EF; sleep 2 } 2>&1 > /dev/null &disown";
       disconnect-xm3 = "bluetoothctl disconnect 38:18:4C:F9:98:A9";
+      disconnect-xm4 = "bluetoothctl disconnect AC:80:0A:0D:E9:47";
       disconnect-jbl = "bluetoothctl disconnect 70:99:1C:7F:E3:EF";
 
       jctl = "journalctl";
