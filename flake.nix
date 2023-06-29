@@ -24,6 +24,8 @@
     jetbrains.url = "github:NixOS/nixpkgs/master";
 
     nur.url = "github:nix-community/NUR/master";
+
+    zoom.url = "github:NixOS/nixpkgs?ref=pull/240462/head";
   };
   outputs =
     { nixpkgs
@@ -84,7 +86,6 @@
             "tmux"
             "vscode-extensions"
             "vscode"
-            "zoom-us"
             "zoxide"
             "zsh"
             "nixUnstable"
@@ -96,6 +97,16 @@
         mkOverlay {
           branch = mkBranch system "stable" { };
           packages = [ ];
+        };
+
+      mkZoomOverlay = system: _self: _super:
+        mkOverlay {
+          branch = mkBranch system "zoom" {
+            allowUnfree = true;
+          };
+          packages = [
+            "zoom-us"
+          ];
         };
 
       mkCommonModules =
@@ -123,6 +134,7 @@
                 mkMasterOverlay
                 mkStableOverlay
                 mkJetbrainsOverlay
+                mkZoomOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay

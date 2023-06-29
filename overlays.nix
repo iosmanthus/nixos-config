@@ -52,8 +52,8 @@ with super;
     src = super.fetchFromGitHub {
       owner = "vinceliuice";
       repo = "Fluent-gtk-theme";
-      rev = "7fc847caf4bd226c937272faeab2946a5ae84ef5";
-      sha256 = "02sgpv89gqqixny7cmv2b7khpia7y3fd7i8qc9vdc1qpw47sb64j";
+      rev = "995f6a377053560c560d026be7761985a9346e36";
+      sha256 = "1zxwna7k04h5h37il1zk7f4pd1p45j52fmg9sqvg58zvpi4bwzvj";
     };
   });
 

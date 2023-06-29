@@ -160,7 +160,8 @@
         "nur": "nur",
         "sops-nix": "sops-nix",
         "stable": "stable",
-        "vscode-insiders": "vscode-insiders"
+        "vscode-insiders": "vscode-insiders",
+        "zoom": "zoom"
       }
     },
     "sops-nix": {
@@ -232,6 +233,22 @@
       "original": {
         "owner": "iosmanthus",
         "repo": "code-insiders-flake",
+        "type": "github"
+      }
+    },
+    "zoom": {
+      "locked": {
+        "lastModified": 1688011647,
+        "narHash": "sha256-uG5GstxmF5h+xQr4qQ+eu9Mlmi++7GeGIKNMpFZk+vI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d0aa543664f6ce487a24a2d8a70c26cc9976e759",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/240462/head",
+        "repo": "nixpkgs",
         "type": "github"
       }
     }

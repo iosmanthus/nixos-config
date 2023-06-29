@@ -6,6 +6,8 @@
     ./sing-box.nix
   ];
 
+  disabledModules = [ "services/networking/sing-box.nix" ];
+
   services.sing-box = {
     enable = true;
     configFile = config.sops.secrets.sing-box.path;
