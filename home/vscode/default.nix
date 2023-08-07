@@ -15,6 +15,20 @@ in
     EDITOR = "${pkgs.runVscode} --wait";
   };
 
+  home.file = {
+    vscodeArgv = {
+      text = ''
+        {
+            "enable-crash-reporter": true,
+            // DO NOT EDIT THIS VALUE
+            "crash-reporter-id": "6c9e4e70-6fde-4668-88c9-51329d63a7e9",
+            "password-store": "gnome"
+        }
+      '';
+      target = ".vscode/argv.json";
+    };
+  };
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;

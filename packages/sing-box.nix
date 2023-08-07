@@ -14,13 +14,13 @@ buildGoModule rec {
   src = fetchFromGitHub {
     owner = "SagerNet";
     repo = pname;
-    rev = "5065ab3ee54a441dc496212aa4195de824f06406";
-    sha256 = "0frappv5ny9jr4hq230ccbjjwazbrpqyykp0h374drwyh52acdgc";
+    rev = "8d9aa7d174af322c5d65187a207274bb5106ad90";
+    sha256 = "08pa7lw1x3cyhp6k48bb0y5wjk6fkgy3mnl2b56l0c8pvdvpbwmr";
   };
 
   proxyVendor = true;
 
-  vendorSha256 = "1s0m769kd283ny5vyhh0r0v6101rppvrqi6ic3arq5rl5ms9a8gf";
+  vendorSha256 = "0qrjx85qy4f7pvgi5pg3ad1f5q13y1nkvhlc4ylwy3kf4ndc6wk8";
 
   tags = [
     "with_quic"

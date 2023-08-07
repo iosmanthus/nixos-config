@@ -71,6 +71,13 @@ with super;
     nss = super.nss_latest;
   };
 
+  vistafonts-chs = super.vistafonts-chs.overrideAttrs (_: {
+    src = fetchurl {
+      url = "http://www.eeo.cn/download/font/VistaFont_CHS.EXE";
+      sha256 = "1qwm30b8aq9piyqv07hv8b5bac9ms40rsdf8pwix5dyk8020i8xi";
+    };
+  });
+
   apx = super.apx.overrideAttrs (_: {
     postPatch = ''
       sed -i "s#/etc/apx#$out/etc/apx#g" $(find . -name "*.go")

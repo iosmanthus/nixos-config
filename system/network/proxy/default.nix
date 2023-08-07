@@ -28,7 +28,7 @@
         "servers" = [
           {
             "address" = "tls://1.1.1.1";
-            "detour" = "transits";
+            "detour" = "final";
             "tag" = "google";
           }
           {
@@ -63,7 +63,7 @@
               "ddrk"
               "ddys"
             ];
-            "outbound" = "transits";
+            "outbound" = "final";
           }
         ];
       };
@@ -73,7 +73,7 @@
           "external_controller" = "127.0.0.1:7990";
           "store_selected" = true;
           "external_ui" = "./ui";
-          "external_ui_download_detour" = "transits";
+          "external_ui_download_detour" = "final";
         };
       };
       "inbounds" = [
