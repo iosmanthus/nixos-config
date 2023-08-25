@@ -90,6 +90,7 @@
             "zsh"
             "nixUnstable"
             "thunderbird"
+            "eww"
           ];
         };
 

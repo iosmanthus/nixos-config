@@ -9,18 +9,18 @@
 
 buildGoModule rec {
   pname = "sing-box";
-  version = "unstable-2023-05-17";
+  version = "unstable-2023-08-12";
 
   src = fetchFromGitHub {
     owner = "SagerNet";
     repo = pname;
-    rev = "8d9aa7d174af322c5d65187a207274bb5106ad90";
-    sha256 = "08pa7lw1x3cyhp6k48bb0y5wjk6fkgy3mnl2b56l0c8pvdvpbwmr";
+    rev = "a89d51f4f73efb22914476c01f6878674cdbb158";
+    sha256 = "1j6h3hx29sylspibc70i0df7ng87n9ban8bc41kazajys09d6f4b";
   };
 
   proxyVendor = true;
 
-  vendorSha256 = "0qrjx85qy4f7pvgi5pg3ad1f5q13y1nkvhlc4ylwy3kf4ndc6wk8";
+  vendorSha256 = "1yj1nx8i35najcrpwnggbl4av16qbn01l1f53f56hf9zsg8jyk6i";
 
   tags = [
     "with_quic"

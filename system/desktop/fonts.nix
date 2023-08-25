@@ -2,7 +2,7 @@
 
 {
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       apple-fonts
       cantarell-fonts
       cascadia-code
@@ -31,9 +31,10 @@
       ubuntu_font_family
       vistafonts-chs
       roboto-mono
+      jetbrains-nerd-font
 
       (nerdfonts.override {
-        fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" "Hasklig" ];
+        fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" "Hasklig" "JetBrainsMono" "FiraCode" ];
       })
     ];
 

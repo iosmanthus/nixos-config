@@ -6,13 +6,13 @@
   imports = [
     ./firefox.nix
     ./media.nix
-    ./rofi.nix
     ./tmux.nix
 
     ./desktop
     ./fcitx5
     ./flameshot
     ./polybar
+    ./rofi
     ./shell
     ./vscode
   ];
@@ -48,9 +48,11 @@
     jq
     kubectl
     kubectx
+    kubernetes-helm
     libnotify
     logseq
     mariadb
+    minikube
     mycli
     networkmanagerapplet
     nix-output-monitor

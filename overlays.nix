@@ -29,11 +29,11 @@ with super;
 
   python3Builder = callPackage ./packages/python3-builder.nix { };
 
+  jetbrains-nerd-font = callPackage ./packages/jetbrains-nerd-font.nix { };
+
   runVscode = import ./packages/scripts/run-vscode.nix {
     inherit pkgs;
   };
-
-  yesplaymusic = callPackage ./packages/yesplaymusic.nix { };
 
   sing-box = callPackage ./packages/sing-box.nix { };
 
@@ -66,14 +66,21 @@ with super;
     };
   });
 
-  feishu = super.feishu.override {
-    commandLineArgs = "--disable-features=AudioServiceSadbox";
+  feishu = (super.feishu.override {
+    commandLineArgs = "--disable-features=AudioServiceSandbox";
     nss = super.nss_latest;
-  };
+  }).overrideAttrs (_: rec {
+    version = "6.5.14";
+    packageHash = "833ac8e9";
+    src = fetchurl {
+      url = "https://sf3-cn.feishucdn.com/obj/ee-appcenter/${packageHash}/Feishu-linux_x64-${version}.deb";
+      sha256 = "1y8amx0g2far30pfwzympbr0vzyk8afng13ndv1kf78g244wv4cp";
+    };
+  });
 
   vistafonts-chs = super.vistafonts-chs.overrideAttrs (_: {
     src = fetchurl {
-      url = "http://www.eeo.cn/download/font/VistaFont_CHS.EXE";
+      url = "https://github.com/iosmanthus/nowhere/releases/download/v0.1.0/VistaFont_CHS.EXE";
       sha256 = "1qwm30b8aq9piyqv07hv8b5bac9ms40rsdf8pwix5dyk8020i8xi";
     };
   });

@@ -71,8 +71,10 @@ in
       kx = "kubectx";
 
       code = "${pkgs.runVscode}";
+
       n = "nix";
       nrs = "nixos-rebuild switch --use-remote-sudo";
+      nhash = "nix hash to-base32";
     };
   };
 }

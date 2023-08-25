@@ -68,13 +68,13 @@ in
 
       [bar/main]
       width = 100%
-      height = 48
+      height = 60
       radius = 0.0
       override-redirect = false
       wm-restack = i3
       fixed-center = true
       bottom = true
-      line-size = 4
+      line-size = 6
       enable-ipc = true
 
       background=''${colors.base00}
