@@ -42,7 +42,7 @@
       defaultSession = "none+i3";
       lightdm = {
         enable = true;
-        background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
+        background = config.wallpaper.package.gnomeFilePath;
         greeters.gtk = {
           enable = true;
           cursorTheme = {

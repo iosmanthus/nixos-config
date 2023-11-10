@@ -32,6 +32,9 @@ in
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
+    # Disable update notifications. THIS IS NOT WINDOWS, MS!
+    enableExtensionUpdateCheck = false;
+    enableUpdateCheck = false;
     mutableExtensions = [
       {
         publisher = "equinusocio";
@@ -49,7 +52,10 @@ in
         builtins.readFile ./extensions.json
       )).extensions
     ++ (with pkgs.vscode-extensions; [
+      eamodio.gitlens
       matklad.rust-analyzer
+      ms-python.python
+      ms-vscode-remote.remote-ssh
       redhat.vscode-yaml
     ]);
 
@@ -111,6 +117,7 @@ in
         "<C-f>" = false;
         "<C-j>" = false;
         "<C-k>" = false;
+        "<C-p>" = false;
       };
       "vim.highlightedyank.enable" = true;
       "vim.hlsearch" = true;

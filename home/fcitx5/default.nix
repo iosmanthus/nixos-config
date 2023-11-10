@@ -6,6 +6,7 @@
 with lib ;
 let
   fcitx5Home = "${config.xdg.configHome}/fcitx5";
+  mkDictPath = pkg: name: "${pkg}/share/fcitx5/pinyin/dictionaries/${name}.dict";
 in
 {
   home.packages = with pkgs; [
@@ -59,7 +60,10 @@ in
     };
   };
 
-  xdg.dataFile."fcitx5/themes/fcitx5-adwaita-dark".source = pkgs.fcitx5-adwaita-dark;
-
-  xdg.dataFile."fcitx5/pinyin/dictionaries/zhwiki.dict".source = pkgs.fcitx5-pinyin-zhwiki;
+  xdg.dataFile =
+    {
+      "fcitx5/themes/fcitx5-adwaita-dark".source = pkgs.fcitx5-adwaita-dark;
+      "fcitx5/pinyin/dictionaries/zhwiki.dict".source = mkDictPath pkgs.fcitx5-pinyin-zhwiki "zhwiki";
+      "fcitx5/pinyin/dictionaries/moegirl.dict".source = mkDictPath pkgs.fcitx5-pinyin-moegirl "moegirl";
+    };
 }

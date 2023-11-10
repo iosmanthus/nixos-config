@@ -25,6 +25,7 @@
     history = rec {
       share = true;
       save = 1048576;
+      extended = true;
       size = save;
     };
     autocd = true;
@@ -33,11 +34,12 @@
       enable = true;
       plugins = [
         "docker"
+        "fd"
+        "git-auto-fetch"
         "git"
         "golang"
-        "fd"
+        "kubectl"
         "systemd"
-        "git-auto-fetch"
       ];
     };
 

@@ -154,10 +154,16 @@ let
         assigns = {
           "1: main" = [
             { class = "^firefox$"; }
+            { class = "^google-chrome$"; }
             { class = "^logseq$"; }
           ];
-          "5: vm" = [{ class = "^Remote-viewer$"; }];
+          "2: chat" = [
+            { class = "^Discord$"; }
+            { class = "^TelegramDesktop$"; }
+          ];
           "3: mail" = [{ class = "^thunderbird$"; }];
+          "4: music" = [{ class = "^Spotify$"; }];
+          "5: vm" = [{ class = "^Remote-viewer$"; }];
         };
         startup = [
           {
@@ -185,6 +191,9 @@ let
           }
           {
             command = "firefox";
+          }
+          {
+            command = "google-chrome-stable";
           }
           {
             command = "thunderbird";

@@ -19,7 +19,7 @@ in
 {
   home.packages = with pkgs; [
     bat
-    exa
+    eza
     systemd
     sudo
     bind
@@ -28,7 +28,7 @@ in
 
   programs.zsh = {
     shellAliases = {
-      ls = "exa --group-directories-first";
+      ls = "eza --group-directories-first";
       la = "ls -a";
       ll = "ls -l";
       l = "ls -F";
@@ -66,6 +66,7 @@ in
       clion = "${ignoreOutput} clion nosplash";
       goland = "${ignoreOutput} goland nosplash";
       idea-ultimate = "${ignoreOutput} idea-ultimate nosplash";
+      rr = "${ignoreOutput} rust-rover nosplash";
 
       k = "kubectl";
       kx = "kubectx";

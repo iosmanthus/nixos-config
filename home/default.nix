@@ -25,8 +25,10 @@
     awscli2
     btop
     cloc
+    delta
     delve
     discord
+    fast-cli
     fd
     feishu
     flameshot
@@ -81,12 +83,23 @@
     xxd
     yesplaymusic
     zoom-us
-  ] ++ (with pkgs.jetbrains ;[
-    clion
-    goland
-    idea-ultimate
-    pycharm-professional
-  ]);
+  ] ++
+  (
+    let
+      commonPlugins = [
+        "github-copilot"
+        "ideavim"
+      ];
+    in
+    # https://github.com/NixOS/nixpkgs/pull/223593
+    (with pkgs.jetbrains; [
+      (plugins.addPlugins clion commonPlugins)
+      (plugins.addPlugins goland commonPlugins)
+      (plugins.addPlugins idea-ultimate commonPlugins)
+      (plugins.addPlugins pycharm-professional commonPlugins)
+      (plugins.addPlugins rust-rover commonPlugins)
+    ])
+  );
 
   home.sessionVariables = {
     "TERMINAL" = "${pkgs.kitty}/bin/kitty";
@@ -119,9 +132,6 @@
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
         };
-      };
-      feature = {
-        manyFiles = true;
       };
     };
     signing = {

@@ -16,6 +16,11 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
+    berberman = {
+      url = "github:berberman/flakes/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vscode-insiders = {
       url = "github:iosmanthus/code-insiders-flake";
       inputs.nixpkgs.follows = "master";
@@ -24,8 +29,6 @@
     jetbrains.url = "github:NixOS/nixpkgs/master";
 
     nur.url = "github:nix-community/NUR/master";
-
-    zoom.url = "github:NixOS/nixpkgs?ref=pull/240462/head";
   };
   outputs =
     { nixpkgs
@@ -34,10 +37,11 @@
     , sops-nix
     , nur
     , vscode-insiders
+    , berberman
     , ...
     }@inputs:
     let
-      inherit (import ./lib) mkOverlay;
+      mkOverlay = import ./lib/branch-overlay.nix;
 
       mkBranch = system: branch: config: import inputs.${branch} {
         inherit system config;
@@ -63,7 +67,7 @@
             "bat"
             "discord"
             "docker"
-            "exa"
+            "eza"
             "fd"
             "firefox"
             "feishu"
@@ -89,8 +93,7 @@
             "zoxide"
             "zsh"
             "nixUnstable"
-            "thunderbird"
-            "eww"
+            "nixos-artwork"
           ];
         };
 
@@ -100,26 +103,18 @@
           packages = [ ];
         };
 
-      mkZoomOverlay = system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "zoom" {
-            allowUnfree = true;
-          };
-          packages = [
-            "zoom-us"
-          ];
-        };
-
       mkCommonModules =
         system: [
           ./system/configuration.nix
           ./modules/gtk-theme
+          ./modules/wallpaper
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           ({ config, ... }: {
             home-manager = {
               sharedModules = [
                 ./modules/gtk-theme
+                ./modules/wallpaper
                 ./modules/immutable-file.nix
                 ./modules/mutable-vscode-ext.nix
                 (./. + "/machines/${config.machine.userName}.nix")
@@ -135,11 +130,11 @@
                 mkMasterOverlay
                 mkStableOverlay
                 mkJetbrainsOverlay
-                mkZoomOverlay
               ] ++ [
                 (import ./overlays.nix)
                 nur.overlay
                 vscode-insiders.overlays.default
+                berberman.overlays.default
               ];
           }
         ];

@@ -13,8 +13,6 @@ with super;
 
   fcitx5-adwaita-dark = callPackage ./packages/fcitx5-adwaita-dark.nix { };
 
-  fcitx5-pinyin-zhwiki = callPackage ./packages/fcitx5-pinyin-zhwiki.nix { };
-
   lxgw-wenkai = callPackage ./packages/lxgw-wenkai.nix { };
 
   segoe-ui = callPackage ./packages/segoe-ui.nix { };
@@ -31,8 +29,12 @@ with super;
 
   jetbrains-nerd-font = callPackage ./packages/jetbrains-nerd-font.nix { };
 
-  runVscode = import ./packages/scripts/run-vscode.nix {
+  runVscode = import ./packages/utils/run-vscode.nix {
     inherit pkgs;
+  };
+
+  mkNixBackground = import ./packages/utils/nix-background.nix {
+    inherit stdenv lib;
   };
 
   sing-box = callPackage ./packages/sing-box.nix { };
@@ -89,5 +91,13 @@ with super;
     postPatch = ''
       sed -i "s#/etc/apx#$out/etc/apx#g" $(find . -name "*.go")
     '';
+  });
+
+  btrfs-progs = super.btrfs-progs.overrideAttrs (_: rec {
+    version = "6.6.1";
+    src = fetchurl {
+      url = "mirror://kernel/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v${version}.tar.xz";
+      hash = "sha256-PpLLbYO93mEjGP2ARt1u/0fHhuWdVt1Ozph5RdUTfJ4=";
+    };
   });
 } 

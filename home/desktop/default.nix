@@ -52,7 +52,8 @@
 
   home.file = {
     wallpaper = {
-      source = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
+      # source = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
+      source = config.wallpaper.package.gnomeFilePath;
       target = ".background-image";
     };
   };

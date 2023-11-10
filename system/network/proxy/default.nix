@@ -13,6 +13,10 @@
     configFile = config.sops.secrets.sing-box.path;
     override = {
       "dns" = {
+        "fakeip" = {
+          "enabled" = true;
+          "inet4_range" = "198.18.0.0/15";
+        };
         "rules" = [
           {
             "geosite" = [
@@ -23,6 +27,20 @@
           {
             "outbound" = "any";
             "server" = "dnspod";
+          }
+          {
+            "domain_keyword" = [
+              "tidb"
+              "pingcap"
+            ];
+            "server" = "google";
+          }
+          {
+            "query_type" = [
+              "A"
+              "AAAA"
+            ];
+            "server" = "remote";
           }
         ];
         "servers" = [
@@ -35,6 +53,10 @@
             "address" = "119.29.29.29";
             "detour" = "direct";
             "tag" = "dnspod";
+          }
+          {
+            "tag" = "remote";
+            "address" = "fakeip";
           }
         ];
         "strategy" = "ipv4_only";
@@ -82,7 +104,7 @@
           "type" = "tun";
           "auto_route" = true;
           "strict_route" = true;
-          "inet4_address" = "198.18.0.1/16";
+          "inet4_address" = "10.255.0.1/16";
           "interface_name" = "utun0";
           "sniff" = true;
           "stack" = "gvisor";
