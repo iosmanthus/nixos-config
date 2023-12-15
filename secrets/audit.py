@@ -47,9 +47,7 @@ def audit(base, whitelist):
                 msg = f'{path} is not encrypted by sops'
                 raise Exception(msg)
 
-            print(f'{path} is encrypted')
-
-    print('safe!')
+            print(f'check {path}')
 
 
 audit('./', ignore_paths)

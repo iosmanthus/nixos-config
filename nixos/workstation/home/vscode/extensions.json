@@ -1,0 +1,184 @@
+{
+    "extensions": [
+        {
+            "publisher": "aaron-bond",
+            "name": "better-comments",
+            "version": "3.0.2",
+            "sha256": "15w1ixvp6vn9ng6mmcmv9ch0ngx8m85i1yabxdfn6zx3ypq802c5"
+        },
+        {
+            "publisher": "alefragnani",
+            "name": "Bookmarks",
+            "version": "13.4.2",
+            "sha256": "14wx92fgsj170lxhq81dc4hcs4rjkmagxzmwsqgayqv4360mkv9v"
+        },
+        {
+            "publisher": "bierner",
+            "name": "markdown-preview-github-styles",
+            "version": "2.0.3",
+            "sha256": "1dlw0p9zkv0dy5bf6byd0l40f5r9200anw20ps75vldgji67mqfa"
+        },
+        {
+            "publisher": "christian-kohler",
+            "name": "path-intellisense",
+            "version": "2.8.5",
+            "sha256": "1ndffv1m4ayiija1l42m28si44vx9y6x47zpxzqv2j4jj7ga1n5z"
+        },
+        {
+            "publisher": "DotJoshJohnson",
+            "name": "xml",
+            "version": "2.5.1",
+            "sha256": "1v4x6yhzny1f8f4jzm4g7vqmqg5bqchyx4n25mkgvw2xp6yls037"
+        },
+        {
+            "publisher": "equinusocio",
+            "name": "vsc-material-theme-icons",
+            "version": "3.1.4",
+            "sha256": "1qnjw5hr68kidqj50p2spmbpgz4hqb5v99cra1h18lav4mfjpr7p"
+        },
+        {
+            "publisher": "foxundermoon",
+            "name": "shell-format",
+            "version": "7.2.5",
+            "sha256": "0a874423xw7z6zjj7gzzl39jahrrqcf2r16zbcvncw23483m3yli"
+        },
+        {
+            "publisher": "GitHub",
+            "name": "copilot",
+            "version": "1.138.570",
+            "sha256": "1y0yz58mrnqcfl8jyrg3ccw1777k9k4v6bsx0lxyx5ld4lz99lpw"
+        },
+        {
+            "publisher": "golang",
+            "name": "go",
+            "version": "0.40.0",
+            "sha256": "1k2zv49pam436cgvb970dc9n4xpdkd07lp8jllrsx5vnx7m2ml52"
+        },
+        {
+            "publisher": "haskell",
+            "name": "haskell",
+            "version": "2.5.0",
+            "sha256": "1dnqw3mkzdfqaqy11ygl3cwnfjm30k5dazldl4pqgb7mw11n32as"
+        },
+        {
+            "publisher": "jeff-hykin",
+            "name": "better-cpp-syntax",
+            "version": "1.21.1",
+            "sha256": "13k0jj4jasq6z4ip9rvzx0g5rkg2fx5p3vl1vnfy3b0v1lz6pryb"
+        },
+        {
+            "publisher": "jnoortheen",
+            "name": "nix-ide",
+            "version": "0.2.2",
+            "sha256": "1264027sjh9a112si0y0p3pk3y36shj5b4qkpsj207z7lbxqq0wg"
+        },
+        {
+            "publisher": "justusadam",
+            "name": "language-haskell",
+            "version": "3.6.0",
+            "sha256": "115y86w6n2bi33g1xh6ipz92jz5797d3d00mr4k8dv5fz76d35dd"
+        },
+        {
+            "publisher": "mkhl",
+            "name": "direnv",
+            "version": "0.15.2",
+            "sha256": "06lp4qgnksklgc6nvx1l9z38y7apbx0a6v886nd15aq9rq8my0ka"
+        },
+        {
+            "publisher": "ms-azuretools",
+            "name": "vscode-docker",
+            "version": "1.28.0",
+            "sha256": "0nmc3pdgxpmr6k2ksdczkv9bbwszncfczik0xjympqnd2k0ra9h0"
+        },
+        {
+            "publisher": "ms-vscode-remote",
+            "name": "remote-containers",
+            "version": "0.325.0",
+            "sha256": "0dn8wxx9h48r71iy4ladhv26l52l6w9jm3ihc2hrcl6287hy8789"
+        },
+        {
+            "publisher": "ms-vscode",
+            "name": "cpptools-extension-pack",
+            "version": "1.3.0",
+            "sha256": "11fk26siccnfxhbb92z6r20mfbl9b3hhp5zsvpn2jmh24vn96x5c"
+        },
+        {
+            "publisher": "ms-vscode",
+            "name": "cpptools-themes",
+            "version": "2.0.0",
+            "sha256": "05r7hfphhlns2i7zdplzrad2224vdkgzb0dbxg40nwiyq193jq31"
+        },
+        {
+            "publisher": "ms-vscode",
+            "name": "makefile-tools",
+            "version": "0.8.16",
+            "sha256": "0skxki0cfqx31cdd0a9fbxx05zxzsdipylzygihnmkdlk047qkmf"
+        },
+        {
+            "publisher": "naumovs",
+            "name": "color-highlight",
+            "version": "2.6.0",
+            "sha256": "1ssh5d4kn3b57gfw5w99pp3xybdk2xif8z6l7m3y2qf204wd1hsd"
+        },
+        {
+            "publisher": "redhat",
+            "name": "vscode-commons",
+            "version": "0.0.6",
+            "sha256": "1b8nlhbrsg3kj27f1kgj8n5ak438lcfq5v5zlgf1hzisnhmcda5n"
+        },
+        {
+            "publisher": "tamasfe",
+            "name": "even-better-toml",
+            "version": "0.19.2",
+            "sha256": "0q9z98i446cc8bw1h1mvrddn3dnpnm2gwmzwv2s3fxdni2ggma14"
+        },
+        {
+            "publisher": "VisualStudioExptTeam",
+            "name": "vscodeintellicode",
+            "version": "1.2.30",
+            "sha256": "0lg298047vmy31fnkczgpw78k3yxzpiip0ln1wixy70hdpwsfqbz"
+        },
+        {
+            "publisher": "vscodevim",
+            "name": "vim",
+            "version": "1.27.1",
+            "sha256": "0ll7r9431mj1xkqxpicr1j5qhznzx12x4ygnw0fm6zp3ngx3mx5m"
+        },
+        {
+            "publisher": "yzhang",
+            "name": "markdown-all-in-one",
+            "version": "3.5.1",
+            "sha256": "04b8hiha6z7w189lkx0lhy0sgldrfwx1yikl2463lkhhkm3f8av7"
+        },
+        {
+            "publisher": "zxh404",
+            "name": "vscode-proto3",
+            "version": "0.5.5",
+            "sha256": "08gjq2ww7pjr3ck9pyp5kdr0q6hxxjy3gg87aklplbc9bkfb0vqj"
+        },
+        {
+            "publisher": "github",
+            "name": "vscode-github-actions",
+            "version": "0.26.2",
+            "sha256": "16kp1yxs798jp8ffqq3ixm3pyz4f3wgdkdyjpjy94ppqp4aklixh"
+        },
+        {
+            "publisher": "github",
+            "name": "copilot-labs",
+            "version": "0.17.1121",
+            "sha256": "00bvkgz4h6gkix7r7h0ikl8hc9bc2n7nrdqkl48sxnif1annv7d0"
+        },
+        {
+            "publisher": "ms-kubernetes-tools",
+            "name": "vscode-kubernetes-tools",
+            "version": "1.3.15",
+            "sha256": "1x6npc90p6b1wx5sd1hd0x0djahmffr6lw9cxh2zg10rbpq48w8i"
+        },
+        {
+            "publisher": "grafana",
+            "name": "vscode-jsonnet",
+            "version": "0.5.1",
+            "sha256": "1wdwi8ik9n3sbw908jk1jl22a69gr2ics8rc5w40ga7rgy97k059"
+        }
+    ]
+}

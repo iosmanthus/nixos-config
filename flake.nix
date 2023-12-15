@@ -1,16 +1,14 @@
 {
-  description = "iosmanthus 💓 NixOS";
+  description = "God does not play dice";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    master.url = "github:NixOS/nixpkgs/master";
+    master.url = "github:NixOS/nixpkgs";
 
-    stable.url = "github:NixOS/nixpkgs/nixos-23.05";
-
-    sops-nix.url = "github:Mic92/sops-nix/master";
+    sops-nix.url = "github:iosmanthus/sops-nix/nested-secrets";
 
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -21,47 +19,77 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vscode-insiders = {
-      url = "github:iosmanthus/code-insiders-flake";
-      inputs.nixpkgs.follows = "master";
-    };
-
     jetbrains.url = "github:NixOS/nixpkgs/master";
-
-    nur.url = "github:nix-community/NUR/master";
   };
   outputs =
-    { nixpkgs
+    { self
+    , nixpkgs
+    , master
     , flake-utils
     , home-manager
     , sops-nix
-    , nur
-    , vscode-insiders
     , berberman
     , ...
-    }@inputs:
+    }:
     let
-      mkOverlay = import ./lib/branch-overlay.nix;
+      this = import ./packages;
 
-      mkBranch = system: branch: config: import inputs.${branch} {
-        inherit system config;
-      };
+      mkWorkstationModules =
+        system: [
+          ./nixos/workstation
+          ./secrets/proxy
 
-      mkJetbrainsOverlay = system: _self: _super:
-        mkOverlay
-          {
-            branch = mkBranch system "jetbrains" {
-              allowUnfree = true;
+          self.nixosModules.system
+          self.nixosModules.admin.iosmanthus
+
+          sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
+
+          ({ config, ... }: {
+            home-manager = {
+              users.${config.admin.name} = { ... }: {
+                imports = [
+                  (./secrets + "/${config.admin.name}")
+                  ./nixos/workstation/home
+                ];
+              };
+              sharedModules = [
+                sops-nix.homeManagerModule
+                self.nixosModules.home-manager
+                self.nixosModules.admin.iosmanthus
+              ];
+              useGlobalPkgs = true;
+              verbose = true;
             };
-            packages = [
-              "jetbrains"
-            ];
-          };
+          })
+          {
+            nixpkgs.overlays =
+              [
+                self.overlays.unstable
+                self.overlays.jetbrains
+                self.overlays.default
 
-      mkMasterOverlay = system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "master" {
+                berberman.overlays.default
+              ];
+          }
+        ];
+    in
+    {
+      packages.x86_64-linux = this.packages (import nixpkgs {
+        allowUnfree = true;
+        system = "x86_64-linux";
+      });
+      overlays = {
+        default = this.overlay;
+        unstable = this.branchOverlay {
+          branch = master;
+          system = "x86_64-linux";
+          config = {
             allowUnfree = true;
+            # https://github.com/NixOS/nixpkgs/issues/265125
+            permittedInsecurePackages = [
+              "electron-25.9.0"
+            ];
           };
           packages = [
             "bat"
@@ -69,8 +97,8 @@
             "docker"
             "eza"
             "fd"
-            "firefox"
             "feishu"
+            "firefox"
             "firmwareLinuxNonfree"
             "gh"
             "google-chrome"
@@ -79,6 +107,8 @@
             "lens"
             "logseq"
             "neovim"
+            "nixos-artwork"
+            "nixUnstable"
             "notion-app-enhanced"
             "oh-my-zsh"
             "ripgrep"
@@ -88,85 +118,59 @@
             "sops"
             "starship"
             "tmux"
+            "virt-manager"
+            "virt-viewer"
             "vscode-extensions"
             "vscode"
             "zoxide"
             "zsh"
-            "nixUnstable"
-            "nixos-artwork"
           ];
         };
-
-      mkStableOverlay = system: _self: _super:
-        mkOverlay {
-          branch = mkBranch system "stable" { };
-          packages = [ ];
+        jetbrains = this.branchOverlay {
+          branch = master;
+          system = "x86_64-linux";
+          config = { allowUnfree = true; };
+          packages = [ "jetbrains" ];
         };
-
-      mkCommonModules =
-        system: [
-          ./system/configuration.nix
-          ./modules/gtk-theme
-          ./modules/wallpaper
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          ({ config, ... }: {
-            home-manager = {
-              sharedModules = [
-                ./modules/gtk-theme
-                ./modules/wallpaper
-                ./modules/immutable-file.nix
-                ./modules/mutable-vscode-ext.nix
-                (./. + "/machines/${config.machine.userName}.nix")
-              ];
-              users.${config.machine.userName} = import ./home;
-              useGlobalPkgs = true;
-              verbose = true;
-            };
-          })
-          {
-            nixpkgs.overlays =
-              map (mkBuilder: mkBuilder system) [
-                mkMasterOverlay
-                mkStableOverlay
-                mkJetbrainsOverlay
-              ] ++ [
-                (import ./overlays.nix)
-                nur.overlay
-                vscode-insiders.overlays.default
-                berberman.overlays.default
-              ];
-          }
-        ];
-    in
-    {
-      nixosConfigurations =
-        {
-          # For more information of this field, check:
-          # https://github.com/NixOS/nixpkgs/blob/master/nixos/lib/eval-config.nix
-          iosmanthus-legion = nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            modules = [
-              { networking.hostName = "iosmanthus-legion"; }
-              ./machines/iosmanthus-legion
-              ./secrets/iosmanthus
-              ./secrets/proxy
-            ] ++ (mkCommonModules system);
-          };
-          iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            modules = [
-              { networking.hostName = "iosmanthus-xps"; }
-              ./machines/iosmanthus-xps
-              ./secrets/iosmanthus
-              ./secrets/proxy
-            ] ++ (mkCommonModules system);
-          };
+      };
+      nixosModules = import ./modules;
+      nixosConfigurations = {
+        iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          modules = [
+            ./nixos/iosmanthus-xps
+          ] ++ (mkWorkstationModules system);
         };
-    } // flake-utils.lib.eachDefaultSystem
+        iosmanthus-legion = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          modules = [
+            ./nixos/iosmanthus-legion
+          ] ++ (mkWorkstationModules system);
+        };
+        aws-lightsail-0 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./secrets/aws-lightsail-0
+            ./nixos/aws-lightsail-0
+
+            sops-nix.nixosModules.sops
+            self.nixosModules.lightsail
+            {
+              nixpkgs.overlays = [
+                self.overlays.default
+              ];
+            }
+          ];
+        };
+      };
+    } // flake-utils.lib.eachSystem
+      [ "x86_64-linux" ]
       (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          config = { allowUnfree = true; };
+        };
       in
       {
         devShells.default = pkgs.mkShell {
@@ -176,8 +180,9 @@
             nix-output-monitor
             nixpkgs-fmt
             sops
-            yapf
             statix
+            terraform
+            yapf
           ];
         };
       });

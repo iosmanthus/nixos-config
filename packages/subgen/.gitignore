@@ -1,0 +1,4 @@
+/.idea
+/manifests
+/config.jsonnet
+/secrets.json

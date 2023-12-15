@@ -1,14 +1,8 @@
 { ... }:
-let
-  hashFiles = builtins.map (builtins.hashFile "sha256");
-in
 {
   sops.secrets.sing-box = {
     format = "binary";
     sopsFile = ./sing-box;
+    restartUnits = [ "iosmanthus-sing-box.service" ];
   };
-
-  systemd.services.sing-box.restartTriggers = hashFiles [
-    ./sing-box
-  ];
 }

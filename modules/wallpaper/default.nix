@@ -3,11 +3,11 @@
 }:
 {
   imports = [
-    ./wallpaper.nix
+    ./options.nix
   ];
 
   wallpaper = {
-    package = pkgs.mkNixBackground {
+    package = pkgs.lib.mkNixBackground {
       name = "nix-wallpaper-nineish-dark-gray";
       description = "Nineish dark gray wallpaper for NixOS";
       src = pkgs.fetchurl {
