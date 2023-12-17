@@ -154,7 +154,25 @@
             ./nixos/aws-lightsail-0
 
             sops-nix.nixosModules.sops
+
+            self.nixosModules.admin.iosmanthus
             self.nixosModules.lightsail
+            home-manager.nixosModules.home-manager
+            ({ config, ... }: {
+              home-manager = {
+                users.${config.admin.name} = { ... }: {
+                  imports = [
+                    ./nixos/aws-lightsail-0/home
+                  ];
+                };
+                sharedModules = [
+                  self.nixosModules.admin.iosmanthus
+                ];
+                useGlobalPkgs = true;
+                verbose = true;
+              };
+            })
+
             {
               nixpkgs.overlays = [
                 self.overlays.default
@@ -183,6 +201,8 @@
             statix
             terraform
             yapf
+            gotools
+            go_1_20
           ];
         };
       });

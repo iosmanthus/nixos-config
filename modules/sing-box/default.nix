@@ -8,17 +8,16 @@ let
   singboxOpts = { ... }: {
     options = {
       enable = mkEnableOption "sing-box";
+
       package = mkOption {
         type = types.package;
         default = pkgs.sing-box;
       };
+
       configFile = mkOption {
         type = types.path;
       };
-      restartTriggers = mkOption {
-        type = with types;listOf unspecified;
-        default = [ ];
-      };
+
       override = mkOption {
         type = types.attrs;
         default = { };
@@ -35,14 +34,14 @@ let
     in
     "${dir}/bin/${name}";
 
-  saveAsJson = attrs: name:
+  toJSON = attrs: name:
     let
       json = builtins.toJSON attrs;
     in
     pkgs.writeText name json;
 
   singboxStart = writeShScript "singbox-start" ''
-    override=${saveAsJson cfg.override "override.json"}
+    override=${toJSON cfg.override "override.json"}
     jq -s '.[0] * .[1]' ${cfg.configFile} $override > $RUNTIME_DIRECTORY/config.json
     sing-box run -C $RUNTIME_DIRECTORY -D $STATE_DIRECTORY --disable-color
   '';
@@ -55,16 +54,20 @@ in
   };
 
   config = mkIf cfg.enable {
-    systemd.services.iosmanthus-sing-box = {
-      inherit (cfg) restartTriggers;
+    systemd.services.sing-box = {
       wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
       description = "Enable sing-box services";
       path = [ cfg.package ] ++ (with pkgs; [ jq ]);
       serviceConfig = {
+        Type = "simple";
         RuntimeDirectory = "sing-box";
         StateDirectory = "sing-box";
-        Type = "simple";
+        Restart = "on-failure";
+        RestartPreventExitStatus = 1;
+        RestartSec = "5s";
+        AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+
         ExecStart = "${singboxStart}";
       };
     };

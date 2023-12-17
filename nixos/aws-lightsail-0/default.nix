@@ -1,17 +1,23 @@
 { pkgs
 , modulesPath
 , lib
-, config
 , ...
 }:
 {
   imports = [
     "${modulesPath}/virtualisation/amazon-image.nix"
+    ./users.nix
 
+    ./caddy
+    ./sing-box
     ./subgen
+    ./promtail
+    ./prometheus
   ];
 
   boot.loader.grub.device = lib.mkForce "/dev/nvme0n1";
+
+  system.stateVersion = "23.05";
 
   nix = {
     package = pkgs.nixUnstable;
@@ -44,9 +50,13 @@
 
   environment.systemPackages = with pkgs; [
     dig
+    fd
     git
     htop
+    httpie
+    jq
     lsof
+    ripgrep
     vim
     wget
   ];
@@ -57,21 +67,17 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  system.stateVersion = "23.05";
+  programs.zsh.enable = true;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "prohibit-password";
+      PasswordAuthentication = false;
+    };
+  };
 
   networking.firewall = {
-    allowedTCPPorts = [ 10080 443 ];
-    allowPing = false;
-  };
-
-  iosmanthus.sing-box = {
     enable = true;
-    configFile = config.sops.templates."sing-box.json".path;
-    restartTriggers = [ config.sops.templates."sing-box.json".content ];
-  };
-
-  iosmanthus.caddy = {
-    enable = true;
-    configFile = config.sops.templates."Caddyfile".path;
   };
 }

@@ -13,6 +13,14 @@
         server: 'dnspod',
       },
       {
+        domain_keyword: [
+          'pingcap',
+          'tidb',
+          'clinic',
+        ],
+        server: 'secure',
+      },
+      {
         query_type: [
           'A',
           'AAAA',
@@ -24,7 +32,7 @@
       {
         address: 'tls://1.1.1.1',
         detour: 'final',
-        tag: 'google',
+        tag: 'secure',
       },
       {
         address: '119.29.29.29',
@@ -41,7 +49,7 @@
       inet4_range: '198.18.0.0/15',
       inet6_range: 'fc00::/18',
     },
-    strategy: 'ipv4_only',
+    strategy: 'prefer_ipv6',
   },
   experimental: {
     clash_api: {
@@ -56,7 +64,8 @@
     {
       auto_route: true,
       inet4_address: '172.19.0.1/30',
-      interface_name: 'utun0',
+      inet6_address: 'fdfe:dcba:9876::1/126',
+      interface_name: 'utun3',
       sniff: true,
       stack: 'mixed',
       strict_route: true,
