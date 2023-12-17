@@ -8,7 +8,6 @@ import yaml
 from os import walk
 
 ignore_paths = [
-    ".*\.sh"
     '.*\.py',
     ".*\.pub",
     ".*\.nix",
