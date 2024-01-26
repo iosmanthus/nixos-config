@@ -26,7 +26,6 @@
       ./sing-box
       ./caddy
       ./subgen
-      #./promtail
     ];
   };
 }

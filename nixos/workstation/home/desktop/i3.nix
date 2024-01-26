@@ -100,7 +100,7 @@ let
           '';
           "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
           "${modifier0}+m" = "exec autorandr --change";
-          "${modifier0}+w" = "exec firefox";
+          "${modifier0}+w" = "exec brave";
           "${modifier0}+p" = "exec rofi -show combi";
           "${modifier0}+d" = "exec Discord";
           "${modifier0}+t" = "exec telegram-desktop";
@@ -153,9 +153,9 @@ let
         ];
         assigns = {
           "1: main" = [
-            { class = "^firefox$"; }
-            { class = "^google-chrome$"; }
+            { class = "^Brave-browser$"; }
             { class = "^logseq$"; }
+            { class = "^kitty$"; }
           ];
           "2: chat" = [
             { class = "^Discord$"; }
@@ -190,16 +190,16 @@ let
             command = "i3-msg workspace 1: main";
           }
           {
-            command = "firefox";
-          }
-          {
-            command = "google-chrome-stable";
-          }
-          {
-            command = "thunderbird";
+            command = "brave";
           }
           {
             command = "logseq";
+          }
+          {
+            command = "kitty tmux";
+          }
+          {
+            command = "thunderbird";
           }
         ];
         bars = lib.mkForce [ ];

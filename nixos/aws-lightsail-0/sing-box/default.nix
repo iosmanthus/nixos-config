@@ -19,6 +19,33 @@
         level = "debug";
         timestamp = true;
       };
+      dns = {
+        final = "cloudflare";
+        servers = [
+          {
+            tag = "cloudflare";
+            address = "tls://1.1.1.1";
+            detour = "direct";
+            strategy = "prefer_ipv6";
+          }
+        ];
+      };
+      route = {
+        final = "direct";
+        rules = [
+          {
+            inbound = [
+              "shadowsocks-multi-user"
+            ];
+            auth_user = [
+              "iosmanthus"
+              "lego"
+              "lbwang"
+            ];
+            outbound = "warp+";
+          }
+        ];
+      };
       inbounds = [
         {
           type = "shadowtls";
@@ -42,42 +69,44 @@
         {
           type = "shadowsocks";
           tag = "shadowsocks-multi-user";
-          listen = "::";
+          listen = "::1";
           listen_port = 0;
           method = config.sops.placeholder."sing-box/shadowsocks/method";
           password = config.sops.placeholder."sing-box/shadowsocks/password";
-          users = [
-            {
-              name = "iosmanthus";
-              password = config.sops.placeholder."sing-box/shadowsocks/users/iosmanthus";
-            }
-            {
-              name = "lego";
-              password = config.sops.placeholder."sing-box/shadowsocks/users/lego";
-            }
-            {
-              name = "lbwang";
-              password = config.sops.placeholder."sing-box/shadowsocks/users/lbwang";
-            }
-            {
-              name = "tover";
-              password = config.sops.placeholder."sing-box/shadowsocks/users/tover";
-            }
-            {
-              name = "alex";
-              password = config.sops.placeholder."sing-box/shadowsocks/users/alex";
-            }
-            {
-              name = "mgw";
-              password = config.sops.placeholder."sing-box/shadowsocks/users/mgw";
-            }
+          users = builtins.map
+            (user: {
+              name = user;
+              password = config.sops.placeholder."sing-box/shadowsocks/users/${user}";
+            }) [
+            "iosmanthus"
+            "lego"
+            "lbwang"
+            "tover"
+            "alex"
+            "mgw"
           ];
         }
       ];
       outbounds = [
         {
           type = "direct";
-          domain_strategy = "prefer_ipv6";
+          tag = "direct";
+        }
+        {
+          type = "wireguard";
+          tag = "warp+";
+
+          server = "engage.cloudflareclient.com";
+          mtu = 1280;
+          server_port = 2408;
+          system_interface = true;
+          interface_name = "wg0";
+          peer_public_key = config.sops.placeholder."cloudflare/warp/peer_public_key";
+          local_address = [
+            config.sops.placeholder."cloudflare/warp/local_address_v4"
+            config.sops.placeholder."cloudflare/warp/local_address_v6"
+          ];
+          private_key = config.sops.placeholder."cloudflare/warp/private_key";
         }
       ];
     };

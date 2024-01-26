@@ -179,6 +179,7 @@ in
 
       "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
+      "remote.autoForwardPortsSource" = "hybrid";
 
       "nix.enableLanguageServer" = true;
       "nix.serverSettings.nil.formatting.command" = [ "nixpkgs-fmt" ];

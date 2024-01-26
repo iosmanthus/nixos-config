@@ -13,6 +13,7 @@
     ./subgen
     ./promtail
     ./prometheus
+    ./vaultwarden
   ];
 
   boot.loader.grub.device = lib.mkForce "/dev/nvme0n1";
@@ -71,13 +72,24 @@
 
   services.openssh = {
     enable = true;
+    ports = [
+      6626
+    ];
     settings = {
       PermitRootLogin = "prohibit-password";
       PasswordAuthentication = false;
     };
   };
 
+  services.journald = {
+    extraConfig = ''
+      SystemMaxUse=500M
+      MaxRetentionSec=7d
+    '';
+  };
+
   networking.firewall = {
     enable = true;
+    checkReversePath = "loose";
   };
 }

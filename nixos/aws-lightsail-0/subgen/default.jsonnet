@@ -10,7 +10,7 @@ function(
   local shadowsocks = finalNode.shadowsocks;
   local template = import './template.jsonnet';
   local relayNodes = std.filter(
-    function(out) std.get(out, 'server_port') == 8443,
+    function(out) std.get(out, 'server_port') == 158,
     subscription.outbounds
   );
   local shadowtlsOutbounds = std.map(

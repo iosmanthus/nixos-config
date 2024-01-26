@@ -97,12 +97,12 @@ in
     };
     {
       profiles: [
-        mkProfile('iosmanthus', '$2y$10$W.rSv8wGsrNYMdHf5D41A.7LQQRLJeHWpHCZm8Pluqz8aZtd7bSi.'),
-        mkProfile('lego', '$2y$10$zWUDy54ZvvSv0HByXV3vsO.KsHDZ3zUXdd0k8Lxi3SqWKItLX7VBm'),
-        mkProfile('lbwang', '$2y$10$ApfNtxL44UZkeVLhCEKxfuzAYtEeO7naNHg9L/w4H3Ko.8aeAdUA.'),
-        mkProfile('tover', '$2y$10$ZN029oB16UgAk3maJE6Opeyb7L83Gw8VMP9TvEs0lSWOPBhKoW9Ay'),
-        mkProfile('alex', '$2y$10$j0tYQfI0KSvaMf7O.OW/DerDEeKyx3bRZgWyOSBISvV5HP3L/mZa.'),
-        mkProfile('mgw', '$2y$10$uqmtmsaBwAHmKwpHEpvCgekZ.iSVTJkA9CkyjdKDZA3RfqGxs0Wqy'),
+        mkProfile('iosmanthus', '$2y$12$I7BENGQd5h2UdSZ.2dI5tusnrz6pk2hmfsEPQOet9CVnUDeCPZReO'),
+        mkProfile('lego', '$2y$12$g7xzL7VwtSGSKxKXlIBcReXRj2Y4kW4h.ui.Z5Hh6E9efzGsB/bZi'),
+        mkProfile('lbwang', '$2y$12$ChjDDIC7qqyAwIOSa/mDBuGOjEfU3/COhUPbHgx/cv.76QEKjShEG'),
+        mkProfile('tover', '$2y$12$d23vJw8MI17H/jQIoqrSfu8YXQvKWMhp3SAub1cOBy.zpc5nP.K0W'),
+        mkProfile('alex', '$2y$12$qFMBz7CphHf4wQumwChBieQUYYkOHehgNbgWRJe8pMkjpvj2B/0TG'),
+        mkProfile('mgw', '$2y$12$GyJGCjJd/ugnml9UzsVcc.DjItPfmK.37xG3ivZkERk1hGOT9JNua'),
       ],
     }
   '';

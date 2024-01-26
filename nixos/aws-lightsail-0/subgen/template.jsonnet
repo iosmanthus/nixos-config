@@ -1,16 +1,31 @@
 {
+  log: {
+    level: 'debug',
+    timestamp: true,
+  },
   dns: {
+    fakeip: {
+      enabled: true,
+      inet4_range: '198.18.0.0/15',
+      inet6_range: 'fc00::/18',
+    },
     independent_cache: true,
     rules: [
       {
-        geosite: [
-          'cn',
-        ],
-        server: 'dnspod',
+        clash_mode: 'Direct',
+        server: 'local',
+      },
+      {
+        clash_mode: 'Global',
+        server: 'secure',
+      },
+      {
+        rule_set: 'cn-site',
+        server: 'local',
       },
       {
         outbound: 'any',
-        server: 'dnspod',
+        server: 'local',
       },
       {
         domain_keyword: [
@@ -37,27 +52,75 @@
       {
         address: '119.29.29.29',
         detour: 'direct',
-        tag: 'dnspod',
+        tag: 'local',
       },
       {
-        tag: 'remote',
         address: 'fakeip',
+        tag: 'remote',
       },
     ],
-    fakeip: {
-      enabled: true,
-      inet4_range: '198.18.0.0/15',
-      inet6_range: 'fc00::/18',
-    },
-    strategy: 'prefer_ipv6',
+  },
+  route: {
+    auto_detect_interface: true,
+    final: 'final',
+    rule_set: [
+      {
+        type: 'remote',
+        tag: 'cn-site',
+        format: 'binary',
+        url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-cn.srs',
+        download_detour: 'final',
+      },
+      {
+        type: 'remote',
+        tag: 'cn-ip',
+        format: 'binary',
+        url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geoip/geoip-cn.srs',
+        download_detour: 'final',
+      },
+    ],
+    rules: [
+      {
+        outbound: 'dns-out',
+        protocol: 'dns',
+      },
+      {
+        clash_mode: 'Direct',
+        outbound: 'direct',
+      },
+      {
+        clash_mode: 'Global',
+        outbound: 'final',
+      },
+      {
+        rule_set: 'cn-site',
+        outbound: 'direct',
+      },
+      {
+        domain_suffix: [
+          'pingcap.net',
+        ],
+        outbound: 'direct',
+      },
+      {
+        ip_is_private: true,
+        outbound: 'direct',
+      },
+      {
+        rule_set: 'cn-ip',
+        outbound: 'direct',
+      },
+    ],
   },
   experimental: {
+    cache_file: {
+      enabled: true,
+      cache_id: '3109dc66-e71d-40d0-9e55-1b60244d0a90',
+    },
     clash_api: {
-      cache_file: 'cache.db',
       external_controller: '127.0.0.1:7990',
       external_ui: './ui',
       external_ui_download_detour: 'final',
-      store_selected: true,
     },
   },
   inbounds: [
@@ -67,6 +130,7 @@
       inet6_address: 'fdfe:dcba:9876::1/126',
       interface_name: 'utun3',
       sniff: true,
+      sniff_override_destination: true,
       stack: 'mixed',
       strict_route: true,
       tag: 'tun-in',
@@ -83,46 +147,4 @@
       type: 'direct',
     },
   ],
-  log: {
-    level: 'debug',
-    timestamp: true,
-  },
-  route: {
-    auto_detect_interface: true,
-    final: 'final',
-    geoip: {
-      download_detour: 'final',
-      download_url: 'https://github.com/iosmanthus/sing-box-geo/releases/latest/download/geoip.db',
-    },
-    geosite: {
-      download_detour: 'final',
-      download_url: 'https://github.com/iosmanthus/sing-box-geo/releases/latest/download/geosite.db',
-    },
-    rules: [
-      {
-        outbound: 'dns-out',
-        protocol: 'dns',
-      },
-      {
-        geosite: [
-          'cn',
-        ],
-        outbound: 'direct',
-      },
-      {
-        geoip: [
-          'cn',
-          'private',
-        ],
-        outbound: 'direct',
-      },
-      {
-        domain_keyword: [
-          'ddrk',
-          'ddys',
-        ],
-        outbound: 'final',
-      },
-    ],
-  },
 }

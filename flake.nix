@@ -5,7 +5,7 @@
 
     master.url = "github:NixOS/nixpkgs";
 
-    sops-nix.url = "github:iosmanthus/sops-nix/nested-secrets";
+    sops-nix.url = "github:Mic92/sops-nix";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -20,6 +20,11 @@
     };
 
     jetbrains.url = "github:NixOS/nixpkgs/master";
+
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     { self
@@ -29,21 +34,23 @@
     , home-manager
     , sops-nix
     , berberman
+    , nix-ld
     , ...
-    }:
+    }@inputs:
     let
       this = import ./packages;
 
       mkWorkstationModules =
         system: [
           ./nixos/workstation
-          ./secrets/proxy
+          ./secrets/workstation
 
           self.nixosModules.system
           self.nixosModules.admin.iosmanthus
 
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
+          nix-ld.nixosModules.nix-ld
 
           ({ config, ... }: {
             home-manager = {
@@ -93,15 +100,14 @@
           };
           packages = [
             "bat"
+            "brave"
             "discord"
             "docker"
             "eza"
             "fd"
             "feishu"
-            "firefox"
             "firmwareLinuxNonfree"
             "gh"
-            "google-chrome"
             "i3"
             "kitty"
             "lens"
@@ -127,7 +133,7 @@
           ];
         };
         jetbrains = this.branchOverlay {
-          branch = master;
+          branch = inputs.jetbrains;
           system = "x86_64-linux";
           config = { allowUnfree = true; };
           packages = [ "jetbrains" ];
@@ -203,6 +209,7 @@
             yapf
             gotools
             go_1_20
+            wgcf
           ];
         };
       });

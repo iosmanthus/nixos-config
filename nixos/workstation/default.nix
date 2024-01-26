@@ -21,11 +21,11 @@
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     stateVersion = "20.09";
-    activationScripts.ldso = lib.stringAfter [ "usrbinenv" ] ''
-      mkdir -m 0755 -p /lib64
-      ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2.tmp
-      mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
-    '';
+    # activationScripts.ldso = lib.stringAfter [ "usrbinenv" ] ''
+    #   mkdir -m 0755 -p /lib64
+    #   ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2.tmp
+    #   mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
+    # '';
   };
 
   nix = {
@@ -67,12 +67,14 @@
   environment.systemPackages = with pkgs; [
     alsa-utils
     bind
+    fd
     file
     git
     killall
     lm_sensors
     lsof
     neovim
+    ripgrep
     wget
 
     docker-compose
@@ -92,7 +94,7 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     loader = {
       systemd-boot = {
         consoleMode = "max";
@@ -172,5 +174,19 @@
     };
     libvirtd = { enable = true; };
     spiceUSBRedirection.enable = true;
+  };
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs;  [
+      curl
+      expat
+      fuse3
+      icu
+      nss
+      openssl
+      stdenv.cc.cc
+      zlib
+    ];
   };
 }

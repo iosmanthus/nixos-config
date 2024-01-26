@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i python3 --pure -p python3Packages.pyyaml python3Packages.requests sops -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-22.11.tar.gz
+#! nix-shell -i python3 --pure -p python3Packages.pyyaml python3Packages.requests sops -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixos-23.11.tar.gz
 
 import yaml
 import subprocess

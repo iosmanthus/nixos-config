@@ -4,10 +4,10 @@
 , ...
 }: {
   imports = [
-    ./firefox.nix
     ./gpg.nix
     ./media.nix
     ./tmux.nix
+    ./firefox.nix
 
     ./desktop
     ./fcitx5
@@ -26,10 +26,10 @@
     apx
     ascii
     awscli2
+    brave
     btop
     cloc
     delta
-    tor
     delve
     discord
     fast-cli
@@ -40,18 +40,19 @@
     fzf
     geoipWithDatabase
     gh
-    gnome.gedit
+    gedit
     gnome.gnome-clocks
     gnome.gnome-font-viewer
     gnome.seahorse
+    go-musicfox
     go-tools
-    google-chrome
     graphviz
     htop
     httpie
     imagemagick
     iperf3
     jq
+    k9s
     kubectl
     kubectx
     kubernetes-helm
@@ -76,6 +77,7 @@
     tdesktop
     thunderbird
     tldr
+    tor
     tree
     unzip
     via
@@ -108,7 +110,6 @@
 
   home.sessionVariables = {
     "TERMINAL" = "${pkgs.kitty}/bin/kitty";
-    "LD_LIBRARY_PATH" = "${pkgs.xorg.libXcursor}/lib";
   };
 
   home.activation = {
@@ -214,5 +215,25 @@
   services.kdeconnect = {
     enable = true;
     indicator = true;
+  };
+
+  programs.neovim = {
+    enable = true;
+    coc = {
+      enable = true;
+    };
+    plugins = [
+      {
+        plugin = pkgs.fetchFromGitHub {
+          owner = "RRethy";
+          repo = "nvim-base16";
+          rev = "010bedf0b7c01ab4d4e4e896a8527d97c222351d";
+          hash = "sha256-e1jf7HyP9nu/HQHZ0QK+o7Aljk7Hu2iK+LNw3166wn8=";
+        };
+        config = ''
+          colorscheme base16-material-darker
+        '';
+      }
+    ];
   };
 }

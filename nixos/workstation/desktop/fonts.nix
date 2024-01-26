@@ -12,6 +12,7 @@
       font-awesome
       hack-font
       hasklig
+      ibm-plex
       inconsolata
       inter
       iosevka

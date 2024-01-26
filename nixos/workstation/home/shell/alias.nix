@@ -33,7 +33,7 @@ in
       ll = "ls -l";
       l = "ls -F";
 
-      cat = "bat";
+      cat = "bat --theme base16";
 
       vim = "nvim";
       vi = "vim";

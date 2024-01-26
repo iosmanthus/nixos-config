@@ -17,8 +17,8 @@ let
       shell = mkOption {
         type = types.package;
       };
-      hashedPassword = mkOption {
-        type = types.str;
+      hashedPasswordFile = mkOption {
+        type = types.path;
       };
       sshPubKey = mkOption {
         type = types.str;

@@ -1,12 +1,24 @@
-{ ... }: {
+{ config
+, ...
+}: {
   sops = {
     defaultSopsFile = ./secrets.yaml;
     secrets = {
-      "cloudflare-api-token" = { };
+      "${config.admin.name}/hashed-password" = {
+        neededForUsers = true;
+      };
+
+      "cloudflare/api-token" = { };
+      "cloudflare/warp/private_key" = { };
+      "cloudflare/warp/peer_public_key" = { };
+      "cloudflare/warp/local_address_v4" = { };
+      "cloudflare/warp/local_address_v6" = { };
+
       "aws-lightsail-0-ip" = { };
 
       "caddy/virtual-host-a" = { };
       "caddy/virtual-host-b" = { };
+      "caddy/virtual-host-c" = { };
 
       "grafana/promtail-basic-auth" = { };
       "grafana/prometheus-basic-auth" = { };
@@ -25,6 +37,8 @@
 
       "subgen/subscription-url" = { };
       "subgen/personal-port" = { };
+
+      "vaultwarden/env" = { };
     };
   };
 }

@@ -9,6 +9,7 @@ let
 in
 {
   services.polybar = {
+    enable = true;
     package = pkgs.polybar.override {
       mpdSupport = true;
       iwSupport = true;
@@ -17,7 +18,6 @@ in
       pulseSupport = true;
       githubSupport = true;
     };
-    enable = true;
     script = ''
       export COLOR_BASE00=#212121
       export COLOR_BASE01=#303030
