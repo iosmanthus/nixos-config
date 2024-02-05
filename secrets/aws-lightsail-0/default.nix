@@ -16,10 +16,6 @@
 
       "aws-lightsail-0-ip" = { };
 
-      "caddy/virtual-host-a" = { };
-      "caddy/virtual-host-b" = { };
-      "caddy/virtual-host-c" = { };
-
       "grafana/promtail-basic-auth" = { };
       "grafana/prometheus-basic-auth" = { };
 
@@ -39,6 +35,8 @@
       "subgen/personal-port" = { };
 
       "vaultwarden/env" = { };
+
+      "atuin/db-uri" = { };
     };
   };
 }

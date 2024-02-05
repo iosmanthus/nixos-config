@@ -174,14 +174,24 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs;  [
+      acl
+      attr
+      bzip2
       curl
       expat
       fuse3
       icu
+      libsodium
+      libssh
+      libxml2
       nss
       openssl
       stdenv.cc.cc
+      systemd
+      util-linux
+      xz
       zlib
+      zstd
     ];
   };
 }

@@ -4,6 +4,7 @@
       ./gtk-theme
       ./wallpaper
       ./sing-box
+      ./caddy
 
       ./monitors.nix
     ];
@@ -26,6 +27,7 @@
       ./sing-box
       ./caddy
       ./subgen
+      ./atuin
     ];
   };
 }

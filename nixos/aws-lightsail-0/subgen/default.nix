@@ -20,11 +20,6 @@ let
       type = "shadowsocks";
       method = config.sops.placeholder."sing-box/shadowsocks/method";
       password = config.sops.placeholder."sing-box/shadowsocks/password";
-      multiplex = {
-        enabled = true;
-        min_streams = 4;
-        max_streams = 8;
-      };
       udp_over_tcp = true;
     };
   };

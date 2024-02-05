@@ -38,9 +38,9 @@
     flameshot
     flyctl
     fzf
+    gedit
     geoipWithDatabase
     gh
-    gedit
     gnome.gnome-clocks
     gnome.gnome-font-viewer
     gnome.seahorse
@@ -67,6 +67,7 @@
     notion-app-enhanced
     pavucontrol
     peek
+    pgcli
     regctl
     ripgrep
     slack
@@ -235,5 +236,19 @@
         '';
       }
     ];
+  };
+
+  programs.atuin = {
+    enable = true;
+    flags = [
+      "--disable-up-arrow"
+    ];
+    settings = {
+      auto_sync = true;
+      keymap_mode = "vim-normal";
+      search_mode = "fuzzy";
+      sync_address = "https://atuin.iosmanthus.com";
+      sync_frequency = "10m";
+    };
   };
 }

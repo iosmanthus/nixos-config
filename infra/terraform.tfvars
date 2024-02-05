@@ -7,5 +7,13 @@ websites = [
   {
     name = "www"
     zone = "72d18453e5277555259d8fee6c65b016"
+  },
+  {
+    name = "vault"
+    zone = "72d18453e5277555259d8fee6c65b016"
+  },
+  {
+    name = "atuin"
+    zone = "72d18453e5277555259d8fee6c65b016"
   }
 ]

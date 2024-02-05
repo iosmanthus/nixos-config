@@ -1,4 +1,6 @@
-{ pkgs
+{ config
+, pkgs
+, lib
 , ...
 }: {
   imports = [
@@ -71,6 +73,9 @@
       typeset -A ZSH_HIGHLIGHT_STYLES
 
       ZSH_HIGHLIGHT_STYLES[comment]='fg=magenta,bold'
+      if [[ $options[zle] = on ]]; then
+        zvm_after_init_commands+=(eval "$(${config.programs.atuin.package}/bin/atuin init zsh ${lib.escapeShellArgs config.programs.atuin.flags})")
+      fi
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
     '';
   };

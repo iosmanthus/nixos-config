@@ -20,11 +20,6 @@
     };
 
     jetbrains.url = "github:NixOS/nixpkgs/master";
-
-    nix-ld = {
-      url = "github:Mic92/nix-ld";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     { self
@@ -34,7 +29,6 @@
     , home-manager
     , sops-nix
     , berberman
-    , nix-ld
     , ...
     }@inputs:
     let
@@ -50,7 +44,6 @@
 
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
-          nix-ld.nixosModules.nix-ld
 
           ({ config, ... }: {
             home-manager = {
