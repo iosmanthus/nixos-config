@@ -247,6 +247,7 @@
       auto_sync = true;
       keymap_mode = "vim-normal";
       search_mode = "fuzzy";
+      style = "compact";
       sync_address = "https://atuin.iosmanthus.com";
       sync_frequency = "10m";
     };

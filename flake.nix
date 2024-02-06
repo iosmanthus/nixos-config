@@ -194,15 +194,14 @@
           buildInputs = with pkgs; [
             fd
             gnumake
+            go_1_20
+            gotools
             nix-output-monitor
             nixpkgs-fmt
             sops
             statix
             terraform
             yapf
-            gotools
-            go_1_20
-            wgcf
           ];
         };
       });

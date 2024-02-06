@@ -45,4 +45,10 @@ in
     format = "binary";
     sopsFile = ./gpg_private_keys.asc;
   };
+
+  sops.secrets.atuin-key = {
+    format = "binary";
+    sopsFile = ./atuin_key;
+    path = "${home}/.local/share/atuin/key";
+  };
 }

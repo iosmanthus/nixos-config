@@ -24,11 +24,9 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     enableVteIntegration = true;
-    history = rec {
+    history = {
       share = true;
-      save = 1048576;
       extended = true;
-      size = save;
     };
     autocd = true;
 
@@ -52,8 +50,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "chisui";
           repo = "zsh-nix-shell";
-          rev = "v0.5.0";
-          sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+          rev = "v0.8.0";
+          sha256 = "sha256-4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=";
         };
       }
       {
@@ -62,8 +60,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-syntax-highlighting";
-          rev = "c5ce0014677a0f69a10b676b6038ad127f40c6b1";
-          sha256 = "000ksv6bb4qkdzp6fdgz8z126pwin6ywib5d6cfwqa2w27xqm9sj";
+          rev = "e0165eaa730dd0fa321a6a6de74f092fe87630b0";
+          sha256 = "sha256-Z6EYQdasvpl1P78poj9efnnLj7QQg13Me8x1Ryyw+dM=";
         };
       }
     ];
