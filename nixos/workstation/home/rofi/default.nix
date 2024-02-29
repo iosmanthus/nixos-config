@@ -7,7 +7,7 @@
     extraConfig = {
       show-icons = true;
       modi = "window,drun,combi";
-      combi-modi = "window,drun";
+      combi-modi = "window,drun,calc";
       disable-history = false;
       display-drun = "   Apps ";
       display-window = " 﩯  Window";

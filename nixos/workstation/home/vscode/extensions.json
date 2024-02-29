@@ -33,8 +33,8 @@
         {
             "publisher": "equinusocio",
             "name": "vsc-material-theme-icons",
-            "version": "3.3.1",
-            "sha256": "1irnc0gvjlpigjzxci53af6n9b36dwq466h18cpv54ziw0gnn98j"
+            "version": "3.5.0",
+            "sha256": "0lqipaa3wp74b74hrxyylp1c4y2918l7ciqz53ja6gbcb5jp5asy"
         },
         {
             "publisher": "foxundermoon",
@@ -45,20 +45,20 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.143.601",
-            "sha256": "0c5zpns1agbvsb32w4d0fj2dmqyak6d1sjwip128x10zy3aymvqr"
+            "version": "1.168.739",
+            "sha256": "0i619wf3zhncaqwag0wzzf6xyla772y4aphh9kii6761i5976qrq"
         },
         {
             "publisher": "golang",
             "name": "go",
-            "version": "0.40.1",
-            "sha256": "0844kxbi7qi79wal0cqcd4wiygc42fyhamn33lsx2ms4yj5jxri9"
+            "version": "0.41.1",
+            "sha256": "0i4h458x90v2bfr0la8axg6fs0756f2paby6h34pj4vflhi78axm"
         },
         {
             "publisher": "haskell",
             "name": "haskell",
-            "version": "2.5.1",
-            "sha256": "1gy2s9pzwsiwjk2b3sqn9hp3zbcg1jxbf4zl9hcqan3q6v96m7dz"
+            "version": "2.5.2",
+            "sha256": "09pr3ya77ryj5n80k5srwaxmr0j77f6xp67w0kz324i6fhjd12bq"
         },
         {
             "publisher": "jeff-hykin",
@@ -81,20 +81,20 @@
         {
             "publisher": "mkhl",
             "name": "direnv",
-            "version": "0.15.2",
-            "sha256": "06lp4qgnksklgc6nvx1l9z38y7apbx0a6v886nd15aq9rq8my0ka"
+            "version": "0.16.0",
+            "sha256": "1jmwqbbh5x5z7dscgcn4pb0g41k7zlhgf5i8syl3ipv6z270aq5v"
         },
         {
             "publisher": "ms-azuretools",
             "name": "vscode-docker",
-            "version": "1.28.0",
-            "sha256": "0nmc3pdgxpmr6k2ksdczkv9bbwszncfczik0xjympqnd2k0ra9h0"
+            "version": "1.29.0",
+            "sha256": "0rz32qwdf7a5hn3nnhxviaf8spwsszfrxmhnbbskspi5r9b6qm4r"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.329.0",
-            "sha256": "1y2r34dc48aj55b5nhdj58qkbvgipcdaiv00vp2q154rmlwx7lz9"
+            "version": "0.347.0",
+            "sha256": "0igfi90rgav8hiqdzb8n65mkgikpjvy77n0n0yrrpr46ynfgbl8k"
         },
         {
             "publisher": "ms-vscode",
@@ -107,12 +107,6 @@
             "name": "cpptools-themes",
             "version": "2.0.0",
             "sha256": "05r7hfphhlns2i7zdplzrad2224vdkgzb0dbxg40nwiyq193jq31"
-        },
-        {
-            "publisher": "ms-vscode",
-            "name": "makefile-tools",
-            "version": "0.9.0",
-            "sha256": "1rp27pvgjcxm9fp9plssqflq5gw3v18rklzcgr4zyk493rkhmyj1"
         },
         {
             "publisher": "naumovs",
@@ -141,14 +135,14 @@
         {
             "publisher": "vscodevim",
             "name": "vim",
-            "version": "1.27.1",
-            "sha256": "0ll7r9431mj1xkqxpicr1j5qhznzx12x4ygnw0fm6zp3ngx3mx5m"
+            "version": "1.27.2",
+            "sha256": "0m5gdyvd3yg52d8zxwdw188wqjfvdyyvwnw5dz57pn633g5bi49v"
         },
         {
             "publisher": "yzhang",
             "name": "markdown-all-in-one",
-            "version": "3.5.1",
-            "sha256": "04b8hiha6z7w189lkx0lhy0sgldrfwx1yikl2463lkhhkm3f8av7"
+            "version": "3.6.2",
+            "sha256": "1n9d3qh7vypcsfygfr5rif9krhykbmbcgf41mcjwgjrf899f11h4"
         },
         {
             "publisher": "zxh404",

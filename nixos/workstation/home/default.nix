@@ -5,13 +5,11 @@
 }: {
   imports = [
     ./gpg.nix
-    ./media.nix
     ./tmux.nix
     ./firefox.nix
 
     ./desktop
     ./fcitx5
-    ./flameshot
     ./polybar
     ./rofi
     ./shell
@@ -85,6 +83,7 @@
     vlc
     wireguard-tools
     wmfocus
+    warp-terminal
     xfce.thunar
     xfce.xfce4-taskmanager
     xxd
@@ -250,6 +249,30 @@
       style = "compact";
       sync_address = "https://atuin.iosmanthus.com";
       sync_frequency = "10m";
+    };
+  };
+
+  services.mpris-proxy.enable = true;
+
+  services.playerctld.enable = true;
+
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" "ssh" ];
+  };
+
+  services.flameshot = {
+    enable = true;
+    settings = {
+      General = {
+        contrastOpacity = 180;
+        disabledTrayIcon = true;
+        filenamePattern = "Screenshot-%F-%H-%M-%S";
+        savePathFixed = true;
+        showDesktopNotification = true;
+        showHelp = false;
+        startupLaunch = false;
+      };
     };
   };
 }

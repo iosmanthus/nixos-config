@@ -3,8 +3,7 @@ function(
   ssUserPassword,
   subscription,
   personalPort,
-  staticHost,
-  staticPort,
+  extraRelays,
 )
   local shadowtls = finalNode.shadowtls;
   local shadowsocks = finalNode.shadowsocks;
@@ -20,20 +19,29 @@ function(
       server_port: personalPort,
     },
     relayNodes
-  ) + [(shadowtls {
-          tag: 'static - outbound',
-          server: staticHost,
-          server_port: staticPort,
-        })];
-  local shadowsocksOutbounds = std.map(function(out) shadowsocks {
-    tag: out.tag,
-    detour: out.tag + ' - outbound',
-    password: shadowsocks.password + ':' + ssUserPassword,
-  }, relayNodes) + [(shadowsocks {
-                       tag: 'static',
-                       detour: 'static - outbound',
-                       password: shadowsocks.password + ':' + ssUserPassword,
-                     })];
+  ) + std.map(
+    function(out) shadowtls {
+      tag: out.tag + ' - outbound',
+      server: out.host,
+      server_port: out.port,
+    },
+    extraRelays
+  );
+  local shadowsocksOutbounds = std.map(
+    function(out) shadowsocks {
+      tag: out.tag,
+      detour: out.tag + ' - outbound',
+      password: shadowsocks.password + ':' + ssUserPassword,
+    },
+    relayNodes
+  ) + std.map(
+    function(out) shadowsocks {
+      tag: out.tag,
+      detour: out.tag + ' - outbound',
+      password: shadowsocks.password + ':' + ssUserPassword,
+    },
+    extraRelays
+  );
   local final = {
     tag: 'final',
     type: 'selector',

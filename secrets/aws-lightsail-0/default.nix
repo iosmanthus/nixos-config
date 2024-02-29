@@ -14,7 +14,8 @@
       "cloudflare/warp/local_address_v4" = { };
       "cloudflare/warp/local_address_v6" = { };
 
-      "aws-lightsail-0-ip" = { };
+      "aws-lightsail-0-ipv4" = { };
+      "aws-lightsail-0-ipv6" = { };
 
       "grafana/promtail-basic-auth" = { };
       "grafana/prometheus-basic-auth" = { };
@@ -37,6 +38,13 @@
       "vaultwarden/env" = { };
 
       "atuin/db-uri" = { };
+
+      "nnr/relay0/host" = { };
+      "nnr/relay0/port" = { };
+      "nnr/relay1/host" = { };
+      "nnr/relay1/port" = { };
+      "nnr/relay2/host" = { };
+      "nnr/relay2/port" = { };
     };
   };
 }

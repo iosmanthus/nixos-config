@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  playerMprisSimpleModule = import ./mpris.nix { inherit pkgs; };
+  playerctl = import ./playerctl.nix { inherit pkgs; };
   iw = "${pkgs.iw}/bin/iw";
   awk = "${pkgs.gawk}/bin/awk";
   ls = "${pkgs.coreutils}/bin/ls";
@@ -46,7 +46,7 @@ in
       polybar main &
     '';
     extraConfig = ''
-      ${playerMprisSimpleModule}
+      ${playerctl}
 
       [colors]
       base00=#212121
@@ -80,9 +80,9 @@ in
       background=''${colors.base00}
       foreground=''${colors.base07}
 
-      modules-left = i3 sep player-mpris-simple
+      modules-left = i3 sep playerctl
       modules-center =
-      modules-right = temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep
+      modules-right = temperature sep cpu sep memory sep network sep backlight sep date sep pulseaudio sep battery sep tray
 
       font-0 = "monospace:size=20;3"
       font-1 = "Material\-Design\-Iconic\-Font:size=20;3"
@@ -90,17 +90,14 @@ in
       font-3 = "feather:size=20;3"
       font-4 = "Microsoft YaHei:size=20;3"
 
-      tray-position = right
-      tray-detached = false
-      tray-maxsize = 32
-      tray-background = ''${root.background}
-      tray-offset-x = 0
-      tray-offset-y = 0
-      tray-padding = 0
-      tray-scale = 1.0
-
       dpi-x = 96
       dpi-y = 96
+
+      [module/tray]
+      type = internal/tray
+      tray-maxsize = 12
+      tray-spacing = 2
+      tray-padding = 2
 
       [module/date]
       type = internal/date
@@ -254,22 +251,22 @@ in
       label-mode-padding = 2
       label-mode-background = ''${colors.base0D}
 
-      label-focused = %icon% %name%
+      label-focused = %index% %icon%
       label-focused-foreground = ''${colors.base07}
       label-focused-background = ''${colors.base03}
       label-focused-underline = ''${colors.base0E}
-      label-focused-padding = 2
+      label-focused-padding = 1
 
-      label-unfocused = %icon% %name%
-      label-unfocused-padding = 2
+      label-unfocused = %index% %icon%
+      label-unfocused-padding = 1
 
-      label-visible = %icon% %name%
-      label-visible-padding = 2
+      label-visible = %index% %icon%
+      label-visible-padding = 1
 
-      label-urgent = %icon% %name%
+      label-urgent = %index% %icon%
       label-urgent-foreground = ''${colors.base00}
       label-urgent-background = ''${colors.base0F}
-      label-urgent-padding = 2
+      label-urgent-padding = 1
 
       ; Separator in between workspaces
       label-separator = |

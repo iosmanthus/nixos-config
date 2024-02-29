@@ -71,14 +71,12 @@ let
           "${modifier0}+3" = "workspace 3: mail";
           "${modifier0}+4" = "workspace 4: music";
           "${modifier0}+5" = "workspace 5: vm";
-          "${modifier0}+0" = "workspace 0: etc";
 
           "${modifier0}+Shift+1" = "move container to workspace 1: main";
           "${modifier0}+Shift+2" = "move container to workspace 2: chat";
           "${modifier0}+Shift+3" = "move container to workspace 3: mail";
           "${modifier0}+Shift+4" = "move container to workspace 4: music";
           "${modifier0}+Shift+5" = "move container to workspace 5: vm";
-          "${modifier0}+Shift+0" = "move container to workspace 0: etc";
 
           "${modifier0}+j" = "focus down";
           "${modifier0}+h" = "focus left";
@@ -144,11 +142,6 @@ let
           {
             workspace = "5: vm";
             output = "primary";
-          }
-          # TODO: workspace 0 is only supported in iosmanthus-xps, find a better way to select `output`.
-          {
-            workspace = "0: etc";
-            output = "DP-1-1";
           }
         ];
         assigns = {

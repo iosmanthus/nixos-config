@@ -80,11 +80,6 @@
   programs.zsh.enable = true;
 
   environment = {
-    etc = {
-      "nixos/flake.nix".source = config.users.users.${config.admin.name}.home
-        + "/nixos-config/flake.nix";
-    };
-
     pathsToLink = lib.mkIf (config.admin.shell == pkgs.zsh) [ "/share/zsh" ];
   };
 
@@ -187,6 +182,7 @@
       nss
       openssl
       stdenv.cc.cc
+      stdenv.cc.cc.lib
       systemd
       util-linux
       xz

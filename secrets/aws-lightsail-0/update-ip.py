@@ -10,12 +10,18 @@ decrypted = subprocess.run(["sops", "-d", secret_file],
                            stdout=subprocess.PIPE).stdout.decode('utf-8')
 obj = yaml.safe_load(decrypted)
 
-instance_ip = subprocess.run([
-    "terraform", "-chdir=../../infra", "output", "-raw", "aws-lightsail-0-ip"
+ipv4 = subprocess.run([
+    "terraform", "-chdir=../../infra", "output", "-raw", "aws-lightsail-0-ipv4"
 ],
-                             stdout=subprocess.PIPE).stdout.decode('utf-8')
+                      stdout=subprocess.PIPE).stdout.decode('utf-8')
 
-obj['aws-lightsail-0-ip'] = instance_ip
+ipv6 = subprocess.run([
+    "terraform", "-chdir=../../infra", "output", "-raw", "aws-lightsail-0-ipv6"
+],
+                      stdout=subprocess.PIPE).stdout.decode('utf-8')
+
+obj['aws-lightsail-0-ipv4'] = ipv4
+obj['aws-lightsail-0-ipv6'] = ipv6
 
 yaml.dump(obj, open(secret_file, "w"), indent=4)
 subprocess.run(["sops", "-e", "-i", secret_file])

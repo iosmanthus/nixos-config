@@ -1,6 +1,20 @@
 { config
 , ...
 }:
+
+let
+  warpUsers = [
+    "iosmanthus"
+    "lego"
+    "lbwang"
+  ];
+  warpRoutes = [
+    "disney"
+    "netflix"
+    "openai"
+    "category-porn"
+  ];
+in
 {
   iosmanthus.sing-box = {
     enable = true;
@@ -21,6 +35,19 @@
       };
       dns = {
         final = "cloudflare";
+        rules = [
+          {
+            outbound = "any";
+            server = "cloudflare";
+          }
+          {
+            inbound = [
+              "shadowsocks-multi-user"
+            ];
+            auth_user = warpUsers;
+            server = "vpn";
+          }
+        ];
         servers = [
           {
             tag = "cloudflare";
@@ -28,21 +55,33 @@
             detour = "direct";
             strategy = "prefer_ipv6";
           }
+          {
+            tag = "vpn";
+            address = "tls://1.1.1.1";
+            detour = "vpn";
+            strategy = "prefer_ipv6";
+          }
         ];
       };
       route = {
         final = "direct";
+        rule_set = builtins.map
+          (geosite: {
+            type = "remote";
+            tag = geosite;
+            format = "binary";
+            url = "https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-${geosite}.srs";
+            download_detour = "direct";
+          })
+          warpRoutes;
         rules = [
           {
             inbound = [
               "shadowsocks-multi-user"
             ];
-            auth_user = [
-              "iosmanthus"
-              "lego"
-              "lbwang"
-            ];
-            outbound = "warp+";
+            auth_user = warpUsers;
+            rule_set = warpRoutes;
+            outbound = "vpn";
           }
         ];
       };
@@ -94,11 +133,10 @@
         }
         {
           type = "wireguard";
-          tag = "warp+";
-
-          server = "engage.cloudflareclient.com";
-          mtu = 1280;
-          server_port = 2408;
+          tag = "vpn";
+          server = "2606:4700:d0::e4:6fba";
+          server_port = 878;
+          mtu = 1330;
           system_interface = true;
           interface_name = "wg0";
           peer_public_key = config.sops.placeholder."cloudflare/warp/peer_public_key";

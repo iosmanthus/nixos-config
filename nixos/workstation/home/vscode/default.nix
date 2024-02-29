@@ -38,13 +38,13 @@ in
     mutableExtensions = [
       {
         publisher = "equinusocio";
-        name = "vsc-community-material-theme";
-        version = "1.4.4";
+        name = "vsc-material-theme";
+        version = "34.3.1";
       }
       {
-        publisher = "equinusocio";
-        name = "vsc-material-theme";
-        version = "33.8.0";
+        publisher = "ms-vscode";
+        name = "makefile-tools";
+        version = "0.9.7";
       }
     ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
@@ -177,7 +177,7 @@ in
       "window.newWindowDimensions" = "inherit";
       "window.zoomLevel" = 1;
 
-      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
+      "workbench.colorTheme" = "Material Theme Darker High Contrast";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
       "remote.autoForwardPortsSource" = "hybrid";
 

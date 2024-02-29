@@ -105,7 +105,7 @@ message {
 
 textbox {
     padding: 6px;
-    margin: 20px 0px 0px 20px;
-    text-color: @blue;
+    margin: 10px 10px 10px 10px;
+    text-color: @fg-col2;
     background-color: @bg-col-light;
 }

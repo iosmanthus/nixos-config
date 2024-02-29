@@ -46,7 +46,7 @@ in
 
   sops.templates."config.jsonnet".content = ''
     function(secrets)
-    local sharedInputs = [
+    local mkInputs = function(username) [
       {
         type: 'local',
         name: 'finalNode',
@@ -64,27 +64,47 @@ in
       },
       {
         type: 'local',
-        name: 'staticHost',
-        value: '${config.sops.placeholder."aws-lightsail-0-ip"}'
+        name: 'ssUserPassword',
+        value: ${config.sops.templates."sspasswords".content}[username],
       },
       {
         type: 'local',
-        name: 'staticPort',
-        value: 10080,
+        name: 'extraRelays',
+        value: [
+          {
+            tag: 'aws-lightsail-0',
+            host: '${config.sops.placeholder."aws-lightsail-0-ipv4"}',
+            port: 10080,
+          }
+        ] + (if (
+          username == 'iosmanthus' ||
+          username == 'lego' ||
+          username == 'lbwang' 
+        ) then [
+          {
+            tag: 'relay0',
+            host: '${config.sops.placeholder."nnr/relay0/host"}',
+            port: ${config.sops.placeholder."nnr/relay0/port"},
+          },
+          {
+            tag: 'relay1',
+            host: '${config.sops.placeholder."nnr/relay1/host"}',
+            port: ${config.sops.placeholder."nnr/relay1/port"},
+          },
+          {
+            tag: 'relay2',
+            host: '${config.sops.placeholder."nnr/relay2/host"}',
+            port: ${config.sops.placeholder."nnr/relay2/port"},
+          }
+        ] else []),
       },
     ];
-    local mkProfile = function(name, hashedPassword) {
-      name: name,
+    local mkProfile = function(username, hashedPassword) {
+      name: username,
       auth: {
         hashedPassword: hashedPassword,
       },
-      inputs: sharedInputs + [
-        {
-          type: 'local',
-          name: 'ssUserPassword',
-          value: ${config.sops.templates."sspasswords".content}[name],
-        },
-      ],
+      inputs: mkInputs(username),
       expr: {
         type: 'local',
         path: 'default.jsonnet',

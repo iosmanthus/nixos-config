@@ -1,4 +1,8 @@
 let
+  ignoredDirs = [
+    "lib"
+    "yesplaymusic"
+  ];
   branchOverlay =
     { branch
     , system
@@ -20,7 +24,7 @@ let
   packageDirs = with builtins;
     filter (k: k != null)
       (attrValues
-        (mapAttrs (k: v: if v == "directory" && k != "lib" then k else null)
+        (mapAttrs (k: v: if v == "directory" && !(builtins.any (d: k == d) ignoredDirs) then k else null)
           (readDir ./.)));
   mkPackages = callPackage:
     builtins.foldl'
