@@ -177,7 +177,7 @@ in
       "window.newWindowDimensions" = "inherit";
       "window.zoomLevel" = 1;
 
-      "workbench.colorTheme" = "Material Theme Darker High Contrast";
+      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
       "workbench.iconTheme" = "eq-material-theme-icons-light";
       "remote.autoForwardPortsSource" = "hybrid";
 

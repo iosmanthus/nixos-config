@@ -76,7 +76,9 @@
     in
     {
       packages.x86_64-linux = this.packages (import nixpkgs {
-        allowUnfree = true;
+        config = {
+          allowUnfree = true;
+        };
         system = "x86_64-linux";
       });
       overlays = {
