@@ -44,6 +44,7 @@
     gnome.seahorse
     go-musicfox
     go-tools
+    google-cloud-sdk
     graphviz
     htop
     httpie
@@ -62,10 +63,10 @@
     networkmanagerapplet
     nix-output-monitor
     nnn
-    notion-app-enhanced
     pavucontrol
     peek
     pgcli
+    r3playx
     regctl
     ripgrep
     slack
@@ -81,9 +82,9 @@
     unzip
     via
     vlc
+    warp-terminal
     wireguard-tools
     wmfocus
-    warp-terminal
     xfce.thunar
     xfce.xfce4-taskmanager
     xxd

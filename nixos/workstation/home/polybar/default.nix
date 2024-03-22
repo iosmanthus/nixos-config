@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ config
+, pkgs
+, ...
+}:
 
 let
   playerctl = import ./playerctl.nix { inherit pkgs; };
@@ -6,6 +9,7 @@ let
   awk = "${pkgs.gawk}/bin/awk";
   ls = "${pkgs.coreutils}/bin/ls";
   grep = "${pkgs.gnugrep}/bin/grep";
+  colors = config.scheme.withHashtag;
 in
 {
   services.polybar = {
@@ -19,22 +23,22 @@ in
       githubSupport = true;
     };
     script = ''
-      export COLOR_BASE00=#212121
-      export COLOR_BASE01=#303030
-      export COLOR_BASE02=#353535
-      export COLOR_BASE03=#4A4A4A
-      export COLOR_BASE04=#B2CCD6
-      export COLOR_BASE05=#EEFFFF
-      export COLOR_BASE06=#EEFFFF
-      export COLOR_BASE07=#FFFFFF
-      export COLOR_BASE08=#F07178
-      export COLOR_BASE09=#F78C6C
-      export COLOR_BASE0A=#FFCB6B
-      export COLOR_BASE0B=#C3E88D
-      export COLOR_BASE0C=#89DDFF
-      export COLOR_BASE0D=#82AAFF
-      export COLOR_BASE0E=#C792EA
-      export COLOR_BASE0F=#FF5370
+      export COLOR_BASE00=${colors.base00}
+      export COLOR_BASE01=${colors.base01}
+      export COLOR_BASE02=${colors.base02}
+      export COLOR_BASE03=${colors.base03}
+      export COLOR_BASE04=${colors.base04}
+      export COLOR_BASE05=${colors.base05}
+      export COLOR_BASE06=${colors.base06}
+      export COLOR_BASE07=${colors.base07}
+      export COLOR_BASE08=${colors.base08}
+      export COLOR_BASE09=${colors.base09}
+      export COLOR_BASE0A=${colors.base0A}
+      export COLOR_BASE0B=${colors.base0B}
+      export COLOR_BASE0C=${colors.base0C}
+      export COLOR_BASE0D=${colors.base0D}
+      export COLOR_BASE0E=${colors.base0E}
+      export COLOR_BASE0F=${colors.base0F}
 
       export NETWORK_LABEL_CONNECTED="%essid% %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{F$COLOR_BASE0E}%signal%%%{F-}"
       export DATE_LABEL="🕓 %date% %{F$COLOR_BASE0C}%time%%{F-}"
@@ -49,26 +53,26 @@ in
       ${playerctl}
 
       [colors]
-      base00=#212121
-      base01=#303030
-      base02=#353535
-      base03=#4A4A4A
-      base04=#B2CCD6
-      base05=#EEFFFF
-      base06=#EEFFFF
-      base07=#FFFFFF
-      base08=#F07178
-      base09=#F78C6C
-      base0A=#FFCB6B
-      base0B=#C3E88D
-      base0C=#89DDFF
-      base0D=#82AAFF
-      base0E=#C792EA
-      base0F=#FF5370
+      base00=${colors.base00}
+      base01=${colors.base01}
+      base02=${colors.base02}
+      base03=${colors.base03}
+      base04=${colors.base04}
+      base05=${colors.base05}
+      base06=${colors.base06}
+      base07=${colors.base07}
+      base08=${colors.base08}
+      base09=${colors.base09}
+      base0A=${colors.base0A}
+      base0B=${colors.base0B}
+      base0C=${colors.base0C}
+      base0D=${colors.base0D}
+      base0E=${colors.base0E}
+      base0F=${colors.base0F}
 
       [bar/main]
       width = 100%
-      height = 60
+      height = 80
       radius = 0.0
       override-redirect = false
       wm-restack = i3

@@ -35,7 +35,7 @@
         }
 
         #urlbar {
-          font-size: 15pt !important;
+          font-size: 13pt !important;
         }
       '';
     };

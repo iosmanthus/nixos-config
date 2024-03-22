@@ -46,10 +46,10 @@ let
     sing-box run -C $RUNTIME_DIRECTORY -D $STATE_DIRECTORY --disable-color
   '';
 
-  cfg = config.iosmanthus.sing-box;
+  cfg = config.services.self-hosted.sing-box;
 in
 {
-  options.iosmanthus.sing-box = mkOption {
+  options.services.self-hosted.sing-box = mkOption {
     type = with types; (submodule singboxOpts);
   };
 

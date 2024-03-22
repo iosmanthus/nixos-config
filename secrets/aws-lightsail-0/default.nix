@@ -1,21 +1,12 @@
-{ config
-, ...
-}: {
+{ ... }: {
   sops = {
     defaultSopsFile = ./secrets.yaml;
     secrets = {
-      "${config.admin.name}/hashed-password" = {
-        neededForUsers = true;
-      };
-
       "cloudflare/api-token" = { };
       "cloudflare/warp/private_key" = { };
       "cloudflare/warp/peer_public_key" = { };
       "cloudflare/warp/local_address_v4" = { };
       "cloudflare/warp/local_address_v6" = { };
-
-      "aws-lightsail-0-ipv4" = { };
-      "aws-lightsail-0-ipv6" = { };
 
       "grafana/promtail-basic-auth" = { };
       "grafana/prometheus-basic-auth" = { };
@@ -39,12 +30,12 @@
 
       "atuin/db-uri" = { };
 
-      "nnr/relay0/host" = { };
-      "nnr/relay0/port" = { };
-      "nnr/relay1/host" = { };
-      "nnr/relay1/port" = { };
-      "nnr/relay2/host" = { };
-      "nnr/relay2/port" = { };
+      "one-api/sql-dsn" = { };
+
+      "chatgpt-next-web/openai-api-key" = { };
+      "chatgpt-next-web/google-api-key" = { };
+      "chatgpt-next-web/google-cse-id" = { };
+      "chatgpt-next-web/password" = { };
     };
   };
 }

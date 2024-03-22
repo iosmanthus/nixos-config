@@ -15,5 +15,7 @@ else
     echo "$INIT_PATH is not empty, skipping rsync"
 fi
 
+sudo chown -R $USER $INIT_PATH
+
 # derive age public key from the ed25519 ssh key of the host
 ssh-keyscan $INIT_HOST | ssh-to-age

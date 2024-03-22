@@ -1,4 +1,6 @@
-{ pkgs
+{ lib
+, config
+, pkgs
 , ...
 }:
 let
@@ -8,7 +10,6 @@ in
 {
   home.packages = with pkgs; [
     nixpkgs-fmt
-    rnix-lsp
   ];
 
   home.sessionVariables = {
@@ -25,13 +26,15 @@ in
             "password-store": "basic"
         }
       '';
-      target = ".vscode/argv.json";
+      target = ".vscode"
+        + (lib.optionalString (config.programs.vscode.package == pkgs.vscode-insiders) "-insiders")
+        + "/argv.json";
     };
   };
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode;
+    package = pkgs.vscode-insiders;
     # Disable update notifications. THIS IS NOT WINDOWS, MS!
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
@@ -40,11 +43,6 @@ in
         publisher = "equinusocio";
         name = "vsc-material-theme";
         version = "34.3.1";
-      }
-      {
-        publisher = "ms-vscode";
-        name = "makefile-tools";
-        version = "0.9.7";
       }
     ];
     extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
@@ -59,6 +57,7 @@ in
       redhat.vscode-yaml
       hashicorp.terraform
       matthewpi.caddyfile-support
+      ms-vscode.makefile-tools
     ]);
 
     keybindings = [
@@ -118,6 +117,7 @@ in
       "caddyfile.executable" = "${pkgs.caddy}/bin/caddy";
 
       "keyboard.dispatch" = "keyCode";
+
       "vim.autoSwitchInputMethod.defaultIM" = "1";
       "vim.autoSwitchInputMethod.enable" = true;
       "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx-remote}";
@@ -165,6 +165,7 @@ in
       "editor.inlineSuggest.enabled" = true;
       "editor.lineHeight" = 22;
       "editor.lineNumbers" = "relative";
+      "editor.semanticHighlighting.enabled" = true;
 
       "terminal.integrated.commandsToSkipShell" = [ "-workbench.action.quickOpen" ];
       "terminal.integrated.fontFamily" = "monospace, 'SF Mono', 'Hasklug Nerd Font'";
@@ -172,13 +173,38 @@ in
       "terminal.integrated.fontSize" = 12;
       "terminal.integrated.fontWeightBold" = 600;
       "terminal.integrated.shellIntegration.enabled" = true;
+      "terminal.integrated.stickyScroll.enabled" = false;
 
       "window.menuBarVisibility" = "toggle";
       "window.newWindowDimensions" = "inherit";
       "window.zoomLevel" = 1;
 
-      "workbench.colorTheme" = "Community Material Theme Darker High Contrast";
-      "workbench.iconTheme" = "eq-material-theme-icons-light";
+      "workbench.colorTheme" = "Material Theme Darker High Contrast";
+      "workbench.iconTheme" = "eq-material-theme-icons-darker";
+
+      "editor.tokenColorCustomizations" = {
+        "[Material Theme Darker High Contrast]" = {
+          "textMateRules" = [
+            {
+              "scope" = [
+                "variable"
+              ];
+              "settings" = {
+                "foreground" = "${config.scheme.withHashtag.base0E}";
+              };
+            }
+            {
+              "scope" = [
+                "variable.parameter"
+              ];
+              "settings" = {
+                "foreground" = "${config.scheme.withHashtag.base0F}";
+              };
+            }
+          ];
+        };
+      };
+
       "remote.autoForwardPortsSource" = "hybrid";
 
       "nix.enableLanguageServer" = true;

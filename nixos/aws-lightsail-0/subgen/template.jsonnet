@@ -69,14 +69,14 @@
         tag: 'cn-site',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-cn.srs',
-        download_detour: 'final',
+        download_detour: 'urltest',
       },
       {
         type: 'remote',
         tag: 'cn-ip',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geoip/geoip-cn.srs',
-        download_detour: 'final',
+        download_detour: 'urltest',
       },
     ],
     rules: [

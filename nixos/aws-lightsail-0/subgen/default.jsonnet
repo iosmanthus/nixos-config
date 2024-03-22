@@ -47,6 +47,11 @@ function(
     type: 'selector',
     outbounds: std.map(function(out) out.tag, shadowsocksOutbounds),
   };
+  local urltest = {
+    tag: 'urltest',
+    type: 'urltest',
+    outbounds: final.outbounds,
+  };
   std.manifestJsonEx(template {
-    outbounds: [final] + shadowsocksOutbounds + shadowtlsOutbounds + template.outbounds,
+    outbounds: [final, urltest] + shadowsocksOutbounds + shadowtlsOutbounds + template.outbounds,
   }, indent='  ')

@@ -17,7 +17,7 @@
     config.sops.templates."atuin.env".content
   ];
 
-  iosmanthus.atuin = {
+  services.self-hosted.atuin = {
     enable = true;
     environmentFile = config.sops.templates."atuin.env".path;
   };

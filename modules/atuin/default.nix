@@ -1,11 +1,11 @@
 { config, pkgs, lib, ... }:
 let
   inherit (lib) mkOption types mdDoc mkIf;
-  cfg = config.iosmanthus.atuin;
+  cfg = config.services.self-hosted.atuin;
 in
 {
   options = {
-    iosmanthus.atuin = {
+    services.self-hosted.atuin = {
       enable = lib.mkEnableOption (mdDoc "Atuin server for shell history sync");
 
       environmentFile = mkOption {

@@ -1,98 +1,82 @@
 { config
+, lib
 , ...
-}: {
-  iosmanthus.caddy = {
-    enable = true;
-    configFile = config.sops.templates."Caddyfile".path;
-  };
-
-  systemd.services.caddy.restartTriggers = [
-    config.sops.templates."Caddyfile".content
-  ];
-
+}:
+let
+  mkReverseProxy =
+    { backend
+    , logLevel
+    , basicauth ? null
+    }: {
+      extraConfig = ''
+        tls {
+          dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+        }
+        log {
+          level ${logLevel}
+        }
+        header / {
+        	-Last-Modified
+        	-Server
+        	-X-Powered-By
+        	Strict-Transport-Security "max-age=31536000;"
+        	X-Content-Type-Options "nosniff"
+        	X-Frame-Options "DENY"
+        	X-Robots-Tag "noindex, nofollow"
+        	X-XSS-Protection "0"
+        }
+        reverse_proxy ${backend} {
+          header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
+        }
+        ${lib.optionalString (basicauth != null) ''
+          basicauth {
+            ${basicauth.username} ${basicauth.hashedPassword}
+          }
+        ''}
+      '';
+    };
+in
+{
   networking.firewall.allowedTCPPorts = [ 443 ];
 
-  sops.templates."Caddyfile" = {
-    owner = config.iosmanthus.caddy.user;
+  sops.templates."caddy.env" = {
     content = ''
-      www.iosmanthus.com {
-        tls {
-          dns cloudflare ${config.sops.placeholder."cloudflare/api-token"}
-        }
-        log {
-          level INFO
-        }
-        reverse_proxy 127.0.0.1:8080
-      }
-      vault.iosmanthus.com {
-        tls {
-          dns cloudflare ${config.sops.placeholder."cloudflare/api-token"}
-        }
-        log {
-          level INFO
-        }
-        header / {
-        	-Last-Modified
-        	-Server
-        	-X-Powered-By
-        	Strict-Transport-Security "max-age=31536000;"
-        	X-Content-Type-Options "nosniff"
-        	X-Frame-Options "DENY"
-        	X-Robots-Tag "noindex, nofollow"
-        	X-XSS-Protection "0"
-        }
-        reverse_proxy ${config.services.vaultwarden.config.ROCKET_ADDRESS}:${toString config.services.vaultwarden.config.ROCKET_PORT} {
-          header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
-        }
-      }
-      atuin.iosmanthus.com {
-        tls {
-          dns cloudflare ${config.sops.placeholder."cloudflare/api-token"}
-        }
-        log {
-          level INFO
-        }
-        header / {
-        	-Last-Modified
-        	-Server
-        	-X-Powered-By
-        	Strict-Transport-Security "max-age=31536000;"
-        	X-Content-Type-Options "nosniff"
-        	X-Frame-Options "DENY"
-        	X-Robots-Tag "noindex, nofollow"
-        	X-XSS-Protection "0"
-        }
-        reverse_proxy 127.0.0.1:8888 {
-          header_up X-Real-IP {http.request.header.Cf-Connecting-Ip}
-        }
-      }
-      :8080 {
-        route /subgen/* {
-          uri strip_prefix /subgen
-          reverse_proxy ${config.iosmanthus.subgen.address} {
-          }
-        }
-
-        route /promtail/* {
-          uri strip_prefix /promtail
-          reverse_proxy https://logs-prod-020.grafana.net {
-            header_up Host logs-prod-020.grafana.net
-            header_up Authorization "Basic ${config.sops.placeholder."grafana/promtail-basic-auth"}"
-          }
-        }
-
-        route /prometheus/* {
-          uri strip_prefix /prometheus
-          reverse_proxy https://prometheus-prod-37-prod-ap-southeast-1.grafana.net {
-            header_up Host prometheus-prod-37-prod-ap-southeast-1.grafana.net
-            header_up Authorization "Basic ${config.sops.placeholder."grafana/prometheus-basic-auth"}"
-          }
-        }
-
-        log {
-          level ERROR
-        }
-      }
+      CLOUDFLARE_API_TOKEN=${config.sops.placeholder."cloudflare/api-token"}
     '';
+  };
+
+  systemd.services.caddy = {
+    restartTriggers = [
+      config.sops.templates."caddy.env".content
+    ];
+    serviceConfig = {
+      EnvironmentFile = [ config.sops.templates."caddy.env".path ];
+    };
+  };
+
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "subgen.iosmanthus.com" = mkReverseProxy {
+        backend = config.services.self-hosted.subgen.address;
+        logLevel = "INFO";
+      };
+      "vault.iosmanthus.com" = mkReverseProxy {
+        backend = "${config.services.vaultwarden.config.ROCKET_ADDRESS}:${toString config.services.vaultwarden.config.ROCKET_PORT}";
+        logLevel = "INFO";
+      };
+      "atuin.iosmanthus.com" = mkReverseProxy {
+        backend = "127.0.0.1:8888";
+        logLevel = "INFO";
+      };
+      "openai.iosmanthus.com" = mkReverseProxy {
+        backend = "127.0.0.1:3000";
+        logLevel = "INFO";
+      };
+      "chatgpt.iosmanthus.com" = mkReverseProxy {
+        backend = "127.0.0.1:3210";
+        logLevel = "INFO";
+      };
+    };
   };
 }

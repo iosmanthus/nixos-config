@@ -20,13 +20,9 @@ let
     player_status=$(${playerctl} -p $player status)
 
     if [ "$player_status" = "Playing" ]; then
-        echo "$player: ▶️ $(${playerctl} metadata title)" | ${colrm} ${
-          builtins.toString limit
-        }
+        echo "$player: ▶️ $(${playerctl} metadata title | ${colrm} ${builtins.toString limit})"
     elif [ "$player_status" = "Paused" ]; then
-        echo "$player: ⏸️ $(${playerctl} metadata title)" | ${colrm} ${
-          builtins.toString limit
-        }
+        echo "$player: ⏸️ $(${playerctl} metadata title | ${colrm} ${builtins.toString limit})"
     else
         echo ": No Track"
     fi

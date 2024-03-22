@@ -25,7 +25,7 @@ let
   };
 in
 {
-  iosmanthus.subgen = {
+  services.self-hosted.subgen = {
     enable = true;
     configFile = config.sops.templates."config.jsonnet".path;
     exprPath = ./.;
@@ -73,30 +73,15 @@ in
         value: [
           {
             tag: 'aws-lightsail-0',
-            host: '${config.sops.placeholder."aws-lightsail-0-ipv4"}',
+            host: '${config.sops.placeholder."aws-lightsail-0/external-address-v4"}',
+            port: 10080,
+          },
+          {
+            tag: 'gcp-instance-0',
+            host: '${config.sops.placeholder."gcp-instance-0/external-address-v4"}',
             port: 10080,
           }
-        ] + (if (
-          username == 'iosmanthus' ||
-          username == 'lego' ||
-          username == 'lbwang' 
-        ) then [
-          {
-            tag: 'relay0',
-            host: '${config.sops.placeholder."nnr/relay0/host"}',
-            port: ${config.sops.placeholder."nnr/relay0/port"},
-          },
-          {
-            tag: 'relay1',
-            host: '${config.sops.placeholder."nnr/relay1/host"}',
-            port: ${config.sops.placeholder."nnr/relay1/port"},
-          },
-          {
-            tag: 'relay2',
-            host: '${config.sops.placeholder."nnr/relay2/host"}',
-            port: ${config.sops.placeholder."nnr/relay2/port"},
-          }
-        ] else []),
+        ],
       },
     ];
     local mkProfile = function(username, hashedPassword) {

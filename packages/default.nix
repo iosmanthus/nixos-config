@@ -94,5 +94,18 @@ rec {
         sed -i "s#/etc/apx#$out/etc/apx#g" $(find . -name "*.go")
       '';
     });
+
+    caddy = prev.callPackage "${prev.path}/pkgs/servers/caddy" {
+      buildGoModule = args: prev.buildGoModule (args // {
+        version = "unstable-2023-12-15";
+        src = prev.fetchFromGitHub {
+          owner = "iosmanthus";
+          repo = "caddy";
+          rev = "18594d72a6636cb68e0c75450c10f44fd38af1f7";
+          hash = "sha256-+z9v/CKEgEoDJWGH14VPNBD9q2/dHkvwPHdoOalrWqA=";
+        };
+        vendorHash = "sha256-sc1WsiSde7GKB+SSEHwQcGn08oq8MbtjlhBPV4VU5eg=";
+      });
+    };
   };
 }

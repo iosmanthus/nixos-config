@@ -5,10 +5,10 @@
 }:
 with lib;
 let
-  cfg = config.iosmanthus.subgen;
+  cfg = config.services.self-hosted.subgen;
 in
 {
-  options.iosmanthus.subgen = {
+  options.services.self-hosted.subgen = {
     enable = mkEnableOption "subgen";
 
     package = mkOption {

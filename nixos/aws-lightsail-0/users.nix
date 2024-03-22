@@ -9,7 +9,9 @@
       isNormalUser = true;
       inherit (config.admin) home;
       description = config.admin.name;
+
       extraGroups = [
+        "docker"
         "storage"
         "wheel"
       ];

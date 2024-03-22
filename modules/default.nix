@@ -1,33 +1,29 @@
 {
-  system = { ... }: {
+  workstation = { ... }: {
     imports = [
-      ./gtk-theme
-      ./wallpaper
-      ./sing-box
-      ./caddy
-
       ./monitors.nix
+
+      ./base16
+      ./gtk-theme
+      ./sing-box
+      ./wallpaper
     ];
   };
-
   home-manager = { ... }: {
     imports = [
-      ./gtk-theme
-      ./wallpaper
-
       ./immutable-file.nix
       ./mutable-vscode-ext.nix
+
+      ./base16
+      ./gtk-theme
+      ./wallpaper
     ];
   };
-
   admin = import ./admin;
-
-  lightsail = { ... }: {
-    imports = [
-      ./sing-box
-      ./caddy
-      ./subgen
-      ./atuin
-    ];
-  };
+  atuin = import ./atuin;
+  cloud = import ./cloud;
+  nixbuild = import ./nixbuild;
+  o11y = import ./o11y;
+  sing-box = import ./sing-box;
+  subgen = import ./subgen;
 }
