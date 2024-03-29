@@ -5,6 +5,7 @@
   imports = [
     ./fonts.nix
     ./monitors.nix
+    ./fcitx5.nix
   ];
 
   environment.variables = {

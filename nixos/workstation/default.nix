@@ -42,16 +42,6 @@
     };
   };
 
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    inputMethod = {
-      enabled = "fcitx5";
-      fcitx5.addons = with pkgs; [
-        fcitx5-chinese-addons
-      ];
-    };
-  };
-
   console = { keyMap = "us"; };
 
   time.timeZone = "Asia/Shanghai";
@@ -159,7 +149,8 @@
     docker = {
       enable = true;
       extraOptions = ''
-        --default-ulimit nofile=1048576:1048576 --bip "172.17.0.1/24" --storage-driver btrfs
+        --ipv6 --fixed-cidr-v6 fd00::/80 --default-ulimit nofile=1048576:1048576 \
+        --bip "172.17.0.1/24" --storage-driver btrfs
       '';
     };
     libvirtd = { enable = true; };

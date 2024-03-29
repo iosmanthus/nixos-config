@@ -1,0 +1,6 @@
+__patch:
+# Rx: iDvel/rime-ice:others/recipes/config:schema=mspy {
+  - patch/+:
+      speller/algebra:
+        __include: melt_eng.schema.yaml:/algebra_mspy
+# }

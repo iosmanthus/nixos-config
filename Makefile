@@ -7,8 +7,8 @@ switch:
 	@nixos-rebuild switch --use-remote-sudo |& nom
 
 format:
-	@fd ".nix" --exec-batch "nixpkgs-fmt"
-	@fd ".py" --exec-batch "yapf" "-i"
+	@fd --glob "*.nix" --exec-batch "nixpkgs-fmt"
+	@fd --glob "*.py" --exec-batch "yapf" "-i"
 
 update:
 	@nix flake update

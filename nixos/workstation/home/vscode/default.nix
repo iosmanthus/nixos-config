@@ -205,8 +205,6 @@ in
         };
       };
 
-      "remote.autoForwardPortsSource" = "hybrid";
-
       "nix.enableLanguageServer" = true;
       "nix.serverSettings.nil.formatting.command" = [ "nixpkgs-fmt" ];
       "nix.serverPath" = "${pkgs.nil}/bin/nil";

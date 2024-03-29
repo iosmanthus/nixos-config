@@ -1,0 +1,6 @@
+__patch:
+# Rx: iDvel/rime-ice:others/recipes/config:schema=mspy {
+  - patch/+:
+      speller/algebra:
+        __include: radical_pinyin.schema.yaml:/algebra_mspy
+# }

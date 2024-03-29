@@ -16,6 +16,7 @@ let
     "netflix"
     "openai"
     "youtube"
+    "stripe"
   ];
 
   settings = {

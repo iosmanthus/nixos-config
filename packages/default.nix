@@ -74,11 +74,11 @@ rec {
       commandLineArgs = "--disable-features=AudioServiceSandbox";
       nss = prev.nss_latest;
     }).overrideAttrs (_: rec {
-      version = "6.9.20";
-      packageHash = "6085d1c4";
+      version = "7.11.8";
+      packageHash = "73244d01";
       src = builtins.fetchurl {
         url = "https://sf3-cn.feishucdn.com/obj/ee-appcenter/${packageHash}/Feishu-linux_x64-${version}.deb";
-        sha256 = "1plzi0xj2ziz20nrgkvrf657xhk46i4xwz2zkhiia24sypz663lj";
+        sha256 = "182lycgkhh7vkwq599xna959rfa6mxai2z4slhc6gqlq1jjcvnbm";
       };
     });
 

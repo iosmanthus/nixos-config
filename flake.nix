@@ -36,6 +36,8 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur.url = "github:nix-community/NUR";
   };
   outputs =
     { self
@@ -48,6 +50,7 @@
     , base16
     , code-insiders
     , nixos-generators
+    , nur
     , ...
     }@inputs:
     let
@@ -95,6 +98,7 @@
 
                 berberman.overlays.default
                 code-insiders.overlays.default
+                nur.overlay
               ];
           }
         ];

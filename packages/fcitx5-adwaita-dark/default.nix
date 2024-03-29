@@ -15,7 +15,7 @@ in
 stdenv.mkDerivation {
   inherit name src;
   installPhase = ''
-    mkdir -p $out
-    cp $src/*.png $src/*.conf $out/
+    mkdir -p $out/share/fcitx5/themes/adwaita-dark
+    cp $src/*.png $src/*.conf $out/share/fcitx5/themes/adwaita-dark
   '';
 }

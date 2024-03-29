@@ -45,11 +45,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1710982269,
-        "narHash": "sha256-OvFo/7nZvags8GsOwo3oCnR1SvdUDf7IqyX6Z1N7dhk=",
+        "lastModified": 1711587019,
+        "narHash": "sha256-EDDeJCKSAo1Jkcq8z5XnRemuR5tY77p+tRLmLvrPPPc=",
         "owner": "iosmanthus",
         "repo": "code-insider-flake",
-        "rev": "2757b3404e04adbd5fa5614ab70a17226e09bd29",
+        "rev": "a5fd897f71a34c83c33d2aba548bd31d3b755276",
         "type": "github"
       },
       "original": {
@@ -275,6 +275,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1711703254,
+        "narHash": "sha256-shmxmrb3/KApdVk+I/BTr4stgZ2Y2XpWsihqtX2g+1M=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "2701441e446b3d1ec07a59ffaf274ab07d3bd1fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "nvfetcher": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -309,6 +324,7 @@
         "master": "master",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_2",
+        "nur": "nur",
         "sops-nix": "sops-nix",
         "tt-schemes": "tt-schemes"
       }
