@@ -4,9 +4,9 @@
 }:
 let
   imageName = "gosuto/chatgpt-next-web-langchain";
-  imageTag = "v2.11.2";
-  imageDigest = "sha256:b1435d1e97741c0ffdd260e84595b0afebcc6889f3ec1f1f7b04d81e216848ef";
-  imageSha256 = "sha256-3p/+rdFNbSzyFmP1ogK/GFGkSIK8EzY651ez/yy2rds=";
+  imageTag = "v2.11.3";
+  imageDigest = "sha256:0838e87d66fdb24deab914d831855e30acc8d6548ac81a55145a6e58034ca231";
+  imageSha256 = "sha256-KH3AXZPXLe24FV5P9Wty7TfP5VQcblOETq8KoNJbhDY=";
 in
 {
   sops.templates."chatgpt-next-web.env" = {

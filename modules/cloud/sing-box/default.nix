@@ -15,8 +15,9 @@ let
     "hulu"
     "netflix"
     "openai"
-    "youtube"
     "stripe"
+    "tiktok"
+    "youtube"
   ];
 
   settings = {

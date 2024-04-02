@@ -12,7 +12,7 @@ data "terraform_remote_state" "aws_lightsail" {
 
 resource "cloudflare_record" "aws_lightsail" {
   for_each = local.records
-  value    = data.terraform_remote_state.aws_lightsail.outputs.external_address_v4
+  value    = data.terraform_remote_state.aws_lightsail.outputs.aws_lightsail_0_external_address_v4
   zone_id  = each.value
   name     = each.key
   type     = "A"
@@ -21,7 +21,7 @@ resource "cloudflare_record" "aws_lightsail" {
 
 resource "cloudflare_record" "aws_lightsail_v6" {
   for_each = local.records
-  value    = data.terraform_remote_state.aws_lightsail.outputs.external_address_v6
+  value    = data.terraform_remote_state.aws_lightsail.outputs.aws_lightsail_0_external_address_v6
   zone_id  = each.value
   name     = each.key
   type     = "AAAA"
