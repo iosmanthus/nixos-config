@@ -69,12 +69,12 @@ in
         backend = "127.0.0.1:8888";
         logLevel = "INFO";
       };
-      "openai.iosmanthus.com" = mkReverseProxy {
-        backend = "127.0.0.1:3000";
-        logLevel = "INFO";
-      };
       "chatgpt.iosmanthus.com" = mkReverseProxy {
         backend = "127.0.0.1:3210";
+        logLevel = "INFO";
+      };
+      "o2g.iosmanthus.com" = mkReverseProxy {
+        backend = "127.0.0.1:${toString config.services.self-hosted.gemini-openai-proxy.port}";
         logLevel = "INFO";
       };
     };

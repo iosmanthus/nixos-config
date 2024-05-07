@@ -7,18 +7,32 @@ with lib;
 let
   cfg = config.services.self-hosted.cloud.sing-box;
 
-  warpRoutes = [
-    "category-porn"
-    "cloudflare"
-    "disney"
-    "hbo"
-    "hulu"
-    "netflix"
-    "openai"
-    "stripe"
-    "tiktok"
-    "youtube"
-  ];
+  ruleBaseUrl = "https://raw.githubusercontent.com/lyc8503/sing-box-rules";
+
+  mkGeositeUrl = geosite: "${ruleBaseUrl}/rule-set-geosite/${geosite}.srs";
+  mkGeoipUrl = geoip: "${ruleBaseUrl}/rule-set-geoip/${geoip}.srs";
+
+  warpGeosite = builtins.map
+    (geosite: "geosite-${geosite}")
+    [
+      "category-porn"
+      "cloudflare"
+      "disney"
+      "hbo"
+      "hulu"
+      "microsoft"
+      "netflix"
+      "openai"
+      "stripe"
+      "tiktok"
+      "youtube"
+    ];
+
+  warpGeoip = builtins.map
+    (geoip: "geoip-${geoip}")
+    [
+      "google"
+    ];
 
   settings = {
     log = {
@@ -36,7 +50,7 @@ let
           inbound = [
             "shadowsocks-multi-user"
           ];
-          rule_set = warpRoutes;
+          rule_set = warpGeosite;
           server = "warp";
         }
       ];
@@ -62,16 +76,23 @@ let
           type = "remote";
           tag = geosite;
           format = "binary";
-          url = "https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-${geosite}.srs";
+          url = mkGeositeUrl geosite;
           download_detour = "direct";
         })
-        warpRoutes;
+        warpGeosite ++ builtins.map
+        (
+          geoip: {
+            type = "remote";
+            tag = geoip;
+            format = "binary";
+            url = mkGeoipUrl geoip;
+            download_detour = "direct";
+          }
+        )
+        warpGeoip;
       rules = [
         {
-          inbound = [
-            "shadowsocks-multi-user"
-          ];
-          rule_set = warpRoutes;
+          rule_set = warpGeoip ++ warpGeosite;
           outbound = "warp";
         }
       ];
@@ -83,6 +104,9 @@ let
         listen_port = cfg.ingress;
         version = 3;
         strict_mode = true;
+        domain_strategy = "prefer_ipv6";
+        sniff = true;
+        sniff_override_destination = true;
         users = [
           {
             name = config.sops.placeholder."sing-box/shadowtls/username";

@@ -3,9 +3,22 @@ variable "cloudflare_api_token" {
   sensitive = true
 }
 
-variable "websites" {
+variable "aws_lightsail_records" {
   type = list(object({
-    name = string
-    zone = string
+    atype   = string
+    name    = string
+    origin  = string
+    proxied = bool
+    zone    = string
+  }))
+}
+
+variable "gcp_records" {
+  type = list(object({
+    atype   = string
+    name    = string
+    origin  = string
+    proxied = bool
+    zone    = string
   }))
 }

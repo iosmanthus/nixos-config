@@ -28,7 +28,7 @@ module "gcp_instance_0" {
 
   google_region = "asia-east1"
   google_zone   = "asia-east1-b"
-  ip_revision   = "20240401172200"
+  ip_revision   = "202405061637"
 }
 
 module "gcp_instance_1" {

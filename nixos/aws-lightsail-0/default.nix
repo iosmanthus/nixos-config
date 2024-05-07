@@ -8,7 +8,6 @@
     ./atuin
     ./caddy
     ./chatgpt-next-web
-    ./one-api
     ./subgen
     ./vaultwarden
   ];
@@ -40,5 +39,10 @@
   services.self-hosted.cloud.sing-box = {
     enable = true;
     ingress = 10080;
+  };
+
+  services.self-hosted.gemini-openai-proxy = {
+    enable = true;
+    port = 5680;
   };
 }

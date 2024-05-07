@@ -26,4 +26,5 @@
   o11y = import ./o11y;
   sing-box = import ./sing-box;
   subgen = import ./subgen;
+  gemini-openai-proxy = import ./gemini-openai-proxy;
 }

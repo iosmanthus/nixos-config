@@ -51,6 +51,7 @@ function(
     tag: 'urltest',
     type: 'urltest',
     outbounds: final.outbounds,
+    url: 'http://captive.apple.com',
   };
   std.manifestJsonEx(template {
     outbounds: [final, urltest] + shadowsocksOutbounds + shadowtlsOutbounds + template.outbounds,

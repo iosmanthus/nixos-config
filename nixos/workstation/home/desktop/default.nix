@@ -41,11 +41,11 @@
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
-    style = {
-      package = pkgs.adwaita-qt;
-      name = "adwaita";
-    };
+    platformTheme.name = "gtk3";
+    # style = {
+    #   package = pkgs.adwaita-qt;
+    #   name = "adwaita";
+    # };
   };
 
   services.clipmenu = { enable = true; };

@@ -150,7 +150,6 @@ let
           "1: main" = [
             { class = "^Brave-browser$"; }
             { class = "^logseq$"; }
-            { class = "^kitty$"; }
           ];
           "2: chat" = [
             { class = "^Discord$"; }

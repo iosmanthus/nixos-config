@@ -1,0 +1,219 @@
+/* --- TAB AND TITLE BAR --- */
+
+#TabsToolbar {
+  display: none !important;
+  height: 0 !important;
+}
+
+.content-header {
+  background: var(--gg-bg) !important;
+}
+
+.content-scrollable {
+  background: var(--gg-black) !important;
+}
+
+/* --- SIDEBAR --- */
+
+#sidebar-header {
+  display: none !important;
+  border-bottom: none !important;
+  border: none !important;
+  background-color: var(--gg-bg) !important;
+  border-inline-color: var(--gg-bg);
+}
+
+#sidebar-box {
+  margin-top: -1px;
+  position: relative;
+}
+
+/* Support for languages that are read from right to left */
+#sidebar-box[positionend] {
+  direction: rtl;
+}
+
+#sidebar-box[positionend] > * {
+  direction: ltr;
+}
+
+#sidebar-box[positionend]:-moz-locale-dir(rtl) {
+  direction: ltr;
+}
+
+#sidebar-box[positionend]:-moz-locale-dir(rtl) > * {
+  direction: rtl;
+}
+
+.sidebar-panel {
+  background: var(--gg-bg) !important;
+}
+
+.sidebar-panel[lwt-sidebar] {
+  background: var(--gg-bg);
+}
+
+#sidebar-icon {
+  filter: contrast(150%);
+  opacity: 1;
+}
+
+.sidebar-placesTree {
+  position: relative;
+  border-top-right-radius: 6px;
+  background: var(--gg-black) !important;
+  color: var(--gg-fg-alt) !important;
+}
+
+/* Uncomment if you place your sidebar to the right */
+/* .sidebar-placesTree {
+	border-top-right-radius: 0;
+	border-top-left-radius: 6px;
+} */
+
+.sidebar-placesTree:before {
+  right: auto;
+  left: 0;
+}
+
+#sidebar-title {
+  font-size: 1.1rem;
+}
+
+#sidebar-close {
+  opacity: 0;
+}
+
+#sidebar-close:hover {
+  opacity: 1;
+}
+
+#historyTree .sidebar-placesTreechildren {
+  margin-left: -8px;
+}
+
+#sidebar-splitter {
+  margin-top: -1px;
+  width: 0px !important;
+  border: 2px solid var(--gg-bg) !important;
+}
+
+#sidebar,
+#sidebar-header {
+  border-inline-width: 0px 4px;
+}
+
+#sidebar-box:not([positionend]) > :-moz-locale-dir(rtl),
+#sidebar-box[positionend] > * {
+  border-inline-width: 4px 0px;
+}
+
+/* --- IMPROVEMENTS & FEATS --- */
+
+#appcontent {
+  margin-top: -1px;
+}
+
+/* Hide on fullscreen */
+#main-window[sizemode="fullscreen"] #sidebar-box,
+#main-window[sizemode="fullscreen"] #sidebar-splitter {
+  /* --- Match the transition from the toolbar; swap to margin-right if you use the sidebar to the right --- */
+  /* transition: .8s margin-left ease-out !important; */
+  display: none !important;
+}
+
+#search-box {
+  appearance: none !important;
+  border-radius: 5px !important;
+  line-height: 1.8rem !important;
+  background: var(--gg-black) !important;
+  color: var() !important;
+}
+
+:root[privatebrowsingmode="temporary"] {
+  --focus-outline-color: var(--gg-purple) !important;
+  --toolbar-field-focus-border-color: var(--gg-purple) !important;
+  --lwt-selected-tab-background-color: var(--gg-purple-dark) !important;
+  --avatar-image-url: url("chrome://global/skin/icons/indicator-private-browsing.svg") !important;
+}
+
+:root {
+  /* --- Colour variables --- */
+  --gg-bg: #2a2932;
+  --gg-fg: #fbfbfe;
+  --gg-fg-alt: #d4d4d4;
+  --gg-fg-faded: #8f8f9d;
+  --gg-grey-alt: #5b5b67;
+  --gg-grey: #53535f;
+  --gg-darkgrey: #43424d;
+  --gg-black: #1c1b22;
+  --gg-black-bold: #0c0c0d;
+  --gg-pseudotransparent: rgba(0, 0, 0, 0);
+  --gg-cyan: #80ecff;
+  --gg-lightblue: #00ddff;
+  --gg-skyblue: #a8f2ff;
+  --gg-turquoise: #52ffbd;
+  --gg-purple-dark: #3c1f7a;
+  --gg-purple-mid: #ac70ff;
+  --gg-purple: #9059ff;
+  --gg-pink: #ff4aa2;
+  --gg-yellow: #ffbd4f;
+  /* Attributes */
+  --button-bgcolor: var(--gg-bg) !important;
+  --button-hover-bgcolor: var(--gg-grey) !important;
+  --button-active-bgcolor: var(--gg-grey-alt) !important;
+  --button-primary-bgcolor: var(--gg-lightblue) !important;
+  --button-primary-hover-bgcolor: var(--gg-cyan) !important;
+  --button-primary-active-bgcolor: var(--gg-skyblue) !important;
+  --button-primary-color: var(--gg-bg) !important;
+  --input-bgcolor: var(--gg-darkgrey) !important;
+  --input-color: var(--gg-fg) !important;
+  --input-border-color: var(--gg-fg-faded) !important;
+  --autocomplete-popup-separator-color: var(--gg-grey) !important;
+  --panel-banner-item-update-supported-bgcolor: var(--gg-turquoise) !important;
+  --panel-banner-item-info-icon-bgcolor: var(--gg-cyan) !important;
+  --tab-icon-overlay-stroke: var(--gg-darkgrey) !important;
+  --tab-icon-overlay-fill: var(--gg-fg) !important;
+  --panel-item-hover-bgcolor: color-mix(
+    in srgb,
+    currentColor 9%,
+    transparent
+  ) !important;
+  --arrowpanel-dimmed-further: color-mix(
+    in srgb,
+    currentColor 14%,
+    transparent
+  ) !important;
+  --panel-item-active-bgcolor: color-mix(
+    in srgb,
+    currentColor 25%,
+    transparent
+  ) !important;
+  --urlbar-icon-fill-opacity: 1 !important;
+  --panel-separator-zap-gradient: linear-gradient(
+    90deg,
+    var(--gg-purple) 0%,
+    var(--gg-pink) 52.08%,
+    var(--gg-yellow) 100%
+  ) !important;
+  --lwt-accent-color: var(--gg-black) !important;
+  --lwt-text-color: var(--gg-fg) !important;
+  --arrowpanel-background: var(--gg-darkgrey) !important;
+  --arrowpanel-color: var(--gg-fg) !important;
+  --arrowpanel-border-color: var(--gg-grey) !important;
+  --toolbar-field-background-color: var(--gg-black) !important;
+  --toolbar-field-color: var(--gg-fg) !important;
+  --toolbar-field-border-color: var(--gg-pseudotransparent) !important;
+  --toolbar-field-focus-background-color: var(--gg-darkgrey) !important;
+  --toolbar-field-focus-color: var(--gg-fg) !important;
+  --lwt-tab-text: var(--gg-fg) !important;
+  --toolbar-bgcolor: var(--gg-bg) !important;
+  --toolbar-color: var(--gg-fg) !important;
+  --chrome-content-separator-color: var(--gg-black-bold) !important;
+  --toolbarbutton-icon-fill: var(--gg-fg) !important;
+  --lwt-selected-tab-background-color: var(--gg-darkgrey) !important;
+  --autocomplete-popup-highlight-background: var(--gg-bg) !important;
+  --tabpanel-background-color: var(--gg-bg) !important;
+  --sidebar-background-color: var(--gg-bg) !important;
+  --sidebar-text-color: var(--gg-fg) !important;
+}

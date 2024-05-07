@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs
+, config
+, ...
+}: {
   home.packages = [ pkgs.xsel ];
   programs.tmux = {
     enable = true;
@@ -7,34 +10,17 @@
     customPaneNavigationAndResize = true;
     clock24 = true;
     sensibleOnTop = true;
-    plugins = with pkgs; [
+    plugins = [
       {
-        plugin = tmuxPlugins.mkTmuxPlugin {
-          pluginName = "base16";
-          version = "unstable-2021-04-03";
-          src = fetchFromGitHub {
-            owner = "mattdavis90";
-            repo = "base16-tmux";
-            rev = "810ba8f86f028b467353e22837f8c89eb46fc287";
-            sha256 = "sha256-CHDSb3uA1g3nPCED8/jMgP4xBMkk9LtGNEuJw4LJr+Q=";
-          };
-          rtpFilePath = "tmuxcolors.tmux";
-        };
+        plugin = pkgs.minimal-tmux-status;
         extraConfig = ''
-          set -g @colors-base16 'material-darker'
+          set -g @minimal-tmux-justify "left"
+          set -g @minimal-tmux-bg "${config.scheme.withHashtag.base0D}"
+          set -g @minimal-tmux-indicator-str " 😊 "
         '';
       }
       {
-        plugin = tmuxPlugins.mkTmuxPlugin {
-          pluginName = "yank";
-          version = "unstable-2020-10-02";
-          src = fetchFromGitHub {
-            owner = "tmux-plugins";
-            repo = "tmux-yank";
-            rev = "1b1a436e19f095ae8f825243dbe29800a8acd25c";
-            sha256 = "sha256-hRvkBf+YrWycecnDixAsD4CAHg3KsioomfJ/nLl5Zgs=";
-          };
-        };
+        plugin = pkgs.tmux-yank;
       }
     ];
     extraConfig = ''

@@ -6,10 +6,10 @@
   imports = [
     ./gpg.nix
     ./tmux.nix
-    ./firefox.nix
 
     ./desktop
     ./fcitx5
+    ./firefox
     ./polybar
     ./rofi
     ./shell
@@ -21,7 +21,6 @@
   home.stateVersion = "18.09";
 
   home.packages = with pkgs; [
-    apx
     ascii
     awscli2
     brave
@@ -90,6 +89,7 @@
     xxd
     yesplaymusic
     zoom-us
+    quickemu
   ] ++
   (
     let

@@ -17,6 +17,7 @@
           "video"
           "wheel"
 
+          "adbusers"
           "docker"
           "libvirtd"
           "networkmanager"

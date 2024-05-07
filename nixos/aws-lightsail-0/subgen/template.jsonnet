@@ -20,10 +20,6 @@
         server: 'secure',
       },
       {
-        rule_set: 'cn-site',
-        server: 'local',
-      },
-      {
         outbound: 'any',
         server: 'local',
       },
@@ -31,7 +27,6 @@
         domain_keyword: [
           'pingcap',
           'tidb',
-          'clinic',
         ],
         server: 'secure',
       },
@@ -97,12 +92,6 @@
         outbound: 'direct',
       },
       {
-        domain_suffix: [
-          'pingcap.net',
-        ],
-        outbound: 'direct',
-      },
-      {
         ip_is_private: true,
         outbound: 'direct',
       },
@@ -116,6 +105,7 @@
     cache_file: {
       enabled: true,
       cache_id: '3109dc66-e71d-40d0-9e55-1b60244d0a90',
+      store_fakeip: true,
     },
     clash_api: {
       external_controller: '127.0.0.1:7990',
@@ -128,7 +118,7 @@
       auto_route: true,
       inet4_address: '172.19.0.1/30',
       inet6_address: 'fdfe:dcba:9876::1/126',
-      interface_name: 'utun3',
+      interface_name: 'utun@2057b9c9',
       sniff: true,
       sniff_override_destination: true,
       stack: 'mixed',

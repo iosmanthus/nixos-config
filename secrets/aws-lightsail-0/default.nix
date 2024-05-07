@@ -30,11 +30,7 @@
 
       "atuin/db-uri" = { };
 
-      "one-api/sql-dsn" = { };
-
       "chatgpt-next-web/openai-api-key" = { };
-      "chatgpt-next-web/google-api-key" = { };
-      "chatgpt-next-web/google-cse-id" = { };
       "chatgpt-next-web/password" = { };
     };
   };

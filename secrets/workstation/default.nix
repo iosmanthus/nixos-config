@@ -8,6 +8,7 @@
       "${config.admin.name}/hashed-password" = {
         neededForUsers = true;
       };
+
       sing-box = {
         format = "binary";
         sopsFile = ./sing-box;

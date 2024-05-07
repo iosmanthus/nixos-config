@@ -66,8 +66,8 @@ in
       clion = "${ignoreOutput} clion nosplash";
       goland = "${ignoreOutput} goland nosplash";
       idea-ultimate = "${ignoreOutput} idea-ultimate nosplash";
-      webstorm = "${ignoreOutput} webstorm nosplash";
       rr = "${ignoreOutput} rust-rover nosplash";
+      webstorm = "${ignoreOutput} webstorm nosplash";
 
       k = "kubectl";
       kx = "kubectx";

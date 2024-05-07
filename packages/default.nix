@@ -70,15 +70,12 @@ rec {
       };
     });
 
-    feishu = (prev.feishu.override {
-      commandLineArgs = "--disable-features=AudioServiceSandbox";
-      nss = prev.nss_latest;
-    }).overrideAttrs (_: rec {
-      version = "7.11.8";
-      packageHash = "73244d01";
+    feishu = prev.feishu.overrideAttrs (_: rec {
+      version = "7.11.9";
+      packageHash = "ec62a2df";
       src = builtins.fetchurl {
         url = "https://sf3-cn.feishucdn.com/obj/ee-appcenter/${packageHash}/Feishu-linux_x64-${version}.deb";
-        sha256 = "182lycgkhh7vkwq599xna959rfa6mxai2z4slhc6gqlq1jjcvnbm";
+        sha256 = "1c4ggcq10knb1gac6rmlb5mdxlz1xrz6i735mfqinvr7qfrqzi4q";
       };
     });
 
@@ -87,12 +84,6 @@ rec {
         url = "https://github.com/iosmanthus/nowhere/releases/download/v0.1.0/VistaFont_CHS.EXE";
         sha256 = "1qwm30b8aq9piyqv07hv8b5bac9ms40rsdf8pwix5dyk8020i8xi";
       };
-    });
-
-    apx = prev.apx.overrideAttrs (_: {
-      postPatch = ''
-        sed -i "s#/etc/apx#$out/etc/apx#g" $(find . -name "*.go")
-      '';
     });
 
     caddy = prev.callPackage "${prev.path}/pkgs/servers/caddy" {

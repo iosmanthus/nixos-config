@@ -24,7 +24,7 @@
   };
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-going = true
@@ -148,10 +148,12 @@
   virtualisation = {
     docker = {
       enable = true;
-      extraOptions = ''
-        --ipv6 --fixed-cidr-v6 fd00::/80 --default-ulimit nofile=1048576:1048576 \
-        --bip "172.17.0.1/24" --storage-driver btrfs
-      '';
+      storageDriver = "btrfs";
+      daemon.settings = {
+        ipv6 = true;
+        fixed-cidr-v6 = "fd00::/80";
+        default-ulimit = "nofile=1048576:1048576";
+      };
     };
     libvirtd = { enable = true; };
     spiceUSBRedirection.enable = true;
@@ -181,4 +183,6 @@
       zstd
     ];
   };
+
+  programs.adb.enable = true;
 }

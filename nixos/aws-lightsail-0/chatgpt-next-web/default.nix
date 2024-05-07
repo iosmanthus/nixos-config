@@ -6,17 +6,14 @@ let
   imageName = "gosuto/chatgpt-next-web-langchain";
   imageTag = "v2.11.3";
   imageDigest = "sha256:0838e87d66fdb24deab914d831855e30acc8d6548ac81a55145a6e58034ca231";
-  imageSha256 = "sha256-KH3AXZPXLe24FV5P9Wty7TfP5VQcblOETq8KoNJbhDY=";
+  imageSha256 = "sha256-ZwIWmkChBS8RtEFQwsCZACpobIoBr5k5r32OGKrbvQ0=";
 in
 {
   sops.templates."chatgpt-next-web.env" = {
     content = ''
-      BASE_URL=https://openai.iosmanthus.com
-      CHOOSE_SEARCH_ENGINE=google
+      BASE_URL=https://o2g.iosmanthus.com
       DALLE_NO_IMAGE_STORAGE=1
       CODE=${config.sops.placeholder."chatgpt-next-web/password"}
-      GOOGLE_API_KEY=${config.sops.placeholder."chatgpt-next-web/google-api-key"}
-      GOOGLE_CSE_ID=${config.sops.placeholder."chatgpt-next-web/google-cse-id"}
       OPENAI_API_KEY=${config.sops.placeholder."chatgpt-next-web/openai-api-key"}
     '';
   };

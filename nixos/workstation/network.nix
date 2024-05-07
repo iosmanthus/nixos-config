@@ -28,8 +28,8 @@
     package = pkgs.wireshark-qt;
   };
 
-
   networking.firewall.enable = lib.mkForce false;
+
   services.self-hosted.sing-box = {
     enable = true;
     configFile = config.sops.secrets.sing-box.path;

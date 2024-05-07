@@ -199,21 +199,9 @@
             self.nixosModules.atuin
             self.nixosModules.cloud.aws-lightsail
             self.nixosModules.cloud.sing-box
+            self.nixosModules.gemini-openai-proxy
             self.nixosModules.o11y
             self.nixosModules.subgen
-
-            home-manager.nixosModules.home-manager
-            ({ config, ... }: {
-              home-manager = {
-                users.nixbuild = { ... }: {
-                  imports = [
-                    ./nixos/aws-lightsail-0/home
-                  ];
-                };
-                useGlobalPkgs = true;
-                verbose = true;
-              };
-            })
 
             {
               nixpkgs.overlays = [
@@ -268,6 +256,28 @@
             }
           ];
         };
+
+        lego-router = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit self;
+          };
+          modules = [
+            ./nixos/lego-router
+            ./secrets/lego-router
+
+            sops-nix.nixosModules.sops
+            self.nixosModules.cloud.base
+            self.nixosModules.nixbuild
+            self.nixosModules.sing-box
+
+            {
+              nixpkgs.overlays = [
+                self.overlays.default
+              ];
+            }
+          ];
+        };
       };
     } // flake-utils.lib.eachSystem
       [ "x86_64-linux" ]
@@ -283,7 +293,7 @@
           buildInputs = with pkgs; [
             fd
             gnumake
-            go_1_20
+            go_1_21
             google-cloud-sdk
             gotools
             nix-output-monitor

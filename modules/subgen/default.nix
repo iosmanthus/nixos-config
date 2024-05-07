@@ -37,7 +37,6 @@ in
     systemd.services.subgen = {
       serviceConfig = {
         Type = "simple";
-        StateDirectory = "subgen";
         AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
         ExecStart = "${cfg.package}/bin/subgen -config ${cfg.configFile} -expr ${cfg.exprPath} -addr ${cfg.address}";
       };

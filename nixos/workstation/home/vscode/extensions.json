@@ -9,14 +9,14 @@
         {
             "publisher": "alefragnani",
             "name": "Bookmarks",
-            "version": "13.4.2",
-            "sha256": "14wx92fgsj170lxhq81dc4hcs4rjkmagxzmwsqgayqv4360mkv9v"
+            "version": "13.5.0",
+            "sha256": "06pmlmd3wahplhv5r8jdk19xlv2rmhiggmmw6s30pnys2bj5va50"
         },
         {
             "publisher": "bierner",
             "name": "markdown-preview-github-styles",
-            "version": "2.0.3",
-            "sha256": "1dlw0p9zkv0dy5bf6byd0l40f5r9200anw20ps75vldgji67mqfa"
+            "version": "2.0.4",
+            "sha256": "0p2iwc52id5616wcvhw7dcnjw190s36fc6vbma8cldncz33ab6wc"
         },
         {
             "publisher": "christian-kohler",
@@ -33,8 +33,8 @@
         {
             "publisher": "equinusocio",
             "name": "vsc-material-theme-icons",
-            "version": "3.5.0",
-            "sha256": "0lqipaa3wp74b74hrxyylp1c4y2918l7ciqz53ja6gbcb5jp5asy"
+            "version": "3.6.0",
+            "sha256": "19s6cbgs9xj2gn8g872pzwihjkibwq3abi5cq0qxbb0f3v6p1r8w"
         },
         {
             "publisher": "foxundermoon",
@@ -45,14 +45,14 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.168.739",
-            "sha256": "0i619wf3zhncaqwag0wzzf6xyla772y4aphh9kii6761i5976qrq"
+            "version": "1.181.0",
+            "sha256": "0lmphhkva63xgi7bnq9g452c7rn1rx0syj6a1hsiyyqrl14rb2dd"
         },
         {
             "publisher": "golang",
             "name": "go",
-            "version": "0.41.1",
-            "sha256": "0i4h458x90v2bfr0la8axg6fs0756f2paby6h34pj4vflhi78axm"
+            "version": "0.41.3",
+            "sha256": "0yi3fvxcv622cmkfa18vjxp6lf48lmgf0sdsx7vkc4kvsapc9yn6"
         },
         {
             "publisher": "haskell",
@@ -63,14 +63,14 @@
         {
             "publisher": "jeff-hykin",
             "name": "better-cpp-syntax",
-            "version": "1.21.1",
-            "sha256": "13k0jj4jasq6z4ip9rvzx0g5rkg2fx5p3vl1vnfy3b0v1lz6pryb"
+            "version": "1.21.4",
+            "sha256": "0l3ncf585p7bjjvzx82zmnns5z925sf986xs9kgi7sn2f6575a6p"
         },
         {
             "publisher": "jnoortheen",
             "name": "nix-ide",
-            "version": "0.2.2",
-            "sha256": "1264027sjh9a112si0y0p3pk3y36shj5b4qkpsj207z7lbxqq0wg"
+            "version": "0.3.1",
+            "sha256": "1cpfckh6zg8byi6x1llkdls24w9b0fvxx4qybi9zfcy5gc60r6nk"
         },
         {
             "publisher": "justusadam",
@@ -81,8 +81,8 @@
         {
             "publisher": "mkhl",
             "name": "direnv",
-            "version": "0.16.0",
-            "sha256": "1jmwqbbh5x5z7dscgcn4pb0g41k7zlhgf5i8syl3ipv6z270aq5v"
+            "version": "0.17.0",
+            "sha256": "1n2qdd1rspy6ar03yw7g7zy3yjg9j1xb5xa4v2q12b0y6dymrhgn"
         },
         {
             "publisher": "ms-azuretools",
@@ -93,8 +93,8 @@
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.347.0",
-            "sha256": "0igfi90rgav8hiqdzb8n65mkgikpjvy77n0n0yrrpr46ynfgbl8k"
+            "version": "0.361.0",
+            "sha256": "12rim5w0wla15afks881lxy358ams5ql6pha340c16w14pvygizc"
         },
         {
             "publisher": "ms-vscode",
@@ -111,8 +111,8 @@
         {
             "publisher": "naumovs",
             "name": "color-highlight",
-            "version": "2.6.0",
-            "sha256": "1ssh5d4kn3b57gfw5w99pp3xybdk2xif8z6l7m3y2qf204wd1hsd"
+            "version": "2.8.0",
+            "sha256": "14capk3b7rs105ij4pjz42zsysdfnkwfjk9lj2cawnqxa7b8ygcr"
         },
         {
             "publisher": "redhat",
@@ -129,8 +129,8 @@
         {
             "publisher": "VisualStudioExptTeam",
             "name": "vscodeintellicode",
-            "version": "1.2.30",
-            "sha256": "0lg298047vmy31fnkczgpw78k3yxzpiip0ln1wixy70hdpwsfqbz"
+            "version": "1.3.1",
+            "sha256": "0zl3hm5i769aqi16g236mpadlkxsh09872b5hc7j9js2xm051hv4"
         },
         {
             "publisher": "vscodevim",
@@ -159,14 +159,14 @@
         {
             "publisher": "ms-kubernetes-tools",
             "name": "vscode-kubernetes-tools",
-            "version": "1.3.15",
-            "sha256": "1x6npc90p6b1wx5sd1hd0x0djahmffr6lw9cxh2zg10rbpq48w8i"
+            "version": "1.3.16",
+            "sha256": "0n6cjc5qhnmp58dgfiycq4kbrzvn8yx5kaf6jr0h7znpav60laik"
         },
         {
             "publisher": "grafana",
             "name": "vscode-jsonnet",
-            "version": "0.5.1",
-            "sha256": "1wdwi8ik9n3sbw908jk1jl22a69gr2ics8rc5w40ga7rgy97k059"
+            "version": "0.6.1",
+            "sha256": "1394dqdw14351z5f6zfjz0i1vq3d89vyik6qyf12wbrxkc8gvpzj"
         }
     ]
 }
