@@ -57,20 +57,12 @@ in
   services.caddy = {
     enable = true;
     virtualHosts = {
-      "subgen.iosmanthus.com" = mkReverseProxy {
-        backend = config.services.self-hosted.subgen.address;
-        logLevel = "INFO";
-      };
       "vault.iosmanthus.com" = mkReverseProxy {
         backend = "${config.services.vaultwarden.config.ROCKET_ADDRESS}:${toString config.services.vaultwarden.config.ROCKET_PORT}";
         logLevel = "INFO";
       };
       "atuin.iosmanthus.com" = mkReverseProxy {
         backend = "127.0.0.1:8888";
-        logLevel = "INFO";
-      };
-      "chatgpt.iosmanthus.com" = mkReverseProxy {
-        backend = "127.0.0.1:3210";
         logLevel = "INFO";
       };
       "o2g.iosmanthus.com" = mkReverseProxy {

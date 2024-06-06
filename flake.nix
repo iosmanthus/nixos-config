@@ -5,7 +5,7 @@
 
     master.url = "github:NixOS/nixpkgs";
 
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.url = "github:iosmanthus/sops-nix/nested-secrets";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -38,6 +38,8 @@
     };
 
     nur.url = "github:nix-community/NUR";
+
+    firefox.url = "github:nix-community/flake-firefox-nightly";
   };
   outputs =
     { self
@@ -100,6 +102,10 @@
                 code-insiders.overlays.default
                 nur.overlay
               ];
+
+            nixpkgs.config.permittedInsecurePackages = [
+              "openssl-1.1.1w"
+            ];
           }
         ];
     in
@@ -190,8 +196,12 @@
             inherit self;
           };
           modules = [
-            ./secrets/endpoints
             ./secrets/aws-lightsail-0
+            ./secrets/cloud/cloudflare
+            ./secrets/cloud/endpoints
+            ./secrets/cloud/grafana
+            ./secrets/cloud/sing-box
+
             ./nixos/aws-lightsail-0
 
             sops-nix.nixosModules.sops
@@ -218,6 +228,12 @@
           };
           modules = [
             ./secrets/gcp-instance-0
+            ./secrets/cloud/cloudflare
+            ./secrets/cloud/grafana
+            ./secrets/cloud/sing-box
+            ./secrets/cloud/endpoints
+            ./secrets/cloud/subgen
+
             ./nixos/gcp-instance-0
 
             sops-nix.nixosModules.sops
@@ -225,6 +241,8 @@
             self.nixosModules.cloud.gce
             self.nixosModules.cloud.sing-box
             self.nixosModules.o11y
+            self.nixosModules.subgen
+            self.nixosModules.unguarded
 
             {
               nixpkgs.overlays = [
@@ -241,6 +259,10 @@
           };
           modules = [
             ./secrets/gcp-instance-1
+            ./secrets/cloud/cloudflare
+            ./secrets/cloud/grafana
+            ./secrets/cloud/sing-box
+
             ./nixos/gcp-instance-1
 
             sops-nix.nixosModules.sops
@@ -298,6 +320,7 @@
             gotools
             nix-output-monitor
             nixpkgs-fmt
+            nodejs
             sops
             statix
             terraform

@@ -1,13 +1,12 @@
 { pkgs
-, lib
 , ...
 }:
 with pkgs;
 let
   pname = "logseq";
-  version = "0.10.7";
+  version = "0.10.9";
   url = "https://github.com/logseq/logseq/releases/download/${version}/Logseq-linux-x64-${version}.AppImage";
-  sha256 = "sha256-EC83D7tSpoDV6h363yIdX9IrTfoMd4b0hTVdW1T0pXg=";
+  sha256 = "sha256-XROuY2RlKnGvK1VNvzauHuLJiveXVKrIYPppoz8fCmc=";
   src = fetchurl { inherit url sha256; };
   extracted = appimageTools.extractType2 {
     name = pname;

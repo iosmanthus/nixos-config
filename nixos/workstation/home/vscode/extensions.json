@@ -45,20 +45,20 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.181.0",
-            "sha256": "0lmphhkva63xgi7bnq9g452c7rn1rx0syj6a1hsiyyqrl14rb2dd"
+            "version": "1.196.0",
+            "sha256": "0m5z08m93fhk1vk264inrbzn65p9790xrdab8p38ghbydhb3zscs"
         },
         {
             "publisher": "golang",
             "name": "go",
-            "version": "0.41.3",
-            "sha256": "0yi3fvxcv622cmkfa18vjxp6lf48lmgf0sdsx7vkc4kvsapc9yn6"
+            "version": "0.41.4",
+            "sha256": "03gxgcvjk5plzkk7gjsrrck1kszzbzswkbcr33m3qlkyz4iw9nly"
         },
         {
             "publisher": "haskell",
             "name": "haskell",
-            "version": "2.5.2",
-            "sha256": "09pr3ya77ryj5n80k5srwaxmr0j77f6xp67w0kz324i6fhjd12bq"
+            "version": "2.5.3",
+            "sha256": "13s39fvb6kwxklcfsa5xh4z7y8y3y0h6jv39ljrgl24qkwgx8xnw"
         },
         {
             "publisher": "jeff-hykin",
@@ -87,14 +87,14 @@
         {
             "publisher": "ms-azuretools",
             "name": "vscode-docker",
-            "version": "1.29.0",
-            "sha256": "0rz32qwdf7a5hn3nnhxviaf8spwsszfrxmhnbbskspi5r9b6qm4r"
+            "version": "1.29.1",
+            "sha256": "0zba6g0cw2h42gfvrlx0x2axlj61hkrfjfg5kyd14fqzi4n9jmxs"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.361.0",
-            "sha256": "12rim5w0wla15afks881lxy358ams5ql6pha340c16w14pvygizc"
+            "version": "0.367.0",
+            "sha256": "1g0b7qrh6k45zx4bj67xbf0h1li9ls3cnxlbphpsh753q86ph9dk"
         },
         {
             "publisher": "ms-vscode",
@@ -135,8 +135,8 @@
         {
             "publisher": "vscodevim",
             "name": "vim",
-            "version": "1.27.2",
-            "sha256": "0m5gdyvd3yg52d8zxwdw188wqjfvdyyvwnw5dz57pn633g5bi49v"
+            "version": "1.27.3",
+            "sha256": "1k5sccfblslfn086rpiswgxhxmylj0bj2bi7slk7vf73ngk4dqwy"
         },
         {
             "publisher": "yzhang",

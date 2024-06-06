@@ -25,7 +25,7 @@
     awscli2
     brave
     btop
-    cloc
+    tokei
     delta
     delve
     discord
@@ -90,6 +90,12 @@
     yesplaymusic
     zoom-us
     quickemu
+    (wechat-uos.override {
+      uosLicense = builtins.fetchurl {
+        url = "https://github.com/archlinux/aur/raw/6e9a4ad47ff090ecd98170e26bd55219e55109fc/license.tar.gz";
+        sha256 = "0sdx5mdybx4y489dhhc8505mjfajscggxvymlcpqzdd5q5wh0xjk";
+      };
+    })
   ] ++
   (
     let

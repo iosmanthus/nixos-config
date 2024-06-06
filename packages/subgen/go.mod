@@ -6,7 +6,7 @@ require (
 	github.com/Jeffail/gabs/v2 v2.7.0
 	github.com/getsops/sops/v3 v3.8.1
 	github.com/gin-gonic/gin v1.9.1
-	github.com/google/go-jsonnet v0.20.0
+	github.com/google/go-jsonnet v0.20.1-0.20230626194039-fed90cd9cd73
 	github.com/sirupsen/logrus v1.9.3
 	golang.org/x/crypto v0.15.0
 )

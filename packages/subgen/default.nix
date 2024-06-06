@@ -4,9 +4,9 @@
 buildGoModule {
   pname = "subgen";
 
-  version = "unstable-2023-12-15";
+  version = "unstable-2024-05-20";
 
   src = ./.;
 
-  vendorHash = "sha256-3FHiEFDSDr1KiEYAGWcdy6jgcasEMFh66Is7/6hbTFc=";
+  vendorHash = "sha256-vsUugD4uf3XWseRS7YHmqvUOLqBthI8DCm9V64/8Fb4=";
 }

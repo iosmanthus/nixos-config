@@ -1,4 +1,8 @@
 { ... }: {
+  imports = [
+    ./caddy
+    ./subgen
+  ];
   virtualisation.docker.enable = true;
 
   services.self-hosted.o11y = {
@@ -10,4 +14,6 @@
     enable = true;
     ingress = 10080;
   };
+
+  services.self-hosted.unguarded.enable = true;
 }

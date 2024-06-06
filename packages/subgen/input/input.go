@@ -21,7 +21,6 @@ type NamedJsonMessage struct {
 	Name  string          `json:"name"`
 	Value json.RawMessage `json:"value"`
 }
-
 type Input interface {
 	Metadata() *types.Metadata
 	Value(ctx context.Context) (*NamedJsonMessage, error)
@@ -37,6 +36,10 @@ func NewRemote(metadata types.Metadata, url string) Input {
 type remoteInput struct {
 	metadata types.Metadata
 	url      string
+}
+
+type remoteValue struct {
+	Data string `json:"data"`
 }
 
 func (r *remoteInput) Metadata() *types.Metadata {
@@ -68,9 +71,18 @@ func (r *remoteInput) Value(ctx context.Context) (*NamedJsonMessage, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	val := remoteValue{
+		Data: string(data),
+	}
+	valBytes, err := json.Marshal(val)
+	if err != nil {
+		return nil, err
+	}
+
 	return &NamedJsonMessage{
 		Name:  r.metadata.Name,
-		Value: data,
+		Value: valBytes,
 	}, nil
 }
 

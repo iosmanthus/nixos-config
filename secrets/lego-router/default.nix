@@ -1,7 +1,6 @@
 { ... }:
 {
   sops = {
-    defaultSopsFile = ./secrets.yaml;
     secrets = {
       sing-box = {
         format = "binary";

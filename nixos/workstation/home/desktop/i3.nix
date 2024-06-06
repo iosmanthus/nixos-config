@@ -148,7 +148,7 @@ let
         ];
         assigns = {
           "1: main" = [
-            { class = "^Brave-browser$"; }
+            { class = "^firefox-nightly$"; }
             { class = "^logseq$"; }
           ];
           "2: chat" = [
@@ -184,7 +184,7 @@ let
             command = "i3-msg workspace 1: main";
           }
           {
-            command = "brave";
+            command = "firefox-nightly";
           }
           {
             command = "logseq";

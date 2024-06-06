@@ -65,6 +65,7 @@
     docker-compose
     virt-manager
     virt-viewer
+    virtiofsd
   ];
 
   programs.zsh.enable = true;
@@ -74,7 +75,6 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
     loader = {
       systemd-boot = {
         consoleMode = "max";
@@ -135,6 +135,8 @@
       };
     };
   };
+
+  sound.enable = true;
 
   hardware = {
     enableAllFirmware = true;

@@ -12,6 +12,8 @@ let
   mkGeositeUrl = geosite: "${ruleBaseUrl}/rule-set-geosite/${geosite}.srs";
   mkGeoipUrl = geoip: "${ruleBaseUrl}/rule-set-geoip/${geoip}.srs";
 
+  latencyTester = "www.gstatic.com";
+
   warpGeosite = builtins.map
     (geosite: "geosite-${geosite}")
     [
@@ -44,6 +46,10 @@ let
       rules = [
         {
           outbound = "any";
+          server = "cloudflare";
+        }
+        {
+          domain = latencyTester;
           server = "cloudflare";
         }
         {
@@ -92,6 +98,14 @@ let
         warpGeoip;
       rules = [
         {
+          protocol = "bittorrent";
+          outbound = "block";
+        }
+        {
+          domain = latencyTester;
+          outbound = "direct";
+        }
+        {
           rule_set = warpGeoip ++ warpGeosite;
           outbound = "warp";
         }
@@ -100,51 +114,46 @@ let
     inbounds = [
       {
         type = "shadowtls";
+        version = 3;
+
+        detour = "shadowsocks-multi-user";
+        domain_strategy = "prefer_ipv6";
         listen = "::";
         listen_port = cfg.ingress;
-        version = 3;
-        strict_mode = true;
-        domain_strategy = "prefer_ipv6";
         sniff = true;
         sniff_override_destination = true;
+        strict_mode = true;
+        tcp_fast_open = true;
+        handshake = {
+          server = config.sops.placeholder."sing-box/shadowtls/handshake/server";
+          server_port = 443;
+        };
         users = [
           {
             name = config.sops.placeholder."sing-box/shadowtls/username";
             password = config.sops.placeholder."sing-box/shadowtls/password";
           }
         ];
-        handshake = {
-          server = config.sops.placeholder."sing-box/shadowtls/handshake/server";
-          server_port = 443;
-        };
-        tcp_fast_open = true;
-        detour = "shadowsocks-multi-user";
       }
       {
         type = "shadowsocks";
         tag = "shadowsocks-multi-user";
+
         listen = "::1";
         listen_port = 0;
         method = config.sops.placeholder."sing-box/shadowsocks/method";
         password = config.sops.placeholder."sing-box/shadowsocks/password";
-        users = builtins.map
-          (user: {
-            name = user;
-            password = config.sops.placeholder."sing-box/shadowsocks/users/${user}";
-          }) [
-          "iosmanthus"
-          "lego"
-          "lbwang"
-          "tover"
-          "alex"
-          "mgw"
-        ];
+        users = config.sops.placeholder."sing-box/shadowsocks/users";
       }
     ];
     outbounds = [
       {
         type = "direct";
         tag = "direct";
+      }
+      {
+        type = "block";
+        tag = "block";
       }
       {
         type = "wireguard";
@@ -163,6 +172,12 @@ let
       }
     ];
   };
+
+  # nested JSON objects should be unquoted
+  settingsJSON = builtins.replaceStrings
+    [ ''"${config.sops.placeholder."sing-box/shadowsocks/users"}"'' ]
+    [ config.sops.placeholder."sing-box/shadowsocks/users" ]
+    (builtins.toJSON settings);
 in
 {
   imports = [
@@ -190,7 +205,7 @@ in
     ];
 
     sops.templates."sing-box.json" = {
-      content = builtins.toJSON settings;
+      content = settingsJSON;
     };
   };
 }

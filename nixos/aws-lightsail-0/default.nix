@@ -1,14 +1,9 @@
-{ pkgs
-, modulesPath
-, lib
-, ...
+{ ...
 }:
 {
   imports = [
     ./atuin
     ./caddy
-    ./chatgpt-next-web
-    ./subgen
     ./vaultwarden
   ];
 

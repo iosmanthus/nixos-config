@@ -13,7 +13,7 @@
     rules: [
       {
         clash_mode: 'Direct',
-        server: 'local',
+        server: 'local-secure',
       },
       {
         clash_mode: 'Global',
@@ -21,7 +21,7 @@
       },
       {
         outbound: 'any',
-        server: 'local',
+        server: 'local-secure',
       },
       {
         domain_keyword: [
@@ -50,6 +50,12 @@
         tag: 'local',
       },
       {
+        address: 'https://doh.pub/dns-query',
+        address_resolver: 'local',
+        detour: 'direct',
+        tag: 'local-secure',
+      },
+      {
         address: 'fakeip',
         tag: 'remote',
       },
@@ -71,6 +77,13 @@
         tag: 'cn-ip',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geoip/geoip-cn.srs',
+        download_detour: 'urltest',
+      },
+      {
+        type: 'remote',
+        tag: 'ads',
+        format: 'binary',
+        url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-category-ads-all.srs',
         download_detour: 'urltest',
       },
     ],
@@ -108,21 +121,21 @@
       store_fakeip: true,
     },
     clash_api: {
-      external_controller: '127.0.0.1:7990',
+      external_controller: '0.0.0.0:7990',
+      external_ui_download_detour: 'urltest',
       external_ui: './ui',
-      external_ui_download_detour: 'final',
     },
   },
   inbounds: [
     {
       auto_route: true,
       inet4_address: '172.19.0.1/30',
-      inet6_address: 'fdfe:dcba:9876::1/126',
-      interface_name: 'utun@2057b9c9',
+      // inet6_address: 'fdfe:dcba:9876::1/126',
+      interface_name: 'utun@130dfab',
       sniff: true,
       sniff_override_destination: true,
       stack: 'mixed',
-      strict_route: true,
+      strict_route: false,
       tag: 'tun-in',
       type: 'tun',
     },

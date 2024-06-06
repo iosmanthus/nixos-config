@@ -70,14 +70,14 @@ rec {
       };
     });
 
-    feishu = prev.feishu.overrideAttrs (_: rec {
-      version = "7.11.9";
-      packageHash = "ec62a2df";
-      src = builtins.fetchurl {
-        url = "https://sf3-cn.feishucdn.com/obj/ee-appcenter/${packageHash}/Feishu-linux_x64-${version}.deb";
-        sha256 = "1c4ggcq10knb1gac6rmlb5mdxlz1xrz6i735mfqinvr7qfrqzi4q";
-      };
-    });
+    # feishu = prev.feishu.overrideAttrs (_: rec {
+    #   version = "7.11.9";
+    #   packageHash = "ec62a2df";
+    #   src = builtins.fetchurl {
+    #     url = "https://sf3-cn.feishucdn.com/obj/ee-appcenter/${packageHash}/Feishu-linux_x64-${version}.deb";
+    #     sha256 = "1c4ggcq10knb1gac6rmlb5mdxlz1xrz6i735mfqinvr7qfrqzi4q";
+    #   };
+    # });
 
     vistafonts-chs = prev.vistafonts-chs.overrideAttrs (_: {
       src = builtins.fetchurl {
@@ -86,16 +86,16 @@ rec {
       };
     });
 
-    caddy = prev.callPackage "${prev.path}/pkgs/servers/caddy" {
+    caddy = prev.callPackage "${prev.path}/pkgs/by-name/ca/caddy/package.nix" {
       buildGoModule = args: prev.buildGoModule (args // {
-        version = "unstable-2023-12-15";
+        version = "unstable-2024-06-05";
         src = prev.fetchFromGitHub {
           owner = "iosmanthus";
           repo = "caddy";
-          rev = "18594d72a6636cb68e0c75450c10f44fd38af1f7";
-          hash = "sha256-+z9v/CKEgEoDJWGH14VPNBD9q2/dHkvwPHdoOalrWqA=";
+          rev = "2c658e7715257b793acd9552518c38badf40a34a";
+          hash = "sha256-nPUv7ZHwrLxHstzS1L3Os0AY//7CJvv1IQ2Hi7QmC30=";
         };
-        vendorHash = "sha256-sc1WsiSde7GKB+SSEHwQcGn08oq8MbtjlhBPV4VU5eg=";
+        vendorHash = "sha256-/Vj8Yn34c81W1KZoCogfG3Z3fzmJnjvubxq3nIqHxm4=";
       });
     };
   };

@@ -27,4 +27,5 @@
   sing-box = import ./sing-box;
   subgen = import ./subgen;
   gemini-openai-proxy = import ./gemini-openai-proxy;
+  unguarded = import ./unguarded;
 }
