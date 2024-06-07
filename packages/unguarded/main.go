@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/iosmanthus/nixos-config/packages/unguarded/dlercloud"
 
@@ -20,35 +20,71 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/dlercloud/v1/relay/list", func(c *gin.Context) {
-		params := []string{"uid", "email", "key"}
-		queries := make([]string, len(params))
-		for i, p := range params {
-			q, ok := c.GetQuery(p)
-			if !ok {
-				c.JSON(400, gin.H{"error": fmt.Sprintf("missing parameter: `%s`", p)})
-				return
-			}
-			queries[i] = q
-		}
-
-		dcli, err := dlercloud.NewClient(*dlercloudEndpoint, dlercloud.Auth{
-			UID:   queries[0],
-			Email: queries[1],
-			Key:   queries[2],
-		})
-
-		if err != nil {
-			c.JSON(500, gin.H{"error": err.Error()})
+		var auth dlercloud.Auth
+		if c.BindQuery(&auth) != nil {
 			return
 		}
 
-		relays, err := dcli.List(c)
+		dcli, err := dlercloud.NewClient(*dlercloudEndpoint, auth)
 		if err != nil {
-			c.JSON(500, gin.H{"error": err.Error()})
+			_ = c.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
 
-		c.JSON(200, gin.H{"relays": relays})
+		relays, err := dcli.ListRelays(c)
+		if err != nil {
+			_ = c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"relays": relays})
+	})
+
+	r.GET("/dlercloud/v1/relay/source_node/list", func(c *gin.Context) {
+		var auth dlercloud.Auth
+		if c.BindQuery(&auth) != nil {
+			return
+		}
+
+		dcli, err := dlercloud.NewClient(*dlercloudEndpoint, auth)
+		if err != nil {
+			_ = c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		nodes, err := dcli.ListSourceNodes(c)
+		if err != nil {
+			_ = c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"source_nodes": nodes})
+	})
+
+	r.POST("/dlercloud/v1/relay/create", func(c *gin.Context) {
+		var auth dlercloud.Auth
+		if c.BindQuery(&auth) != nil {
+			return
+		}
+
+		var createRelay dlercloud.CreateRelay
+		if c.BindJSON(&createRelay) != nil {
+			return
+		}
+
+		dcli, err := dlercloud.NewClient(*dlercloudEndpoint, auth)
+		if err != nil {
+			_ = c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		err = dcli.CreateRelay(c, &createRelay)
+		if err != nil {
+			_ = c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		c.Status(http.StatusOK)
 	})
 
 	err := r.Run(*addr)

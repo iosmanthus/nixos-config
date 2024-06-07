@@ -12,7 +12,7 @@ let
         server_name = config.sops.placeholder."sing-box/shadowtls/handshake/server";
         utls = {
           enabled = true;
-          fingerprint = "chrome";
+          fingerprint = "safari";
         };
       };
     };
