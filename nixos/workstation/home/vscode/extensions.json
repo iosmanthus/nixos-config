@@ -21,8 +21,8 @@
         {
             "publisher": "christian-kohler",
             "name": "path-intellisense",
-            "version": "2.8.5",
-            "sha256": "1ndffv1m4ayiija1l42m28si44vx9y6x47zpxzqv2j4jj7ga1n5z"
+            "version": "2.9.0",
+            "sha256": "1sshl8za6wviaikad8pisisn2x1y382npsh7grw3vdfi4j3awb8g"
         },
         {
             "publisher": "DotJoshJohnson",
@@ -45,8 +45,8 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.196.0",
-            "sha256": "0m5z08m93fhk1vk264inrbzn65p9790xrdab8p38ghbydhb3zscs"
+            "version": "1.200.920",
+            "sha256": "0d7m8kslrlka7gamvbvxmp9rd2lbsiyrymc70q1hpzwds5ds3i1c"
         },
         {
             "publisher": "golang",
@@ -93,8 +93,8 @@
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.367.0",
-            "sha256": "1g0b7qrh6k45zx4bj67xbf0h1li9ls3cnxlbphpsh753q86ph9dk"
+            "version": "0.371.0",
+            "sha256": "1b26xyv661xp76nqg4fnnbf9m7kaf6pn50ld1amj0a9gncvf0wj5"
         },
         {
             "publisher": "ms-vscode",
@@ -153,8 +153,8 @@
         {
             "publisher": "github",
             "name": "vscode-github-actions",
-            "version": "0.26.2",
-            "sha256": "16kp1yxs798jp8ffqq3ixm3pyz4f3wgdkdyjpjy94ppqp4aklixh"
+            "version": "0.26.3",
+            "sha256": "17p4xjanmaphfx63s6cdji6b237n3ndkfzjjndsvk64imrh2jxdl"
         },
         {
             "publisher": "ms-kubernetes-tools",

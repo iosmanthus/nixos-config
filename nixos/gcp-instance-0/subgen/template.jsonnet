@@ -93,6 +93,10 @@
         protocol: 'dns',
       },
       {
+        protocol: 'bittorrent',
+        outbound: 'direct',
+      },
+      {
         clash_mode: 'Direct',
         outbound: 'direct',
       },

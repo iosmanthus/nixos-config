@@ -23,22 +23,7 @@ def get(url):
 
 
 def override(resp):
-    obj = json.loads(resp)
-    if 'route' not in obj:
-        raise Exception("No `route` field found in response")
-
-    i = 0
-    for rule in obj['route']['rules']:
-        if rule['protocol'] == 'dns':
-            break
-        i += 1
-
-    obj['route']['rules'].insert(i + 1, {
-        'protocol': 'bittorrent',
-        'outbound': 'direct',
-    })
-
-    return obj
+    return json.loads(resp)
 
 
 url = decrypt("./secrets.yaml")['sing-box-url']
