@@ -24,11 +24,26 @@
         server: 'local-secure',
       },
       {
-        domain_keyword: [
-          'pingcap',
-          'tidb',
+        rule_set: 'geosite-cn',
+        server: 'local-secure',
+      },
+      {
+        type: 'logical',
+        mode: 'and',
+        rules: [
+          {
+            rule_set: 'geosite-geolocation-!cn',
+            invert: true,
+          },
+          {
+            rule_set: [
+              'geoip-cn',
+              'geoip-private',
+            ],
+          },
         ],
         server: 'secure',
+        client_subnet: '121.46.17.159/24',
       },
       {
         query_type: [
@@ -40,7 +55,7 @@
     ],
     servers: [
       {
-        address: 'tls://1.1.1.1',
+        address: 'https://1.1.1.1/dns-query',
         detour: 'final',
         tag: 'secure',
       },
@@ -67,21 +82,35 @@
     rule_set: [
       {
         type: 'remote',
-        tag: 'cn-site',
+        tag: 'geosite-cn',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-cn.srs',
         download_detour: 'urltest',
       },
       {
         type: 'remote',
-        tag: 'cn-ip',
+        tag: 'geosite-geolocation-!cn',
+        format: 'binary',
+        url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-geolocation-!cn.srs',
+        download_detour: 'urltest',
+      },
+      {
+        type: 'remote',
+        tag: 'geoip-cn',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geoip/geoip-cn.srs',
         download_detour: 'urltest',
       },
       {
         type: 'remote',
-        tag: 'ads',
+        tag: 'geoip-private',
+        format: 'binary',
+        url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geoip/geoip-private.srs',
+        download_detour: 'urltest',
+      },
+      {
+        type: 'remote',
+        tag: 'geosite-category-ads-all',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-category-ads-all.srs',
         download_detour: 'urltest',
@@ -93,10 +122,6 @@
         protocol: 'dns',
       },
       {
-        protocol: 'bittorrent',
-        outbound: 'direct',
-      },
-      {
         clash_mode: 'Direct',
         outbound: 'direct',
       },
@@ -105,15 +130,23 @@
         outbound: 'final',
       },
       {
-        rule_set: 'cn-site',
+        rule_set: 'geosite-category-ads-all',
+        outbound: 'block',
+      },
+      {
+        protocol: 'bittorrent',
         outbound: 'direct',
       },
       {
-        ip_is_private: true,
+        rule_set: 'geoip-cn',
         outbound: 'direct',
       },
       {
-        rule_set: 'cn-ip',
+        rule_set: 'geoip-private',
+        outbound: 'direct',
+      },
+      {
+        rule_set: 'geosite-cn',
         outbound: 'direct',
       },
     ],
@@ -137,7 +170,7 @@
       // inet6_address: 'fdfe:dcba:9876::1/126',
       interface_name: 'utun@130dfab',
       sniff: true,
-      sniff_override_destination: true,
+      // sniff_override_destination: true,
       stack: 'mixed',
       strict_route: false,
       tag: 'tun-in',
@@ -152,6 +185,10 @@
     {
       tag: 'direct',
       type: 'direct',
+    },
+    {
+      tag: 'block',
+      type: 'block',
     },
   ],
 }

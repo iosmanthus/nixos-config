@@ -219,11 +219,11 @@
     },
     "jetbrains": {
       "locked": {
-        "lastModified": 1717492737,
-        "narHash": "sha256-O5oRQCqiZ2rm9yoGJjz3jU6eUnjbCiQ0pQDGZ7e+aP4=",
+        "lastModified": 1718552432,
+        "narHash": "sha256-M/HofJteqrqOIsiF6jQK3Fy0YzIVVfEMtVf0Zthctyc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "356406aff9a1db9a8f8af683c405c38d2864fb23",
+        "rev": "46bdde8c71ca148e83a6fd446b6f7ff8db3e54a6",
         "type": "github"
       },
       "original": {

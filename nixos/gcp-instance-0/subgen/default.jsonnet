@@ -63,7 +63,7 @@ function(
     tag: 'urltest',
     type: 'urltest',
     outbounds: relaySsOutboundsTags,
-    interval: '10s',
+    interval: '1m',
   };
 
   local origin = {

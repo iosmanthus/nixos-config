@@ -10,9 +10,6 @@ let
   ruleBaseUrl = "https://raw.githubusercontent.com/lyc8503/sing-box-rules";
 
   mkGeositeUrl = geosite: "${ruleBaseUrl}/rule-set-geosite/${geosite}.srs";
-  mkGeoipUrl = geoip: "${ruleBaseUrl}/rule-set-geoip/${geoip}.srs";
-
-  latencyTester = "www.gstatic.com";
 
   warpGeosite = builtins.map
     (geosite: "geosite-${geosite}")
@@ -30,12 +27,6 @@ let
       "youtube"
     ];
 
-  warpGeoip = builtins.map
-    (geoip: "geoip-${geoip}")
-    [
-      "google"
-    ];
-
   settings = {
     log = {
       level = "debug";
@@ -49,13 +40,6 @@ let
           server = "cloudflare";
         }
         {
-          domain = latencyTester;
-          server = "cloudflare";
-        }
-        {
-          inbound = [
-            "shadowsocks-multi-user"
-          ];
           rule_set = warpGeosite;
           server = "warp";
         }
@@ -85,28 +69,14 @@ let
           url = mkGeositeUrl geosite;
           download_detour = "direct";
         })
-        warpGeosite ++ builtins.map
-        (
-          geoip: {
-            type = "remote";
-            tag = geoip;
-            format = "binary";
-            url = mkGeoipUrl geoip;
-            download_detour = "direct";
-          }
-        )
-        warpGeoip;
+        warpGeosite;
       rules = [
         {
           protocol = "bittorrent";
           outbound = "block";
         }
         {
-          domain = latencyTester;
-          outbound = "direct";
-        }
-        {
-          rule_set = warpGeoip ++ warpGeosite;
+          rule_set = warpGeosite;
           outbound = "warp";
         }
       ];
@@ -117,7 +87,6 @@ let
         version = 3;
 
         detour = "shadowsocks-multi-user";
-        domain_strategy = "prefer_ipv6";
         listen = "::";
         listen_port = cfg.ingress;
         sniff = true;

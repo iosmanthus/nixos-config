@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./desktop
+    ./o11y
 
     ./network.nix
     ./users.nix
