@@ -61,6 +61,10 @@ in
         backend = config.services.self-hosted.subgen.address;
         logLevel = "INFO";
       };
+      "chinadns.iosmanthus.com" = mkReverseProxy {
+        backend = config.services.self-hosted.chinadns.statusAddress;
+        logLevel = "INFO";
+      };
     };
   };
 }

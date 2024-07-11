@@ -5,7 +5,7 @@ let
 in
 {
   sops.secrets = {
-    "subgen/subscription-url" = { inherit sopsFile format; };
+    "subgen/relay-subscription-url" = { inherit sopsFile format; };
     "subgen/users" = { inherit sopsFile format; };
   };
 }

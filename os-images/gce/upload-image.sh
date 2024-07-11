@@ -3,8 +3,8 @@
 
 set -euo pipefail
 
-PROJECT_ID=${PROJECT_ID:-"infra-417609"}
-BUCKET_NAME=${BUCKET_NAME:-"iosmanthus-nixos-cloud-images"}
+PROJECT_ID=${PROJECT_ID:-"clean-node-425415-i9"}
+BUCKET_NAME=${BUCKET_NAME:-"nixos-cloud-images-20240701160523"}
 
 img_path=$(echo result/*.tar.gz)
 img_name=${IMAGE_NAME:-$(basename "$img_path")}

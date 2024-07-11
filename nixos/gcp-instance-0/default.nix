@@ -2,8 +2,9 @@
   imports = [
     ./caddy
     ./subgen
+    ./chinadns
   ];
-  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = false;
 
   services.self-hosted.o11y = {
     enable = true;

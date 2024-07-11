@@ -8,6 +8,7 @@
     "${modulesPath}/virtualisation/amazon-image.nix"
 
     self.nixosModules.cloud.base
+    self.nixosModules.cloud.firewall
     self.nixosModules.nixbuild
   ];
 

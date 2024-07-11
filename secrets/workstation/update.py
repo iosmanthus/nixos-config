@@ -23,7 +23,16 @@ def get(url):
 
 
 def override(resp):
-    return json.loads(resp)
+    cfg = json.loads(resp)
+    tun = cfg['inbounds'][0]
+    if tun['type'] != "tun":
+        return
+    tun['auto_redirect'] = True
+    tun['route_exclude_address_set'] = ["geoip-cn"]
+    tun['address'] = [tun['inet4_address']]
+    tun['route_exclude_address'] = ['10.2.0.0/16']
+    del tun['inet4_address']
+    return cfg
 
 
 url = decrypt("./secrets.yaml")['sing-box-url']

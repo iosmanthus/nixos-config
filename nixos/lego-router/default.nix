@@ -1,10 +1,11 @@
-{ config
-, ...
+{ ...
 }:
 
 {
   imports = [
     ./hardware-configuration.nix
+
+    ./sing-box
   ];
 
   networking.hostName = "lego-router";
@@ -37,11 +38,6 @@
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
-  };
-
-  services.self-hosted.sing-box = {
-    enable = true;
-    configFile = config.sops.secrets.sing-box.path;
   };
 
   services.coredns = {

@@ -51,7 +51,7 @@ in
       )).extensions
     ++ (with pkgs.vscode-extensions; [
       eamodio.gitlens
-      matklad.rust-analyzer
+      rust-lang.rust-analyzer
       ms-python.python
       ms-vscode-remote.remote-ssh
       redhat.vscode-yaml

@@ -4,12 +4,12 @@
 , ...
 }: {
   imports = [
-    ./gpg.nix
     ./tmux.nix
 
     ./desktop
     ./fcitx5
     ./firefox
+    ./gpg
     ./polybar
     ./rofi
     ./shell
@@ -39,8 +39,8 @@
     geoipWithDatabase
     gh
     gnome.gnome-clocks
-    gnome.gnome-font-viewer
-    gnome.seahorse
+    gnome-font-viewer
+    seahorse
     go-musicfox
     go-tools
     google-cloud-sdk
@@ -95,6 +95,12 @@
         url = "https://github.com/archlinux/aur/raw/6e9a4ad47ff090ecd98170e26bd55219e55109fc/license.tar.gz";
         sha256 = "0sdx5mdybx4y489dhhc8505mjfajscggxvymlcpqzdd5q5wh0xjk";
       };
+    })
+    (retroarch.override {
+      cores = with pkgs.libretro; [
+        mgba
+        melonds
+      ];
     })
   ] ++
   (

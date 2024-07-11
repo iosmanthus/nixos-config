@@ -1,4 +1,4 @@
-{
+function(secrets) {
   log: {
     level: 'debug',
     timestamp: true,
@@ -12,38 +12,40 @@
     independent_cache: true,
     rules: [
       {
+        outbound: 'any',
+        server: 'local',
+      },
+      {
         clash_mode: 'Direct',
-        server: 'local-secure',
+        server: 'local',
       },
       {
         clash_mode: 'Global',
         server: 'secure',
       },
       {
-        outbound: 'any',
-        server: 'local-secure',
+        query_type: [
+          'A',
+          'AAAA',
+        ],
+        rule_set: 'geosite-geolocation-!cn',
+        server: 'remote',
       },
       {
-        rule_set: 'geosite-cn',
-        server: 'local-secure',
+        rule_set: 'geosite-china-list',
+        server: 'local',
       },
       {
-        type: 'logical',
-        mode: 'and',
-        rules: [
-          {
-            rule_set: 'geosite-geolocation-!cn',
-            invert: true,
-          },
-          {
-            rule_set: [
-              'geoip-cn',
-              'geoip-private',
-            ],
-          },
+        rule_set: 'geosite-chinadns',
+        server: 'local',
+      },
+      {
+        rule_set: [
+          'geoip-cn',
+          'geoip-private',
         ],
         server: 'secure',
-        client_subnet: '121.46.17.159/24',
+        client_subnet: '121.46.17.1/24',
       },
       {
         query_type: [
@@ -55,7 +57,8 @@
     ],
     servers: [
       {
-        address: 'https://1.1.1.1/dns-query',
+        address: secrets.defaultDnsServer,
+        address_resolver: 'local',
         detour: 'final',
         tag: 'secure',
       },
@@ -63,12 +66,6 @@
         address: '119.29.29.29',
         detour: 'direct',
         tag: 'local',
-      },
-      {
-        address: 'https://doh.pub/dns-query',
-        address_resolver: 'local',
-        detour: 'direct',
-        tag: 'local-secure',
       },
       {
         address: 'fakeip',
@@ -82,38 +79,46 @@
     rule_set: [
       {
         type: 'remote',
-        tag: 'geosite-cn',
+        tag: 'geosite-china-list',
         format: 'binary',
-        url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-cn.srs',
-        download_detour: 'urltest',
+        url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-china-list.srs',
+        download_detour: 'origin',
       },
       {
         type: 'remote',
         tag: 'geosite-geolocation-!cn',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-geolocation-!cn.srs',
-        download_detour: 'urltest',
+        download_detour: 'origin',
       },
       {
         type: 'remote',
         tag: 'geoip-cn',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geoip/geoip-cn.srs',
-        download_detour: 'urltest',
+        download_detour: 'origin',
       },
       {
         type: 'remote',
         tag: 'geoip-private',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geoip/geoip-private.srs',
-        download_detour: 'urltest',
+        download_detour: 'origin',
       },
       {
         type: 'remote',
         tag: 'geosite-category-ads-all',
         format: 'binary',
         url: 'https://raw.githubusercontent.com/lyc8503/sing-box-rules/rule-set-geosite/geosite-category-ads-all.srs',
-        download_detour: 'urltest',
+        download_detour: 'origin',
+      },
+      {
+        type: 'remote',
+        tag: 'geosite-chinadns',
+        format: 'binary',
+        url: 'https://chinadns.iosmanthus.com/binary',
+        update_interval: '30m',
+        download_detour: 'origin',
       },
     ],
     rules: [
@@ -146,8 +151,8 @@
         outbound: 'direct',
       },
       {
-        rule_set: 'geosite-cn',
-        outbound: 'direct',
+        protocol: 'quic',
+        outbound: 'block',
       },
     ],
   },
@@ -156,10 +161,11 @@
       enabled: true,
       cache_id: '3109dc66-e71d-40d0-9e55-1b60244d0a90',
       store_fakeip: true,
+      store_rdrc: true,
     },
     clash_api: {
       external_controller: '0.0.0.0:7990',
-      external_ui_download_detour: 'urltest',
+      external_ui_download_detour: 'origin',
       external_ui: './ui',
     },
   },
@@ -167,10 +173,8 @@
     {
       auto_route: true,
       inet4_address: '172.19.0.1/30',
-      // inet6_address: 'fdfe:dcba:9876::1/126',
       interface_name: 'utun@130dfab',
       sniff: true,
-      // sniff_override_destination: true,
       stack: 'mixed',
       strict_route: false,
       tag: 'tun-in',

@@ -1,6 +1,6 @@
 resource "random_id" "revision" {
   keepers = {
-    creation_timestamp = "20240320173139"
+    creation_timestamp = "20240628151839"
   }
   byte_length = 4
 }
@@ -35,6 +35,7 @@ resource "google_compute_subnetwork" "dual_stack" {
 resource "google_compute_network" "main" {
   name                    = "main-${random_id.revision.hex}"
   auto_create_subnetworks = false
+  mtu                     = 8896
 }
 
 resource "google_compute_firewall" "main" {
@@ -48,6 +49,11 @@ resource "google_compute_firewall" "main" {
   allow {
     protocol = "tcp"
     ports    = ["22", "443", "10080"]
+  }
+
+  allow {
+    protocol = "udp"
+    ports    = ["10853"]
   }
 
   source_ranges = ["0.0.0.0/0"]

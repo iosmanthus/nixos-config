@@ -9,7 +9,9 @@
     profiles.${config.admin.name} = {
       settings = {
         "browser.sessionstore.resume_from_crash" = true;
+        "browser.urlbar.showSearchSuggestionsFirst" = false;
         "extensions.pocket.enabled" = false;
+        "network.http.http3.enable" = false;
         "network.predictor.enable-hover-on-ssl" = true;
         "network.predictor.enable-prefetch" = true;
         "network.predictor.preconnect-min-confidence" = 20;
@@ -20,7 +22,6 @@
         "network.trr.mode" = 0;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "widget.content.gtk-theme-override" = config.gtk.globalTheme.name;
-        "browser.urlbar.showSearchSuggestionsFirst" = false;
         "xpinstall.signatures.required" = false;
       };
       userChrome = builtins.readFile ./userChrome.css;

@@ -30,6 +30,8 @@
 
   networking.firewall.enable = lib.mkForce false;
 
+  networking.nftables.enable = true;
+
   services.self-hosted.sing-box = {
     enable = true;
     configFile = config.sops.secrets.sing-box.path;

@@ -19,13 +19,41 @@ let
       "disney"
       "hbo"
       "hulu"
-      "microsoft"
       "netflix"
       "openai"
       "stripe"
       "tiktok"
-      "youtube"
+      "microsoft"
+      # "youtube"
     ];
+
+  tcpInboud = {
+    type = "vless";
+    listen = "::";
+    listen_port = cfg.ingress;
+    sniff = true;
+    sniff_override_destination = true;
+    tcp_fast_open = true;
+    users = config.sops.placeholder."sing-box/vless/users";
+    tls =
+      let
+        server_name = config.sops.placeholder."sing-box/vless/reality/server-name";
+        private_key = config.sops.placeholder."sing-box/vless/reality/private-key";
+        short_id = [ config.sops.placeholder."sing-box/vless/reality/short-id" ];
+      in
+      {
+        enabled = true;
+        inherit server_name;
+        reality = {
+          inherit private_key short_id;
+          enabled = true;
+          handshake = {
+            server = server_name;
+            server_port = 443;
+          };
+        };
+      };
+  };
 
   settings = {
     log = {
@@ -81,40 +109,8 @@ let
         }
       ];
     };
-    inbounds = [
-      {
-        type = "shadowtls";
-        version = 3;
 
-        detour = "shadowsocks-multi-user";
-        listen = "::";
-        listen_port = cfg.ingress;
-        sniff = true;
-        sniff_override_destination = true;
-        strict_mode = true;
-        tcp_fast_open = true;
-        handshake = {
-          server = config.sops.placeholder."sing-box/shadowtls/handshake/server";
-          server_port = 443;
-        };
-        users = [
-          {
-            name = config.sops.placeholder."sing-box/shadowtls/username";
-            password = config.sops.placeholder."sing-box/shadowtls/password";
-          }
-        ];
-      }
-      {
-        type = "shadowsocks";
-        tag = "shadowsocks-multi-user";
-
-        listen = "::1";
-        listen_port = 0;
-        method = config.sops.placeholder."sing-box/shadowsocks/method";
-        password = config.sops.placeholder."sing-box/shadowsocks/password";
-        users = config.sops.placeholder."sing-box/shadowsocks/users";
-      }
-    ];
+    inbounds = [ tcpInboud ];
     outbounds = [
       {
         type = "direct";
@@ -130,8 +126,6 @@ let
         server = "engage.cloudflareclient.com";
         server_port = 2408;
         mtu = 1330;
-        system_interface = true;
-        interface_name = "wg0";
         peer_public_key = config.sops.placeholder."cloudflare/warp/peer_public_key";
         local_address = [
           config.sops.placeholder."cloudflare/warp/local_address_v4"
@@ -144,8 +138,8 @@ let
 
   # nested JSON objects should be unquoted
   settingsJSON = builtins.replaceStrings
-    [ ''"${config.sops.placeholder."sing-box/shadowsocks/users"}"'' ]
-    [ config.sops.placeholder."sing-box/shadowsocks/users" ]
+    [ ''"${config.sops.placeholder."sing-box/vless/users"}"'' ]
+    [ config.sops.placeholder."sing-box/vless/users" ]
     (builtins.toJSON settings);
 in
 {
@@ -171,6 +165,8 @@ in
 
     systemd.services.sing-box.restartTriggers = [
       config.sops.templates."sing-box.json".content
+
+      ../../../secrets/cloud/sing-box/secrets.json
     ];
 
     sops.templates."sing-box.json" = {

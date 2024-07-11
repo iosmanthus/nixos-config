@@ -9,6 +9,8 @@
         neededForUsers = true;
       };
 
+      sing-box-url = { };
+
       sing-box = {
         format = "binary";
         sopsFile = ./sing-box;

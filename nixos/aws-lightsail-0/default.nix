@@ -19,11 +19,6 @@
     '';
   };
 
-  networking.firewall = {
-    enable = true;
-    checkReversePath = "loose";
-  };
-
   virtualisation.docker.enable = true;
 
   services.self-hosted.o11y = {

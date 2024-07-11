@@ -6,13 +6,11 @@ in
 {
   sops = {
     secrets = {
-      "sing-box/shadowsocks/method" = { inherit sopsFile format; };
-      "sing-box/shadowsocks/password" = { inherit sopsFile format; };
-      "sing-box/shadowsocks/users" = { inherit sopsFile format; };
-
-      "sing-box/shadowtls/handshake/server" = { inherit sopsFile format; };
-      "sing-box/shadowtls/password" = { inherit sopsFile format; };
-      "sing-box/shadowtls/username" = { inherit sopsFile format; };
+      "sing-box/vless/reality/server-name" = { inherit sopsFile format; };
+      "sing-box/vless/reality/public-key" = { inherit sopsFile format; };
+      "sing-box/vless/reality/private-key" = { inherit sopsFile format; };
+      "sing-box/vless/reality/short-id" = { inherit sopsFile format; };
+      "sing-box/vless/users" = { inherit sopsFile format; };
     };
   };
 }

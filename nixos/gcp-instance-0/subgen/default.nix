@@ -2,25 +2,23 @@
 , ...
 }:
 let
-  finalNode = {
-    shadowtls = {
-      type = "shadowtls";
-      version = 3;
-      password = config.sops.placeholder."sing-box/shadowtls/password";
+  outboundTemplates = {
+    vless = {
+      type = "vless";
+      tcp_fast_open = true;
       tls = {
         enabled = true;
-        server_name = config.sops.placeholder."sing-box/shadowtls/handshake/server";
+        server_name = config.sops.placeholder."sing-box/vless/reality/server-name";
         utls = {
           enabled = true;
-          fingerprint = "safari";
+          fingerprint = "firefox";
+        };
+        reality = {
+          enabled = true;
+          public_key = config.sops.placeholder."sing-box/vless/reality/public-key";
+          short_id = config.sops.placeholder."sing-box/vless/reality/short-id";
         };
       };
-    };
-    shadowsocks = {
-      type = "shadowsocks";
-      method = config.sops.placeholder."sing-box/shadowsocks/method";
-      password = config.sops.placeholder."sing-box/shadowsocks/password";
-      udp_over_tcp = true;
     };
   };
 in
@@ -33,53 +31,65 @@ in
 
   systemd.services.subgen.restartTriggers = [
     config.sops.templates."config.jsonnet".content
+
+    ../../../secrets/cloud/sing-box/secrets.json
+    ../../../secrets/cloud/subgen/secrets.json
   ];
 
   sops.templates."config.jsonnet".content = ''
     function(secrets)
     local users = ${config.sops.placeholder."subgen/users"};
-    local sspasswords = std.foldl(
-      function(acc, user)
-        acc + {
-          [user.name]: user.password,
+    local vlessUsers = std.foldl(
+      function(acc, user) acc + {
+          [user.name]: {
+            uuid: user.uuid,
+            flow: user.flow,
+          },
         },
-      ${config.sops.placeholder."sing-box/shadowsocks/users"},
+      ${config.sops.placeholder."sing-box/vless/users"},
       {}
     );
     local mkInputs = function(username) [
       {
         type: 'local',
-        name: 'finalNode',
-        value: ${builtins.toJSON finalNode},
+        name: 'outboundTemplates',
+        value: ${builtins.toJSON outboundTemplates},
       },
       {
         type: 'remote',
-        name: 'subscription',
-        url: "${config.sops.placeholder."subgen/subscription-url"}",
+        name: 'relaySubscription',
+        url: '${config.sops.placeholder."subgen/relay-subscription-url"}',
       },
       {
         type: 'local',
-        name: 'ssUserPassword',
-        value: sspasswords[username],
+        name: 'vlessUser',
+        value: vlessUsers[username],
+      },
+      {
+        type: 'local',
+        name: 'defaultDnsServer',
+        value: 'udp://' +
+          '${config.sops.placeholder."gcp-instance-0/external-address-v4"}:' +
+          '${toString config.services.self-hosted.chinadns.port}',
       },
       {
         type: 'local',
         name: 'originGroup',
         value: [
           {
-            tag: 'aws-ap-southeast-1',
-            host: '${config.sops.placeholder."aws-lightsail-0/external-address-v4"}',
-            port: 10080,
-          },
-          {
             tag: 'gcp-asia-east-1',
-            host: '${config.sops.placeholder."gcp-instance-0/external-address-v4"}',
-            port: 10080,
+            server: '${config.sops.placeholder."gcp-instance-0/external-address-v4"}',
+            server_port: 10080,
           },
           {
             tag: 'gcp-us-west-1',
-            host: '${config.sops.placeholder."gcp-instance-1/external-address-v4"}',
-            port: 10080,
+            server: '${config.sops.placeholder."gcp-instance-1/external-address-v4"}',
+            server_port: 10080,
+          },
+          {
+            tag: 'aws-ap-southeast-1',
+            server: '${config.sops.placeholder."aws-lightsail-0/external-address-v4"}',
+            server_port: 10080,
           },
         ],
       },

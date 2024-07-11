@@ -1,7 +1,7 @@
 {
   description = "God does not play dice";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=ae784887524c9c3f079c6d4c4444586a434e24e7";
 
     master.url = "github:NixOS/nixpkgs";
 
@@ -151,8 +151,8 @@
             "lens"
             "neovim"
             "nixos-artwork"
-            "nixUnstable"
             "oh-my-zsh"
+            "openssh"
             "ripgrep"
             "rofi"
             "rust-analyzer"
@@ -216,6 +216,7 @@
             {
               nixpkgs.overlays = [
                 self.overlays.default
+                self.overlays.unstable
               ];
             }
           ];
@@ -243,10 +244,12 @@
             self.nixosModules.o11y
             self.nixosModules.subgen
             self.nixosModules.unguarded
+            self.nixosModules.chinadns
 
             {
               nixpkgs.overlays = [
                 self.overlays.default
+                self.overlays.unstable
               ];
             }
           ];
@@ -274,6 +277,7 @@
             {
               nixpkgs.overlays = [
                 self.overlays.default
+                self.overlays.unstable
               ];
             }
           ];
@@ -296,6 +300,7 @@
             {
               nixpkgs.overlays = [
                 self.overlays.default
+                self.overlays.unstable
               ];
             }
           ];
@@ -312,6 +317,7 @@
       in
       {
         devShells.default = pkgs.mkShell {
+          hardeningDisable = [ "fortify" ];
           buildInputs = with pkgs; [
             fd
             gnumake

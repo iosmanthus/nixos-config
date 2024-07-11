@@ -98,5 +98,14 @@ rec {
         vendorHash = "sha256-/Vj8Yn34c81W1KZoCogfG3Z3fzmJnjvubxq3nIqHxm4=";
       });
     };
+
+    fail2ban = prev.fail2ban.overrideAttrs (_: {
+      patches = [
+        (prev.fetchpatch {
+          url = "https://github.com/fail2ban/fail2ban/commit/2fed408c05ac5206b490368d94599869bd6a056d.patch";
+          sha256 = "sha256-uyrCdcBm0QyA97IpHzuGfiQbSSvhGH6YaQluG5jVIiI=";
+        })
+      ];
+    });
   };
 }
