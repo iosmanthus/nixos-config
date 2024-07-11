@@ -1,6 +1,5 @@
 package main
 
-import "C"
 import (
 	"flag"
 	"log/slog"
