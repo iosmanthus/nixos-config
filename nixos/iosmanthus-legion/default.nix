@@ -1,13 +1,14 @@
-{ pkgs
-, ...
-}: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ./monitors.nix
   ];
 
   networking.hostName = "iosmanthus-legion";
-  services.throttled = { enable = true; };
+  services.throttled = {
+    enable = true;
+  };
   hardware.firmware = [ pkgs.firmwareLinuxNonfree ];
   # video driver
   hardware.opengl.extraPackages = with pkgs; [

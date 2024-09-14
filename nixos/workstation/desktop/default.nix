@@ -1,7 +1,5 @@
-{ config
-, pkgs
-, ...
-}: {
+{ config, pkgs, ... }:
+{
   imports = [
     ./fonts.nix
     ./monitors.nix
@@ -49,20 +47,28 @@
           size = 48;
         };
         theme = config.gtk.globalTheme;
-        indicators =
-          [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
+        indicators = [
+          "~host"
+          "~spacer"
+          "~clock"
+          "~spacer"
+          "~session"
+          "~power"
+        ];
         extraConfig = ''
           xft-dpi=192
           font-name=sans-serif
         '';
       };
     };
-    windowManager.i3 = { enable = true; };
+    windowManager.i3 = {
+      enable = true;
+    };
   };
 
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce;[
+    plugins = with pkgs.xfce; [
       thunar-archive-plugin
       thunar-volman
     ];

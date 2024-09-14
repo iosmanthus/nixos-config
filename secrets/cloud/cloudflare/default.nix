@@ -5,7 +5,9 @@ in
 {
   sops = {
     secrets = {
-      "cloudflare/api-token" = { inherit sopsFile; };
+      "cloudflare/api-token" = {
+        inherit sopsFile;
+      };
     };
   };
 }

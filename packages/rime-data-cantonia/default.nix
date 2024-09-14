@@ -1,6 +1,4 @@
-{ stdenv
-, ...
-}:
+{ stdenv, ... }:
 stdenv.mkDerivation {
   pname = "rime-data-cantonia";
 

@@ -1,6 +1,5 @@
-{ config
-, ...
-}: {
+{ config, ... }:
+{
   users = {
     mutableUsers = false;
     users.${config.admin.name} = {
@@ -9,25 +8,22 @@
       isNormalUser = true;
       inherit (config.admin) home;
       description = config.admin.name;
-      extraGroups =
-        [
-          "audio"
-          "input"
-          "storage"
-          "video"
-          "wheel"
+      extraGroups = [
+        "audio"
+        "input"
+        "storage"
+        "video"
+        "wheel"
 
-          "adbusers"
-          "docker"
-          "libvirtd"
-          "networkmanager"
-          "tor"
-          "wireshark"
-        ];
-
-      openssh.authorizedKeys.keys = [
-        config.admin.sshPubKey
+        "adbusers"
+        "docker"
+        "libvirtd"
+        "networkmanager"
+        "tor"
+        "wireshark"
       ];
+
+      openssh.authorizedKeys.keys = [ config.admin.sshPubKey ];
     };
   };
 }

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   virtualisation.docker.enable = true;
 
   services.self-hosted.o11y = {

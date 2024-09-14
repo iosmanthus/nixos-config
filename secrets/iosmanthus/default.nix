@@ -1,6 +1,4 @@
-{ config
-, ...
-}:
+{ config, ... }:
 let
   inherit (config.admin) home;
 in

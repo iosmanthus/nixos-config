@@ -1,21 +1,20 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib;
 let
   cfg = config.home.immutable-file;
-  immutableFileOpts = { ... }: {
-    options = {
-      src = mkOption {
-        type = types.path;
-      };
-      dst = mkOption {
-        type = types.path;
+  immutableFileOpts =
+    { ... }:
+    {
+      options = {
+        src = mkOption { type = types.path; };
+        dst = mkOption { type = types.path; };
       };
     };
-  };
   mkImmutableFile = pkgs.writeScript "make_immutable_file" ''
     # $1: dst
     # $2: src
@@ -38,13 +37,14 @@ in
   };
 
   config = mkIf (cfg != { }) {
-    home.activation = mapAttrs'
-      (name: { src, dst }:
-        nameValuePair
-          "make-immutable-${name}"
-          (lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            ${mkImmutableFile} ${dst} ${src}
-          ''))
-      cfg;
+    home.activation = mapAttrs' (
+      name:
+      { src, dst }:
+      nameValuePair "make-immutable-${name}" (
+        lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          ${mkImmutableFile} ${dst} ${src}
+        ''
+      )
+    ) cfg;
   };
 }

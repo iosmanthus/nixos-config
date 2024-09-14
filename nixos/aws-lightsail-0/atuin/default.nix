@@ -1,6 +1,4 @@
-{ config
-, ...
-}:
+{ config, ... }:
 {
   sops.templates."atuin.env".content = ''
     ATUIN_HOST="127.0.0.1"
@@ -13,9 +11,7 @@
     ATUIN_DB_URI="${config.sops.placeholder."atuin/db-uri"}"
   '';
 
-  systemd.services.atuin.restartTriggers = [
-    config.sops.templates."atuin.env".content
-  ];
+  systemd.services.atuin.restartTriggers = [ config.sops.templates."atuin.env".content ];
 
   services.self-hosted.atuin = {
     enable = true;

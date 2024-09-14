@@ -37,7 +37,14 @@
       vistafonts-chs
 
       (nerdfonts.override {
-        fonts = [ "DroidSansMono" "LiberationMono" "Iosevka" "Hasklig" "JetBrainsMono" "FiraCode" ];
+        fonts = [
+          "DroidSansMono"
+          "LiberationMono"
+          "Iosevka"
+          "Hasklig"
+          "JetBrainsMono"
+          "FiraCode"
+        ];
       })
     ];
 

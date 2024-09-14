@@ -1,11 +1,7 @@
-{ config
-, ...
-}:
+{ config, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   networking.hostName = "lego-router";
 

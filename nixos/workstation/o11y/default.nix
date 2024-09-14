@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.grafana = {
     enable = true;
     settings = {
@@ -21,9 +22,7 @@
         http_listen_port = 0;
         grpc_listen_port = 0;
       };
-      clients = [{
-        url = "http://127.0.0.1:3100/loki/api/v1/push";
-      }];
+      clients = [ { url = "http://127.0.0.1:3100/loki/api/v1/push"; } ];
       scrape_configs = [
         {
           job_name = "journal";
@@ -37,9 +36,7 @@
           };
           relabel_configs = [
             {
-              source_labels = [
-                "__journal__systemd_unit"
-              ];
+              source_labels = [ "__journal__systemd_unit" ];
               target_label = "unit";
             }
           ];

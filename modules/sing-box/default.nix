@@ -1,28 +1,30 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 let
   cfg = config.services.self-hosted.sing-box;
 
-  singboxOpts = { ... }: {
-    options = {
-      enable = mkEnableOption "sing-box";
+  singboxOpts =
+    { ... }:
+    {
+      options = {
+        enable = mkEnableOption "sing-box";
 
-      package = mkOption {
-        type = types.package;
-        default = pkgs.sing-box;
-      };
+        package = mkOption {
+          type = types.package;
+          default = pkgs.sing-box;
+        };
 
-      configFile = mkOption {
-        type = types.path;
+        configFile = mkOption { type = types.path; };
       };
     };
-  };
 
-  writeShScript = name: text:
+  writeShScript =
+    name: text:
     let
       dir = pkgs.writeScriptBin name ''
         #! ${pkgs.runtimeShell} -e
@@ -40,9 +42,7 @@ let
   '';
 in
 {
-  options.services.self-hosted.sing-box = mkOption {
-    type = with types; (submodule singboxOpts);
-  };
+  options.services.self-hosted.sing-box = mkOption { type = with types; (submodule singboxOpts); };
 
   config = mkIf cfg.enable {
     systemd.services.sing-box = {

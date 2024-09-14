@@ -46,43 +46,47 @@
     vaultwarden.url = "github:iosmanthus/nixpkgs/bump-vaultwarden-20240912141923";
   };
   outputs =
-    { self
-    , nixpkgs
-    , master
-    , flake-utils
-    , home-manager
-    , sops-nix
-    , berberman
-    , base16
-    , code-insiders
-    , nixos-generators
-    , nur
-    , nixos-hardware
-    , ...
+    {
+      self,
+      nixpkgs,
+      master,
+      flake-utils,
+      home-manager,
+      sops-nix,
+      berberman,
+      base16,
+      code-insiders,
+      nixos-generators,
+      nur,
+      nixos-hardware,
+      ...
     }@inputs:
     let
       this = import ./packages;
 
-      mkWorkstationModules =
-        system: [
-          ./nixos/workstation
-          ./secrets/workstation
+      mkWorkstationModules = system: [
+        ./nixos/workstation
+        ./secrets/workstation
 
-          self.nixosModules.workstation
-          self.nixosModules.admin.iosmanthus
+        self.nixosModules.workstation
+        self.nixosModules.admin.iosmanthus
 
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          base16.nixosModule
+        sops-nix.nixosModules.sops
+        home-manager.nixosModules.home-manager
+        base16.nixosModule
 
-          ({ config, ... }: {
+        (
+          { config, ... }:
+          {
             home-manager = {
-              users.${config.admin.name} = { ... }: {
-                imports = [
-                  (./secrets + "/${config.admin.name}")
-                  ./nixos/workstation/home
-                ];
-              };
+              users.${config.admin.name} =
+                { ... }:
+                {
+                  imports = [
+                    (./secrets + "/${config.admin.name}")
+                    ./nixos/workstation/home
+                  ];
+                };
               sharedModules = [
                 sops-nix.homeManagerModule
                 base16.nixosModule
@@ -95,40 +99,41 @@
               useGlobalPkgs = true;
               verbose = true;
             };
-          })
-          {
-            nixpkgs.overlays =
-              [
-                self.overlays.unstable
-                self.overlays.jetbrains
-                self.overlays.default
-
-                berberman.overlays.default
-                code-insiders.overlays.default
-                nur.overlay
-              ];
           }
-        ];
+        )
+        {
+          nixpkgs.overlays = [
+            self.overlays.unstable
+            self.overlays.jetbrains
+            self.overlays.default
+
+            berberman.overlays.default
+            code-insiders.overlays.default
+            nur.overlay
+          ];
+        }
+      ];
     in
     {
-      packages.x86_64-linux = this.packages
-        (import nixpkgs {
-          config = {
-            allowUnfree = true;
+      packages.x86_64-linux =
+        this.packages (
+          import nixpkgs {
+            config = {
+              allowUnfree = true;
+            };
+            system = "x86_64-linux";
+          }
+        )
+        // {
+          nixos-gce-image = nixos-generators.nixosGenerate {
+            system = "x86_64-linux";
+            format = "gce";
+            specialArgs = {
+              inherit self;
+            };
+            modules = [ self.nixosModules.cloud.gce ];
           };
-          system = "x86_64-linux";
-        }) // {
-        nixos-gce-image = nixos-generators.nixosGenerate {
-          system = "x86_64-linux";
-          format = "gce";
-          specialArgs = {
-            inherit self;
-          };
-          modules = [
-            self.nixosModules.cloud.gce
-          ];
         };
-      };
       overlays = {
         default = this.overlay;
         unstable = this.branchOverlay {
@@ -136,9 +141,7 @@
           system = "x86_64-linux";
           config = {
             allowUnfree = true;
-            permittedInsecurePackages = [
-              "openssl-1.1.1w"
-            ];
+            permittedInsecurePackages = [ "openssl-1.1.1w" ];
           };
           packages = [
             "bat"
@@ -172,20 +175,26 @@
         jetbrains = this.branchOverlay {
           branch = inputs.jetbrains;
           system = "x86_64-linux";
-          config = { allowUnfree = true; };
+          config = {
+            allowUnfree = true;
+          };
           packages = [ "jetbrains" ];
         };
         vaultwarden = this.branchOverlay {
           branch = inputs.vaultwarden;
           system = "x86_64-linux";
-          config = { allowUnfree = true; };
+          config = {
+            allowUnfree = true;
+          };
           packages = [ "vaultwarden" ];
         };
       };
       nixosModules = import ./modules;
       nixosConfigurations = {
         iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
-          specialArgs = { inherit self; };
+          specialArgs = {
+            inherit self;
+          };
           system = "x86_64-linux";
           modules = [
             ./nixos/iosmanthus-xps
@@ -195,9 +204,7 @@
 
         iosmanthus-legion = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
-          modules = [
-            ./nixos/iosmanthus-legion
-          ] ++ (mkWorkstationModules system);
+          modules = [ ./nixos/iosmanthus-legion ] ++ (mkWorkstationModules system);
         };
 
         aws-lightsail-0 = nixpkgs.lib.nixosSystem {
@@ -346,13 +353,15 @@
           ];
         };
       };
-    } // flake-utils.lib.eachSystem
-      [ "x86_64-linux" ]
-      (system:
+    }
+    // flake-utils.lib.eachSystem [ "x86_64-linux" ] (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          config = { allowUnfree = true; };
+          config = {
+            allowUnfree = true;
+          };
         };
       in
       {
@@ -365,7 +374,7 @@
             google-cloud-sdk
             gotools
             nix-output-monitor
-            nixpkgs-fmt
+            nixfmt-rfc-style
             nodejs
             sops
             statix
@@ -373,5 +382,6 @@
             yapf
           ];
         };
-      });
+      }
+    );
 }

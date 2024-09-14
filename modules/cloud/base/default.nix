@@ -1,6 +1,4 @@
-{ pkgs
-, ...
-}:
+{ pkgs, ... }:
 {
   nix = {
     package = pkgs.nixVersions.nix_2_22;
@@ -27,10 +25,12 @@
     "net.core.default_qdisc" = "fq";
   };
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = 2 * 1024; # 2 GiB
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 2 * 1024; # 2 GiB
+    }
+  ];
 
   services.openssh = {
     enable = true;
@@ -64,7 +64,9 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  console = { keyMap = "us"; };
+  console = {
+    keyMap = "us";
+  };
 
   time.timeZone = "Asia/Shanghai";
 }

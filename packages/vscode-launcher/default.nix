@@ -1,8 +1,5 @@
 { pkgs, ... }:
-(pkgs.writers.writePython3 "run_vscode"
-{
-  libraries = [ ];
-} ''
+(pkgs.writers.writePython3 "run_vscode" { libraries = [ ]; } ''
   import shutil
   import subprocess
   import sys

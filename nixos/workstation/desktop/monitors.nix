@@ -1,7 +1,4 @@
-{ config
-, pkgs
-, ...
-}:
+{ config, pkgs, ... }:
 let
   builtin = config.monitors.builtin.name;
   builtinFp = config.monitors.builtin.fingerprint;
@@ -28,12 +25,16 @@ let
     };
   };
   mkProfile =
-    { name
-    , fingerprint
-    , mkConfig
-    , ports
-    }: builtins.foldl'
-      (profile: port: profile // {
+    {
+      name,
+      fingerprint,
+      mkConfig,
+      ports,
+    }:
+    builtins.foldl' (
+      profile: port:
+      profile
+      // {
         "${name}-${port}" = {
           fingerprint = {
             "${builtin}" = builtinFp;
@@ -42,9 +43,8 @@ let
           config = mkConfig port;
           inherit hooks;
         };
-      })
-      { }
-      ports;
+      }
+    ) { } ports;
 in
 {
   monitors = {
@@ -58,22 +58,20 @@ in
   services.autorandr = {
     enable = true;
     inherit hooks;
-    profiles = mkProfile
-      {
+    profiles =
+      mkProfile {
         name = "aoc-only";
         inherit (externalMonitors.home-aoc) fingerprint;
         inherit ports;
         mkConfig = mk4k;
       }
-    // mkProfile
-      {
+      // mkProfile {
         name = "lg-only";
         inherit (externalMonitors.home-lg) fingerprint;
         inherit ports;
         mkConfig = mk4k;
       }
-    // mkProfile
-      {
+      // mkProfile {
         name = "office";
         inherit (externalMonitors.office-lg) fingerprint;
         inherit ports;

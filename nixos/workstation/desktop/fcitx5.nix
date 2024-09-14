@@ -1,6 +1,5 @@
-{ pkgs
-, ...
-}: {
+{ pkgs, ... }:
+{
   i18n = {
     defaultLocale = "en_US.UTF-8";
     inputMethod = {
@@ -9,9 +8,7 @@
       fcitx5 = {
         addons = with pkgs; [
           fcitx5-adwaita-dark
-          (fcitx5-rime.override {
-            rimeDataPkgs = pkgs.rime-data-cantonia;
-          })
+          (fcitx5-rime.override { rimeDataPkgs = pkgs.rime-data-cantonia; })
         ];
 
         settings = {

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -31,8 +32,7 @@
       };
       memory_usage = {
         disabled = false;
-        format =
-          "[using ](green)$symbol[\${ram}](bold blue)[ = \${ram_pct} ](bold cyan)";
+        format = "[using ](green)$symbol[\${ram}](bold blue)[ = \${ram_pct} ](bold cyan)";
         threshold = -1;
       };
       cmd_duration = {
@@ -43,8 +43,12 @@
         ssh_only = false;
         style = "bold yellow";
       };
-      gcloud = { disabled = true; };
-      aws = { disabled = true; };
+      gcloud = {
+        disabled = true;
+      };
+      aws = {
+        disabled = true;
+      };
     };
   };
 }

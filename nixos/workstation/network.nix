@@ -1,8 +1,10 @@
-{ lib
-, config
-, pkgs
-, ...
-}: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   networking = {
     nameservers = [
       "119.29.29.29"

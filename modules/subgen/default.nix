@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 let
@@ -41,7 +42,10 @@ in
         ExecStart = "${cfg.package}/bin/subgen -config ${cfg.configFile} -expr ${cfg.exprPath} -addr ${cfg.address}";
       };
       wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "network-online.target" ];
+      after = [
+        "network.target"
+        "network-online.target"
+      ];
       requires = [ "network-online.target" ];
     };
   };

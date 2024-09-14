@@ -1,10 +1,6 @@
-{ pkgs
-, ...
-}:
+{ pkgs, ... }:
 {
-  imports = [
-    ./theme.nix
-  ];
+  imports = [ ./theme.nix ];
 
   gtk.globalTheme = {
     package = pkgs.fluent-gtk-theme;

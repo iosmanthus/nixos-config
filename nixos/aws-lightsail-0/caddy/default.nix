@@ -1,13 +1,12 @@
-{ config
-, lib
-, ...
-}:
+{ config, lib, ... }:
 let
   mkReverseProxy =
-    { backend
-    , logLevel
-    , basicauth ? null
-    }: {
+    {
+      backend,
+      logLevel,
+      basicauth ? null,
+    }:
+    {
       extraConfig = ''
         tls {
           dns cloudflare {env.CLOUDFLARE_API_TOKEN}
@@ -46,9 +45,7 @@ in
   };
 
   systemd.services.caddy = {
-    restartTriggers = [
-      config.sops.templates."caddy.env".content
-    ];
+    restartTriggers = [ config.sops.templates."caddy.env".content ];
     serviceConfig = {
       EnvironmentFile = [ config.sops.templates."caddy.env".path ];
     };

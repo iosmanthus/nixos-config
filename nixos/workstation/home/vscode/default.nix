@@ -1,16 +1,15 @@
-{ lib
-, config
-, pkgs
-, ...
+{
+  lib,
+  config,
+  pkgs,
+  ...
 }:
 let
   fcitx-remote = "${pkgs.fcitx5}/bin/fcitx5-remote";
   nvim = "${pkgs.neovim}/bin/nvim";
 in
 {
-  home.packages = with pkgs; [
-    nixpkgs-fmt
-  ];
+  home.packages = with pkgs; [ nixfmt-rfc-style ];
 
   home.sessionVariables = {
     EDITOR = "${pkgs.vscode-launcher} --wait";
@@ -26,7 +25,8 @@ in
             "password-store": "basic"
         }
       '';
-      target = ".vscode"
+      target =
+        ".vscode"
         + (lib.optionalString (config.programs.vscode.package == pkgs.vscode-insiders) "-insiders")
         + "/argv.json";
     };
@@ -45,33 +45,31 @@ in
         version = "34.3.1";
       }
     ];
-    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
-      (builtins.fromJSON (
+    extensions =
+      pkgs.vscode-utils.extensionsFromVscodeMarketplace (builtins.fromJSON (
         builtins.readFile ./extensions.json
       )).extensions
-    ++ (with pkgs.vscode-extensions; [
-      eamodio.gitlens
-      rust-lang.rust-analyzer
-      ms-python.python
-      ms-vscode-remote.remote-ssh
-      redhat.vscode-yaml
-      hashicorp.terraform
-      matthewpi.caddyfile-support
-      ms-vscode.makefile-tools
-    ]);
+      ++ (with pkgs.vscode-extensions; [
+        eamodio.gitlens
+        rust-lang.rust-analyzer
+        ms-python.python
+        ms-vscode-remote.remote-ssh
+        redhat.vscode-yaml
+        hashicorp.terraform
+        matthewpi.caddyfile-support
+        ms-vscode.makefile-tools
+      ]);
 
     keybindings = [
       {
         command = "selectNextSuggestion";
         key = "tab";
-        when =
-          "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
+        when = "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
       }
       {
         command = "selectPrevSuggestion";
         key = "shift+tab";
-        when =
-          "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
+        when = "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
       }
       {
         key = "ctrl+j";
@@ -161,15 +159,25 @@ in
           commands = [ "redo" ];
         }
         {
-          before = [ "g" "i" ];
+          before = [
+            "g"
+            "i"
+          ];
           commands = [ "references-view.findImplementations" ];
         }
         {
-          before = [ "g" "p" "i" ];
+          before = [
+            "g"
+            "p"
+            "i"
+          ];
           commands = [ "editor.action.peekImplementation" ];
         }
         {
-          before = [ "g" "r" ];
+          before = [
+            "g"
+            "r"
+          ];
           commands = [ "references-view.findReferences" ];
         }
       ];
@@ -202,17 +210,13 @@ in
         "[Material Theme Darker High Contrast]" = {
           "textMateRules" = [
             {
-              "scope" = [
-                "variable"
-              ];
+              "scope" = [ "variable" ];
               "settings" = {
                 "foreground" = "${config.scheme.withHashtag.base0E}";
               };
             }
             {
-              "scope" = [
-                "variable.parameter"
-              ];
+              "scope" = [ "variable.parameter" ];
               "settings" = {
                 "foreground" = "${config.scheme.withHashtag.base0F}";
               };
@@ -222,7 +226,7 @@ in
       };
 
       "nix.enableLanguageServer" = true;
-      "nix.serverSettings.nil.formatting.command" = [ "nixpkgs-fmt" ];
+      "nix.serverSettings.nil.formatting.command" = [ "nixfmt" ];
       "nix.serverPath" = "${pkgs.nil}/bin/nil";
       "redhat.telemetry.enabled" = false;
       "cmake.configureOnOpen" = true;

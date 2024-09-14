@@ -1,11 +1,7 @@
-{ lib
-, ...
-}:
+{ lib, ... }:
 with lib;
 {
   options.wallpaper = {
-    package = mkOption {
-      type = types.package;
-    };
+    package = mkOption { type = types.package; };
   };
 }

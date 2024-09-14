@@ -1,7 +1,8 @@
-{ pkgs
-, config
-, lib
-, ...
+{
+  pkgs,
+  config,
+  lib,
+  ...
 }:
 with lib;
 let
@@ -31,7 +32,10 @@ in
         ExecStart = "${cfg.package}/bin/unguarded -addr ${cfg.address}";
       };
       wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "network-online.target" ];
+      after = [
+        "network.target"
+        "network-online.target"
+      ];
       requires = [ "network-online.target" ];
     };
   };

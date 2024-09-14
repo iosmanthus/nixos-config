@@ -1,6 +1,5 @@
-{ config
-, ...
-}: {
+{ config, ... }:
+{
   users = {
     mutableUsers = false;
     users.${config.admin.name} = {
@@ -16,9 +15,7 @@
         "wheel"
       ];
 
-      openssh.authorizedKeys.keys = [
-        config.admin.sshPubKey
-      ];
+      openssh.authorizedKeys.keys = [ config.admin.sshPubKey ];
     };
   };
 }

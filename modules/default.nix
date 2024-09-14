@@ -1,24 +1,28 @@
 {
-  workstation = { ... }: {
-    imports = [
-      ./monitors.nix
+  workstation =
+    { ... }:
+    {
+      imports = [
+        ./monitors.nix
 
-      ./base16
-      ./gtk-theme
-      ./sing-box
-      ./wallpaper
-    ];
-  };
-  home-manager = { ... }: {
-    imports = [
-      ./immutable-file.nix
-      ./mutable-vscode-ext.nix
+        ./base16
+        ./gtk-theme
+        ./sing-box
+        ./wallpaper
+      ];
+    };
+  home-manager =
+    { ... }:
+    {
+      imports = [
+        ./immutable-file.nix
+        ./mutable-vscode-ext.nix
 
-      ./base16
-      ./gtk-theme
-      ./wallpaper
-    ];
-  };
+        ./base16
+        ./gtk-theme
+        ./wallpaper
+      ];
+    };
   admin = import ./admin;
   atuin = import ./atuin;
   cloud = import ./cloud;

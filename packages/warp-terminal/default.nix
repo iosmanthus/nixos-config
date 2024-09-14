@@ -1,19 +1,20 @@
-{ lib
-, stdenvNoCC
-, stdenv
-, fetchurl
-, undmg
-, appimageTools
-, zstd
-, autoPatchelfHook
-, curl
-, fontconfig
-, xorg
-, libxkbcommon
-, xdg-utils
-, zlib
-, libglvnd
-, vulkan-loader
+{
+  lib,
+  stdenvNoCC,
+  stdenv,
+  fetchurl,
+  undmg,
+  appimageTools,
+  zstd,
+  autoPatchelfHook,
+  curl,
+  fontconfig,
+  xorg,
+  libxkbcommon,
+  xdg-utils,
+  zlib,
+  libglvnd,
+  vulkan-loader,
 }:
 
 let
@@ -28,7 +29,10 @@ let
       hash = "sha256-u3VZ2l2ec8UHzt4tOJgnn98HiASSWJAQwBRdoaR/aO4=";
     };
 
-    nativeBuildInputs = [ autoPatchelfHook zstd ];
+    nativeBuildInputs = [
+      autoPatchelfHook
+      zstd
+    ];
 
     buildInputs = [
       curl
@@ -90,11 +94,12 @@ let
     homepage = "https://www.warp.dev";
     license = licenses.unfree;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    maintainers = with maintainers; [ emilytrau Enzime ];
+    maintainers = with maintainers; [
+      emilytrau
+      Enzime
+    ];
     platforms = platforms.darwin ++ [ "x86_64-linux" ];
   };
 
 in
-if stdenvNoCC.isDarwin
-then darwin
-else linux
+if stdenvNoCC.isDarwin then darwin else linux

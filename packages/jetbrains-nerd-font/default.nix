@@ -1,6 +1,4 @@
-{ stdenvNoCC
-, fetchFromGitHub
-}:
+{ stdenvNoCC, fetchFromGitHub }:
 
 stdenvNoCC.mkDerivation {
   pname = "jetbrains-nerd-font";

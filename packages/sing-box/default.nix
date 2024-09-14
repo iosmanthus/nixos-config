@@ -1,10 +1,11 @@
-{ lib
-, stdenv
-, buildGoModule
-, fetchFromGitHub
-, installShellFiles
-, buildPackages
-, nix-update-script
+{
+  lib,
+  stdenv,
+  buildGoModule,
+  fetchFromGitHub,
+  installShellFiles,
+  buildPackages,
+  nix-update-script,
 }:
 
 buildGoModule rec {
@@ -38,26 +39,26 @@ buildGoModule rec {
     "with_gvisor"
   ];
 
-  subPackages = [
-    "cmd/sing-box"
-  ];
+  subPackages = [ "cmd/sing-box" ];
 
   nativeBuildInputs = [ installShellFiles ];
 
-  ldflags = [
-    "-X=github.com/sagernet/sing-box/constant.Version=${version}"
-  ];
+  ldflags = [ "-X=github.com/sagernet/sing-box/constant.Version=${version}" ];
 
-  postInstall = let emulator = stdenv.hostPlatform.emulator buildPackages; in ''
-    installShellCompletion --cmd sing-box \
-      --bash <(${emulator} $out/bin/sing-box completion bash) \
-      --fish <(${emulator} $out/bin/sing-box completion fish) \
-      --zsh  <(${emulator} $out/bin/sing-box completion zsh )
-  '';
+  postInstall =
+    let
+      emulator = stdenv.hostPlatform.emulator buildPackages;
+    in
+    ''
+      installShellCompletion --cmd sing-box \
+        --bash <(${emulator} $out/bin/sing-box completion bash) \
+        --fish <(${emulator} $out/bin/sing-box completion fish) \
+        --zsh  <(${emulator} $out/bin/sing-box completion zsh )
+    '';
 
   passthru.updateScript = nix-update-script { };
 
-  meta = with lib;{
+  meta = with lib; {
     homepage = "https://sing-box.sagernet.org";
     description = "The universal proxy platform";
     license = licenses.gpl3Plus;

@@ -1,5 +1,4 @@
-{ buildGoModule
-}:
+{ buildGoModule }:
 
 buildGoModule {
   pname = "unguarded";

@@ -1,7 +1,5 @@
-{ pkgs
-, config
-, ...
-}: {
+{ pkgs, config, ... }:
+{
   home.packages = [ pkgs.xsel ];
   programs.tmux = {
     enable = true;
@@ -19,9 +17,7 @@
           set -g @minimal-tmux-indicator-str " 😊 "
         '';
       }
-      {
-        plugin = pkgs.tmux-yank;
-      }
+      { plugin = pkgs.tmux-yank; }
     ];
     extraConfig = ''
       set -g mouse

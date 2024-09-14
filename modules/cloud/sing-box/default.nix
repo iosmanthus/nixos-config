@@ -1,8 +1,9 @@
-{ self
-, lib
-, pkgs
-, config
-, ...
+{
+  self,
+  lib,
+  pkgs,
+  config,
+  ...
 }:
 with lib;
 let
@@ -17,21 +18,19 @@ let
 
   mkGeositeUrl = geosite: "${ruleBaseUrl}/rule-set-geosite/${geosite}.srs";
 
-  defaultUnlockSites = builtins.map
-    (geosite: "geosite-${geosite}")
-    [
-      "category-porn"
-      "cloudflare"
-      "disney"
-      "hbo"
-      "hulu"
-      "netflix"
-      "openai"
-      "stripe"
-      "tiktok"
-      "microsoft"
-      # "youtube"
-    ];
+  defaultUnlockSites = builtins.map (geosite: "geosite-${geosite}") [
+    "category-porn"
+    "cloudflare"
+    "disney"
+    "hbo"
+    "hulu"
+    "netflix"
+    "openai"
+    "stripe"
+    "tiktok"
+    "microsoft"
+    # "youtube"
+  ];
 
   defaultUnlockServer = {
     type = "wireguard";
@@ -48,10 +47,12 @@ let
   };
 
   unlockSettings =
-    if cfg.unlockSettings == null then {
-      server = defaultUnlockServer;
-      sites = defaultUnlockSites;
-    } else
+    if cfg.unlockSettings == null then
+      {
+        server = defaultUnlockServer;
+        sites = defaultUnlockSites;
+      }
+    else
       cfg.unlockSettings;
 
   shadowtls = {
@@ -132,15 +133,13 @@ let
     };
     route = {
       final = "direct";
-      rule_set = builtins.map
-        (geosite: {
-          type = "remote";
-          tag = geosite;
-          format = "binary";
-          url = mkGeositeUrl geosite;
-          download_detour = "direct";
-        })
-        unlockSettings.sites;
+      rule_set = builtins.map (geosite: {
+        type = "remote";
+        tag = geosite;
+        format = "binary";
+        url = mkGeositeUrl geosite;
+        download_detour = "direct";
+      }) unlockSettings.sites;
       rules = [
         {
           protocol = "bittorrent";
@@ -153,7 +152,10 @@ let
       ];
     };
 
-    inbounds = [ shadowtls shadowsocks ];
+    inbounds = [
+      shadowtls
+      shadowsocks
+    ];
     outbounds = [
       {
         type = "direct";
@@ -168,28 +170,27 @@ let
   };
 
   # nested JSON objects should be unquoted
-  settingsJSON = builtins.replaceStrings
-    [ ''"${config.sops.placeholder."sing-box/shadowsocks/users"}"'' ]
-    [ config.sops.placeholder."sing-box/shadowsocks/users" ]
-    (builtins.toJSON settings);
+  settingsJSON = builtins.replaceStrings [
+    ''"${config.sops.placeholder."sing-box/shadowsocks/users"}"''
+  ] [ config.sops.placeholder."sing-box/shadowsocks/users" ] (builtins.toJSON settings);
 
-  unlockSettingsOpts = { ... }: {
-    options = {
-      server = mkOption {
-        inherit (pkgs.formats.json { }) type;
-        description = "The unlock server";
-      };
-      sites = mkOption {
-        type = types.listOf types.str;
-        description = "The sites to unlock";
+  unlockSettingsOpts =
+    { ... }:
+    {
+      options = {
+        server = mkOption {
+          inherit (pkgs.formats.json { }) type;
+          description = "The unlock server";
+        };
+        sites = mkOption {
+          type = types.listOf types.str;
+          description = "The sites to unlock";
+        };
       };
     };
-  };
 in
 {
-  imports = [
-    self.nixosModules.sing-box
-  ];
+  imports = [ self.nixosModules.sing-box ];
 
   options.services.self-hosted.cloud.sing-box = {
     enable = mkEnableOption "sing-box service in the cloud";

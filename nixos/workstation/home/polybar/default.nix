@@ -1,7 +1,4 @@
-{ config
-, pkgs
-, ...
-}:
+{ config, pkgs, ... }:
 
 let
   playerctl = import ./playerctl.nix { inherit pkgs; };

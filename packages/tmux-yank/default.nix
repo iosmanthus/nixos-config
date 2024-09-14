@@ -1,7 +1,4 @@
-{ fetchFromGitHub
-, tmuxPlugins
-, ...
-}:
+{ fetchFromGitHub, tmuxPlugins, ... }:
 tmuxPlugins.mkTmuxPlugin {
   pluginName = "tmux-yank";
   version = "unstable-2021-06-20";

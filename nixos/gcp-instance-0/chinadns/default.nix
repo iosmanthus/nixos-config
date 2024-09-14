@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.self-hosted.chinadns = {
     enable = true;
     geoipCN = ./geoip-cn.srs;

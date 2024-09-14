@@ -1,7 +1,5 @@
-{ config
-, pkgs
-, ...
-}: {
+{ config, pkgs, ... }:
+{
   imports = [
     ./i3.nix
     ./dunst.nix
@@ -48,7 +46,9 @@
     # };
   };
 
-  services.clipmenu = { enable = true; };
+  services.clipmenu = {
+    enable = true;
+  };
 
   home.file = {
     wallpaper = {

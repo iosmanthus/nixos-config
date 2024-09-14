@@ -1,6 +1,4 @@
-{ buildGoModule
-, fetchFromGitHub
-}:
+{ buildGoModule, fetchFromGitHub }:
 
 buildGoModule {
   pname = "gemini-openai-proxy";

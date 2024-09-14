@@ -1,10 +1,6 @@
-{ pkgs
-, ...
-}:
+{ pkgs, ... }:
 {
-  imports = [
-    ./options.nix
-  ];
+  imports = [ ./options.nix ];
 
   wallpaper = {
     package = pkgs.lib.mkNixBackground {

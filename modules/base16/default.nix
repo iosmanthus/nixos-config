@@ -1,6 +1,5 @@
-{ self
-, ...
-}: {
+{ self, ... }:
+{
   # system: "base16"
   # name: "Material Darker"
   # author: "Nate Peterson"

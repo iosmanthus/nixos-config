@@ -5,8 +5,12 @@ in
 {
   sops = {
     secrets = {
-      "grafana/promtail-basic-auth" = { inherit sopsFile; };
-      "grafana/prometheus-basic-auth" = { inherit sopsFile; };
+      "grafana/promtail-basic-auth" = {
+        inherit sopsFile;
+      };
+      "grafana/prometheus-basic-auth" = {
+        inherit sopsFile;
+      };
     };
   };
 }

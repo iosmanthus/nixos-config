@@ -1,5 +1,4 @@
-{ ...
-}:
+{ ... }:
 {
   imports = [
     ./atuin
@@ -7,9 +6,7 @@
     ./vaultwarden
   ];
 
-  networking.timeServers = [
-    "time.aws.com"
-  ];
+  networking.timeServers = [ "time.aws.com" ];
 
   services.timesyncd = {
     enable = true;

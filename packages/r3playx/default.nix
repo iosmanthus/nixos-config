@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 with pkgs;
 let
   pname = "r3playx";
@@ -23,7 +20,10 @@ let
     name = "R3PLAYX";
     desktopName = name;
     exec = "r3playx";
-    categories = [ "Audio" "Player" ];
+    categories = [
+      "Audio"
+      "Player"
+    ];
     terminal = false;
     icon = "${extracted}/desktop.png";
     comment = "R3PLAYX Launcher";

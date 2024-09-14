@@ -1,12 +1,14 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 with lib;
 let
   cfg = config.services.self-hosted.chinadns;
-  writeShScript = name: text:
+  writeShScript =
+    name: text:
     let
       dir = pkgs.writeScriptBin name ''
         #! ${pkgs.runtimeShell} -e
@@ -41,15 +43,9 @@ in
         type = types.str;
         default = "127.0.0.1:10888";
       };
-      geoipCN = mkOption {
-        type = types.path;
-      };
-      geositeCN = mkOption {
-        type = types.path;
-      };
-      geositeNotCN = mkOption {
-        type = types.path;
-      };
+      geoipCN = mkOption { type = types.path; };
+      geositeCN = mkOption { type = types.path; };
+      geositeNotCN = mkOption { type = types.path; };
       statePath = mkOption {
         type = types.path;
         default = "/var/lib/chinadns/data";
@@ -110,5 +106,3 @@ in
     };
   };
 }
-
-

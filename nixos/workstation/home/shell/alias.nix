@@ -1,11 +1,6 @@
-{ pkgs
-, ...
-}:
+{ pkgs, ... }:
 let
-  ignoreOutput = pkgs.writers.writePython3 "ignore_output"
-    {
-      libraries = [ ];
-    } ''
+  ignoreOutput = pkgs.writers.writePython3 "ignore_output" { libraries = [ ]; } ''
     import subprocess
     import sys
 

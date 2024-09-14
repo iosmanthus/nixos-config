@@ -1,6 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
-  inherit (lib) mkOption types mdDoc mkIf;
+  inherit (lib)
+    mkOption
+    types
+    mdDoc
+    mkIf
+    ;
   cfg = config.services.self-hosted.atuin;
 in
 {

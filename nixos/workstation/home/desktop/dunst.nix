@@ -1,7 +1,4 @@
-{ config
-, pkgs
-, ...
-}:
+{ config, pkgs, ... }:
 let
   playNotificationSound = pkgs.writeShellScript "play-notification-sound" ''
     ${pkgs.mpv}/bin/mpv ${pkgs.yaru-theme}/share/sounds/Yaru/stereo/message.oga

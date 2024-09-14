@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
 with pkgs;
 let
   pname = "yesplaymusic";
@@ -22,7 +19,10 @@ let
     name = "YesPlayMusic";
     desktopName = name;
     exec = "yesplaymusic";
-    categories = [ "Audio" "Player" ];
+    categories = [
+      "Audio"
+      "Player"
+    ];
     terminal = false;
     icon = "${extracted}/yesplaymusic.png";
     comment = "YesPlayMusic Launcher";

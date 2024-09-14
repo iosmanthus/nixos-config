@@ -1,7 +1,4 @@
-{ fetchFromGitHub
-, stdenv
-, ...
-}:
+{ fetchFromGitHub, stdenv, ... }:
 
 let
   name = "fcitx5-adwaita-dark";

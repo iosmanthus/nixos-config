@@ -1,13 +1,13 @@
-{ lib
-, stdenvNoCC
-, fetchurl
-, appimageTools
-, makeWrapper
-, writeShellApplication
-, curl
-, yq
-, common-updater-scripts
-,
+{
+  lib,
+  stdenvNoCC,
+  fetchurl,
+  appimageTools,
+  makeWrapper,
+  writeShellApplication,
+  curl,
+  yq,
+  common-updater-scripts,
 }:
 let
   pname = "follow";

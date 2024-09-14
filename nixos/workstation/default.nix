@@ -1,8 +1,10 @@
-{ config
-, pkgs
-, lib
-, ...
-}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = [
     ./desktop
     ./o11y
@@ -43,12 +45,13 @@
     };
   };
 
-  console = { keyMap = "us"; };
+  console = {
+    keyMap = "us";
+  };
 
   time.timeZone = "Asia/Shanghai";
 
-  sops.age.keyFile =
-    "${config.admin.home}/.config/sops/age/keys.txt";
+  sops.age.keyFile = "${config.admin.home}/.config/sops/age/keys.txt";
 
   environment.systemPackages = with pkgs; [
     alsa-utils
@@ -108,9 +111,7 @@
   services.gvfs.enable = true;
   services.upower.enable = true;
   services.udev = {
-    packages = with pkgs; [
-      via
-    ];
+    packages = with pkgs; [ via ];
     extraRules = ''
       RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/intel_backlight/brightness"
       RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/intel_backlight/brightness"
@@ -124,13 +125,17 @@
   security = {
     polkit.enable = true;
     rtkit.enable = true;
-    sudo.extraRules = [{
-      users = [ "${config.admin.name}" ];
-      commands = [{
-        command = "ALL";
-        options = [ "NOPASSWD" ];
-      }];
-    }];
+    sudo.extraRules = [
+      {
+        users = [ "${config.admin.name}" ];
+        commands = [
+          {
+            command = "ALL";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
     pam = {
       services = {
         ${config.admin.name}.gnupg.enable = true;
@@ -159,13 +164,15 @@
         default-ulimit = "nofile=1048576:1048576";
       };
     };
-    libvirtd = { enable = true; };
+    libvirtd = {
+      enable = true;
+    };
     spiceUSBRedirection.enable = true;
   };
 
   programs.nix-ld = {
     enable = true;
-    libraries = with pkgs;  [
+    libraries = with pkgs; [
       acl
       attr
       bzip2

@@ -26,7 +26,7 @@ def override(resp):
     cfg = json.loads(resp)
     dns_rules = cfg['dns']['rules']
     dns_rules.insert(3, {
-        'domain_keyword': [ 'aws', 'pingcap', 'tidb', 'clinic' ],
+        'domain_keyword': ['aws', 'pingcap', 'tidb', 'clinic'],
         'server': 'secure'
     })
     # tun = cfg['inbounds'][0]

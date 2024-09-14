@@ -1,7 +1,4 @@
-{ pkgs
-, stdenv
-, ...
-}:
+{ pkgs, stdenv, ... }:
 stdenv.mkDerivation {
   name = "base16-rofi";
   src = pkgs.fetchFromGitHub {

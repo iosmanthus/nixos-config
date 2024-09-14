@@ -1,7 +1,4 @@
-{ fetchFromGitHub
-, tmuxPlugins
-, ...
-}:
+{ fetchFromGitHub, tmuxPlugins, ... }:
 
 tmuxPlugins.mkTmuxPlugin {
   pluginName = "minimal-tmux-status";

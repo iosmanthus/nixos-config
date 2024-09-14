@@ -1,6 +1,7 @@
-{ pkgs
-, themeVariant ? "black"
-, ...
+{
+  pkgs,
+  themeVariant ? "black",
+  ...
 }:
 
 let

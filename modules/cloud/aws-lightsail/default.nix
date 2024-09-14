@@ -1,7 +1,8 @@
-{ self
-, modulesPath
-, lib
-, ...
+{
+  self,
+  modulesPath,
+  lib,
+  ...
 }:
 {
   imports = [

@@ -1,8 +1,10 @@
-{ config
-, self
-, pkgs
-, ...
-}: {
+{
+  config,
+  self,
+  pkgs,
+  ...
+}:
+{
   programs.firefox = {
     enable = true;
     package = self.inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin.unwrapped;

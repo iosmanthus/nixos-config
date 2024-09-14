@@ -1,12 +1,8 @@
 {
   iosmanthus =
-    { pkgs
-    , config
-    , ...
-    }: {
-      imports = [
-        ./options.nix
-      ];
+    { pkgs, config, ... }:
+    {
+      imports = [ ./options.nix ];
 
       admin = rec {
         name = "iosmanthus";

@@ -1,8 +1,10 @@
-{ lib
-, config
-, pkgs
-, ...
-}: {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./tmux.nix
 
@@ -20,109 +22,112 @@
 
   home.stateVersion = "18.09";
 
-  home.packages = with pkgs; [
-    ascii
-    awscli2
-    brave
-    btop
-    code-cursor
-    delta
-    delve
-    discord
-    fast-cli
-    fd
-    feishu
-    flameshot
-    flyctl
-    fzf
-    gedit
-    geoipWithDatabase
-    gh
-    gnome-font-viewer
-    gnome-clocks
-    go-musicfox
-    go-tools
-    google-cloud-sdk
-    graphviz
-    htop
-    httpie
-    imagemagick
-    iperf3
-    jq
-    k9s
-    kubectl
-    kubectx
-    kubernetes-helm
-    libnotify
-    logseq
-    mariadb
-    minikube
-    mycli
-    networkmanagerapplet
-    nix-output-monitor
-    nnn
-    pavucontrol
-    peek
-    pgcli
-    quickemu
-    r3playx
-    regctl
-    ripgrep
-    seahorse
-    slack
-    solaar
-    sops
-    speedtest-cli
-    spotify-unwrapped
-    ssm-session-manager-plugin
-    tdesktop
-    thunderbird
-    tldr
-    tokei
-    tor
-    tree
-    unzip
-    via
-    vlc
-    warp-terminal
-    wireguard-tools
-    wmfocus
-    xfce.xfce4-taskmanager
-    xxd
-    yesplaymusic
-    zoom-us
-    nur.repos.linyinfeng.wemeet
-    follow
-    (wechat-uos.override {
-      uosLicense = builtins.fetchurl {
-        url = "https://github.com/archlinux/aur/raw/6e9a4ad47ff090ecd98170e26bd55219e55109fc/license.tar.gz";
-        sha256 = "0sdx5mdybx4y489dhhc8505mjfajscggxvymlcpqzdd5q5wh0xjk";
-      };
-    })
-    (retroarch.override {
-      cores = with pkgs.libretro; [
-        mgba
-        melonds
-      ];
-    })
-  ] ++
-  (
-    let
-      commonPlugins = [
-        "github-copilot"
-        "ideavim"
-      ];
-    in
-    # https://github.com/NixOS/nixpkgs/pull/223593
-    with pkgs.jetbrains; [
-      (plugins.addPlugins clion commonPlugins)
-      (plugins.addPlugins goland commonPlugins)
-      (plugins.addPlugins idea-ultimate commonPlugins)
-      (plugins.addPlugins pycharm-professional commonPlugins)
-      (plugins.addPlugins rust-rover commonPlugins)
-      (plugins.addPlugins webstorm commonPlugins)
+  home.packages =
+    with pkgs;
+    [
+      ascii
+      awscli2
+      brave
+      btop
+      code-cursor
+      delta
+      delve
+      discord
+      fast-cli
+      fd
+      feishu
+      flameshot
+      flyctl
+      fzf
+      gedit
+      geoipWithDatabase
+      gh
+      gnome-font-viewer
+      gnome-clocks
+      go-musicfox
+      go-tools
+      google-cloud-sdk
+      graphviz
+      htop
+      httpie
+      imagemagick
+      iperf3
+      jq
+      k9s
+      kubectl
+      kubectx
+      kubernetes-helm
+      libnotify
+      logseq
+      mariadb
+      minikube
+      mycli
+      networkmanagerapplet
+      nix-output-monitor
+      nnn
+      pavucontrol
+      peek
+      pgcli
+      quickemu
+      r3playx
+      regctl
+      ripgrep
+      seahorse
+      slack
+      solaar
+      sops
+      speedtest-cli
+      spotify-unwrapped
+      ssm-session-manager-plugin
+      tdesktop
+      thunderbird
+      tldr
+      tokei
+      tor
+      tree
+      unzip
+      via
+      vlc
+      warp-terminal
+      wireguard-tools
+      wmfocus
+      xfce.xfce4-taskmanager
+      xxd
+      yesplaymusic
+      zoom-us
+      nur.repos.linyinfeng.wemeet
+      follow
+      (wechat-uos.override {
+        uosLicense = builtins.fetchurl {
+          url = "https://github.com/archlinux/aur/raw/6e9a4ad47ff090ecd98170e26bd55219e55109fc/license.tar.gz";
+          sha256 = "0sdx5mdybx4y489dhhc8505mjfajscggxvymlcpqzdd5q5wh0xjk";
+        };
+      })
+      (retroarch.override {
+        cores = with pkgs.libretro; [
+          mgba
+          melonds
+        ];
+      })
     ]
-  );
+    ++ (
+      let
+        commonPlugins = [
+          "github-copilot"
+          "ideavim"
+        ];
+      in
+      # https://github.com/NixOS/nixpkgs/pull/223593
+      with pkgs.jetbrains;
+      [
+        (plugins.addPlugins clion commonPlugins)
+        (plugins.addPlugins goland commonPlugins)
+        (plugins.addPlugins idea-ultimate commonPlugins)
+        (plugins.addPlugins pycharm-professional commonPlugins)
+        (plugins.addPlugins rust-rover commonPlugins)
+        (plugins.addPlugins webstorm commonPlugins)
+      ]
+    );
 
   home.sessionVariables = {
     "TERMINAL" = "${pkgs.kitty}/bin/kitty";
@@ -133,12 +138,13 @@
       $DRY_RUN_CMD mkdir -p $VERBOSE_ARG $HOME/.go
     '';
 
-    restartSopsNix = lib.hm.dag.entryAfter [ "reloadSystemd" ] ''(
-      if ${pkgs.systemd}/bin/systemctl --user list-unit-files | grep -q sops-nix.service; then
-        echo "restart sops-nix.service"
-        $DRY_RUN_CMD ${pkgs.systemd}/bin/systemctl --user restart sops-nix.service
-      fi
-    )'';
+    restartSopsNix = lib.hm.dag.entryAfter [ "reloadSystemd" ] ''
+      (
+            if ${pkgs.systemd}/bin/systemctl --user list-unit-files | grep -q sops-nix.service; then
+              echo "restart sops-nix.service"
+              $DRY_RUN_CMD ${pkgs.systemd}/bin/systemctl --user restart sops-nix.service
+            fi
+          )'';
   };
 
   home.keyboard.options = [ "caps:escape" ];
@@ -184,7 +190,9 @@
     };
   };
 
-  programs.gpg = { enable = true; };
+  programs.gpg = {
+    enable = true;
+  };
 
   services.gpg-agent = {
     enable = true;
@@ -255,9 +263,7 @@
 
   programs.atuin = {
     enable = true;
-    flags = [
-      "--disable-up-arrow"
-    ];
+    flags = [ "--disable-up-arrow" ];
     settings = {
       auto_sync = true;
       keymap_mode = "vim-normal";
@@ -274,7 +280,11 @@
 
   services.gnome-keyring = {
     enable = true;
-    components = [ "pkcs11" "secrets" "ssh" ];
+    components = [
+      "pkcs11"
+      "secrets"
+      "ssh"
+    ];
   };
 
   services.flameshot = {

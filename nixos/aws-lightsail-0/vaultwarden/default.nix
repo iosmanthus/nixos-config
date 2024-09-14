@@ -1,6 +1,5 @@
-{ config
-, ...
-}: {
+{ config, ... }:
+{
   services.vaultwarden = {
     enable = true;
     dbBackend = "postgresql";

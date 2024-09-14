@@ -1,7 +1,4 @@
-{ config
-, lib
-, ...
-}:
+{ config, lib, ... }:
 with lib;
 let
   cfg = config.services.self-hosted.o11y;
@@ -38,9 +35,11 @@ let
       http_listen_port = 0;
       grpc_listen_port = 0;
     };
-    clients = [{
-      url = "http://127.0.0.1:${cfg.grafanaCloudGateway}/promtail/loki/api/v1/push";
-    }];
+    clients = [
+      {
+        url = "http://127.0.0.1:${cfg.grafanaCloudGateway}/promtail/loki/api/v1/push";
+      }
+    ];
     scrape_configs = [
       {
         job_name = "journal";
@@ -54,16 +53,12 @@ let
         };
         relabel_configs = [
           {
-            source_labels = [
-              "__journal__hostname"
-            ];
+            source_labels = [ "__journal__hostname" ];
             target_label = "host";
             replacement = cfg.hostName;
           }
           {
-            source_labels = [
-              "__journal__systemd_unit"
-            ];
+            source_labels = [ "__journal__systemd_unit" ];
             target_label = "unit";
           }
         ];
@@ -83,9 +78,13 @@ let
   scrapeConfigs = [
     {
       job_name = "systemd";
-      static_configs = [{
-        targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
-      }];
+      static_configs = [
+        {
+          targets = [
+            "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+          ];
+        }
+      ];
       relabel_configs = [
         {
           source_labels = [ "__address__" ];
@@ -96,9 +95,11 @@ let
     }
   ];
 
-  remoteWrite = [{
-    url = "http://127.0.0.1:${cfg.grafanaCloudGateway}/prometheus/api/prom/push";
-  }];
+  remoteWrite = [
+    {
+      url = "http://127.0.0.1:${cfg.grafanaCloudGateway}/prometheus/api/prom/push";
+    }
+  ];
 in
 {
   options.services.self-hosted.o11y = {
@@ -122,9 +123,7 @@ in
     };
 
     systemd.services.caddy = {
-      restartTriggers = [
-        config.sops.templates."caddy.env".content
-      ];
+      restartTriggers = [ config.sops.templates."caddy.env".content ];
 
       serviceConfig = {
         EnvironmentFile = [ config.sops.templates."caddy.env".path ];

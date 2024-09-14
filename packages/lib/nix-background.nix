@@ -1,12 +1,10 @@
-{ stdenv
-, lib
-, ...
-}:
+{ stdenv, lib, ... }:
 let
   mkNixBackground =
-    { name
-    , src
-    , description
+    {
+      name,
+      src,
+      description,
     }:
     let
       pkg = stdenv.mkDerivation {
@@ -62,6 +60,6 @@ let
       };
     in
     pkg;
-in
 
+in
 mkNixBackground
