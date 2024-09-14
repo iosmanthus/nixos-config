@@ -86,7 +86,7 @@ in
           },
           {
             tag: 'gcp-us-west-1',
-            server: '${config.sops.placeholder."gcp-instance-1/external-address-v4"}',
+            server: '${config.sops.placeholder."gcp-instance-2/external-address-v4"}',
             server_port: 18443,
           },
           {

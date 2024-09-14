@@ -239,8 +239,6 @@ in
       "github.copilot.editor.enableAutoCompletions" = true;
       "gitlens.ai.experimental.provider" = "openai";
       "gitlens.ai.experimental.openai.model" = "gpt-3.5-turbo";
-
-      "find-it-faster.general.useTerminalInEditor" = true;
     };
   };
 }

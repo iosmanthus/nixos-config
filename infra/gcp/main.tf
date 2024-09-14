@@ -32,18 +32,6 @@ module "gcp_instance_0" {
   ip_revision   = "20240716232217"
 }
 
-module "gcp_instance_1" {
-  source = "./gce"
-
-  google_project            = var.google_project
-  google_service_account_id = google_service_account.main.id
-  vm_image                  = google_compute_image.nixos.self_link
-
-  google_region = "us-west1"
-  google_zone   = "us-west1-b"
-  ip_revision   = "20240726142448"
-}
-
 module "gcp_instance_2" {
   source = "./gce"
 

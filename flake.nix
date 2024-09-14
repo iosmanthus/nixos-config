@@ -273,34 +273,6 @@
           ];
         };
 
-        gcp-instance-1 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit self;
-          };
-          modules = [
-            ./secrets/gcp-instance-1
-            ./secrets/cloud/cloudflare
-            ./secrets/cloud/grafana
-            ./secrets/cloud/sing-box
-
-            ./nixos/gcp-instance-1
-
-            sops-nix.nixosModules.sops
-
-            self.nixosModules.cloud.gce
-            self.nixosModules.cloud.sing-box
-            self.nixosModules.o11y
-
-            {
-              nixpkgs.overlays = [
-                self.overlays.default
-                self.overlays.unstable
-              ];
-            }
-          ];
-        };
-
         gcp-instance-2 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {

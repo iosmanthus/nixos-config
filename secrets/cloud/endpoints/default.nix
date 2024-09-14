@@ -11,7 +11,7 @@ in
       "gcp-instance-0/external-address-v4" = {
         inherit sopsFile;
       };
-      "gcp-instance-1/external-address-v4" = {
+      "gcp-instance-2/external-address-v4" = {
         inherit sopsFile;
       };
     };
