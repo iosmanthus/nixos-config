@@ -13,10 +13,11 @@ buildGoModule rec {
   version = "1.10.0-alpha.20";
 
   src = fetchFromGitHub {
-    owner = "SagerNet";
+    # owner = "SagerNet";
+    owner = "iosmanthus";
     repo = pname;
-    rev = "v${version}";
-    hash = "sha256-n90JjPdOiFnlfsfzbjQvlorfdpgU5gV2iSBLNwJsvQ4=";
+    rev = "052273fa0c221390112e171a90f6c6ad6332d45b";
+    hash = "sha256-3O5J/0+5MJs+iq3MPB8UaKLb+QSlNiD82X8yoLRrMTo=";
   };
 
   proxyVendor = true;

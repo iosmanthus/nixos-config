@@ -74,10 +74,14 @@ in
           "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible";
       }
       {
-        command = "-rust-analyzer.onEnter";
-        key = "enter";
-        when =
-          "editorTextFocus && !suggestWidgetVisible && editorLangId == 'rust'";
+        key = "ctrl+j";
+        command = "workbench.action.quickOpenSelectNext";
+        when = "inQuickOpen";
+      }
+      {
+        key = "ctrl+k";
+        command = "workbench.action.quickOpenSelectPrevious";
+        when = "inQuickOpen";
       }
       {
         key = "ctrl+]";
@@ -156,6 +160,18 @@ in
           before = [ "C-r" ];
           commands = [ "redo" ];
         }
+        {
+          before = [ "g" "i" ];
+          commands = [ "references-view.findImplementations" ];
+        }
+        {
+          before = [ "g" "p" "i" ];
+          commands = [ "editor.action.peekImplementation" ];
+        }
+        {
+          before = [ "g" "r" ];
+          commands = [ "references-view.findReferences" ];
+        }
       ];
       "vim.visualstar" = true;
 
@@ -219,6 +235,8 @@ in
       "github.copilot.editor.enableAutoCompletions" = true;
       "gitlens.ai.experimental.provider" = "openai";
       "gitlens.ai.experimental.openai.model" = "gpt-3.5-turbo";
+
+      "find-it-faster.general.useTerminalInEditor" = true;
     };
   };
 }

@@ -1,11 +1,10 @@
-{ ...
+{ config
+, ...
 }:
 
 {
   imports = [
     ./hardware-configuration.nix
-
-    ./sing-box
   ];
 
   networking.hostName = "lego-router";
@@ -55,6 +54,11 @@
     AllowHybridSleep=no
     AllowSuspendThenHibernate=no
   '';
+
+  services.self-hosted.sing-box = {
+    enable = true;
+    configFile = config.sops.secrets.sing-box.path;
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

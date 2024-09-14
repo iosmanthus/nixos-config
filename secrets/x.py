@@ -11,10 +11,10 @@ import yaml
 from os import walk
 
 ignore_paths = [
-    '.*\.py',
-    ".*\.pub",
-    ".*\.nix",
-    "\.sops\.yaml",
+    '.*.py',
+    ".*.pub",
+    ".*.nix",
+    ".sops.yaml",
     ".*__pycache__.*",
 ]
 

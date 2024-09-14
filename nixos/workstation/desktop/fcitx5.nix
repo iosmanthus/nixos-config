@@ -4,7 +4,8 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
     inputMethod = {
-      enabled = "fcitx5";
+      enable = true;
+      type = "fcitx5";
       fcitx5 = {
         addons = with pkgs; [
           fcitx5-adwaita-dark
@@ -37,6 +38,10 @@
           };
 
           addons = {
+            # Disable the default clipboard manager
+            clipboard.globalSection = {
+              "TriggerKey" = "";
+            };
             classicui.globalSection = {
               "Vertical Candidate List" = "True";
               "PerScreenDPI" = "True";

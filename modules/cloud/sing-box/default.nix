@@ -1,5 +1,6 @@
 { self
 , lib
+, pkgs
 , config
 , ...
 }:
@@ -7,11 +8,16 @@ with lib;
 let
   cfg = config.services.self-hosted.cloud.sing-box;
 
+  ports = {
+    shadowtls = 18443;
+    shadowsocks = 18080;
+  };
+
   ruleBaseUrl = "https://raw.githubusercontent.com/lyc8503/sing-box-rules";
 
   mkGeositeUrl = geosite: "${ruleBaseUrl}/rule-set-geosite/${geosite}.srs";
 
-  warpGeosite = builtins.map
+  defaultUnlockSites = builtins.map
     (geosite: "geosite-${geosite}")
     [
       "category-porn"
@@ -27,38 +33,75 @@ let
       # "youtube"
     ];
 
-  tcpInboud = {
-    type = "vless";
+  defaultUnlockServer = {
+    type = "wireguard";
+    tag = "warp";
+    server = "engage.cloudflareclient.com";
+    server_port = 2408;
+    mtu = 1330;
+    peer_public_key = config.sops.placeholder."cloudflare/warp/peer_public_key";
+    local_address = [
+      config.sops.placeholder."cloudflare/warp/local_address_v4"
+      config.sops.placeholder."cloudflare/warp/local_address_v6"
+    ];
+    private_key = config.sops.placeholder."cloudflare/warp/private_key";
+  };
+
+  unlockSettings =
+    if cfg.unlockSettings == null then {
+      server = defaultUnlockServer;
+      sites = defaultUnlockSites;
+    } else
+      cfg.unlockSettings;
+
+  shadowtls = {
+    detour = "shadowsocks-multi-users";
+
     listen = "::";
-    listen_port = cfg.ingress;
+    listen_port = ports.shadowtls;
     sniff = true;
     sniff_override_destination = true;
     tcp_fast_open = true;
-    users = config.sops.placeholder."sing-box/vless/users";
-    tls =
-      let
-        server_name = config.sops.placeholder."sing-box/vless/reality/server-name";
-        private_key = config.sops.placeholder."sing-box/vless/reality/private-key";
-        short_id = [ config.sops.placeholder."sing-box/vless/reality/short-id" ];
-      in
+
+    type = "shadowtls";
+    version = 3;
+    strict_mode = true;
+    users = [
       {
-        enabled = true;
-        inherit server_name;
-        reality = {
-          inherit private_key short_id;
-          enabled = true;
-          handshake = {
-            server = server_name;
-            server_port = 443;
-          };
-        };
-      };
+        name = config.sops.placeholder."sing-box/shadowtls/username";
+        password = config.sops.placeholder."sing-box/shadowtls/password";
+      }
+    ];
+    handshake = {
+      server = config.sops.placeholder."sing-box/shadowtls/server-name";
+      server_port = 443;
+    };
+  };
+
+  shadowsocks = {
+    listen = "::";
+    listen_port = ports.shadowsocks;
+    sniff = true;
+    sniff_override_destination = true;
+    tcp_fast_open = true;
+
+    type = "shadowsocks";
+    tag = "shadowsocks-multi-users";
+    method = config.sops.placeholder."sing-box/shadowsocks/method";
+    password = config.sops.placeholder."sing-box/shadowsocks/server-password";
+    users = config.sops.placeholder."sing-box/shadowsocks/users";
+    multiplex = {
+      enabled = true;
+      padding = true;
+    };
   };
 
   settings = {
     log = {
       level = "debug";
       timestamp = true;
+      user_idx = true;
+      parent_id = true;
     };
     dns = {
       final = "cloudflare";
@@ -68,8 +111,8 @@ let
           server = "cloudflare";
         }
         {
-          rule_set = warpGeosite;
-          server = "warp";
+          rule_set = unlockSettings.sites;
+          server = unlockSettings.server.tag;
         }
       ];
       servers = [
@@ -79,10 +122,10 @@ let
           detour = "direct";
           strategy = "prefer_ipv6";
         }
-        {
-          tag = "warp";
+        rec {
+          inherit (unlockSettings.server) tag;
+          detour = tag;
           address = "tls://1.1.1.1";
-          detour = "warp";
           strategy = "prefer_ipv6";
         }
       ];
@@ -97,20 +140,20 @@ let
           url = mkGeositeUrl geosite;
           download_detour = "direct";
         })
-        warpGeosite;
+        unlockSettings.sites;
       rules = [
         {
           protocol = "bittorrent";
           outbound = "block";
         }
         {
-          rule_set = warpGeosite;
-          outbound = "warp";
+          rule_set = unlockSettings.sites;
+          outbound = unlockSettings.server.tag;
         }
       ];
     };
 
-    inbounds = [ tcpInboud ];
+    inbounds = [ shadowtls shadowsocks ];
     outbounds = [
       {
         type = "direct";
@@ -120,27 +163,28 @@ let
         type = "block";
         tag = "block";
       }
-      {
-        type = "wireguard";
-        tag = "warp";
-        server = "engage.cloudflareclient.com";
-        server_port = 2408;
-        mtu = 1330;
-        peer_public_key = config.sops.placeholder."cloudflare/warp/peer_public_key";
-        local_address = [
-          config.sops.placeholder."cloudflare/warp/local_address_v4"
-          config.sops.placeholder."cloudflare/warp/local_address_v6"
-        ];
-        private_key = config.sops.placeholder."cloudflare/warp/private_key";
-      }
+      unlockSettings.server
     ];
   };
 
   # nested JSON objects should be unquoted
   settingsJSON = builtins.replaceStrings
-    [ ''"${config.sops.placeholder."sing-box/vless/users"}"'' ]
-    [ config.sops.placeholder."sing-box/vless/users" ]
+    [ ''"${config.sops.placeholder."sing-box/shadowsocks/users"}"'' ]
+    [ config.sops.placeholder."sing-box/shadowsocks/users" ]
     (builtins.toJSON settings);
+
+  unlockSettingsOpts = { ... }: {
+    options = {
+      server = mkOption {
+        inherit (pkgs.formats.json { }) type;
+        description = "The unlock server";
+      };
+      sites = mkOption {
+        type = types.listOf types.str;
+        description = "The sites to unlock";
+      };
+    };
+  };
 in
 {
   imports = [
@@ -149,14 +193,17 @@ in
 
   options.services.self-hosted.cloud.sing-box = {
     enable = mkEnableOption "sing-box service in the cloud";
-    ingress = mkOption {
-      type = types.int;
-      description = "The port to listen on for incoming connections";
+    unlockSettings = mkOption {
+      type = types.nullOr (types.submodule unlockSettingsOpts);
+      default = null;
     };
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [ cfg.ingress ];
+    networking.firewall.allowedTCPPorts = [
+      ports.shadowsocks
+      ports.shadowtls
+    ];
 
     services.self-hosted.sing-box = {
       enable = true;

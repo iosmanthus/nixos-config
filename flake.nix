@@ -1,7 +1,7 @@
 {
   description = "God does not play dice";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?rev=ae784887524c9c3f079c6d4c4444586a434e24e7";
+    nixpkgs.url = "github:NixOS/nixpkgs/954e8210477d1d22cfaebebcfae9fa86e254e3a0";
 
     master.url = "github:NixOS/nixpkgs";
 
@@ -40,6 +40,10 @@
     nur.url = "github:nix-community/NUR";
 
     firefox.url = "github:nix-community/flake-firefox-nightly";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    vaultwarden.url = "github:iosmanthus/nixpkgs/bump-vaultwarden-20240912141923";
   };
   outputs =
     { self
@@ -53,6 +57,7 @@
     , code-insiders
     , nixos-generators
     , nur
+    , nixos-hardware
     , ...
     }@inputs:
     let
@@ -102,10 +107,6 @@
                 code-insiders.overlays.default
                 nur.overlay
               ];
-
-            nixpkgs.config.permittedInsecurePackages = [
-              "openssl-1.1.1w"
-            ];
           }
         ];
     in
@@ -135,10 +136,14 @@
           system = "x86_64-linux";
           config = {
             allowUnfree = true;
+            permittedInsecurePackages = [
+              "openssl-1.1.1w"
+            ];
           };
           packages = [
             "bat"
             "brave"
+            "code-cursor"
             "discord"
             "docker"
             "eza"
@@ -152,18 +157,16 @@
             "neovim"
             "nixos-artwork"
             "oh-my-zsh"
-            "openssh"
             "ripgrep"
             "rofi"
             "rust-analyzer"
             "sops"
             "starship"
             "tmux"
-            "virt-manager"
-            "virt-viewer"
             "vscode"
             "zoxide"
             "zsh"
+            "wechat-uos"
           ];
         };
         jetbrains = this.branchOverlay {
@@ -171,6 +174,12 @@
           system = "x86_64-linux";
           config = { allowUnfree = true; };
           packages = [ "jetbrains" ];
+        };
+        vaultwarden = this.branchOverlay {
+          branch = inputs.vaultwarden;
+          system = "x86_64-linux";
+          config = { allowUnfree = true; };
+          packages = [ "vaultwarden" ];
         };
       };
       nixosModules = import ./modules;
@@ -180,6 +189,7 @@
           system = "x86_64-linux";
           modules = [
             ./nixos/iosmanthus-xps
+            nixos-hardware.nixosModules.dell-xps-17-9710-intel
           ] ++ (mkWorkstationModules system);
         };
 
@@ -217,6 +227,7 @@
               nixpkgs.overlays = [
                 self.overlays.default
                 self.overlays.unstable
+                self.overlays.vaultwarden
               ];
             }
           ];
@@ -267,6 +278,35 @@
             ./secrets/cloud/sing-box
 
             ./nixos/gcp-instance-1
+
+            sops-nix.nixosModules.sops
+
+            self.nixosModules.cloud.gce
+            self.nixosModules.cloud.sing-box
+            self.nixosModules.o11y
+
+            {
+              nixpkgs.overlays = [
+                self.overlays.default
+                self.overlays.unstable
+              ];
+            }
+          ];
+        };
+
+        gcp-instance-2 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit self;
+          };
+          modules = [
+            ./secrets/gcp-instance-2
+            ./secrets/cloud/cloudflare
+            ./secrets/cloud/grafana
+            ./secrets/cloud/sing-box
+            ./secrets/cloud/endpoints
+
+            ./nixos/gcp-instance-2
 
             sops-nix.nixosModules.sops
 

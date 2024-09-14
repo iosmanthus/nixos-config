@@ -8,4 +8,4 @@ function recover {
 sops -d -i terraform.tfvars.json
 sops -d -i terraform.tfstate
 trap recover EXIT
-terraform apply -auto-approve $@
+terraform $@

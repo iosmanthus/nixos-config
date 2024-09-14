@@ -25,7 +25,7 @@
     awscli2
     brave
     btop
-    tokei
+    code-cursor
     delta
     delve
     discord
@@ -38,9 +38,8 @@
     gedit
     geoipWithDatabase
     gh
-    gnome.gnome-clocks
     gnome-font-viewer
-    seahorse
+    gnome-clocks
     go-musicfox
     go-tools
     google-cloud-sdk
@@ -65,10 +64,13 @@
     pavucontrol
     peek
     pgcli
+    quickemu
     r3playx
     regctl
     ripgrep
+    seahorse
     slack
+    solaar
     sops
     speedtest-cli
     spotify-unwrapped
@@ -76,6 +78,7 @@
     tdesktop
     thunderbird
     tldr
+    tokei
     tor
     tree
     unzip
@@ -84,12 +87,12 @@
     warp-terminal
     wireguard-tools
     wmfocus
-    xfce.thunar
     xfce.xfce4-taskmanager
     xxd
     yesplaymusic
     zoom-us
-    quickemu
+    nur.repos.linyinfeng.wemeet
+    follow
     (wechat-uos.override {
       uosLicense = builtins.fetchurl {
         url = "https://github.com/archlinux/aur/raw/6e9a4ad47ff090ecd98170e26bd55219e55109fc/license.tar.gz";

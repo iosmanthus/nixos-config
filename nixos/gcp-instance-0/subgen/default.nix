@@ -3,21 +3,25 @@
 }:
 let
   outboundTemplates = {
-    vless = {
-      type = "vless";
-      tcp_fast_open = true;
+    shadowtls = {
+      type = "shadowtls";
+      version = 3;
+      password = config.sops.placeholder."sing-box/shadowtls/password";
       tls = {
         enabled = true;
-        server_name = config.sops.placeholder."sing-box/vless/reality/server-name";
+        server_name = config.sops.placeholder."sing-box/shadowtls/server-name";
         utls = {
           enabled = true;
           fingerprint = "firefox";
         };
-        reality = {
-          enabled = true;
-          public_key = config.sops.placeholder."sing-box/vless/reality/public-key";
-          short_id = config.sops.placeholder."sing-box/vless/reality/short-id";
-        };
+      };
+    };
+    shadowsocks = {
+      type = "shadowsocks";
+      method = config.sops.placeholder."sing-box/shadowsocks/method";
+      multiplex = {
+        enabled = true;
+        padding = true;
       };
     };
   };
@@ -39,14 +43,15 @@ in
   sops.templates."config.jsonnet".content = ''
     function(secrets)
     local users = ${config.sops.placeholder."subgen/users"};
-    local vlessUsers = std.foldl(
+    local shadowsocksServerPassword = 
+      '${config.sops.placeholder."sing-box/shadowsocks/server-password"}';
+    local shadowsocksUsers = std.foldl(
       function(acc, user) acc + {
           [user.name]: {
-            uuid: user.uuid,
-            flow: user.flow,
+            password: shadowsocksServerPassword + ':' + user.password,
           },
         },
-      ${config.sops.placeholder."sing-box/vless/users"},
+      ${config.sops.placeholder."sing-box/shadowsocks/users"},
       {}
     );
     local mkInputs = function(username) [
@@ -62,8 +67,8 @@ in
       },
       {
         type: 'local',
-        name: 'vlessUser',
-        value: vlessUsers[username],
+        name: 'shadowsocksUser',
+        value: shadowsocksUsers[username],
       },
       {
         type: 'local',
@@ -79,17 +84,17 @@ in
           {
             tag: 'gcp-asia-east-1',
             server: '${config.sops.placeholder."gcp-instance-0/external-address-v4"}',
-            server_port: 10080,
+            server_port: 18443,
           },
           {
             tag: 'gcp-us-west-1',
             server: '${config.sops.placeholder."gcp-instance-1/external-address-v4"}',
-            server_port: 10080,
+            server_port: 18443,
           },
           {
             tag: 'aws-ap-southeast-1',
             server: '${config.sops.placeholder."aws-lightsail-0/external-address-v4"}',
-            server_port: 10080,
+            server_port: 18443,
           },
         ],
       },

@@ -11,10 +11,7 @@
     hostName = "gcp-instance-0";
   };
 
-  services.self-hosted.cloud.sing-box = {
-    enable = true;
-    ingress = 10080;
-  };
+  services.self-hosted.cloud.sing-box.enable = true;
 
   services.self-hosted.unguarded.enable = true;
 }

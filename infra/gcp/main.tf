@@ -4,10 +4,10 @@ resource "google_service_account" "main" {
 }
 
 resource "google_compute_image" "nixos" {
-  name   = "nixos-v20240701161159"
+  name   = "nixos-v20240716235958"
   family = "nixos-24-05"
   raw_disk {
-    source = "https://storage.cloud.google.com/nixos-cloud-images-20240701160523/nixos-image-24.11.20240524.bfb7a88-x86_64-linux.raw.tar.gz"
+    source = "https://storage.cloud.google.com/nixos-cloud-images-20240701160523/nixos-image-24.11.20240703.ae78488-x86_64-linux.raw.tar.gz"
   }
 }
 
@@ -29,7 +29,7 @@ module "gcp_instance_0" {
 
   google_region = "asia-east1"
   google_zone   = "asia-east1-b"
-  ip_revision   = "20240704003503"
+  ip_revision   = "20240716232217"
 }
 
 module "gcp_instance_1" {
@@ -41,5 +41,17 @@ module "gcp_instance_1" {
 
   google_region = "us-west1"
   google_zone   = "us-west1-b"
-  ip_revision   = "20240704003503"
+  ip_revision   = "20240726142448"
+}
+
+module "gcp_instance_2" {
+  source = "./gce"
+
+  google_project            = var.google_project
+  google_service_account_id = google_service_account.main.id
+  vm_image                  = google_compute_image.nixos.self_link
+
+  google_region = "asia-east2"
+  google_zone   = "asia-east2-b"
+  ip_revision   = "20240726155619"
 }

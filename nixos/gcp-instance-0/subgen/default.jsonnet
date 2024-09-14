@@ -1,7 +1,7 @@
 function(
   relaySubscription,
   outboundTemplates,
-  vlessUser,
+  shadowsocksUser,
   originGroup,
   defaultDnsServer,
 )
@@ -27,56 +27,68 @@ function(
     function(node) node.tag
   );
 
-  local vlessTemplate = outboundTemplates.vless;
+  local shadowsocksTemplate = outboundTemplates.shadowsocks;
 
-  local vlessRelayOutbounds = std.map(
-    function(node) vlessTemplate + vlessUser + node,
+  local shadowsocksRelayOutbounds = std.map(
+    function(node) shadowsocksTemplate + shadowsocksUser + node,
     relayNodes
   );
 
-  local vlessRelayOutboundsTags = std.map(
+  local shadowsocksRelayOutboundsTags = std.map(
     function(node) node.tag,
-    vlessRelayOutbounds
+    shadowsocksRelayOutbounds
   );
 
-  local vlessOriginOutbounds = std.map(
-    function(node) vlessTemplate + vlessUser + node,
+  local shadowsocksOriginOutbounds = std.map(
+    function(node) shadowsocksTemplate + shadowsocksUser + {
+      tag: node.tag,
+      detour: '~> ' + node.tag,
+    },
     originGroup
   );
 
-  local vlessOriginOutboundsTags = std.map(
+  local shadowtlsTemplate = outboundTemplates.shadowtls;
+
+  local shadowtlsOriginOutbounds = std.map(
+    function(node) shadowtlsTemplate + node + {
+      tag: '~> ' + node.tag,
+    },
+    originGroup
+  );
+
+  local shadowsocksOriginOutboundsTags = std.map(
     function(node) node.tag,
-    vlessOriginOutbounds
+    shadowsocksOriginOutbounds
   );
 
   local origin = {
     tag: 'origin',
     type: 'selector',
-    outbounds: vlessOriginOutboundsTags,
+    outbounds: shadowsocksOriginOutboundsTags,
   };
 
-  local urltest = {
-    tag: 'urltest',
-    type: 'urltest',
-    interval: '1m',
-    outbounds: vlessRelayOutboundsTags,
+  local relay = {
+    tag: 'relay',
+    type: 'selector',
+    outbounds: shadowsocksRelayOutboundsTags,
   };
 
   local final = {
     tag: 'final',
     type: 'selector',
-    outbounds: [urltest.tag, origin.tag] + vlessRelayOutboundsTags,
+    outbounds: [origin.tag, relay.tag] + shadowsocksRelayOutboundsTags,
   };
 
   std.manifestJsonEx(template {
     experimental+: {
       clash_api+: {
-        secret: std.sha3(std.sha3(vlessUser.uuid)),
+        secret: std.sha3(std.sha3(shadowsocksUser.password)),
       },
     },
   } {
-    outbounds: [final, urltest, origin]
-               + vlessRelayOutbounds
-               + vlessOriginOutbounds
+    outbounds: [final, origin, relay]
+               + shadowsocksRelayOutbounds
+               + shadowsocksOriginOutbounds
+               + shadowtlsOriginOutbounds
                + template.outbounds,
   }, indent='  ')

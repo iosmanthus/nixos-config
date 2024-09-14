@@ -76,7 +76,7 @@ in
 
       n = "nix";
       nrs = "nixos-rebuild switch --use-remote-sudo";
-      nhash = "nix hash to-base32";
+      nix32 = "nix hash convert --to nix32";
 
       tf = "terraform";
     };

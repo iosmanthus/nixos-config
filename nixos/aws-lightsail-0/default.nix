@@ -26,10 +26,7 @@
     enable = true;
   };
 
-  services.self-hosted.cloud.sing-box = {
-    enable = true;
-    ingress = 10080;
-  };
+  services.self-hosted.cloud.sing-box.enable = true;
 
   services.self-hosted.gemini-openai-proxy = {
     enable = true;

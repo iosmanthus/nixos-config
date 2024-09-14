@@ -34,7 +34,6 @@
       enable = true;
       plugins = [
         "docker"
-        "fd"
         "git-auto-fetch"
         "git"
         "golang"

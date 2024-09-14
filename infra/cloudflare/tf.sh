@@ -16,4 +16,4 @@ sops -d ../gcp/terraform.tfstate > ./states/gcp/terraform.tfstate
 sops -d -i terraform.tfvars.json
 sops -d -i terraform.tfstate
 
-terraform apply -auto-approve $@
+terraform $@

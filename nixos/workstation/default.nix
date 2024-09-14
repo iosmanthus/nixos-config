@@ -60,6 +60,7 @@
     lm_sensors
     lsof
     neovim
+    pciutils
     ripgrep
     wget
 
@@ -86,6 +87,7 @@
     kernel.sysctl = {
       "net.ipv4.tcp_fastopen" = 3;
     };
+    kernelPackages = pkgs.linuxPackages_6_6;
   };
 
   systemd.extraConfig = ''
@@ -137,11 +139,10 @@
     };
   };
 
-  sound.enable = true;
-
   hardware = {
     enableAllFirmware = true;
     pulseaudio.enable = true;
+    alsa.enablePersistence = true;
     bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -188,4 +189,9 @@
   };
 
   programs.adb.enable = true;
+
+  # services.ollama = {
+  #   enable = true;
+  #   acceleration = "cuda";
+  # };
 }
