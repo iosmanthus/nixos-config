@@ -180,6 +180,13 @@ in
           ];
           commands = [ "references-view.findReferences" ];
         }
+        {
+          before = [
+            "<leader>"
+            "i"
+          ];
+          commands = [ "go.impl.cursor" ];
+        }
       ];
       "vim.visualstar" = true;
 

@@ -1,63 +1,100 @@
 {
+  electron,
+  fetchFromGitHub,
+  imagemagick,
   lib,
-  stdenvNoCC,
-  fetchurl,
-  appimageTools,
+  makeDesktopItem,
   makeWrapper,
-  writeShellApplication,
-  curl,
-  yq,
-  common-updater-scripts,
+  nodejs,
+  pnpm,
+  stdenv,
 }:
-let
+stdenv.mkDerivation rec {
   pname = "follow";
-  version = "0.0.1-alpha.10";
-  owner = "RSSNext";
-  repo = "Follow";
-  src = fetchurl {
-    url = "https://github.com/${owner}/${repo}/releases/download/v${version}/Follow-${version}-linux-x64.AppImage";
-    hash = "sha256-YmwY8WQIPy3/YZ9lssekgxaLNpMPX2ey1IMqo35j81Q=";
+
+  version = "0.0.1-alpha.13";
+
+  src = fetchFromGitHub {
+    owner = "RSSNext";
+    repo = "Follow";
+    rev = "v${version}";
+    hash = "sha256-LCI+kUxrEFLDBZrgDnOu6UI3d6atm4JptNKhyob9PH4=";
   };
-  appimageContents = appimageTools.extractType2 { inherit version pname src; };
-in
-stdenvNoCC.mkDerivation {
-  inherit pname version;
 
-  src = appimageTools.wrapType2 { inherit version pname src; };
+  nativeBuildInputs = [
+    nodejs
+    pnpm.configHook
+    makeWrapper
+    imagemagick
+  ];
 
-  nativeBuildInputs = [ makeWrapper ];
+  pnpmDeps = pnpm.fetchDeps {
+    inherit pname version src;
+    hash = "sha256-K8IM2kE7qhEBux4eta1ma/timSeljzf0MbOUeJ4JCIc=";
+  };
+
+  env = {
+    ELECTRON_SKIP_BINARY_DOWNLOAD = "1";
+
+    # This environment variables inject the production Vite config at build time.
+    # Copy from:
+    # 1. https://github.com/RSSNext/Follow/blob/0745ac07dd2a4a34e4251c034678ace15c302697/.github/workflows/build.yml#L18
+    # 2. And logs in the corresponding GitHub Actions: https://github.com/RSSNext/Follow/actions/workflows/build.yml
+    VITE_WEB_URL = "https://app.follow.is";
+    VITE_API_URL = "https://api.follow.is";
+    VITE_IMGPROXY_URL = "https://thumbor.follow.is";
+    VITE_SENTRY_DSN = "https://e5bccf7428aa4e881ed5cb713fdff181@o4507542488023040.ingest.us.sentry.io/4507570439979008";
+    VITE_BUILD_TYPE = "production";
+    VITE_POSTHOG_KEY = "phc_EZGEvBt830JgBHTiwpHqJAEbWnbv63m5UpreojwEWNL";
+  };
+
+  desktopItem = makeDesktopItem {
+    name = "follow";
+    desktopName = "Follow";
+    comment = "Next generation information browser";
+    icon = "follow";
+    exec = "follow";
+    categories = [ "Utility" ];
+    mimeTypes = [ "x-scheme-handler/follow" ];
+  };
+
+  icon = src + "/resources/icon.png";
+
+  buildPhase = ''
+    runHook preBuild
+
+    pnpm --offline electron-vite build --outDir=dist
+    # Remove dev dependencies.
+    pnpm --ignore-scripts prune --prod
+    # Clean up broken symlinks left behind by `pnpm prune`
+    find node_modules/.bin -xtype l -delete
+
+    runHook postBuild
+  '';
 
   installPhase = ''
     runHook preInstall
-    mkdir -p $out/
-    cp -r bin $out/bin
-    mkdir -p $out/share/follow
-    cp -a ${appimageContents}/locales $out/share/follow
-    cp -a ${appimageContents}/resources $out/share/follow
-    cp -a ${appimageContents}/usr/share/icons $out/share/
-    install -Dm 644 ${appimageContents}/Follow.desktop -t $out/share/applications/
-    substituteInPlace $out/share/applications/Follow.desktop --replace-fail "Follow" "follow"
-    wrapProgram $out/bin/follow \
-      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}} --no-update"
+
+    mkdir -p $out/share/{applications,follow}
+    cp -r . $out/share/follow
+    rm -rf $out/share/follow/{.vscode,.github}
+
+    makeWrapper "${electron}/bin/electron" "$out/bin/follow" \
+      --inherit-argv0 \
+      --add-flags --disable-gpu-compositing \
+      --add-flags $out/share/follow \
+      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime}}"
+
+    install -m 444 -D "${desktopItem}/share/applications/"* \
+        -t $out/share/applications/
+
+    for size in 16 24 32 48 64 128 256 512; do
+      mkdir -p $out/share/icons/hicolor/"$size"x"$size"/apps
+      convert -background none -resize "$size"x"$size" ${icon} $out/share/icons/hicolor/"$size"x"$size"/apps/follow.png
+    done
+
     runHook postInstall
   '';
-
-  passthru = {
-    updateScript = lib.getExe (writeShellApplication {
-      name = "update-follow";
-      runtimeInputs = [
-        curl
-        yq
-        common-updater-scripts
-      ];
-      text = ''
-        set -o errexit
-        latestLinux="$(curl -sL https://github.com/${owner}/${repo}/releases/latest/download/latest-linux.yml)"
-        version="$(echo "$latestLinux" | yq -r .version)"
-        update-source-version follow "$version" --source-key=src.src
-      '';
-    });
-  };
 
   meta = {
     description = "Next generation information browser";

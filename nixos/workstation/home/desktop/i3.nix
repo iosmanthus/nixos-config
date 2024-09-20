@@ -55,6 +55,12 @@ let
               window_role = "task_dialog";
             };
           }
+          {
+            command = "floating enable";
+            criteria = {
+              title = "Bitwarden";
+            };
+          }
         ];
       };
       terminal = "kitty tmux";
@@ -148,6 +154,7 @@ let
       assigns = {
         "1: main" = [
           { class = "^firefox-nightly$"; }
+          { class = "^Brave-browser$"; }
           { class = "^logseq$"; }
         ];
         "2: chat" = [
