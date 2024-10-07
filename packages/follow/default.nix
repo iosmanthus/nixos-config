@@ -12,13 +12,13 @@
 stdenv.mkDerivation rec {
   pname = "follow";
 
-  version = "0.0.1-alpha.13";
+  version = "0.0.1-alpha.18";
 
   src = fetchFromGitHub {
     owner = "RSSNext";
     repo = "Follow";
     rev = "v${version}";
-    hash = "sha256-LCI+kUxrEFLDBZrgDnOu6UI3d6atm4JptNKhyob9PH4=";
+    hash = "sha256-s9sct+WUeEVX95kc+LggCZvpuoUX/HN+AtxrjOUdTIA=";
   };
 
   nativeBuildInputs = [
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
 
   pnpmDeps = pnpm.fetchDeps {
     inherit pname version src;
-    hash = "sha256-K8IM2kE7qhEBux4eta1ma/timSeljzf0MbOUeJ4JCIc=";
+    hash = "sha256-8CapMFRebEIR/mNFzxSaosWuBQ7UW1/hXqamld2UCAU=";
   };
 
   env = {
@@ -63,7 +63,7 @@ stdenv.mkDerivation rec {
   buildPhase = ''
     runHook preBuild
 
-    pnpm --offline electron-vite build --outDir=dist
+    pnpm --offline electron-vite build
     # Remove dev dependencies.
     pnpm --ignore-scripts prune --prod
     # Clean up broken symlinks left behind by `pnpm prune`

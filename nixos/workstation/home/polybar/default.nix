@@ -10,7 +10,7 @@ let
 in
 {
   services.polybar = {
-    enable = true;
+    enable = false;
     package = pkgs.polybar.override {
       mpdSupport = true;
       iwSupport = true;

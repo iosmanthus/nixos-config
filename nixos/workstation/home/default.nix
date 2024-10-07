@@ -38,12 +38,13 @@
       feishu
       flameshot
       flyctl
+      follow
       fzf
       gedit
       geoipWithDatabase
       gh
-      gnome-font-viewer
       gnome-clocks
+      gnome-font-viewer
       go-musicfox
       go-tools
       google-cloud-sdk
@@ -65,6 +66,7 @@
       networkmanagerapplet
       nix-output-monitor
       nnn
+      nur.repos.linyinfeng.wemeet
       pavucontrol
       peek
       pgcli
@@ -95,8 +97,6 @@
       xxd
       yesplaymusic
       zoom-us
-      nur.repos.linyinfeng.wemeet
-      follow
       (wechat-uos.override {
         uosLicense = builtins.fetchurl {
           url = "https://github.com/archlinux/aur/raw/6e9a4ad47ff090ecd98170e26bd55219e55109fc/license.tar.gz";
@@ -135,16 +135,8 @@
 
   home.activation = {
     createGoPath = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG $HOME/.go
+      run mkdir -p $VERBOSE_ARG $HOME/.go
     '';
-
-    restartSopsNix = lib.hm.dag.entryAfter [ "reloadSystemd" ] ''
-      (
-            if ${pkgs.systemd}/bin/systemctl --user list-unit-files | grep -q sops-nix.service; then
-              echo "restart sops-nix.service"
-              $DRY_RUN_CMD ${pkgs.systemd}/bin/systemctl --user restart sops-nix.service
-            fi
-          )'';
   };
 
   home.keyboard.options = [ "caps:escape" ];

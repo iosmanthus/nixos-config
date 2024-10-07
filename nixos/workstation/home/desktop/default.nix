@@ -2,6 +2,7 @@
 {
   imports = [
     ./i3.nix
+    ./xfce.nix
     ./dunst.nix
   ];
 
@@ -20,8 +21,8 @@
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.tela-icon-theme;
-      name = "Tela";
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
     };
     theme = config.gtk.globalTheme;
   };

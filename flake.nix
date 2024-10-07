@@ -1,7 +1,7 @@
 {
   description = "God does not play dice";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/954e8210477d1d22cfaebebcfae9fa86e254e3a0";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     master.url = "github:NixOS/nixpkgs";
 

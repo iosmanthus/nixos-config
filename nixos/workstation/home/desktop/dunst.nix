@@ -46,8 +46,8 @@ in
     };
 
     iconTheme = {
-      name = "Tela";
-      package = pkgs.tela-icon-theme;
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
       size = "32x32";
     };
   };

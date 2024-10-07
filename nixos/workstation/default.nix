@@ -146,13 +146,18 @@
 
   hardware = {
     enableAllFirmware = true;
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
     alsa.enablePersistence = true;
     bluetooth = {
       enable = true;
       powerOnBoot = true;
     };
   };
+
+  services.pipewire.enable = false;
 
   virtualisation = {
     docker = {

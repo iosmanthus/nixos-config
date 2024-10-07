@@ -7,7 +7,6 @@
 let
   modifier0 = "Mod4";
   modifier1 = "Mod1";
-  betterlockscreen = "${pkgs.betterlockscreen}/bin/betterlockscreen";
   colors = config.scheme.withHashtag;
   i3 = {
     enable = true;
@@ -100,12 +99,10 @@ let
         "${modifier0}+Shift+k" = "move up";
 
         "${modifier0}+Shift+q" = "exec i3-msg restart";
-        "${modifier0}+Shift+x" = ''
-          exec ${betterlockscreen} -l dim
-        '';
+        "${modifier0}+Shift+x" = "exec xflock4";
         "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
-        "${modifier0}+m" = "exec autorandr --change";
-        "${modifier0}+w" = "exec brave";
+        "${modifier0}+m" = "exec xfce4-display-settings -m";
+        "${modifier0}+w" = "exec firefox-nightly";
         "${modifier0}+p" = "exec rofi -show combi";
         "${modifier0}+d" = "exec Discord";
         "${modifier0}+t" = "exec telegram-desktop";
@@ -114,7 +111,7 @@ let
         "${modifier0}+Shift+n" = "exec dunstctl close-all";
         "${modifier0}+g" = "exec gedit";
         "${modifier0}+space" = "exec wmfocus";
-        "${modifier0}+b" = "exec polybar-msg cmd toggle";
+        # "${modifier0}+b" = "exec polybar-msg cmd toggle";
 
         # Disable tiling_drag before there is a threshold for it.
         "button1" = "focus";
@@ -156,9 +153,10 @@ let
           { class = "^firefox-nightly$"; }
           { class = "^Brave-browser$"; }
           { class = "^logseq$"; }
+          { class = "^kitty$"; }
         ];
         "2: chat" = [
-          { class = "^Discord$"; }
+          { class = "^discord$"; }
           { class = "^TelegramDesktop$"; }
         ];
         "3: mail" = [ { class = "^thunderbird$"; } ];
@@ -174,23 +172,15 @@ let
           command = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
           always = true;
         }
-        {
-          command = "${betterlockscreen} -u ~/.background-image --fx dim,pixel";
-          always = true;
-        }
-        {
-          command = "systemctl restart --user polybar.service";
-          always = true;
-        }
-        {
-          command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          always = true;
-        }
         { command = "i3-msg workspace 1: main"; }
         { command = "firefox-nightly"; }
         { command = "logseq"; }
         { command = "kitty tmux"; }
         { command = "thunderbird"; }
+        # {
+        #   command = "systemctl restart --user polybar.service";
+        #   always = true;
+        # }
       ];
       bars = lib.mkForce [ ];
     };
@@ -226,6 +216,9 @@ in
 {
   xsession = {
     enable = true;
+    initExtra = ''
+      ${pkgs.runtimeShell} ${pkgs.xfce.xfce4-session.xinitrc} &
+    '';
     windowManager = {
       inherit i3;
     };

@@ -25,8 +25,24 @@
     };
   };
 
+  environment.xfce.excludePackages = with pkgs.xfce; [
+    xfce4-notifyd
+    xfce4-volumed-pulse
+  ];
+
+  environment.systemPackages = with pkgs.xfce // pkgs; [
+    xfce4-panel
+    xfwm4
+
+    xfce4-systemload-plugin
+    xfce4-netload-plugin
+    xfce4-pulseaudio-plugin
+    xfce4-volumed-pulse
+    xfce4-sensors-plugin
+  ];
+
   services.displayManager = {
-    defaultSession = "none+i3";
+    defaultSession = "xfce+i3";
   };
 
   services.xserver = {
@@ -36,6 +52,14 @@
     xkb.layout = "us";
     autoRepeatInterval = 20;
     autoRepeatDelay = 200;
+    desktopManager = {
+      xterm.enable = false;
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
+    };
     displayManager.lightdm = {
       enable = true;
       background = config.wallpaper.package.gnomeFilePath;
@@ -45,6 +69,10 @@
           package = pkgs.yaru-theme;
           name = "Yaru";
           size = 48;
+        };
+        iconTheme = {
+          package = pkgs.papirus-icon-theme;
+          name = "Papirus";
         };
         theme = config.gtk.globalTheme;
         indicators = [
@@ -58,6 +86,7 @@
         extraConfig = ''
           xft-dpi=192
           font-name=sans-serif
+          user-background=false
         '';
       };
     };

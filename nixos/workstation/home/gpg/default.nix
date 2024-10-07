@@ -11,7 +11,7 @@ in
 {
   programs.gpg = {
     enable = true;
-    mutableKeys = false;
+    mutableKeys = true;
     mutableTrust = false;
     publicKeys = [
       {
@@ -29,13 +29,14 @@ in
     import-gpg-keys = {
       Unit = {
         Description = "Import GPG secret keys";
+        After = [ "sops-nix.service" ];
       };
       Service = {
         Type = "simple";
         ExecStart = "${importGPGKeys}";
       };
       Install = {
-        WantedBy = [ "sockets.target" ];
+        WantedBy = [ "default.target" ];
       };
     };
   };

@@ -24,19 +24,19 @@ def get(url):
 
 def override(resp):
     cfg = json.loads(resp)
-    dns_rules = cfg['dns']['rules']
-    dns_rules.insert(3, {
-        'domain_keyword': ['aws', 'pingcap', 'tidb', 'clinic'],
-        'server': 'secure'
-    })
-    # tun = cfg['inbounds'][0]
-    # if tun['type'] != "tun":
-    #     return
-    # tun['auto_redirect'] = True
-    # tun['route_exclude_address_set'] = ["geoip-cn"]
-    # tun['address'] = [tun['inet4_address']]
-    # tun['route_exclude_address'] = ['10.0.0.0/8']
-    # del tun['inet4_address']
+    # dns_rules = cfg['dns']['rules']
+    # dns_rules.insert(3, {
+    #     'domain_keyword': ['aws', 'pingcap', 'tidb', 'clinic'],
+    #     'server': 'secure'
+    # })
+    tun = cfg['inbounds'][0]
+    if tun['type'] != "tun":
+        return
+    tun['auto_redirect'] = True
+    tun['route_exclude_address_set'] = ["geoip-cn"]
+    tun['address'] = [tun['inet4_address']]
+    tun['route_exclude_address'] = ['10.0.0.0/8']
+    del tun['inet4_address']
     return cfg
 
 
