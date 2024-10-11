@@ -341,7 +341,7 @@
           buildInputs = with pkgs; [
             fd
             gnumake
-            go_1_21
+            go_1_22
             google-cloud-sdk
             gotools
             nix-output-monitor
