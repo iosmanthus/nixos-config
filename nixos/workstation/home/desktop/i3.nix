@@ -8,6 +8,7 @@ let
   modifier0 = "Mod4";
   modifier1 = "Mod1";
   colors = config.scheme.withHashtag;
+  betterlockscreen = "${pkgs.betterlockscreen}/bin/betterlockscreen";
   i3 = {
     enable = true;
     package = pkgs.i3;
@@ -99,9 +100,9 @@ let
         "${modifier0}+Shift+k" = "move up";
 
         "${modifier0}+Shift+q" = "exec i3-msg restart";
-        "${modifier0}+Shift+x" = "exec xflock4";
+        "${modifier0}+Shift+x" = "exec ${betterlockscreen} -l dim";
         "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
-        "${modifier0}+m" = "exec xfce4-display-settings -m";
+        "${modifier0}+m" = "exec autorandr --change";
         "${modifier0}+w" = "exec firefox-nightly";
         "${modifier0}+p" = "exec rofi -show combi";
         "${modifier0}+d" = "exec Discord";
@@ -111,10 +112,7 @@ let
         "${modifier0}+Shift+n" = "exec dunstctl close-all";
         "${modifier0}+g" = "exec gedit";
         "${modifier0}+space" = "exec wmfocus";
-        # "${modifier0}+b" = "exec polybar-msg cmd toggle";
-
-        # Disable tiling_drag before there is a threshold for it.
-        "button1" = "focus";
+        "${modifier0}+b" = "exec polybar-msg cmd toggle";
       };
       modes = lib.mkOptionDefault {
         resize = {
@@ -172,6 +170,10 @@ let
           command = "feh --bg-scale --conversion-timeout 1 ~/.background-image";
           always = true;
         }
+        {
+          command = "${betterlockscreen} -u ~/.background-image --fx dim,pixel";
+          always = true;
+        }
         { command = "i3-msg workspace 1: main"; }
         { command = "firefox-nightly"; }
         { command = "logseq"; }
@@ -215,10 +217,6 @@ let
 in
 {
   xsession = {
-    enable = true;
-    initExtra = ''
-      ${pkgs.runtimeShell} ${pkgs.xfce.xfce4-session.xinitrc} &
-    '';
     windowManager = {
       inherit i3;
     };

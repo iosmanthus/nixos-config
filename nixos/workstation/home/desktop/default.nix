@@ -2,7 +2,6 @@
 {
   imports = [
     ./i3.nix
-    ./xfce.nix
     ./dunst.nix
   ];
 
@@ -29,12 +28,7 @@
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      gtk-application-prefer-dark-theme = true;
-    };
-    "org/gnome/gedit/preferences/editor" = {
-      scheme = "Yaru-dark";
-      use-default-font = false;
-      wrap-last-split-mode = "word";
+      color-scheme = "prefer-dark";
     };
   };
 

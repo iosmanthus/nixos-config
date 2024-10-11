@@ -16,7 +16,7 @@ in
     };
   };
   services.autorandr = {
-    enable = false;
+    enable = true;
     profiles = {
       default = {
         fingerprint = {

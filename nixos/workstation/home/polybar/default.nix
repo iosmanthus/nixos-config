@@ -10,7 +10,7 @@ let
 in
 {
   services.polybar = {
-    enable = false;
+    enable = true;
     package = pkgs.polybar.override {
       mpdSupport = true;
       iwSupport = true;
@@ -37,7 +37,7 @@ in
       export COLOR_BASE0E=${colors.base0E}
       export COLOR_BASE0F=${colors.base0F}
 
-      export NETWORK_LABEL_CONNECTED="%essid% %{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-} %{F$COLOR_BASE0E}%signal%%%{F-}"
+      export NETWORK_LABEL_CONNECTED="%{F$COLOR_BASE0B}%upspeed%%{F-} %{F$COLOR_BASE0A}%downspeed%%{F-}"
       export DATE_LABEL="🕓 %date% %{F$COLOR_BASE0C}%time%%{F-}"
       export HWMON_PATH=$(echo /sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input)
       export ADAPTER=$(${ls} -1 /sys/class/power_supply | ${grep} AC)
@@ -204,14 +204,10 @@ in
       accumulate-stats = false
       unknown-as-up = true
 
-      format-connected = <ramp-signal> <label-connected>
+      format-connected = <label-connected>
       format-disconnected = <label-disconnected>
-      format-disconnected-prefix = 
       label-connected = ''${env:NETWORK_LABEL_CONNECTED}
       label-disconnected = "Offline"
-      ramp-signal-0 = 
-      ramp-signal-1 = 
-      ramp-signal-2 = 
 
       [module/pulseaudio]
       type = internal/pulseaudio

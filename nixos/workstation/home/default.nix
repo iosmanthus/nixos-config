@@ -29,7 +29,6 @@
       awscli2
       brave
       btop
-      code-cursor
       delta
       delve
       discord
@@ -67,11 +66,11 @@
       nix-output-monitor
       nnn
       nur.repos.linyinfeng.wemeet
+      openai-translator
       pavucontrol
       peek
       pgcli
       quickemu
-      r3playx
       regctl
       ripgrep
       seahorse
@@ -90,12 +89,10 @@
       unzip
       via
       vlc
-      warp-terminal
       wireguard-tools
       wmfocus
       xfce.xfce4-taskmanager
       xxd
-      yesplaymusic
       zoom-us
       (wechat-uos.override {
         uosLicense = builtins.fetchurl {
@@ -226,12 +223,21 @@
     };
   };
 
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+
   services.blueman-applet.enable = true;
 
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
-  };
+  services.network-manager-applet.enable = true;
+
+  # services.kdeconnect = {
+  #   enable = true;
+  #   indicator = true;
+  # };
 
   programs.neovim = {
     enable = true;

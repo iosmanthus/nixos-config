@@ -57,7 +57,7 @@ in
   };
 
   services.autorandr = {
-    enable = false;
+    enable = true;
     inherit hooks;
     profiles =
       mkProfile {

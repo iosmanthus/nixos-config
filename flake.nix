@@ -146,7 +146,6 @@
           packages = [
             "bat"
             "brave"
-            "code-cursor"
             "discord"
             "docker"
             "eza"

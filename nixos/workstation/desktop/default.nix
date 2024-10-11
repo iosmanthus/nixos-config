@@ -25,24 +25,14 @@
     };
   };
 
-  environment.xfce.excludePackages = with pkgs.xfce; [
-    xfce4-notifyd
-    xfce4-volumed-pulse
-  ];
+  services.gnome.at-spi2-core.enable = true;
+  services.accounts-daemon.enable = true;
+  services.gnome.glib-networking.enable = true;
 
-  environment.systemPackages = with pkgs.xfce // pkgs; [
-    xfce4-panel
-    xfwm4
-
-    xfce4-systemload-plugin
-    xfce4-netload-plugin
-    xfce4-pulseaudio-plugin
-    xfce4-volumed-pulse
-    xfce4-sensors-plugin
-  ];
+  environment.pathsToLink = [ "/libexec" ];
 
   services.displayManager = {
-    defaultSession = "xfce+i3";
+    defaultSession = "none+i3";
   };
 
   services.xserver = {
@@ -52,14 +42,7 @@
     xkb.layout = "us";
     autoRepeatInterval = 20;
     autoRepeatDelay = 200;
-    desktopManager = {
-      xterm.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
-    };
+    desktopManager.xterm.enable = false;
     displayManager.lightdm = {
       enable = true;
       background = config.wallpaper.package.gnomeFilePath;
