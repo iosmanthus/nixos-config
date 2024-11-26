@@ -16,6 +16,7 @@
     ./rofi
     ./shell
     ./vscode
+    ./neovim
   ];
 
   sops.age.keyFile = "${config.admin.home}/.config/sops/age/keys.txt";
@@ -62,7 +63,6 @@
       mariadb
       minikube
       mycli
-      networkmanagerapplet
       nix-output-monitor
       nnn
       nur.repos.linyinfeng.wemeet
@@ -94,12 +94,7 @@
       xfce.xfce4-taskmanager
       xxd
       zoom-us
-      (wechat-uos.override {
-        uosLicense = builtins.fetchurl {
-          url = "https://github.com/archlinux/aur/raw/6e9a4ad47ff090ecd98170e26bd55219e55109fc/license.tar.gz";
-          sha256 = "0sdx5mdybx4y489dhhc8505mjfajscggxvymlcpqzdd5q5wh0xjk";
-        };
-      })
+      wechat-uos
       (retroarch.override {
         cores = with pkgs.libretro; [
           mgba
@@ -238,26 +233,6 @@
   #   enable = true;
   #   indicator = true;
   # };
-
-  programs.neovim = {
-    enable = true;
-    coc = {
-      enable = true;
-    };
-    plugins = [
-      {
-        plugin = pkgs.fetchFromGitHub {
-          owner = "RRethy";
-          repo = "nvim-base16";
-          rev = "010bedf0b7c01ab4d4e4e896a8527d97c222351d";
-          hash = "sha256-e1jf7HyP9nu/HQHZ0QK+o7Aljk7Hu2iK+LNw3166wn8=";
-        };
-        config = ''
-          colorscheme base16-material-darker
-        '';
-      }
-    ];
-  };
 
   programs.atuin = {
     enable = true;

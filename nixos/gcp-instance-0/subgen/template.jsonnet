@@ -1,4 +1,4 @@
-function(secrets) {
+function(inputs) {
   log: {
     level: 'debug',
     timestamp: true,
@@ -57,13 +57,13 @@ function(secrets) {
     ],
     servers: [
       {
-        address: secrets.defaultDnsServer,
+        address: inputs.defaultDnsServer,
         address_resolver: 'local',
         detour: 'final',
         tag: 'secure',
       },
       {
-        address: '119.29.29.29',
+        address: '114.114.114.114',
         detour: 'direct',
         tag: 'local',
       },

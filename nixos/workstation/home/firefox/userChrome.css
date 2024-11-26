@@ -33,7 +33,7 @@
   direction: rtl;
 }
 
-#sidebar-box[positionend] > * {
+#sidebar-box[positionend]>* {
   direction: ltr;
 }
 
@@ -41,7 +41,7 @@
   direction: ltr;
 }
 
-#sidebar-box[positionend]:-moz-locale-dir(rtl) > * {
+#sidebar-box[positionend]:-moz-locale-dir(rtl)>* {
   direction: rtl;
 }
 
@@ -103,8 +103,8 @@
   border-inline-width: 0px 4px;
 }
 
-#sidebar-box:not([positionend]) > :-moz-locale-dir(rtl),
-#sidebar-box[positionend] > * {
+#sidebar-box:not([positionend])> :-moz-locale-dir(rtl),
+#sidebar-box[positionend]>* {
   border-inline-width: 4px 0px;
 }
 
@@ -174,28 +174,20 @@
   --panel-banner-item-info-icon-bgcolor: var(--gg-cyan) !important;
   --tab-icon-overlay-stroke: var(--gg-darkgrey) !important;
   --tab-icon-overlay-fill: var(--gg-fg) !important;
-  --panel-item-hover-bgcolor: color-mix(
-    in srgb,
-    currentColor 9%,
-    transparent
-  ) !important;
-  --arrowpanel-dimmed-further: color-mix(
-    in srgb,
-    currentColor 14%,
-    transparent
-  ) !important;
-  --panel-item-active-bgcolor: color-mix(
-    in srgb,
-    currentColor 25%,
-    transparent
-  ) !important;
+  --panel-item-hover-bgcolor: color-mix(in srgb,
+      currentColor 9%,
+      transparent) !important;
+  --arrowpanel-dimmed-further: color-mix(in srgb,
+      currentColor 14%,
+      transparent) !important;
+  --panel-item-active-bgcolor: color-mix(in srgb,
+      currentColor 25%,
+      transparent) !important;
   --urlbar-icon-fill-opacity: 1 !important;
-  --panel-separator-zap-gradient: linear-gradient(
-    90deg,
-    var(--gg-purple) 0%,
-    var(--gg-pink) 52.08%,
-    var(--gg-yellow) 100%
-  ) !important;
+  --panel-separator-zap-gradient: linear-gradient(90deg,
+      var(--gg-purple) 0%,
+      var(--gg-pink) 52.08%,
+      var(--gg-yellow) 100%) !important;
   --lwt-accent-color: var(--gg-black) !important;
   --lwt-text-color: var(--gg-fg) !important;
   --arrowpanel-background: var(--gg-darkgrey) !important;

@@ -24,11 +24,10 @@ def get(url):
 
 def override(resp):
     cfg = json.loads(resp)
-    dns_rules = cfg['dns']['rules']
-    dns_rules.insert(3, {
-        'domain_keyword': ['aws', 'pingcap', 'tidb', 'clinic'],
-        'server': 'secure'
-    })
+    dns_rules = cfg["dns"]["rules"]
+    dns_rules.insert(
+        3, {"domain_keyword": ["aws", "pingcap", "tidb", "clinic"], "server": "secure"}
+    )
     # tun = cfg['inbounds'][0]
     # if tun['type'] != "tun":
     #     return
@@ -40,7 +39,7 @@ def override(resp):
     return cfg
 
 
-url = decrypt("./secrets.yaml")['sing-box-url']
+url = decrypt("./secrets.yaml")["sing-box-url"]
 resp = get(url)
 obj = override(resp)
 

@@ -2,7 +2,6 @@ package expr
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/google/go-jsonnet"
 	"github.com/iosmanthus/subgen/input"
@@ -21,17 +20,13 @@ type Expr interface {
 type localExpr struct {
 	metadata types.Metadata
 	path     string
-	vm       *jsonnet.VM
 }
 
-func NewLocal(metadata types.Metadata, path string) Expr {
-	vm := jsonnet.MakeVM()
-	vm.StringOutput = true
+func NewLocal(metadata types.Metadata, path string) (Expr, error) {
 	return &localExpr{
 		metadata: metadata,
 		path:     path,
-		vm:       vm,
-	}
+	}, nil
 }
 
 func (l *localExpr) Metadata() *types.Metadata {
@@ -39,15 +34,12 @@ func (l *localExpr) Metadata() *types.Metadata {
 }
 
 func (l *localExpr) Eval(_ context.Context, args ...*input.NamedJsonMessage) (string, error) {
-	var namedArgs string
+	vm := jsonnet.MakeVM()
+	vm.StringOutput = true
+
 	for _, arg := range args {
-		namedArgs += fmt.Sprintf("%s=%s,", arg.Name, string(arg.Value))
+		vm.ExtCode(arg.Name, string(arg.Value))
 	}
-	code := fmt.Sprintf(
-		`
-local g = import '%s';
-g(%s)
-`, l.path, namedArgs)
-	result, err := l.vm.EvaluateAnonymousSnippet(l.path, code)
-	return result, err
+
+	return vm.EvaluateFile(l.path)
 }

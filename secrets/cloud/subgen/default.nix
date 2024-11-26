@@ -11,5 +11,8 @@ in
     "subgen/users" = {
       inherit sopsFile format;
     };
+    "subgen/overlays" = {
+      inherit sopsFile format;
+    };
   };
 }

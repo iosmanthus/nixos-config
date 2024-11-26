@@ -97,8 +97,6 @@ in
       "security.workspace.trust.enabled" = false;
       "rust-analyzer.serverPath" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
       "rust-analyzer.cargo.buildScripts.enable" = true;
-      "python.formatting.yapfPath" = "${pkgs.yapf}/bin/yapf";
-      "python.formatting.provider" = "yapf";
       "gopls" = {
         "ui.semanticTokens" = true;
       };
@@ -120,6 +118,10 @@ in
 
       "keyboard.dispatch" = "keyCode";
 
+      "extensions.experimental.affinity" = {
+        "vscodevim.vim" = 1;
+      };
+      "vim.incsearch" = true;
       "vim.autoSwitchInputMethod.defaultIM" = "1";
       "vim.autoSwitchInputMethod.enable" = true;
       "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx-remote}";
@@ -187,6 +189,42 @@ in
           ];
           commands = [ "go.impl.cursor" ];
         }
+        {
+          before = [
+            "<leader>"
+            "l"
+          ];
+          commands = [ "workbench.action.nextEditor" ];
+        }
+        {
+          before = [
+            "<leader>"
+            "h"
+          ];
+          commands = [ "workbench.action.previousEditor" ];
+        }
+        {
+          before = [
+            "<leader>"
+            "p"
+          ];
+          commands = [ "workbench.action.quickOpen" ];
+        }
+        {
+          before = [
+            "<leader>"
+            "g"
+            "f"
+          ];
+          commands = [ "workbench.action.findInFiles" ];
+        }
+        {
+          before = [
+            "<leader>"
+            "f"
+          ];
+          commands = [ "actions.find" ];
+        }
       ];
       "vim.visualstar" = true;
 
@@ -211,7 +249,7 @@ in
       "window.zoomLevel" = 1;
 
       "workbench.colorTheme" = "Material Theme Darker High Contrast";
-      "workbench.iconTheme" = "eq-material-theme-icons-darker";
+      "workbench.iconTheme" = "eq-material-theme-icons-light";
 
       "editor.tokenColorCustomizations" = {
         "[Material Theme Darker High Contrast]" = {
@@ -246,6 +284,9 @@ in
       "github.copilot.editor.enableAutoCompletions" = true;
       "gitlens.ai.experimental.provider" = "openai";
       "gitlens.ai.experimental.openai.model" = "gpt-3.5-turbo";
+      "[dockerfile]" = {
+        "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
+      };
     };
   };
 }

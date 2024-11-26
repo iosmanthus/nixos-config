@@ -41,6 +41,13 @@ in
   sops.templates."config.jsonnet".content = ''
     function(secrets)
     local users = ${config.sops.placeholder."subgen/users"};
+    local overlays = std.foldl(
+      function(acc, o) acc + {
+          [o.user]: o.path,
+        },
+      ${config.sops.placeholder."subgen/overlays"},
+      {}
+    );
     local shadowsocksServerPassword = 
       '${config.sops.placeholder."sing-box/shadowsocks/server-password"}';
     local shadowsocksUsers = std.foldl(
@@ -96,6 +103,11 @@ in
           },
         ],
       },
+      {
+        type: 'extCode',
+        name: 'overlay',
+        path: std.get(overlays, username, default="")
+      }
     ];
     local mkProfile = function(username, hashedPassword) {
       name: username,

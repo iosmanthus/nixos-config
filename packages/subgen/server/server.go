@@ -67,17 +67,26 @@ func New(c *config.Config) (Server, error) {
 				inputs = append(inputs, input.NewLocal(in.Metadata, in.LocalInput.Value))
 			case config.InputTypeRemote:
 				inputs = append(inputs, input.NewRemote(in.Metadata, in.RemoteInput.Url))
+			case config.InputTypeExtCode:
+				inputs = append(inputs, input.NewExtCode(in.Metadata, c.ExprPath, in.ExtCodeInput.Path))
 			default:
 				return nil, fmt.Errorf("unknown input type: %s", in.Type)
 			}
 		}
 
-		var e expr.Expr
+		var (
+			e   expr.Expr
+			err error
+		)
 		switch config.ExprType(p.Expr.Type) {
 		case config.ExprTypeLocal:
-			e = expr.NewLocal(p.Expr.Metadata, path.Join(c.ExprPath, p.Expr.LocalExpr.Path))
+			e, err = expr.NewLocal(p.Expr.Metadata, path.Join(c.ExprPath, p.Expr.LocalExpr.Path))
 		case config.ExprTypeRemote:
-			return nil, fmt.Errorf("remote expression is not supported yet")
+			err = fmt.Errorf("remote expression is not supported yet")
+		}
+
+		if err != nil {
+			return nil, err
 		}
 
 		prf := &profile.Profile{

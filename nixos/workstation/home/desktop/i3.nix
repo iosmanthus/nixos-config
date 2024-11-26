@@ -61,6 +61,12 @@ let
               title = "Bitwarden";
             };
           }
+          {
+            command = "floating enable";
+            criteria = {
+              title = "朋友圈";
+            };
+          }
         ];
       };
       terminal = "kitty tmux";

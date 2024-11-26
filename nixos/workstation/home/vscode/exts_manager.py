@@ -12,7 +12,7 @@ from tempfile import TemporaryDirectory
 
 
 def check_code_command():
-    commands = ['code', 'codium', 'code-insiders']
+    commands = ["code", "codium", "code-insiders"]
     for cmd in commands:
         if shutil.which(cmd):
             return cmd
@@ -20,39 +20,38 @@ def check_code_command():
 
 def execute_dump(args: argparse.Namespace) -> None:
     o = dump_extensions(code_command=check_code_command())
-    if args.format == 'json':
+    if args.format == "json":
         print(json.dumps(o, indent=4))
-    elif args.format == 'yaml':
+    elif args.format == "yaml":
         print(yaml.dump(o, indent=4))
 
 
 def dump_extensions(code_command: str) -> dict:
-    output = subprocess.run([code_command, '--list-extensions'],
-                            stdout=subprocess.PIPE)
-    lines = output.stdout.decode('utf-8').splitlines()
+    output = subprocess.run([code_command, "--list-extensions"], stdout=subprocess.PIPE)
+    lines = output.stdout.decode("utf-8").splitlines()
 
-    o = {'extensions': []}
+    o = {"extensions": []}
     for line in lines:
-        [publisher, name] = line.split('.')
-        o['extensions'].append({'publisher': publisher, 'name': name})
+        [publisher, name] = line.split(".")
+        o["extensions"].append({"publisher": publisher, "name": name})
 
     return o
 
 
 def execute_update(args: argparse.Namespace):
-    with open(args.__dict__['from'], 'r+') as f:
-        if args.format == 'json':
+    with open(args.__dict__["from"], "r+") as f:
+        if args.format == "json":
             extensions = json.load(f)
-        elif args.format == 'yaml':
+        elif args.format == "yaml":
             extensions = yaml.load(f, Loader=yaml.SafeLoader)
         f.seek(0)
 
         updates = check_update(extensions)
 
         if args.inplace:
-            if args.format == 'json':
+            if args.format == "json":
                 dumper = json.dump
-            elif args.format == 'yaml':
+            elif args.format == "yaml":
                 dumper = yaml.dump
 
             dumper(updates, f, indent=4)
@@ -62,70 +61,67 @@ def execute_update(args: argparse.Namespace):
 
 
 def check_update(extensions: dict) -> dict:
-    if extensions.get('extensions') is None:
-        raise AttributeError('extensions is not found')
-    for ext in extensions['extensions']:
+    if extensions.get("extensions") is None:
+        raise AttributeError("extensions is not found")
+    for ext in extensions["extensions"]:
         meta = download_update(ext)
-        ext['version'] = meta['version']
-        ext['sha256'] = meta['sha256']
+        ext["version"] = meta["version"]
+        ext["sha256"] = meta["sha256"]
     return extensions
 
 
 def download_update(extension: dict) -> dict:
-    publisher = extension['publisher']
-    name = extension['name']
-    api = f'https://{publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/{publisher}/extension/{name}/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage'
+    publisher = extension["publisher"]
+    name = extension["name"]
+    api = f"https://{publisher}.gallery.vsassets.io/_apis/public/gallery/publisher/{publisher}/extension/{name}/latest/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
     meta = nix_prefetch_url(url=api)
 
-    version = get_ext_version_from_cache(path=meta['path'])
-    meta['version'] = version
+    version = get_ext_version_from_cache(path=meta["path"])
+    meta["version"] = version
     return meta
 
 
 def nix_prefetch_url(url: str) -> dict:
-    command = ['nix-prefetch-url', '--type', 'sha256', '--print-path', url]
-    [sha256, path] = subprocess.run(
-        command, stdout=subprocess.PIPE).stdout.decode('utf-8').splitlines()
-    return {'sha256': sha256, 'path': path}
+    command = ["nix-prefetch-url", "--type", "sha256", "--print-path", url]
+    [sha256, path] = (
+        subprocess.run(command, stdout=subprocess.PIPE)
+        .stdout.decode("utf-8")
+        .splitlines()
+    )
+    return {"sha256": sha256, "path": path}
 
 
 def get_ext_version_from_cache(path: str) -> str:
     with TemporaryDirectory() as tmpdir:
-        subprocess.run(['unzip', path, '-d', tmpdir], stdout=subprocess.PIPE)
-        with open(f'{tmpdir}/extension/package.json', 'r') as f:
+        subprocess.run(["unzip", path, "-d", tmpdir], stdout=subprocess.PIPE)
+        with open(f"{tmpdir}/extension/package.json", "r") as f:
             package = json.load(f)
-    return package['version']
+    return package["version"]
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='Manager of vscode extensions')
-    subparser = parser.add_subparsers(dest='subcommand')
+    parser = argparse.ArgumentParser(description="Manager of vscode extensions")
+    subparser = parser.add_subparsers(dest="subcommand")
 
-    parser_dump = subparser.add_parser('dump', help='dump extensions')
-    parser_dump.add_argument('--format',
-                             help='output format',
-                             default='json',
-                             choices=['json', 'yaml'])
+    parser_dump = subparser.add_parser("dump", help="dump extensions")
+    parser_dump.add_argument(
+        "--format", help="output format", default="json", choices=["json", "yaml"]
+    )
 
-    parser_update = subparser.add_parser('update', help='update extensions')
-    parser_update.add_argument('--from',
-                               help='update from spec file',
-                               required=True)
-    parser_update.add_argument('--format',
-                               help='spec file format',
-                               default='json',
-                               choices=['json', 'yaml'])
-    parser_update.add_argument('-i',
-                               '--inplace',
-                               help='update inplace',
-                               action='store_true')
+    parser_update = subparser.add_parser("update", help="update extensions")
+    parser_update.add_argument("--from", help="update from spec file", required=True)
+    parser_update.add_argument(
+        "--format", help="spec file format", default="json", choices=["json", "yaml"]
+    )
+    parser_update.add_argument(
+        "-i", "--inplace", help="update inplace", action="store_true"
+    )
 
     args = parser.parse_args()
 
-    if args.subcommand == 'dump':
+    if args.subcommand == "dump":
         execute_dump(args)
-    elif args.subcommand == 'update':
+    elif args.subcommand == "update":
         execute_update(args)
 
 

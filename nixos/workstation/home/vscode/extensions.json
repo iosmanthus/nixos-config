@@ -45,14 +45,14 @@
         {
             "publisher": "GitHub",
             "name": "copilot",
-            "version": "1.232.0",
-            "sha256": "0dz05ksyh24sd0yw0g02blcadm3xripa7dzy3gkhq7850d8309ww"
+            "version": "1.243.1191",
+            "sha256": "0amrb7psq136y1apz1wafp33x6s358m4y57z0d89c1d55wr0bidl"
         },
         {
             "publisher": "golang",
             "name": "go",
-            "version": "0.43.1",
-            "sha256": "1dib2qp56l7awpr6a7g7lkdmsrv2zhhh5fi5hjqkbvb28rsdl3i7"
+            "version": "0.43.2",
+            "sha256": "00bsgmpcg7vakrjcjl6r8jpj7g9pcnnc2f8438mqyxk8hm9lnlic"
         },
         {
             "publisher": "haskell",
@@ -87,14 +87,14 @@
         {
             "publisher": "ms-azuretools",
             "name": "vscode-docker",
-            "version": "1.29.2",
-            "sha256": "0c24nv506nnn7xz4x0h100bybyg2nwrjrcywvacsakcbgj005bwg"
+            "version": "1.29.3",
+            "sha256": "1j35yr8f0bqzv6qryw0krbfigfna94b519gnfy46sr1licb6li6g"
         },
         {
             "publisher": "ms-vscode-remote",
             "name": "remote-containers",
-            "version": "0.386.0",
-            "sha256": "0g42xspmlr595zwnzr0jnppxsk3my3x9n8i4j1vjyc3vlsva1srd"
+            "version": "0.389.0",
+            "sha256": "0ymz5yjrx88a842mpmhfi5pa65cjx94x89j0pklzbsmff6m2949h"
         },
         {
             "publisher": "ms-vscode",
@@ -129,14 +129,8 @@
         {
             "publisher": "VisualStudioExptTeam",
             "name": "vscodeintellicode",
-            "version": "1.3.1",
-            "sha256": "0zl3hm5i769aqi16g236mpadlkxsh09872b5hc7j9js2xm051hv4"
-        },
-        {
-            "publisher": "vscodevim",
-            "name": "vim",
-            "version": "1.28.1",
-            "sha256": "0cwml7z6gj2hi1hr9bzavg4zcij73lap9qgry3biv47pgwzn1gvj"
+            "version": "1.3.2",
+            "sha256": "1yy1fb1marblz6n5rvwyjn3nwyfgzwg0ybyvh9ikwa2qgp4v2dyv"
         },
         {
             "publisher": "yzhang",
@@ -153,20 +147,38 @@
         {
             "publisher": "github",
             "name": "vscode-github-actions",
-            "version": "0.26.5",
-            "sha256": "0piwwg3mx0776iwya1hx6dc43lvm308h5x09vjj4dlkqhrniynz5"
+            "version": "0.27.0",
+            "sha256": "0sk8cgnk4pyjxwfi3hr3qrajffvdncvq3xbjn73g3jz0ygakg7xi"
         },
         {
             "publisher": "ms-kubernetes-tools",
             "name": "vscode-kubernetes-tools",
-            "version": "1.3.16",
-            "sha256": "0n6cjc5qhnmp58dgfiycq4kbrzvn8yx5kaf6jr0h7znpav60laik"
+            "version": "1.3.18",
+            "sha256": "068bpv00sxkja8cw2p26mrjbrgksclqr6lcks48lsnspz2jmcrds"
         },
         {
             "publisher": "grafana",
             "name": "vscode-jsonnet",
-            "version": "0.6.1",
-            "sha256": "1394dqdw14351z5f6zfjz0i1vq3d89vyik6qyf12wbrxkc8gvpzj"
+            "version": "0.7.0",
+            "sha256": "1zyy1gb72dwwbah64ikfhwqlm1ixaphyhf5g37wvb876d0hz4xwr"
+        },
+        {
+            "publisher": "github",
+            "name": "copilot-chat",
+            "version": "0.23.2024102903",
+            "sha256": "0qdg4jc7rykm5a0ba9n2bflfm0dw0cja8j8sfvdnv2xqppww2sql"
+        },
+        {
+            "publisher": "vscodevim",
+            "name": "vim",
+            "version": "1.28.1",
+            "sha256": "0cwml7z6gj2hi1hr9bzavg4zcij73lap9qgry3biv47pgwzn1gvj"
+        },
+        {
+            "publisher": "ms-python",
+            "name": "black-formatter",
+            "version": "2024.5.12841012",
+            "sha256": "1dx4dpvajffdrhki6q5az4lhyhfn90cdgwmjy3j8lpd5dgvp0nkk"
         }
     ]
 }

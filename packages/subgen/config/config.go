@@ -29,14 +29,16 @@ type Authenticator struct {
 type InputType string
 
 const (
-	InputTypeRemote InputType = "remote"
-	InputTypeLocal  InputType = "local"
+	InputTypeRemote  InputType = "remote"
+	InputTypeLocal   InputType = "local"
+	InputTypeExtCode InputType = "extCode"
 )
 
 type Input struct {
 	types.Metadata `json:",inline"`
 	*RemoteInput   `json:",inline"`
 	*LocalInput    `json:",inline"`
+	*ExtCodeInput  `json:",inline"`
 }
 
 func (i *Input) UnmarshalJSON(data []byte) error {
@@ -57,6 +59,11 @@ func (i *Input) UnmarshalJSON(data []byte) error {
 			Metadata:    ii.Metadata,
 			RemoteInput: ii.RemoteInput,
 		}
+	case InputTypeExtCode:
+		*i = Input{
+			Metadata:     ii.Metadata,
+			ExtCodeInput: ii.ExtCodeInput,
+		}
 	default:
 		return fmt.Errorf("unknown input type: %s", ii.Type)
 	}
@@ -71,6 +78,11 @@ type RemoteInput struct {
 type LocalInput struct {
 	types.Metadata `json:",inline"`
 	Value          json.RawMessage `json:"value"`
+}
+
+type ExtCodeInput struct {
+	types.Metadata `json:",inline"`
+	Path           string `json:"path"`
 }
 
 type ExprType string

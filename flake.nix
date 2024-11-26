@@ -1,7 +1,7 @@
 {
   description = "God does not play dice";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     master.url = "github:NixOS/nixpkgs";
 
@@ -141,7 +141,9 @@
           system = "x86_64-linux";
           config = {
             allowUnfree = true;
-            permittedInsecurePackages = [ "openssl-1.1.1w" ];
+            permittedInsecurePackages = [
+              "electron-27.3.11"
+            ];
           };
           packages = [
             "bat"
@@ -156,6 +158,7 @@
             "i3"
             "kitty"
             "lens"
+            "logseq"
             "neovim"
             "nixos-artwork"
             "oh-my-zsh"
@@ -166,9 +169,9 @@
             "starship"
             "tmux"
             "vscode"
+            "wechat-uos"
             "zoxide"
             "zsh"
-            "wechat-uos"
           ];
         };
         jetbrains = this.branchOverlay {
@@ -350,7 +353,7 @@
             sops
             statix
             terraform
-            yapf
+            black
           ];
         };
       }

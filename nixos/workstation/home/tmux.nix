@@ -22,6 +22,7 @@
     extraConfig = ''
       set -g mouse
       set -g default-terminal "tmux-256color"
+      set -g escape-time 0
       bind  c  new-window      -c "#{pane_current_path}"
       bind  %  split-window -h -c "#{pane_current_path}"
       bind '"' split-window -v -c "#{pane_current_path}"

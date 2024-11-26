@@ -2,16 +2,19 @@ package dlercloud
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
-	"net/http/cookiejar"
 	"net/url"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	utls "github.com/refraction-networking/utls"
+	"golang.org/x/net/http2"
 )
 
 var _ Client = (*client)(nil)
@@ -19,6 +22,9 @@ var _ Client = (*client)(nil)
 const (
 	relayPath       = "user/cusrelay"
 	relayCreatePath = "user/cusrelay/create"
+
+	defaultUA     = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+	defaultExpiry = time.Hour * 24 * 30
 )
 
 type Relay struct {
@@ -41,7 +47,7 @@ type SourceNode struct {
 	ID   string `json:"id"`
 }
 
-type Auth struct {
+type Credential struct {
 	UID   string `json:"uid" form:"uid"`
 	Email string `json:"email" form:"email"`
 	Key   string `json:"key" form:"key"`
@@ -54,36 +60,44 @@ type Client interface {
 }
 
 type client struct {
-	endpoint string
+	endpoint *url.URL
+	cred     Credential
 	inner    *http.Client
 }
 
-func NewClient(endpoint string, auth Auth) (Client, error) {
+func NewClient(endpoint string, cred Credential) (Client, error) {
 	u, err := url.Parse(endpoint)
 	if err != nil {
 		return nil, err
 	}
 
-	jar, err := cookiejar.New(nil)
-	if err != nil {
-		return nil, err
+	dialTLS := func(ctx context.Context, network, addr string, cfg *tls.Config) (net.Conn, error) {
+		dialer := &net.Dialer{}
+		tcpConn, err := dialer.DialContext(ctx, network, addr)
+		if err != nil {
+			return nil, err
+		}
+
+		config := utls.Config{ServerName: cfg.ServerName, NextProtos: cfg.NextProtos}
+		tlsConn := utls.UClient(tcpConn, &config, utls.HelloChrome_Auto)
+		err = tlsConn.Handshake()
+		if err != nil {
+			return nil, err
+		}
+
+		return tlsConn, nil
 	}
 
-	expireIn := time.Now().Add(time.Hour)
-	jar.SetCookies(u, []*http.Cookie{
-		{Name: "uid", Value: auth.UID},
-		{Name: "email", Value: auth.Email},
-		{Name: "key", Value: auth.Key},
-		{Name: "expire_in", Value: fmt.Sprintf("%d", expireIn.Unix())},
-	})
-
-	inner := &http.Client{
-		Jar: jar,
+	cli := &http.Client{
+		Transport: &http2.Transport{
+			DialTLSContext: dialTLS,
+		},
 	}
 
 	return &client{
-		endpoint: endpoint,
-		inner:    inner,
+		endpoint: u,
+		cred:     cred,
+		inner:    cli,
 	}, nil
 }
 
@@ -93,7 +107,7 @@ func (c *client) ListRelays(ctx context.Context) ([]*Relay, error) {
 		return nil, err
 	}
 
-	resp, err := c.inner.Do(req.WithContext(ctx))
+	resp, err := c.do(ctx, req)
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +167,7 @@ func (c *client) ListSourceNodes(ctx context.Context) ([]*SourceNode, error) {
 		return nil, err
 	}
 
-	resp, err := c.inner.Do(req.WithContext(ctx))
+	resp, err := c.do(ctx, req)
 	if err != nil {
 		return nil, err
 	}
@@ -202,7 +216,7 @@ func (c *client) CreateRelay(ctx context.Context, request *CreateRelay) error {
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
-	resp, err := c.inner.Do(req.WithContext(ctx))
+	resp, err := c.do(ctx, req)
 	if err != nil {
 		return err
 	}
@@ -212,4 +226,27 @@ func (c *client) CreateRelay(ctx context.Context, request *CreateRelay) error {
 	}
 
 	return nil
+}
+
+func (c *client) do(ctx context.Context, req *http.Request) (*http.Response, error) {
+	req.Header.Set("User-Agent", defaultUA)
+
+	req.AddCookie(&http.Cookie{
+		Name:  "uid",
+		Value: c.cred.UID,
+	})
+	req.AddCookie(&http.Cookie{
+		Name:  "email",
+		Value: c.cred.Email,
+	})
+	req.AddCookie(&http.Cookie{
+		Name:  "key",
+		Value: c.cred.Key,
+	})
+	req.AddCookie(&http.Cookie{
+		Name:  "expire_in",
+		Value: fmt.Sprintf("%d", time.Now().Add(defaultExpiry).Unix()),
+	})
+
+	return c.inner.Do(req.WithContext(ctx))
 }

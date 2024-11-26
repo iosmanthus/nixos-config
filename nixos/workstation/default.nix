@@ -14,7 +14,9 @@
   ];
 
   # nixpkgs configuration
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
   system = {
     # This value determines the NixOS release from which the default
@@ -147,6 +149,11 @@
   hardware = {
     enableAllFirmware = true;
     alsa.enablePersistence = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      support32Bit = true;
+    };
     bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -154,11 +161,7 @@
   };
 
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
+    enable = false;
   };
 
   virtualisation = {

@@ -8,6 +8,8 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
+	"path"
 
 	"github.com/iosmanthus/subgen/types"
 )
@@ -15,12 +17,14 @@ import (
 var (
 	_ Input = (*remoteInput)(nil)
 	_ Input = (*localInput)(nil)
+	_ Input = (*extCodeInput)(nil)
 )
 
 type NamedJsonMessage struct {
 	Name  string          `json:"name"`
 	Value json.RawMessage `json:"value"`
 }
+
 type Input interface {
 	Metadata() *types.Metadata
 	Value(ctx context.Context) (*NamedJsonMessage, error)
@@ -106,5 +110,46 @@ func (l *localInput) Value(_ context.Context) (*NamedJsonMessage, error) {
 	return &NamedJsonMessage{
 		Name:  l.metadata.Name,
 		Value: l.value,
+	}, nil
+}
+
+type extCodeInput struct {
+	metadata types.Metadata
+	path     string
+}
+
+func NewExtCode(metadata types.Metadata, basePath string, codePath string) Input {
+	if codePath == "" {
+		return &extCodeInput{
+			metadata: metadata,
+			path:     "",
+		}
+	}
+	return &extCodeInput{
+		metadata: metadata,
+		path:     path.Join(basePath, codePath),
+	}
+}
+
+func (e *extCodeInput) Metadata() *types.Metadata {
+	return &e.metadata
+}
+
+func (e *extCodeInput) Value(_ context.Context) (*NamedJsonMessage, error) {
+	if e.path == "" {
+		return &NamedJsonMessage{
+			Name:  e.metadata.Name,
+			Value: []byte("function(x) x"),
+		}, nil
+	}
+
+	code, err := os.ReadFile(e.path)
+	if err != nil {
+		return nil, err
+	}
+
+	return &NamedJsonMessage{
+		Name:  e.metadata.Name,
+		Value: code,
 	}, nil
 }

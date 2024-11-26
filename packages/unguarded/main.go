@@ -20,7 +20,7 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/dlercloud/v1/relay/list", func(c *gin.Context) {
-		var auth dlercloud.Auth
+		var auth dlercloud.Credential
 		if c.BindQuery(&auth) != nil {
 			return
 		}
@@ -41,7 +41,7 @@ func main() {
 	})
 
 	r.GET("/dlercloud/v1/relay/source_node/list", func(c *gin.Context) {
-		var auth dlercloud.Auth
+		var auth dlercloud.Credential
 		if c.BindQuery(&auth) != nil {
 			return
 		}
@@ -62,7 +62,7 @@ func main() {
 	})
 
 	r.POST("/dlercloud/v1/relay/create", func(c *gin.Context) {
-		var auth dlercloud.Auth
+		var auth dlercloud.Credential
 		if c.BindQuery(&auth) != nil {
 			return
 		}
