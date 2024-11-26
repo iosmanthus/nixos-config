@@ -179,6 +179,10 @@
           system = "x86_64-linux";
           config = {
             allowUnfree = true;
+            permittedInsecurePackages = [
+              "dotnet-sdk-7.0.410"
+              "dotnet-sdk-wrapped-7.0.410"
+            ];
           };
           packages = [ "jetbrains" ];
         };

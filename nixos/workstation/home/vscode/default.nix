@@ -53,7 +53,6 @@ in
         eamodio.gitlens
         rust-lang.rust-analyzer
         ms-python.python
-        ms-vscode-remote.remote-ssh
         redhat.vscode-yaml
         hashicorp.terraform
         matthewpi.caddyfile-support
