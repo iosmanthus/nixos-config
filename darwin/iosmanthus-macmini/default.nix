@@ -7,6 +7,10 @@ let
   hostName = "iosmanthus-macmini";
 in
 {
+  imports = [
+    ./homebrew
+  ];
+
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config = {
@@ -46,6 +50,14 @@ in
         AppleInterfaceStyle = "Dark";
 
         "com.apple.swipescrolldirection" = false;
+      };
+      CustomUserPreferences = {
+        "com.apple.HIToolbox" = {
+          AppleDictationAutoEnable = false;
+        };
+        "com.apple.assistant.support" = {
+          "Dictation Enabled" = false;
+        };
       };
       smb = {
         NetBIOSName = hostName;

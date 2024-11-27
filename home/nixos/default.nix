@@ -6,11 +6,12 @@
 }:
 {
   imports = [
-    ../base/firefox
-    ../base/shell
+    ../base/kitty
     ../base/tmux
 
+    ./shell
     ./desktop
+    ./firefox
     ./fcitx5
     ./gpg
     ./neovim
@@ -91,6 +92,7 @@
       vlc
       wireguard-tools
       wmfocus
+      xsel
       xfce.xfce4-taskmanager
       xxd
       zoom-us
@@ -190,17 +192,6 @@
     goPath = ".go";
   };
 
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "monospace";
-      size = 12;
-    };
-    settings = {
-      include = pkgs.kitty-themes.mkKittyTheme "base16-material-darker";
-    };
-  };
-
   services.picom = {
     package = pkgs.picom-next;
     enable = true;
@@ -233,19 +224,6 @@
   #   enable = true;
   #   indicator = true;
   # };
-
-  programs.atuin = {
-    enable = true;
-    flags = [ "--disable-up-arrow" ];
-    settings = {
-      auto_sync = true;
-      keymap_mode = "vim-normal";
-      search_mode = "fuzzy";
-      style = "compact";
-      sync_address = "https://atuin.iosmanthus.com";
-      sync_frequency = "10m";
-    };
-  };
 
   services.mpris-proxy.enable = true;
 

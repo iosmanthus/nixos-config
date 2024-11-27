@@ -357,6 +357,12 @@
             inherit self;
           };
           modules = [
+            {
+              nixpkgs.overlays = [
+                self.overlays.default
+                self.overlays.unstable-darwin
+              ];
+            }
             ./darwin/iosmanthus-macmini
             home-manager.darwinModules.home-manager
             self.darwinModules.admin.iosmanthus-darwin
@@ -388,44 +394,44 @@
                 };
               }
             )
-            {
-              nixpkgs.overlays = [
-                self.overlays.default
-                self.overlays.unstable-darwin
-              ];
-            }
           ];
         };
       };
     }
-    // flake-utils.lib.eachSystem [ "x86_64-linux" ] (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-        };
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          hardeningDisable = [ "fortify" ];
-          buildInputs = with pkgs; [
-            fd
-            gnumake
-            go_1_22
-            google-cloud-sdk
-            gotools
-            nix-output-monitor
-            nixfmt-rfc-style
-            nodejs
-            sops
-            statix
-            terraform
-            black
-          ];
-        };
-      }
-    );
+    //
+      flake-utils.lib.eachSystem
+        [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ]
+        (
+          system:
+          let
+            pkgs = import nixpkgs {
+              inherit system;
+              config = {
+                allowUnfree = true;
+              };
+            };
+          in
+          {
+            devShells.default = pkgs.mkShell {
+              hardeningDisable = [ "fortify" ];
+              buildInputs = with pkgs; [
+                fd
+                gnumake
+                go_1_22
+                google-cloud-sdk
+                gotools
+                nix-output-monitor
+                nixfmt-rfc-style
+                nodejs
+                sops
+                statix
+                terraform
+                black
+              ];
+            };
+          }
+        );
 }

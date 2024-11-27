@@ -3,6 +3,6 @@
 }:
 {
   imports = [
-    ../base/vscode
+    ../../base/vscode
   ];
 }
