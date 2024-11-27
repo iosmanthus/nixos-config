@@ -6,17 +6,17 @@
 }:
 {
   imports = [
-    ./tmux.nix
+    ../base/firefox
+    ../base/shell
+    ../base/tmux
 
     ./desktop
     ./fcitx5
-    ./firefox
     ./gpg
+    ./neovim
     ./polybar
     ./rofi
-    ./shell
     ./vscode
-    ./neovim
   ];
 
   sops.age.keyFile = "${config.admin.home}/.config/sops/age/keys.txt";

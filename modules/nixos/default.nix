@@ -3,9 +3,10 @@
     { ... }:
     {
       imports = [
+        ../base/base16
+
         ./monitors.nix
 
-        ./base16
         ./gtk-theme
         ./sing-box
         ./wallpaper
@@ -15,15 +16,14 @@
     { ... }:
     {
       imports = [
-        ./immutable-file.nix
-        ./mutable-vscode-ext.nix
+        ../base/immutable-file.nix
+        ../base/base16
 
-        ./base16
         ./gtk-theme
         ./wallpaper
       ];
     };
-  admin = import ./admin;
+  admin = import ../base/admin;
   atuin = import ./atuin;
   cloud = import ./cloud;
   nixbuild = import ./nixbuild;

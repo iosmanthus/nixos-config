@@ -44,6 +44,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     vaultwarden.url = "github:iosmanthus/nixpkgs/bump-vaultwarden-20240912141923";
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
   outputs =
     {
@@ -59,6 +66,8 @@
       nixos-generators,
       nur,
       nixos-hardware,
+      nix-darwin,
+      mac-app-util,
       ...
     }@inputs:
     let
@@ -84,7 +93,7 @@
                 {
                   imports = [
                     (./secrets + "/${config.admin.name}")
-                    ./nixos/workstation/home
+                    ./home/nixos
                   ];
                 };
               sharedModules = [
@@ -194,8 +203,18 @@
           };
           packages = [ "vaultwarden" ];
         };
+        unstable-darwin = this.branchOverlay {
+          branch = master;
+          system = "aarch64-darwin";
+          config = {
+            allowUnfree = true;
+          };
+          packages = [
+            "vscode"
+          ];
+        };
       };
-      nixosModules = import ./modules;
+      nixosModules = import ./modules/nixos;
       nixosConfigurations = {
         iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
           specialArgs = {
@@ -326,6 +345,53 @@
               nixpkgs.overlays = [
                 self.overlays.default
                 self.overlays.unstable
+              ];
+            }
+          ];
+        };
+      };
+      darwinModules = import ./modules/darwin;
+      darwinConfigurations = {
+        iosmanthus-macmini = nix-darwin.lib.darwinSystem {
+          specialArgs = {
+            inherit self;
+          };
+          modules = [
+            ./darwin/iosmanthus-macmini
+            home-manager.darwinModules.home-manager
+            self.darwinModules.admin.iosmanthus-darwin
+            mac-app-util.darwinModules.default
+            (
+              { config, ... }:
+              {
+                home-manager = {
+                  users.iosmanthus =
+                    { ... }:
+                    {
+                      imports = [
+                        (./secrets + "/${config.admin.name}")
+                        ./home/darwin
+                      ];
+                    };
+                  sharedModules = [
+                    self.darwinModules.admin.iosmanthus-darwin
+                    self.darwinModules.home-manager
+                    sops-nix.homeManagerModule
+                    base16.homeManagerModule
+                    mac-app-util.homeManagerModules.default
+                  ];
+                  extraSpecialArgs = {
+                    inherit self;
+                  };
+                  useGlobalPkgs = true;
+                  verbose = true;
+                };
+              }
+            )
+            {
+              nixpkgs.overlays = [
+                self.overlays.default
+                self.overlays.unstable-darwin
               ];
             }
           ];

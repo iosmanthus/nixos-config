@@ -4,10 +4,6 @@
   pkgs,
   ...
 }:
-let
-  fcitx-remote = "${pkgs.fcitx5}/bin/fcitx5-remote";
-  nvim = "${pkgs.neovim}/bin/nvim";
-in
 {
   home.packages = with pkgs; [ nixfmt-rfc-style ];
 
@@ -15,36 +11,10 @@ in
     EDITOR = "${pkgs.vscode-launcher} --wait";
   };
 
-  home.file = {
-    vscodeArgv = {
-      text = ''
-        {
-            "enable-crash-reporter": true,
-            // DO NOT EDIT THIS VALUE
-            "crash-reporter-id": "6c9e4e70-6fde-4668-88c9-51329d63a7e9",
-            "password-store": "basic"
-        }
-      '';
-      target =
-        ".vscode"
-        + (lib.optionalString (config.programs.vscode.package == pkgs.vscode-insiders) "-insiders")
-        + "/argv.json";
-    };
-  };
-
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode-insiders;
-    # Disable update notifications. THIS IS NOT WINDOWS, MS!
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
-    mutableExtensions = [
-      {
-        publisher = "equinusocio";
-        name = "vsc-material-theme";
-        version = "34.3.1";
-      }
-    ];
     extensions =
       pkgs.vscode-utils.extensionsFromVscodeMarketplace (builtins.fromJSON (
         builtins.readFile ./extensions.json
@@ -123,13 +93,11 @@ in
       "vim.incsearch" = true;
       "vim.autoSwitchInputMethod.defaultIM" = "1";
       "vim.autoSwitchInputMethod.enable" = true;
-      "vim.autoSwitchInputMethod.obtainIMCmd" = "${fcitx-remote}";
-      "vim.autoSwitchInputMethod.switchIMCmd" = "${fcitx-remote} -t {im}";
       "vim.camelCaseMotion.enable" = true;
       "vim.debug.silent" = true;
       "vim.easymotion" = true;
       "vim.enableNeovim" = true;
-      "vim.neovimPath" = "${nvim}";
+      "vim.neovimPath" = "${pkgs.neovim}/bin/nvim";
       "vim.handleKeys" = {
         "<C-a>" = false;
         "<C-c>" = false;

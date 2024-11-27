@@ -185,6 +185,12 @@
             "name": "remote-ssh",
             "version": "0.116.2024112515",
             "sha256": "080rzj3n6bf49cfkhx7rnns45jd4gsvs8yzapnncmp2svwfhkafw"
+        },
+        {
+            "publisher": "equinusocio",
+            "name": "vsc-material-theme",
+            "version": "34.7.9",
+            "sha256": "0a2hjd552b2fbfkm3wcvf5rh6dl4wb9kdrmdji4yx9jvqh2di60z"
         }
     ]
 }
