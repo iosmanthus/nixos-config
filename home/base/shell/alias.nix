@@ -1,16 +1,4 @@
 { pkgs, ... }:
-let
-  ignoreOutput = pkgs.writers.writePython3 "ignore_output" { libraries = [ ]; } ''
-    import subprocess
-    import sys
-
-    subprocess.Popen(
-      sys.argv[1:],
-      stdout=subprocess.DEVNULL,
-      stderr=subprocess.DEVNULL
-    )
-  '';
-in
 {
   home.packages = with pkgs; [
     bat
@@ -34,12 +22,6 @@ in
       py2 = "python2";
 
       dig = "dig +ttlunits";
-
-      clion = "${ignoreOutput} clion nosplash";
-      goland = "${ignoreOutput} goland nosplash";
-      idea-ultimate = "${ignoreOutput} idea-ultimate nosplash";
-      rr = "${ignoreOutput} rust-rover nosplash";
-      webstorm = "${ignoreOutput} webstorm nosplash";
 
       k = "kubectl";
       kx = "kubectx";

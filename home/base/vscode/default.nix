@@ -192,6 +192,13 @@
           ];
           commands = [ "actions.find" ];
         }
+        {
+          before = [
+            "\\"
+            "r"
+          ];
+          commands = [ "editor.action.formatDocument" ];
+        }
       ];
       "vim.visualstar" = true;
 

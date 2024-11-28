@@ -51,6 +51,10 @@ in
 
         "com.apple.swipescrolldirection" = false;
       };
+      WindowManager = {
+        GloballyEnabled = true;
+        AppWindowGroupingBehavior = false;
+      };
       CustomUserPreferences = {
         "com.apple.HIToolbox" = {
           AppleDictationAutoEnable = false;
@@ -62,11 +66,22 @@ in
       smb = {
         NetBIOSName = hostName;
       };
+      dock = {
+        autohide = true;
+        persistent-apps = [
+          "/System/Applications/Launchpad.app"
+          "/System/Applications/Music.app"
+
+          "/Applications/Firefox.app"
+          "${pkgs.vscode}/Applications/Visual Studio Code.app"
+          "/Applications/Telegram.app"
+          "/Applications/SFM.app"
+        ];
+      };
     };
   };
 
   programs.zsh.enable = true;
-
   networking = rec {
     inherit hostName;
     computerName = hostName;
@@ -75,8 +90,7 @@ in
   users.users.${config.admin.name} = {
     inherit (config.admin) shell home;
     description = config.admin.name;
-    openssh.authorizedKeys.keys = [ config.admin.sshPubKey ];
-  };
+    openssh.authorizedKeys.keys = [ config.admin.sshPubKey ]; };
 
   nix.settings.trusted-users = [ config.admin.name ];
 }

@@ -8,9 +8,15 @@
     global.brewfile = true;
     masApps = { };
     casks = [
+      "discord"
+      "feishu"
       "firefox"
-      "telegram"
+      "jetbrains-toolbox"
+      "maccy"
+      "sfm"
       "squirrel"
+      "telegram"
+      "wechat"
     ];
   };
 }
