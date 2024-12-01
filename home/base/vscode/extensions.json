@@ -181,12 +181,6 @@
             "sha256": "1c9ss4qs12clv783sxsrs11ayj0h2ymp08czcl72h0p363dlk92q"
         },
         {
-            "publisher": "ms-vscode-remote",
-            "name": "remote-ssh",
-            "version": "0.116.2024112515",
-            "sha256": "080rzj3n6bf49cfkhx7rnns45jd4gsvs8yzapnncmp2svwfhkafw"
-        },
-        {
             "publisher": "equinusocio",
             "name": "vsc-material-theme",
             "version": "34.7.9",

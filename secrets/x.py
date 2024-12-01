@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i python3 --pure -p python3Packages.pyyaml sops
+#! nix-shell -i python3 --pure -p python3Packages.pyyaml sops --keep SOPS_AGE_KEY_FILE
 
 import json
 import os

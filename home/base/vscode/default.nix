@@ -1,5 +1,4 @@
 {
-  lib,
   config,
   pkgs,
   ...
@@ -191,6 +190,13 @@
             "f"
           ];
           commands = [ "actions.find" ];
+        }
+        {
+          before = [
+            "\\"
+            "r"
+          ];
+          commands = [ "editor.action.formatDocument" ];
         }
       ];
       "vim.visualstar" = true;

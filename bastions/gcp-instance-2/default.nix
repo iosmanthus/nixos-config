@@ -1,10 +1,10 @@
-{ config, ... }:
+{ config, hostName, ... }:
 {
   virtualisation.docker.enable = true;
 
   services.self-hosted.o11y = {
+    inherit hostName;
     enable = true;
-    hostName = "gcp-instance-2";
   };
 
   services.self-hosted.cloud.sing-box = {

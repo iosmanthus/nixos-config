@@ -6,11 +6,13 @@
 }:
 {
   imports = [
-    ../base/firefox
-    ../base/shell
+    ../base/kitty
     ../base/tmux
+    ../base/git
 
+    ./shell
     ./desktop
+    ./firefox
     ./fcitx5
     ./gpg
     ./neovim
@@ -91,6 +93,7 @@
       vlc
       wireguard-tools
       wmfocus
+      xsel
       xfce.xfce4-taskmanager
       xxd
       zoom-us
@@ -135,35 +138,6 @@
 
   programs.feh.enable = true;
 
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    userName = config.admin.name;
-    userEmail = config.admin.email;
-    extraConfig = {
-      core = {
-        editor = "${pkgs.vscode-launcher} --wait";
-        fsmonitor = true;
-      };
-      pull = {
-        rebase = false;
-      };
-      url = {
-        "ssh://git@github.com/" = {
-          insteadOf = "https://github.com/";
-        };
-      };
-    };
-    signing = {
-      key = config.admin.gpgPubKey;
-      signByDefault = true;
-    };
-    ignores = [
-      "/bazel-*"
-      "/.idea"
-    ];
-  };
-
   home.file = {
     cargoConfig = {
       text = ''
@@ -188,17 +162,6 @@
   programs.go = {
     enable = true;
     goPath = ".go";
-  };
-
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "monospace";
-      size = 12;
-    };
-    settings = {
-      include = pkgs.kitty-themes.mkKittyTheme "base16-material-darker";
-    };
   };
 
   services.picom = {
@@ -233,19 +196,6 @@
   #   enable = true;
   #   indicator = true;
   # };
-
-  programs.atuin = {
-    enable = true;
-    flags = [ "--disable-up-arrow" ];
-    settings = {
-      auto_sync = true;
-      keymap_mode = "vim-normal";
-      search_mode = "fuzzy";
-      style = "compact";
-      sync_address = "https://atuin.iosmanthus.com";
-      sync_frequency = "10m";
-    };
-  };
 
   services.mpris-proxy.enable = true;
 

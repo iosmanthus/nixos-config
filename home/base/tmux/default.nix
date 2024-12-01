@@ -1,6 +1,5 @@
 { pkgs, config, ... }:
 {
-  home.packages = [ pkgs.xsel ];
   programs.tmux = {
     enable = true;
     disableConfirmationPrompt = true;
@@ -22,6 +21,7 @@
     extraConfig = ''
       set -g mouse
       set -g default-terminal "tmux-256color"
+      set -g default-command  "zsh"
       set -g escape-time 0
       bind  c  new-window      -c "#{pane_current_path}"
       bind  %  split-window -h -c "#{pane_current_path}"

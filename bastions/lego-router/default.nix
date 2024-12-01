@@ -1,9 +1,11 @@
-{ config, ... }:
+{ config, hostName, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
 
-  networking.hostName = "lego-router";
+  networking = {
+    inherit hostName;
+  };
 
   boot = {
     # Use the systemd-boot EFI boot loader.

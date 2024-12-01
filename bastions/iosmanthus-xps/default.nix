@@ -1,4 +1,4 @@
-{ ... }:
+{ hostName, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -6,7 +6,9 @@
     ./monitors.nix
   ];
 
-  networking.hostName = "iosmanthus-xps";
+  networking = {
+    inherit hostName;
+  };
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {

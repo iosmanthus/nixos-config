@@ -9,6 +9,7 @@
     ./starship.nix
     ./alias.nix
   ];
+
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -21,6 +22,19 @@
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+  };
+
+  programs.atuin = {
+    enable = true;
+    flags = [ "--disable-up-arrow" ];
+    settings = {
+      auto_sync = true;
+      keymap_mode = "vim-normal";
+      search_mode = "fuzzy";
+      style = "compact";
+      sync_address = "https://atuin.iosmanthus.com";
+      sync_frequency = "10m";
+    };
   };
 
   programs.zsh = {

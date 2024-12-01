@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, flakeRoot, ... }:
 {
   security.sudo.wheelNeedsPassword = false;
 
@@ -14,7 +14,7 @@
     extraGroups = [ "wheel" ] ++ (if config.virtualisation.docker.enable then [ "docker" ] else [ ]);
 
     openssh.authorizedKeys.keys = [
-      (builtins.readFile ../../secrets/iosmanthus/id_ecdsa_iosmanthus.pub)
+      (builtins.readFile (flakeRoot + "/secrets/iosmanthus/id_ecdsa_iosmanthus.pub"))
     ];
   };
 

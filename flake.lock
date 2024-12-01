@@ -253,11 +253,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1732482255,
-        "narHash": "sha256-GUffLwzawz5WRVfWaWCg78n/HrBJrOG7QadFY6rtV8A=",
+        "lastModified": 1732793095,
+        "narHash": "sha256-6TrknJ8CpvSSF4gviQSeD+wyj3siRcMvdBKhOXkEMKU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a9953635d7f34e7358d5189751110f87e3ac17da",
+        "rev": "2f7739d01080feb4549524e8f6927669b61c6ee3",
         "type": "github"
       },
       "original": {
@@ -359,15 +359,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1732603785,
-        "narHash": "sha256-AEjWTJwOmSnVYsSJCojKgoguGfFfwel6z/6ud6UFMU8=",
-        "owner": "LnL7",
+        "lastModified": 1732811980,
+        "narHash": "sha256-3ilThyc2VG32ygLGhkaqnrns3TrXn7jHDuXHMacENdk=",
+        "owner": "iosmanthus",
         "repo": "nix-darwin",
-        "rev": "6ab87b7c84d4ee873e937108c4ff80c015a40c7a",
+        "rev": "3dfaf51935301ae4b09bb42a01da297a7151e8a9",
         "type": "github"
       },
       "original": {
-        "owner": "LnL7",
+        "owner": "iosmanthus",
+        "ref": "aerospace-path",
         "repo": "nix-darwin",
         "type": "github"
       }
