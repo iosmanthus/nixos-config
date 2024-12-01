@@ -1,6 +1,11 @@
 {
   iosmanthus =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      config,
+      flakeRoot,
+      ...
+    }:
     {
       imports = [ ./options.nix ];
 
@@ -11,12 +16,12 @@
         home = "/home/iosmanthus";
         hashedPasswordFile = config.sops.secrets."${name}/hashed-password".path;
         gpgPubKey = "0xDEE5BAABFE092169";
-        sshPubKey = builtins.readFile ../../../secrets/iosmanthus/id_ecdsa_iosmanthus.pub;
+        sshPubKey = builtins.readFile (flakeRoot + "/secrets/iosmanthus/id_ecdsa_iosmanthus.pub");
       };
     };
 
   iosmanthus-darwin =
-    { pkgs, ... }:
+    { pkgs, flakeRoot, ... }:
     {
       imports = [ ./options.nix ];
 
@@ -26,7 +31,7 @@
         shell = pkgs.zsh;
         home = "/Users/iosmanthus";
         gpgPubKey = "0xDEE5BAABFE092169";
-        sshPubKey = builtins.readFile ../../../secrets/iosmanthus/id_ecdsa_iosmanthus.pub;
+        sshPubKey = builtins.readFile (flakeRoot + "/secrets/iosmanthus/id_ecdsa_iosmanthus.pub");
       };
     };
 }

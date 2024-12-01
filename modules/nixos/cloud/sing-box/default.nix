@@ -214,7 +214,7 @@ in
     systemd.services.sing-box.restartTriggers = [
       config.sops.templates."sing-box.json".content
 
-      ../../../secrets/cloud/sing-box/secrets.json
+      ../../../../secrets/cloud/sing-box/secrets.json
     ];
 
     sops.templates."sing-box.json" = {

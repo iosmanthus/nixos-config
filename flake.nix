@@ -74,7 +74,7 @@
       this = import ./packages;
 
       mkWorkstationModules = system: [
-        ./nixos/workstation
+        ./bastions/workstation
         ./secrets/workstation
 
         self.nixosModules.workstation
@@ -104,6 +104,7 @@
               ];
               extraSpecialArgs = {
                 inherit self;
+                flakeRoot = ./.;
               };
               useGlobalPkgs = true;
               verbose = true;
@@ -139,6 +140,7 @@
             format = "gce";
             specialArgs = {
               inherit self;
+              flakeRoot = ./.;
             };
             modules = [ self.nixosModules.cloud.gce ];
           };
@@ -219,23 +221,22 @@
         iosmanthus-xps = nixpkgs.lib.nixosSystem rec {
           specialArgs = {
             inherit self;
+            hostName = "iosmanthus-xps";
+            flakeRoot = ./.;
           };
           system = "x86_64-linux";
           modules = [
-            ./nixos/iosmanthus-xps
+            ./bastions/iosmanthus-xps
             nixos-hardware.nixosModules.dell-xps-17-9710-intel
           ] ++ (mkWorkstationModules system);
-        };
-
-        iosmanthus-legion = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-          modules = [ ./nixos/iosmanthus-legion ] ++ (mkWorkstationModules system);
         };
 
         aws-lightsail-0 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit self;
+            hostName = "aws-lightsail-0";
+            flakeRoot = ./.;
           };
           modules = [
             ./secrets/aws-lightsail-0
@@ -244,7 +245,7 @@
             ./secrets/cloud/grafana
             ./secrets/cloud/sing-box
 
-            ./nixos/aws-lightsail-0
+            ./bastions/aws-lightsail-0
 
             sops-nix.nixosModules.sops
 
@@ -269,6 +270,8 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit self;
+            hostName = "gcp-instance-0";
+            flakeRoot = ./.;
           };
           modules = [
             ./secrets/gcp-instance-0
@@ -278,7 +281,7 @@
             ./secrets/cloud/endpoints
             ./secrets/cloud/subgen
 
-            ./nixos/gcp-instance-0
+            ./bastions/gcp-instance-0
 
             sops-nix.nixosModules.sops
 
@@ -302,6 +305,8 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit self;
+            hostName = "gcp-instance-2";
+            flakeRoot = ./.;
           };
           modules = [
             ./secrets/gcp-instance-2
@@ -310,7 +315,7 @@
             ./secrets/cloud/sing-box
             ./secrets/cloud/endpoints
 
-            ./nixos/gcp-instance-2
+            ./bastions/gcp-instance-2
 
             sops-nix.nixosModules.sops
 
@@ -331,9 +336,11 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit self;
+            hostName = "lego-router";
+            flakeRoot = ./.;
           };
           modules = [
-            ./nixos/lego-router
+            ./bastions/lego-router
             ./secrets/lego-router
 
             sops-nix.nixosModules.sops
@@ -356,6 +363,7 @@
           specialArgs = {
             inherit self;
             hostName = "iosmanthus-macmini";
+            flakeRoot = ./.;
           };
           modules = [
             {
@@ -364,7 +372,7 @@
                 self.overlays.unstable-darwin
               ];
             }
-            ./darwin/iosmanthus-macmini
+            ./bastions/iosmanthus-macmini
             ./secrets/darwin
 
             self.darwinModules.admin.iosmanthus-darwin
@@ -394,6 +402,7 @@
                   ];
                   extraSpecialArgs = {
                     inherit self;
+                    flakeRoot = ./.;
                   };
                   useGlobalPkgs = true;
                   verbose = true;

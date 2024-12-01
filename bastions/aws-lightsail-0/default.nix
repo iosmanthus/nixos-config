@@ -1,4 +1,4 @@
-{ ... }:
+{ hostName, ... }:
 {
   imports = [
     ./atuin
@@ -19,7 +19,7 @@
   virtualisation.docker.enable = true;
 
   services.self-hosted.o11y = {
-    hostName = "aws-lightsail-0";
+    inherit hostName;
     enable = true;
   };
 

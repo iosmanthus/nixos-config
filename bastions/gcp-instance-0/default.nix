@@ -1,4 +1,4 @@
-{ ... }:
+{ hostName, ... }:
 {
   imports = [
     ./caddy
@@ -8,8 +8,8 @@
   virtualisation.docker.enable = false;
 
   services.self-hosted.o11y = {
+    inherit hostName;
     enable = true;
-    hostName = "gcp-instance-0";
   };
 
   services.self-hosted.cloud.sing-box.enable = true;
