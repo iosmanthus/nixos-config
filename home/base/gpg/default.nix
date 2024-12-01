@@ -1,9 +1,5 @@
 { ... }:
 {
-  imports = [
-    ../../base/gpg
-  ];
-
   programs.gpg = {
     enable = true;
     mutableKeys = true;
