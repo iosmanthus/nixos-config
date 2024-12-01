@@ -1,21 +1,40 @@
 {
   config,
   pkgs,
+  hostName,
   ...
 }:
-let
-  hostName = "iosmanthus-macmini";
-in
 {
   imports = [
+    ./aerospace
     ./homebrew
+    ./system
   ];
+
+  sops.age.keyFile = "${config.admin.home}/.config/sops/age/keys.txt";
+
+  environment.variables = {
+    SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+  };
 
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config = {
       allowUnfree = true;
     };
+  };
+
+  networking = {
+    knownNetworkServices = [
+      "Wi-Fi"
+      "Ethernet Adaptor"
+      "Thunderbolt Ethernet"
+    ];
+    dns = [
+      "223.5.5.5"
+      "114.114.114.114"
+      "119.29.29.29"
+    ];
   };
 
   nix = {
@@ -35,54 +54,8 @@ in
     };
   };
 
-  system = {
-    stateVersion = 5;
-    # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
-    activationScripts.postUserActivation.text = ''
-      # activateSettings -u will reload the settings from the database and apply them to the current session,
-      # so we do not need to logout and login again to make the changes take effect.
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-    '';
-    defaults = {
-      NSGlobalDomain = {
-        KeyRepeat = 2;
-        ApplePressAndHoldEnabled = false;
-        AppleInterfaceStyle = "Dark";
-
-        "com.apple.swipescrolldirection" = false;
-      };
-      WindowManager = {
-        GloballyEnabled = true;
-        AppWindowGroupingBehavior = false;
-      };
-      CustomUserPreferences = {
-        "com.apple.HIToolbox" = {
-          AppleDictationAutoEnable = false;
-        };
-        "com.apple.assistant.support" = {
-          "Dictation Enabled" = false;
-        };
-      };
-      smb = {
-        NetBIOSName = hostName;
-      };
-      dock = {
-        autohide = true;
-        persistent-apps = [
-          "/System/Applications/Launchpad.app"
-          "/System/Applications/Music.app"
-
-          "/Applications/Firefox.app"
-          "${pkgs.vscode}/Applications/Visual Studio Code.app"
-          "/Applications/Telegram.app"
-          "/Applications/SFM.app"
-        ];
-      };
-    };
-  };
-
   programs.zsh.enable = true;
-  networking = rec {
+  networking = {
     inherit hostName;
     computerName = hostName;
   };
@@ -90,7 +63,13 @@ in
   users.users.${config.admin.name} = {
     inherit (config.admin) shell home;
     description = config.admin.name;
-    openssh.authorizedKeys.keys = [ config.admin.sshPubKey ]; };
+    openssh.authorizedKeys.keys = [ config.admin.sshPubKey ];
+  };
 
   nix.settings.trusted-users = [ config.admin.name ];
+
+  services.sing-box = {
+    enable = true;
+    configPath = config.sops.secrets.sing-box.path;
+  };
 }

@@ -46,7 +46,7 @@
     vaultwarden.url = "github:iosmanthus/nixpkgs/bump-vaultwarden-20240912141923";
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:iosmanthus/nix-darwin/aerospace-path";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -355,6 +355,7 @@
         iosmanthus-macmini = nix-darwin.lib.darwinSystem {
           specialArgs = {
             inherit self;
+            hostName = "iosmanthus-macmini";
           };
           modules = [
             {
@@ -364,8 +365,13 @@
               ];
             }
             ./darwin/iosmanthus-macmini
-            home-manager.darwinModules.home-manager
+            ./secrets/darwin
+
             self.darwinModules.admin.iosmanthus-darwin
+            self.darwinModules.sing-box
+
+            sops-nix.darwinModules.sops
+            home-manager.darwinModules.home-manager
             mac-app-util.darwinModules.default
             (
               { config, ... }:

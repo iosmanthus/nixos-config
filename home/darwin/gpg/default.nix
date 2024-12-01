@@ -17,10 +17,6 @@ in
     enable = true;
     config = {
       ProgramArguments = [ "${importGPGKeys}" ];
-      KeepAlive = {
-        Crashed = false;
-        SuccessfulExit = false;
-      };
       RunAtLoad = true;
     };
   };

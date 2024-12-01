@@ -5,14 +5,15 @@
 }:
 {
   imports = [
-    ../base/kitty
     ../base/tmux
     ../base/git
 
-    ./vscode
-    ./shell
     ./firefox
     ./gpg
+    ./kitty
+    ./shell
+    ./vscode
+    ./maccy
   ];
 
   home.stateVersion = "24.11";

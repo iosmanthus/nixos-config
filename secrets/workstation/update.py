@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i python3 --pure -p python3Packages.pyyaml python3Packages.requests sops
+#! nix-shell -i python3 --pure -p python3Packages.pyyaml python3Packages.requests sops --keep SOPS_AGE_KEY_FILE
 
 import yaml
 import subprocess
@@ -28,6 +28,10 @@ def override(resp):
     dns_rules.insert(
         3, {"domain_keyword": ["aws", "pingcap", "tidb", "clinic"], "server": "secure"}
     )
+    tun = cfg["inbounds"][0]
+    if tun["type"] != "tun":
+        return
+    tun["interface_name"] = "utun7"
     # tun = cfg['inbounds'][0]
     # if tun['type'] != "tun":
     #     return
