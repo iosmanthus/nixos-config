@@ -2,51 +2,48 @@
 
 {
   fonts = {
-    packages = with pkgs; [
-      apple-fonts
-      cantarell-fonts
-      cascadia-code
-      dejavu_fonts
-      fira
-      fira-code
-      font-awesome
-      hack-font
-      hasklig
-      ibm-plex
-      inconsolata
-      inter
-      iosevka
-      jetbrains-mono
-      jetbrains-nerd-font
-      material-design-icons
-      meslo-lg
-      monaspace
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      noto-fonts-extra
-      open-sans
-      polybar-fonts
-      roboto
-      roboto-mono
-      sf-mono
-      siji
-      source-han-mono
-      source-han-sans
-      ubuntu_font_family
-      vistafonts-chs
-
-      (nerdfonts.override {
-        fonts = [
-          "DroidSansMono"
-          "LiberationMono"
-          "Iosevka"
-          "Hasklig"
-          "JetBrainsMono"
-          "FiraCode"
-        ];
-      })
-    ];
+    packages =
+      (with pkgs; [
+        apple-fonts
+        cantarell-fonts
+        cascadia-code
+        dejavu_fonts
+        fira
+        fira-code
+        font-awesome
+        hack-font
+        hasklig
+        ibm-plex
+        inconsolata
+        inter
+        iosevka
+        jetbrains-mono
+        jetbrains-nerd-font
+        material-design-icons
+        meslo-lg
+        monaspace
+        noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-emoji
+        noto-fonts-extra
+        open-sans
+        polybar-fonts
+        roboto
+        roboto-mono
+        sf-mono
+        siji
+        source-han-mono
+        source-han-sans
+        ubuntu_font_family
+        vistafonts-chs
+      ])
+      ++ (with pkgs.nerd-fonts; [
+        droid-sans-mono
+        fira-code
+        iosevka
+        jetbrains-mono
+        liberation
+      ]);
 
     fontconfig = {
       antialias = true;

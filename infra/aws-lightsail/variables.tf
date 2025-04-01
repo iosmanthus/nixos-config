@@ -14,6 +14,5 @@ variable "aws_secret_key" {
 }
 
 variable "ip_revision" {
-  type    = number
-  default = 0
+  type = string
 }

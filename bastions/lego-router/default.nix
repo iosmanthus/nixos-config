@@ -14,6 +14,11 @@
   };
 
   networking = {
+    nameservers = [
+      "119.29.29.29"
+      "223.5.5.5"
+      "114.114.114.114"
+    ];
     networkmanager = {
       enable = true;
       dns = "none";

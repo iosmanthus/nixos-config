@@ -40,6 +40,7 @@
     # Unlock auto unlock gnome-keyring for i3 and other WMs that don't use a display manager
     updateDbusEnvironment = true;
     xkb.layout = "us";
+    xkb.options = "caps:escape";
     autoRepeatInterval = 20;
     autoRepeatDelay = 200;
     desktopManager.xterm.enable = false;

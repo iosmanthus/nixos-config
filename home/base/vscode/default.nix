@@ -3,15 +3,8 @@
   pkgs,
   ...
 }:
-{
-  home.packages = with pkgs; [ nixfmt-rfc-style ];
-
-  home.sessionVariables = {
-    EDITOR = "${pkgs.vscode-launcher} --wait";
-  };
-
-  programs.vscode = {
-    enable = true;
+let
+  defaultProfile = {
     enableExtensionUpdateCheck = false;
     enableUpdateCheck = false;
     extensions =
@@ -20,14 +13,13 @@
       )).extensions
       ++ (with pkgs.vscode-extensions; [
         eamodio.gitlens
-        rust-lang.rust-analyzer
-        ms-python.python
-        redhat.vscode-yaml
         hashicorp.terraform
         matthewpi.caddyfile-support
+        ms-python.python
         ms-vscode.makefile-tools
+        redhat.vscode-yaml
+        rust-lang.rust-analyzer
       ]);
-
     keybindings = [
       {
         command = "selectNextSuggestion";
@@ -69,7 +61,8 @@
         "ui.semanticTokens" = true;
       };
       "jsonnet.languageServer.lint" = true;
-      "jsonnet.languageServer.pathToBinary" = "${pkgs.jsonnet-language-server}/bin/jsonnet-language-server";
+      "jsonnet.languageServer.pathToBinary" =
+        "${pkgs.jsonnet-language-server}/bin/jsonnet-language-server";
       "terraform.languageServer.path" = "${pkgs.terraform-lsp}/bin/terraform-lsp";
       "[terraform]" = {
         "editor.defaultFormatter" = "hashicorp.terraform";
@@ -222,7 +215,7 @@
       "window.zoomLevel" = 1;
 
       "workbench.colorTheme" = "Material Theme Darker High Contrast";
-      "workbench.iconTheme" = "eq-material-theme-icons-light";
+      "workbench.iconTheme" = "vscode-jetbrains-icon-theme-2023-auto";
 
       "editor.tokenColorCustomizations" = {
         "[Material Theme Darker High Contrast]" = {
@@ -261,5 +254,17 @@
         "editor.defaultFormatter" = "ms-azuretools.vscode-docker";
       };
     };
+  };
+in
+{
+  home.packages = with pkgs; [ nixfmt-rfc-style ];
+
+  home.sessionVariables = {
+    EDITOR = "${pkgs.vscode-launcher} --wait";
+  };
+
+  programs.vscode = {
+    enable = true;
+    profiles.default = defaultProfile;
   };
 }

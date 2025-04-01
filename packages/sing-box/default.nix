@@ -5,29 +5,26 @@
   fetchFromGitHub,
   installShellFiles,
   buildPackages,
+  coreutils,
   nix-update-script,
+  nixosTests,
 }:
 
 buildGoModule rec {
   pname = "sing-box";
-
-  version = "1.10.0-alpha.20";
+  version = "1.11.4";
 
   src = fetchFromGitHub {
-    # owner = "SagerNet";
-    owner = "iosmanthus";
+    owner = "SagerNet";
     repo = pname;
-    rev = "052273fa0c221390112e171a90f6c6ad6332d45b";
-    hash = "sha256-3O5J/0+5MJs+iq3MPB8UaKLb+QSlNiD82X8yoLRrMTo=";
+    rev = "v${version}";
+    hash = "sha256-Zm8hfB5tuOvTi29GZG7AvFKc3CVz8wo+KMxJKhvrSlw=";
   };
 
-  proxyVendor = true;
-
-  vendorHash = "sha256-7s1al/w53ylD6LmIkDxGuhq3p3tWotnpbi21IkfnZVc=";
+  vendorHash = "sha256-Ix4Pzq+yGfaJNPJnhLGgcCzZ85hGjSU24NffMR3ZSxQ=";
 
   tags = [
     "with_quic"
-    "with_grpc"
     "with_dhcp"
     "with_wireguard"
     "with_ech"
@@ -35,15 +32,18 @@ buildGoModule rec {
     "with_reality_server"
     "with_acme"
     "with_clash_api"
-    "with_v2ray_api"
     "with_gvisor"
   ];
 
-  subPackages = [ "cmd/sing-box" ];
+  subPackages = [
+    "cmd/sing-box"
+  ];
 
   nativeBuildInputs = [ installShellFiles ];
 
-  ldflags = [ "-X=github.com/sagernet/sing-box/constant.Version=${version}" ];
+  ldflags = [
+    "-X=github.com/sagernet/sing-box/constant.Version=${version}"
+  ];
 
   postInstall =
     let
@@ -54,14 +54,23 @@ buildGoModule rec {
         --bash <(${emulator} $out/bin/sing-box completion bash) \
         --fish <(${emulator} $out/bin/sing-box completion fish) \
         --zsh  <(${emulator} $out/bin/sing-box completion zsh )
+
+      substituteInPlace release/config/sing-box{,@}.service \
+        --replace-fail "/usr/bin/sing-box" "$out/bin/sing-box" \
+        --replace-fail "/bin/kill" "${coreutils}/bin/kill"
+      install -Dm444 -t "$out/lib/systemd/system/" release/config/sing-box{,@}.service
     '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru = {
+    updateScript = nix-update-script { };
+    tests = { inherit (nixosTests) sing-box; };
+  };
 
   meta = with lib; {
     homepage = "https://sing-box.sagernet.org";
-    description = "The universal proxy platform";
+    description = "Universal proxy platform";
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ nickcao ];
+    mainProgram = "sing-box";
   };
 }

@@ -60,8 +60,8 @@ let
 
     listen = "::";
     listen_port = ports.shadowtls;
-    sniff = true;
-    sniff_override_destination = true;
+    # sniff = true;
+    # sniff_override_destination = true;
     tcp_fast_open = true;
 
     type = "shadowtls";
@@ -82,8 +82,8 @@ let
   shadowsocks = {
     listen = "::";
     listen_port = ports.shadowsocks;
-    sniff = true;
-    sniff_override_destination = true;
+    # sniff = true;
+    # sniff_override_destination = true;
     tcp_fast_open = true;
 
     type = "shadowsocks";
@@ -101,8 +101,6 @@ let
     log = {
       level = "debug";
       timestamp = true;
-      user_idx = true;
-      parent_id = true;
     };
     dns = {
       final = "cloudflare";
@@ -141,9 +139,10 @@ let
         download_detour = "direct";
       }) unlockSettings.sites;
       rules = [
+        { action = "sniff"; }
         {
+          action = "reject";
           protocol = "bittorrent";
-          outbound = "block";
         }
         {
           rule_set = unlockSettings.sites;
@@ -156,6 +155,7 @@ let
       shadowtls
       shadowsocks
     ];
+
     outbounds = [
       {
         type = "direct";
@@ -170,9 +170,13 @@ let
   };
 
   # nested JSON objects should be unquoted
-  settingsJSON = builtins.replaceStrings [
-    ''"${config.sops.placeholder."sing-box/shadowsocks/users"}"''
-  ] [ config.sops.placeholder."sing-box/shadowsocks/users" ] (builtins.toJSON settings);
+  settingsJSON =
+    builtins.replaceStrings
+      [
+        ''"${config.sops.placeholder."sing-box/shadowsocks/users"}"''
+      ]
+      [ config.sops.placeholder."sing-box/shadowsocks/users" ]
+      (builtins.toJSON settings);
 
   unlockSettingsOpts =
     { ... }:

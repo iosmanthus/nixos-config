@@ -16,6 +16,9 @@
   # nixpkgs configuration
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [
+      "openssl-1.1.1w"
+    ];
   };
 
   system = {
@@ -29,7 +32,7 @@
   };
 
   nix = {
-    package = pkgs.nixVersions.nix_2_22;
+    package = pkgs.nixVersions.nix_2_24;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-going = true
@@ -149,15 +152,16 @@
   hardware = {
     enableAllFirmware = true;
     alsa.enablePersistence = true;
-    pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-      support32Bit = true;
-    };
     bluetooth = {
       enable = true;
       powerOnBoot = true;
     };
+  };
+
+  services.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+    support32Bit = true;
   };
 
   services.pipewire = {

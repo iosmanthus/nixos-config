@@ -9,6 +9,7 @@ let
   modifier1 = "Mod1";
   colors = config.scheme.withHashtag;
   betterlockscreen = "${pkgs.betterlockscreen}/bin/betterlockscreen";
+  browser = "firefox-nightly";
   i3 = {
     enable = true;
     package = pkgs.i3;
@@ -109,7 +110,7 @@ let
         "${modifier0}+Shift+x" = "exec ${betterlockscreen} -l dim";
         "${modifier0}+c" = "exec env CM_LAUNCHER=rofi clipmenu";
         "${modifier0}+m" = "exec autorandr --change";
-        "${modifier0}+w" = "exec firefox-nightly";
+        "${modifier0}+w" = "exec ${browser}";
         "${modifier0}+p" = "exec rofi -show combi";
         "${modifier0}+d" = "exec Discord";
         "${modifier0}+t" = "exec telegram-desktop";
@@ -181,7 +182,7 @@ let
           always = true;
         }
         { command = "i3-msg workspace 1: main"; }
-        { command = "firefox-nightly"; }
+        { command = "${browser}"; }
         { command = "logseq"; }
         { command = "kitty tmux"; }
         { command = "thunderbird"; }

@@ -28,17 +28,19 @@
 
   programs.vscode = {
     package = pkgs.vscode-insiders;
-    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        publisher = "ms-vscode-remote";
-        name = "remote-ssh";
-        version = "0.116.2024112515";
-        sha256 = "080rzj3n6bf49cfkhx7rnns45jd4gsvs8yzapnncmp2svwfhkafw";
-      }
-    ];
-    userSettings = {
-      "vim.autoSwitchInputMethod.obtainIMCmd" = "${pkgs.fcitx5}/bin/fcitx5-remote";
-      "vim.autoSwitchInputMethod.switchIMCmd" = "${pkgs.fcitx5}/bin/fcitx5-remote -t {im}";
+    profiles.default = {
+      extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          publisher = "ms-vscode-remote";
+          name = "remote-ssh";
+          version = "0.116.2024112515";
+          sha256 = "080rzj3n6bf49cfkhx7rnns45jd4gsvs8yzapnncmp2svwfhkafw";
+        }
+      ];
+      userSettings = {
+        "vim.autoSwitchInputMethod.obtainIMCmd" = "${pkgs.fcitx5}/bin/fcitx5-remote";
+        "vim.autoSwitchInputMethod.switchIMCmd" = "${pkgs.fcitx5}/bin/fcitx5-remote -t {im}";
+      };
     };
   };
 }

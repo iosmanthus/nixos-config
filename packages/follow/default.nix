@@ -6,31 +6,31 @@
   makeDesktopItem,
   makeWrapper,
   nodejs,
-  pnpm,
+  pnpm_9,
   stdenv,
 }:
 stdenv.mkDerivation rec {
   pname = "follow";
 
-  version = "0.2.0-beta.2";
+  version = "0.3.5";
 
   src = fetchFromGitHub {
     owner = "RSSNext";
     repo = "Follow";
     rev = "v${version}";
-    hash = "sha256-7KSPZj9QG6zksji/eY8jczBDHr/9tStlw26LKVqXTAw=";
+    hash = "sha256-QnnSuXlfus4tTdlWZnrI59gShaawpOOc4//Wv6P0bes=";
   };
 
   nativeBuildInputs = [
     nodejs
-    pnpm.configHook
+    pnpm_9.configHook
     makeWrapper
     imagemagick
   ];
 
-  pnpmDeps = pnpm.fetchDeps {
+  pnpmDeps = pnpm_9.fetchDeps {
     inherit pname version src;
-    hash = "sha256-FzMjN0rIjYxexf6tix4qi3mnuPkadjKihhN0Pj5y2nU=";
+    hash = "sha256-bwmi7xSFWNCXYPae+jxhBMHFnhT57NNVWzRG/I0xzeY=";
   };
 
   env = {
@@ -38,18 +38,25 @@ stdenv.mkDerivation rec {
 
     # This environment variables inject the production Vite config at build time.
     # Copy from:
-    # 1. https://github.com/RSSNext/Follow/blob/v0.2.0-beta.2/.github/workflows/build.yml#L18
+    # 1. https://github.com/RSSNext/Follow/blob/v0.3.5/.github/workflows/build.yml#L18
     # 2. And logs in the corresponding GitHub Actions: https://github.com/RSSNext/Follow/actions/workflows/build.yml
     VITE_WEB_URL = "https://app.follow.is";
     VITE_API_URL = "https://api.follow.is";
-    VITE_IMGPROXY_URL = "https://thumbor.follow.is";
     VITE_SENTRY_DSN = "https://e5bccf7428aa4e881ed5cb713fdff181@o4507542488023040.ingest.us.sentry.io/4507570439979008";
     VITE_OPENPANEL_CLIENT_ID = "0e477ab4-d92d-4d6e-b889-b09d86ab908e";
     VITE_OPENPANEL_API_URL = "https://openpanel.follow.is/api";
-    VITE_FIREBASE_CONFIG = ''
-      {"apiKey":"AIzaSyDuM93019tp8VI7wsszJv8ChOs7b1EE5Hk","authDomain":"follow-428106.firebaseapp.com","projectId":"follow-428106","storageBucket":"follow-428106.appspot.com","messagingSenderId":"194977404578","appId"":"1:194977404578:web:1920bb0c9ea5e2373669fb","measurementId":"G-SJE57D4F14"}
-    '';
+    VITE_FIREBASE_CONFIG = builtins.toJSON {
+      apiKey = "AIzaSyDuM93019tp8VI7wsszJv8ChOs7b1EE5Hk";
+      authDomain = "follow-428106.firebaseapp.com";
+      projectId = "follow-428106";
+      storageBucket = "follow-428106.appspot.com";
+      messagingSenderId = "194977404578";
+      appId = "1:194977404578:web:1920bb0c9ea5e2373669fb";
+      measurementId = "G-SJE57D4F14";
+    };
   };
+
+  dontCheckForBrokenSymlinks = true;
 
   desktopItem = makeDesktopItem {
     name = "follow";

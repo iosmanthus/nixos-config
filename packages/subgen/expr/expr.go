@@ -14,7 +14,7 @@ var (
 
 type Expr interface {
 	Metadata() *types.Metadata
-	Eval(ctx context.Context, args ...*input.NamedJsonMessage) (string, error)
+	Eval(ctx context.Context, args map[string]*input.NamedJsonMessage) (string, error)
 }
 
 type localExpr struct {
@@ -33,12 +33,12 @@ func (l *localExpr) Metadata() *types.Metadata {
 	return &l.metadata
 }
 
-func (l *localExpr) Eval(_ context.Context, args ...*input.NamedJsonMessage) (string, error) {
+func (l *localExpr) Eval(_ context.Context, args map[string]*input.NamedJsonMessage) (string, error) {
 	vm := jsonnet.MakeVM()
 	vm.StringOutput = true
 
-	for _, arg := range args {
-		vm.ExtCode(arg.Name, string(arg.Value))
+	for name, arg := range args {
+		vm.ExtCode(name, string(arg.Value))
 	}
 
 	return vm.EvaluateFile(l.path)

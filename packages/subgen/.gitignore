@@ -1,4 +1,6 @@
 /.idea
 /manifests
-/config.jsonnet
-/secrets.json
+/overlays
+/templates
+**/*.jsonnet
+**/*.json

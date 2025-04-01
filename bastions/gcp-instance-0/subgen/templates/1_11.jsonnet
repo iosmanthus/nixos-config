@@ -123,7 +123,10 @@ function(inputs) {
     ],
     rules: [
       {
-        outbound: 'dns-out',
+        action: 'sniff',
+      },
+      {
+        action: 'hijack-dns',
         protocol: 'dns',
       },
       {
@@ -136,23 +139,23 @@ function(inputs) {
       },
       {
         rule_set: 'geosite-category-ads-all',
-        outbound: 'block',
+        action: 'reject',
       },
       {
+        outbound: 'direct',
         protocol: 'bittorrent',
-        outbound: 'direct',
       },
       {
+        outbound: 'direct',
         rule_set: 'geoip-cn',
+      },
+      {
+        ip_is_private: true,
         outbound: 'direct',
       },
       {
-        rule_set: 'geoip-private',
-        outbound: 'direct',
-      },
-      {
+        action: 'reject',
         protocol: 'quic',
-        outbound: 'block',
       },
     ],
   },
@@ -172,27 +175,19 @@ function(inputs) {
   inbounds: [
     {
       auto_route: true,
-      inet4_address: '172.19.0.1/30',
-      interface_name: 'utun@130dfab',
-      sniff: true,
+      strict_route: inputs.isRouter,
+      auto_redirect: inputs.isRouter,
+      address: '172.19.0.1/30',
+      interface_name: 'utun7',
       stack: 'mixed',
-      strict_route: false,
       tag: 'tun-in',
       type: 'tun',
     },
   ],
   outbounds: [
     {
-      tag: 'dns-out',
-      type: 'dns',
-    },
-    {
       tag: 'direct',
       type: 'direct',
-    },
-    {
-      tag: 'block',
-      type: 'block',
     },
   ],
 }

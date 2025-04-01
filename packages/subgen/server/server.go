@@ -60,15 +60,15 @@ func New(c *config.Config) (Server, error) {
 			Name: p.Name,
 		}
 		authenticator := auth.NewPasswordAuthenticator(p.Auth.HashedPassword)
-		var inputs []input.Input
+		inputs := make(map[string]input.Input)
 		for _, in := range p.Inputs {
 			switch config.InputType(in.Type) {
 			case config.InputTypeLocal:
-				inputs = append(inputs, input.NewLocal(in.Metadata, in.LocalInput.Value))
+				inputs[in.Name] = input.NewLocal(in.Metadata, in.LocalInput.Value)
 			case config.InputTypeRemote:
-				inputs = append(inputs, input.NewRemote(in.Metadata, in.RemoteInput.Url))
+				inputs[in.Name] = input.NewRemote(in.Metadata, in.RemoteInput.Url)
 			case config.InputTypeExtCode:
-				inputs = append(inputs, input.NewExtCode(in.Metadata, c.ExprPath, in.ExtCodeInput.Path))
+				inputs[in.Name] = input.NewExtCode(in.Metadata, c.ExprPath, in.ExtCodeInput.Path)
 			default:
 				return nil, fmt.Errorf("unknown input type: %s", in.Type)
 			}
@@ -132,7 +132,11 @@ func (s *server) getProfile(c *gin.Context) {
 		return
 	}
 
-	result, err := prf.Generate(c.Request.Context(), params)
+	options := c.Request.URL.Query()
+	// remove the token from options
+	options.Del("token")
+
+	result, err := prf.Generate(c.Request.Context(), params, options)
 	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return

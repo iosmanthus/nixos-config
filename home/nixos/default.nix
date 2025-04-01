@@ -35,6 +35,7 @@
       delta
       delve
       discord
+      dust
       fast-cli
       fd
       feishu
@@ -68,6 +69,7 @@
       nix-output-monitor
       nnn
       nur.repos.linyinfeng.wemeet
+      nur.repos.xddxdd.dingtalk
       openai-translator
       pavucontrol
       peek
@@ -91,19 +93,14 @@
       unzip
       via
       vlc
+      wechat-uos
       wireguard-tools
       wmfocus
-      xsel
       xfce.xfce4-taskmanager
+      xsel
       xxd
       zoom-us
-      wechat-uos
-      (retroarch.override {
-        cores = with pkgs.libretro; [
-          mgba
-          melonds
-        ];
-      })
+      # brave-nightly
     ]
     ++ (
       let
@@ -117,7 +114,7 @@
       [
         (plugins.addPlugins clion commonPlugins)
         (plugins.addPlugins goland commonPlugins)
-        (plugins.addPlugins idea-ultimate commonPlugins)
+        # (plugins.addPlugins idea-ultimate commonPlugins)
         (plugins.addPlugins pycharm-professional commonPlugins)
         (plugins.addPlugins rust-rover commonPlugins)
         (plugins.addPlugins webstorm commonPlugins)
@@ -134,7 +131,7 @@
     '';
   };
 
-  home.keyboard.options = [ "caps:escape" ];
+  xdg.enable = true;
 
   programs.feh.enable = true;
 

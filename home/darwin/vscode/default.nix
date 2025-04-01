@@ -8,7 +8,7 @@
   ];
 
   programs.vscode = {
-    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    profiles.default.extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         publisher = "ms-vscode-remote";
         name = "remote-ssh";

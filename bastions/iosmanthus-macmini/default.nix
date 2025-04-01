@@ -38,7 +38,7 @@
   };
 
   nix = {
-    package = pkgs.nixVersions.nix_2_22;
+    package = pkgs.nixVersions.nix_2_24;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-going = true

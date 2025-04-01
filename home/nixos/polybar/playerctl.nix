@@ -3,6 +3,7 @@ let
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   playerctld = "${pkgs.playerctl}/bin/playerctld";
   colrm = "${pkgs.util-linux}/bin/colrm";
+  cut = "${pkgs.coreutils}/bin/cut";
   limit = 32;
   firstPlayer = pkgs.writeShellScript "first-player" ''
     players=$(${playerctl} --list-all)
@@ -16,7 +17,7 @@ let
     echo $player
   '';
   script = pkgs.writeShellScript "playerctl" ''
-    player=$(${firstPlayer})
+    player=$(${firstPlayer} | ${cut} -d '.' -f1)
     player_status=$(${playerctl} -p $player status)
 
     if [ "$player_status" = "Playing" ]; then

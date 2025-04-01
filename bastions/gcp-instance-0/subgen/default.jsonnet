@@ -10,10 +10,22 @@ local defaultDnsServer = std.extVar('defaultDnsServer');
 
 local overlay = std.extVar('overlay');
 
-local mkTemplate = import './template.jsonnet';
+local version = std.extVar('version');
+
+local isRouter = std.extVar('router') == 'true';
+
+local defaultTemplate = import './templates/1_10.jsonnet';
+
+local templates = {
+  '1_10': defaultTemplate,
+  '1_11': import './templates/1_11.jsonnet',
+};
+
+local mkTemplate = std.get(templates, version, defaultTemplate);
 
 local template = mkTemplate({
   defaultDnsServer: defaultDnsServer,
+  isRouter: isRouter,
 });
 
 local relayList = std.parseJson(relaySubscription.data).relays;

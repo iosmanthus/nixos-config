@@ -92,11 +92,6 @@ in
             server_port: 18443,
           },
           {
-            tag: 'gcp-asia-east-2',
-            server: '${config.sops.placeholder."gcp-instance-2/external-address-v4"}',
-            server_port: 18443,
-          },
-          {
             tag: 'aws-ap-southeast-1',
             server: '${config.sops.placeholder."aws-lightsail-0/external-address-v4"}',
             server_port: 18443,
@@ -107,7 +102,17 @@ in
         type: 'extCode',
         name: 'overlay',
         path: std.get(overlays, username, default="")
-      }
+      },
+      {
+        type: 'local',
+        name: 'version',
+        value: '1_10',
+      },
+      {
+        type: 'local',
+        name: 'router',
+        value: false,
+      },
     ];
     local mkProfile = function(username, hashedPassword) {
       name: username,

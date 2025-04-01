@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    jetbrains.url = "github:NixOS/nixpkgs";
+    jetbrains.url = "github:NixOS/nixpkgs/master";
 
     base16.url = "github:SenchoPens/base16.nix";
 
@@ -42,8 +42,6 @@
     firefox.url = "github:nix-community/flake-firefox-nightly";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
-    vaultwarden.url = "github:iosmanthus/nixpkgs/bump-vaultwarden-20240912141923";
 
     nix-darwin = {
       url = "github:iosmanthus/nix-darwin/aerospace-path";
@@ -119,7 +117,7 @@
 
             berberman.overlays.default
             code-insiders.overlays.default
-            nur.overlay
+            nur.overlays.default
           ];
         }
       ];
@@ -163,7 +161,6 @@
             "docker"
             "eza"
             "fd"
-            "feishu"
             "firmwareLinuxNonfree"
             "gh"
             "i3"
@@ -196,14 +193,6 @@
             ];
           };
           packages = [ "jetbrains" ];
-        };
-        vaultwarden = this.branchOverlay {
-          branch = inputs.vaultwarden;
-          system = "x86_64-linux";
-          config = {
-            allowUnfree = true;
-          };
-          packages = [ "vaultwarden" ];
         };
         unstable-darwin = this.branchOverlay {
           branch = master;
@@ -260,7 +249,6 @@
               nixpkgs.overlays = [
                 self.overlays.default
                 self.overlays.unstable
-                self.overlays.vaultwarden
               ];
             }
           ];
@@ -291,37 +279,6 @@
             self.nixosModules.subgen
             self.nixosModules.unguarded
             self.nixosModules.chinadns
-
-            {
-              nixpkgs.overlays = [
-                self.overlays.default
-                self.overlays.unstable
-              ];
-            }
-          ];
-        };
-
-        gcp-instance-2 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit self;
-            hostName = "gcp-instance-2";
-            flakeRoot = ./.;
-          };
-          modules = [
-            ./secrets/gcp-instance-2
-            ./secrets/cloud/cloudflare
-            ./secrets/cloud/grafana
-            ./secrets/cloud/sing-box
-            ./secrets/cloud/endpoints
-
-            ./bastions/gcp-instance-2
-
-            sops-nix.nixosModules.sops
-
-            self.nixosModules.cloud.gce
-            self.nixosModules.cloud.sing-box
-            self.nixosModules.o11y
 
             {
               nixpkgs.overlays = [

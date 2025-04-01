@@ -29,17 +29,5 @@ module "gcp_instance_0" {
 
   google_region = "asia-east1"
   google_zone   = "asia-east1-b"
-  ip_revision   = "20241106165825"
-}
-
-module "gcp_instance_2" {
-  source = "./gce"
-
-  google_project            = var.google_project
-  google_service_account_id = google_service_account.main.id
-  vm_image                  = google_compute_image.nixos.self_link
-
-  google_region = "asia-east2"
-  google_zone   = "asia-east2-b"
-  ip_revision   = "20241106155518"
+  ip_revision   = "366c66fbb72aceb44756d93f00e0dc35"
 }
