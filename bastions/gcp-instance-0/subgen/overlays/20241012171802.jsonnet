@@ -1,4 +1,5 @@
-function(o)
+function(o, version='1_10')
+  local idx = if version > '1_10' then 4 else 3;
   o {
     route+: {
       rule_set+: [
@@ -10,15 +11,24 @@ function(o)
           download_detour: 'origin',
         },
       ],
-      rules: o.route.rules[:3] + [
+      rules: o.route.rules[:idx] + [
         {
           rule_set: 'geosite-apple',
           outbound: 'direct',
         },
-      ] + o.route.rules[3:],
+      ] + o.route.rules[idx:],
     },
     dns+: {
       rules: o.dns.rules[:3] + [
+        {
+          domain_keyword: [
+            'aws',
+            'pingcap',
+            'tidb',
+            'clinic',
+          ],
+          server: 'secure',
+        },
         {
           rule_set: 'geosite-apple',
           server: 'local',
